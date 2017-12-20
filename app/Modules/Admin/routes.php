@@ -47,16 +47,19 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::delete('photo/delete/{id}', ['as' => 'admin.photo.destroy', 'uses'=>'MultiPhotoController@destroy']);
         Route::post('photo/deleteAll', ['as' => 'admin.photo.deleteAll', 'uses'=>'MultiPhotoController@deleteAll']);
 
+        /*AGENCY*/
+        Route::get('agency/getData', ['as' => 'admin.agency.getData', 'uses' => 'AgencyController@getData']);
+        Route::post('agency/deleteAll', ['as' => 'admin.agency.deleteAll', 'uses' => 'AgencyController@deleteAll']);
+        Route::post('agency/updateStatus', ['as' => 'admin.agency.updateStatus', 'uses' => 'AgencyController@updateStatus']);
+        Route::post('agency/postAjaxUpdateOrder', ['as' => 'admin.agency.postAjaxUpdateOrder', 'uses' => 'AgencyController@postAjaxUpdateOrder']);
+        Route::resource('agency', 'AgencyController');
+
         /*CATEGORY*/
         Route::get('category/getData', ['as' => 'admin.category.getData', 'uses' => 'CategoryController@getData']);
         Route::post('category/deleteAll', ['as' => 'admin.category.deleteAll', 'uses' => 'CategoryController@deleteAll']);
         Route::post('category/updateStatus', ['as' => 'admin.category.updateStatus', 'uses' => 'CategoryController@updateStatus']);
         Route::post('category/postAjaxUpdateOrder', ['as' => 'admin.category.postAjaxUpdateOrder', 'uses' => 'CategoryController@postAjaxUpdateOrder']);
         Route::resource('category', 'CategoryController');
-
-        /* COMPANY */
-        Route::any('company/{id?}', ['as' => 'admin.company.index', 'uses' => 'CompanyController@getInformation']);
-
 
         /*PRODUCT*/
         Route::get('product/getData', ['as' => 'admin.product.getData', 'uses' => 'ProductController@getData']);
@@ -67,6 +70,62 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('product/updateStatus', ['as' => 'admin.product.updateStatus', 'uses' => 'ProductController@updateStatus']);
         Route::post('product/updateHotProduct', ['as' => 'admin.product.updateHotProduct', 'uses' => 'ProductController@updateHotProduct']);
         Route::resource('product', 'ProductController');
+
+        /*COMMENT*/
+        Route::get('comment/getData', ['as' => 'admin.comment.getData', 'uses' => 'CommentController@getData']);
+        Route::post('comment/deleteAll', ['as' => 'admin.comment.deleteAll', 'uses' => 'CommentController@deleteAll']);
+        Route::resource('comment', 'CommentController', ['expect' => ['index','edit','update','destroy']]);
+
+        /*PAYMENT METHOD*/
+        Route::get('payment-method/getData', ['as' => 'admin.payment-method.getData', 'uses' => 'PaymentMethodController@getData']);
+        Route::post('payment-method/deleteAll', ['as' => 'admin.payment-method.deleteAll', 'uses' => 'PaymentMethodController@deleteAll']);
+        Route::post('payment-method/updateStatus', ['as' => 'admin.payment-method.updateStatus', 'uses' => 'PaymentMethodController@updateStatus']);
+        Route::resource('payment-method', 'PaymentMethodController');
+
+        /*PROMOTION*/
+        Route::get('promotion/getData', ['as' => 'admin.promotion.getData', 'uses' => 'PromotionController@getData']);
+        Route::post('promotion/deleteAll', ['as' => 'admin.promotion.deleteAll', 'uses' => 'PromotionController@deleteAll']);
+        Route::post('promotion/updateStatus', ['as' => 'admin.promotion.updateStatus', 'uses' => 'PromotionController@updateStatus']);
+        Route::post('promotion/postAjaxUpdateOrder', ['as' => 'admin.promotion.postAjaxUpdateOrder', 'uses' => 'PromotionController@postAjaxUpdateOrder']);
+        Route::resource('promotion', 'PromotionController');
+
+        /*FEEDBACK*/
+        Route::get('feedback/getData', ['as' => 'admin.feedback.getData', 'uses' => 'FeedbackController@getData']);
+        Route::post('feedback/deleteAll', ['as' => 'admin.feedback.deleteAll', 'uses' => 'FeedbackController@deleteAll']);
+        Route::post('feedback/updateStatus', ['as' => 'admin.feedback.updateStatus', 'uses' => 'FeedbackController@updateStatus']);
+        Route::post('feedback/postAjaxUpdateOrder', ['as' => 'admin.feedback.postAjaxUpdateOrder', 'uses' => 'FeedbackController@postAjaxUpdateOrder']);
+        Route::resource('feedback', 'FeedbackController');
+
+        /*NEWS*/
+        Route::get('news/getData', ['as' => 'admin.news.getData', 'uses' => 'NewsController@getData']);
+        Route::post('news/deleteAll', ['as' => 'admin.news.deleteAll', 'uses' => 'NewsController@deleteAll']);
+        Route::post('news/updateStatus', ['as' => 'admin.news.updateStatus', 'uses' => 'NewsController@updateStatus']);
+        Route::post('news/postAjaxUpdateOrder', ['as' => 'admin.news.postAjaxUpdateOrder', 'uses' => 'NewsController@postAjaxUpdateOrder']);
+        Route::resource('news', 'NewsController');
+
+        /*NEWS*/
+        Route::get('pages/getData', ['as' => 'admin.pages.getData', 'uses' => 'PagesController@getData']);
+        Route::post('pages/deleteAll', ['as' => 'admin.pages.deleteAll', 'uses' => 'PagesController@deleteAll']);
+        Route::post('pages/updateStatus', ['as' => 'admin.pages.updateStatus', 'uses' => 'PagesController@updateStatus']);
+        Route::post('pages/postAjaxUpdateOrder', ['as' => 'admin.pages.postAjaxUpdateOrder', 'uses' => 'PagesController@postAjaxUpdateOrder']);
+        Route::resource('pages', 'PagesController');
+
+        /*PAYMENT SUPPLIER*/
+        Route::get('payment-supplier/getData', ['as' => 'admin.payment-supplier.getData', 'uses' => 'PaymentSupplierController@getData']);
+        Route::post('payment-supplier/deleteAll', ['as' => 'admin.payment-supplier.deleteAll', 'uses' => 'PaymentSupplierController@deleteAll']);
+        Route::post('payment-supplier/updateStatus', ['as' => 'admin.payment-supplier.updateStatus', 'uses' => 'PaymentSupplierController@updateStatus']);
+        Route::post('payment-supplier/postAjaxUpdateOrder', ['as' => 'admin.payment-supplier.postAjaxUpdateOrder', 'uses' => 'PaymentSupplierController@postAjaxUpdateOrder']);
+        Route::resource('payment-supplier', 'PaymentSupplierController');
+
+        /*CUSTOMER MANAMENT*/
+        Route::get('customer/getData', ['as' => 'admin.customer.getData', 'uses' => 'CustomerController@getData']);
+        Route::post('customer/deleteAll', ['as' => 'admin.customer.deleteAll', 'uses' => 'CustomerController@deleteAll']);
+        Route::post('customer/updateStatus', ['as' => 'admin.customer.updateStatus', 'uses' => 'CustomerController@updateStatus']);
+        Route::post('customer/postAjaxUpdateOrder', ['as' => 'admin.customer.postAjaxUpdateOrder', 'uses' => 'CustomerController@postAjaxUpdateOrder']);
+        Route::resource('customer', 'CustomerController');
+
+        /* COMPANY */
+        Route::any('company/{id?}', ['as' => 'admin.company.index', 'uses' => 'CompanyController@getInformation']);
 
     });
   });
