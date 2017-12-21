@@ -18,6 +18,8 @@ class CreateAttributesTable extends Migration
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->boolean('status')->default(1);
+            $table->integer('product_id')->unsigned();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->timestamps();
         });
     }
