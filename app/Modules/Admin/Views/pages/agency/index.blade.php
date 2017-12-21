@@ -1,12 +1,12 @@
 @extends('Admin::layouts.main-layout')
 
 @section('link')
-    {{Html::link(route('admin.category.create'),'Add New',['class'=>'btn btn-primary'])}}
+    {{Html::link(route('admin.agency.create'),'Add New',['class'=>'btn btn-primary'])}}
     <button type="button" class="btn btn-danger" id="btn-remove-all">Remove All Selected</button>
     <button type="button" class="btn btn-warning" id="btn-updateOrder">Update Order</button>
 @stop
 
-@section('title','Danh Mục Sản Phẩm')
+@section('title','Nhà Cung Cấp')
 
 @section('content')
     @if(Session::has('error'))
@@ -24,14 +24,12 @@
         <table class="table table-hover">
           <thead>
             <tr>
-                <th width="5%">ID</th>
-                <th width="120px"><i class="glyphicon glyphicon-search"></i> Mã Danh Mục</th>
-                <th width="20%"><i class="glyphicon glyphicon-search"></i> Tên Danh Mục</th>
-                <th width="120">Hình ảnh</th>
-                <th width="80">Sắp xếp</th>
-                <th >Trạng thái</th>
-                <th >Nhà Cung Cấp</th>
-                <th width="120px">&nbsp;</th>
+              <th width="5%">ID</th>
+              <th width="20%"><i class="glyphicon glyphicon-search"></i> Nhà Cung Cấp </th>
+              <th width="20%">Hình ảnh</th>
+              <th width="10%">Sắp xếp</th>
+              <th width="10%">Trạng thái</th>
+              <th width="20%">&nbsp;</th>
             </tr>
           </thead>
         </table>
@@ -58,19 +56,17 @@
             processing: true,
             serverSide: true,
             ajax:{
-                url:  '{!! route('admin.category.getData') !!}',
+                url:  '{!! route('admin.agency.getData') !!}',
                 data: function(d){
                     d.name = $('input[type="search"]').val();
                 }
             },
             columns: [
                {data: 'id', name: 'id', 'orderable': false},
-               {data: 'sku_cate', name: 'sku_cate'},
                {data: 'name', name: 'name'},
                {data: 'img_url', name: 'img_url', 'orderable': false},
                {data: 'order', name: 'order'},
                {data: 'status', name: 'status'},
-               {data: 'agency_name', name: 'agency_name'},
                {data: 'action', name: 'action', 'orderable': false}
            ],
            initComplete: function(){
@@ -85,7 +81,7 @@
                     alertify.confirm('You can not undo this action. Are you sure ?', function(e){
                         if(e){
                             $.ajax({
-                                'url':"{!!route('admin.category.deleteAll')!!}",
+                                'url':"{!!route('admin.agency.deleteAll')!!}",
                                 'data' : {arr: data,_token:$('meta[name="csrf-token"]').attr('content')},
                                 'type': "POST",
                                 'success':function(result){
@@ -110,7 +106,7 @@
                         data_order[id] = va;
                     });
                     $.ajax({
-                        url: '{{route("admin.category.postAjaxUpdateOrder")}}',
+                        url: '{{route("admin.agency.postAjaxUpdateOrder")}}',
                         type:'POST',
                         data: {data: data_order,  _token:$('meta[name="csrf-token"]').attr('content') },
                         success: function(rs){
@@ -129,7 +125,7 @@
                     const id_item = $(this).data('id');
                     console.log(id_item);
                     $.ajax({
-                        url: "{{route('admin.category.updateStatus')}}",
+                        url: "{{route('admin.agency.updateStatus')}}",
                         type : 'POST',
                         data: {value: value, id: id_item, _token:$('meta[name="csrf-token"]').attr('content')},
                         success: function(data){

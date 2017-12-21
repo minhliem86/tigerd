@@ -8,7 +8,7 @@ class Agencies extends Model
 {
     public $table = 'agencies';
 
-    protected $guard = ['id'];
+    protected $guarded = ['id'];
 
     public function categories()
     {

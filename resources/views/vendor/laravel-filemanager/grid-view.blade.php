@@ -9,7 +9,7 @@
     <?php $item_path = $item->is_file ? $item->url : $item->path; ?>
 
     <div class="square clickable {{ $item->is_file ? '' : 'folder-item' }}" data-id="{{ $item_path }}"
-           @if($item->is_file && $thumb_src) onclick="fileView('{{ $item_path }}', '{{ $item->updated }}')"
+           @if($item->is_file && $thumb_src) onclick="useFile('{{ $item_path }}', '{{ $item->updated }}')"
            @elseif($item->is_file) onclick="download('{{ $item_name }}')" @endif >
       @if($thumb_src)
       <img src="{{ $thumb_src }}">
@@ -22,7 +22,7 @@
       <div class="btn-group">
         <button type="button" data-id="{{ $item_path }}"
                 class="item_name btn btn-default btn-xs {{ $item->is_file ? '' : 'folder-item'}}"
-                @if($item->is_file && $thumb_src) onclick="fileView('{{ $item_path }}', '{{ $item->updated }}')"
+                @if($item->is_file && $thumb_src) onclick="useFile('{{ $item_path }}', '{{ $item->updated }}')"
                 @elseif($item->is_file) onclick="download('{{ $item_name }}')" @endif >
           {{ $item_name }}
         </button>
@@ -36,7 +36,7 @@
           <li><a href="javascript:download('{{ $item_name }}')"><i class="fa fa-download fa-fw"></i> {{ Lang::get('laravel-filemanager::lfm.menu-download') }}</a></li>
           <li class="divider"></li>
           @if($thumb_src)
-          <li><a href="javascript:fileView('{{ $item_path }}', '{{ $item->updated }}')"><i class="fa fa-image fa-fw"></i> {{ Lang::get('laravel-filemanager::lfm.menu-view') }}</a></li>
+          <li><a href="javascript:useFile('{{ $item_path }}', '{{ $item->updated }}')"><i class="fa fa-image fa-fw"></i> {{ Lang::get('laravel-filemanager::lfm.menu-view') }}</a></li>
           <li><a href="javascript:resizeImage('{{ $item_name }}')"><i class="fa fa-arrows fa-fw"></i> {{ Lang::get('laravel-filemanager::lfm.menu-resize') }}</a></li>
           <li><a href="javascript:cropImage('{{ $item_name }}')"><i class="fa fa-crop fa-fw"></i> {{ Lang::get('laravel-filemanager::lfm.menu-crop') }}</a></li>
           <li class="divider"></li>

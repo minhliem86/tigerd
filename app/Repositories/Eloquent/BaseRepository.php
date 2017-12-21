@@ -160,25 +160,22 @@ public function findWhereIn( $field, array $values, $columns = array('*'))
 	 * @param type
 	 * @return void
  */
- public function deleteAll($Arr_data)
- {
-     $this->model->destroy($Arr_data);
-     return true;
- }
+     public function deleteAll($Arr_data)
+     {
+         $this->model->destroy($Arr_data);
+         return true;
+     }
 
- /**
- * GET ORDER
- **/
-public function getOrder()
-{
-  try {
-    $inst = $this->model->orderBy('id','DESC')->firstOrFail();
-    return $inst->order + 1;
-  } catch (ModelNotFoundException $e) {
-    return 1;
-  }
-
-
-}
-
+     /**
+     * GET ORDER
+     **/
+    public function getOrder()
+    {
+      try {
+        $inst = $this->model->orderBy('id','DESC')->firstOrFail();
+        return $inst->order + 1;
+      } catch (ModelNotFoundException $e) {
+        return 1;
+      }
+    }
 }

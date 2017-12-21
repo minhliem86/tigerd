@@ -5,29 +5,17 @@
     <button class="btn btn-primary" onclick="submitForm();">Save Changes</button>
 @stop
 
-@section('title','Danh Mục Sản Phẩm')
+@section('title','Nhà Cung Cấp')
 
 @section('content')
     <div class="row">
       <div class="col-sm-12">
-        {{Form::model($inst, ['route'=>['admin.category.update',$inst->id], 'method'=>'put' , 'class'=>'form-horizontal' ])}}
+        {{Form::model($inst, ['route'=>['admin.agency.update',$inst->id], 'method'=>'put' ])}}
           <div class="form-group">
-              <label for="agency_id" class="col-md-2 control-label">Chọn Nhà Cung Cấp</label>
-              <div class="col-md-10">
-                  {!! Form::select('agency_id', ['' => 'Chọn Nhà Cung Cấp'] + $agency, old('agency_id'), ['class'=>'form-control', 'required'] ) !!}
-              </div>
-          </div>
-          <div class="form-group">
-              <label class="col-md-2 control-label">Tên: </label>
-              <div class="col-md-10">
-                  {!! Form::text('name', old('name'), ['class'=> 'form-control', 'placeholder' => 'Tên Danh Mục']) !!}
-              </div>
-          </div>
-          <div class="form-group">
-              <label class="col-md-2 control-label">Mã Danh Mục: <p><small>(Từ 2-3 Ký Tự Hoa)</small></p></label>
-              <div class="col-md-10">
-                  {!! Form::text('sku_cate', old('sku_cate'), ['class'=> 'form-control', 'placeholder' => 'Mã Danh Mục']) !!}
-              </div>
+            <label class="col-md-2 control-label">Tên:</label>
+            <div class="col-md-10">
+              {{Form::text('name',old('name'), ['class'=>'form-control', 'placeholder'=>'Tên'])}}
+            </div>
           </div>
           <div class="form-group">
               <label class="col-md-2 control-label">Mô tả ngắn:</label>
@@ -36,19 +24,19 @@
               </div>
           </div>
           <div class="form-group">
-              <label class="col-md-2 control-label" for="description">Sắp xếp</label>
-              <div class="col-md-10">
-                  {{Form::text('order',old('order'), ['class'=>'form-control', 'placeholder'=>'order'])}}
-              </div>
+            <label class="col-md-2 control-label" for="description">Sắp xếp</label>
+            <div class="col-md-10">
+              {{Form::text('order',old('order'), ['class'=>'form-control', 'placeholder'=>'order'])}}
+            </div>
           </div>
           <div class="form-group">
-              <label class="col-md-2 control-label" for="description">Trạng thái</label>
-              <div class="col-md-10">
-                  <label class="toggle">
-                      <input type="checkbox" name="status" value="1" {{$inst->status == 1 ? 'checked' : '' }}  >
-                      <span class="handle"></span>
-                  </label>
-              </div>
+            <label class="col-md-2 control-label" for="description">Trạng thái</label>
+            <div class="col-md-10">
+                <label class="toggle">
+                  <input type="checkbox" name="status" value="1" {{$inst->status == 1 ? 'checked' : '' }}  >
+                  <span class="handle"></span>
+                </label>
+            </div>
           </div>
           <div class="form-group">
             <label class="col-md-2 control-label">Hình Ảnh:</label>
@@ -82,10 +70,6 @@
     function submitForm(){
      $('form').submit();
     }
-    // $(document).ready(function(){
-    //     $('radio[name="status"]').change(function(){
-    //
-    //     })
-    // })
+
     </script>
 @stop

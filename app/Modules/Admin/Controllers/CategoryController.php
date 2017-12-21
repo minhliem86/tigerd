@@ -7,18 +7,25 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Repositories\CategoryRepository;
+use App\Repositories\AgencyRepository;
 use App\Repositories\Eloquent\CommonRepository;
 use Datatables;
 use DB;
+use Validator;
 
 class CategoryController extends Controller
 {
     protected $cateRepo;
+    protected $agency;
     protected $common;
-    public function __construct(CategoryRepository $cate, CommonRepository $common)
+    protected $_repalcePath;
+
+    public function __construct(CategoryRepository $cate, CommonRepository $common, AgencyRepository $agency)
     {
         $this->cateRepo = $cate;
+        $this->agency = $agency;
         $this->common = $common;
+        $this->_repalcePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
     }
     /**
      * Display a listing of the resource.
@@ -32,7 +39,7 @@ class CategoryController extends Controller
 
     public function getData(Request $request)
     {
-        $cate = DB::table('categories')->select(['id', 'title', 'avatar_img', 'order', 'status']);
+        $cate = $this->cateRepo->query(['categories.id as id', 'categories.name as name', 'categories.sku_cate as sku_cate', 'categories.img_url as img_url', 'categories.order as order', 'categories.status as status', 'agencies.name as agency_name'])->join('agencies', 'agencies.id', '=', 'categories.agency_id');
             return Datatables::of($cate)
             ->addColumn('action', function($cate){
                 return '<a href="'.route('admin.category.edit', $cate->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>
@@ -41,9 +48,9 @@ class CategoryController extends Controller
                     <input name="_token" type="hidden" value="'.csrf_token().'">
                                <button class="btn  btn-danger btn-xs remove-btn" type="button" attrid=" '.route('admin.category.destroy', $cate->id).' " onclick="confirm_remove(this);" > Remove </button>
                </form>' ;
-           })->addColumn('order', function($cate){
+           })->editColumn('order', function($cate){
                return "<input type='text' name='order' class='form-control' data-id= '".$cate->id."' value= '".$cate->order."' />";
-           })->addColumn('status', function($cate){
+           })->editColumn('status', function($cate){
                $status = $cate->status ? 'checked' : '';
                $cate_id =$cate->id;
                return '
@@ -52,11 +59,11 @@ class CategoryController extends Controller
                     <span class="handle"></span>
                   </label>
               ';
-           })->editColumn('avatar_img',function($cate){
-             return '<img src="'.$cate->avatar_img.'" width="120" class="img-responsive">';
+           })->editColumn('img_url',function($cate){
+             return '<img src="'.asset($cate->img_url).'" width="100" class="img-responsive">';
          })->filter(function($query) use ($request){
                     if (request()->has('name')) {
-                        $query->where('title', 'like', "%{$request->input('name')}%");
+                        $query->where('categories.name', 'like', "%{$request->input('name')}%")->orWhere('categories.sku_cate','like', "%{$request->input('name')}%");
                     }
                 })->setRowId('id')->make(true);
     }
@@ -68,7 +75,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('Admin::pages.category.create');
+        $agency = $this->agency->query(['name','id'])->lists('name', 'id')->toArray();
+        return view('Admin::pages.category.create', compact('agency'));
     }
 
     /**
@@ -79,14 +87,32 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $valid = Validator::make($request->all(),[
+            'sku_cate' => 'required|min:2|max:3',
+            'agency_id' => 'required'
+        ],[
+            'sku_cate.required' => 'Vui lòng điền SKU',
+            'sku_cate.min' => 'SKU chỉ được từ 2-3 ký tự hoa',
+            'sku_cate.max' => 'SKU chỉ được từ 2-3 ký tự hoa',
+            'agency_id.required' => 'Vui lòng chọn Nhà Cung Cấp'
+        ]);
+        if($valid->fails()){
+            return redirect()->back()->withInput()->withErrors($valid->errors());
+        }
         if($request->has('img_url')){
-            $img_url = $this->common->getPath($request->input('img_url'));
+            $img_url = $this->common->getPath($request->input('img_url'),$this->_repalcePath);
+        }else{
+            $img_url = '';
         }
         $order = $this->cateRepo->getOrder();
+
         $data = [
-            'title' => $request->input('title'),
-            'slug' => \LP_lib::unicode($request->input('title')),
-            'avatar_img' => $img_url,
+            'name' => $request->input('name'),
+            'slug' => \LP_lib::unicode($request->input('name')),
+            'description' => $request->input('description'),
+            'sku_cate' => \Str::upper($request->input('sku_cate')),
+            'agency_id' => $request->input('agency_id'),
+            'img_url' => $img_url,
             'order' => $order,
         ];
         $this->cateRepo->create($data);
@@ -112,8 +138,9 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        $agency = $this->agency->query(['name','id'])->lists('name', 'id')->toArray();
         $inst = $this->cateRepo->find($id);
-        return view('Admin::pages.category.edit', compact('inst'));
+        return view('Admin::pages.category.edit', compact('inst','agency'));
     }
 
     /**
@@ -125,15 +152,33 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $img_url = $this->common->getPath($request->input('img_url'));
+        $valid = Validator::make($request->all(),[
+            'sku_cate' => 'required|min:2|max:3',
+            'agency_id' => 'required'
+        ],[
+            'sku_cate.required' => 'Vui lòng điền SKU',
+            'sku_cate.min' => 'SKU chỉ được từ 2-3 ký tự hoa',
+            'sku_cate.max' => 'SKU chỉ được từ 2-3 ký tự hoa',
+            'agency_id.required' => 'Vui lòng chọn Nhà Cung Cấp'
+        ]);
+        if($valid->fails()){
+            return redirect()->back()->withInput()->withErrors($valid->errors());
+        }
+
+        $img_url = $this->common->getPath($request->input('img_url'),$this->_repalcePath);
+
         $data = [
-                'title' => $request->input('title'),
-                'slug' => \LP_lib::unicode($request->input('title')),
-                'avatar_img' => $img_url,
-                'order' => $request->input('order'),
-                'status' => $request->input('status'),
+            'name' => $request->input('name'),
+            'slug' => \LP_lib::unicode($request->input('name')),
+            'description' => $request->input('description'),
+            'sku_cate' => \Str::upper($request->input('sku_cate')),
+            'agency_id' => $request->input('agency_id'),
+            'img_url' => $img_url,
+            'order' => $request->input('order'),
+            'status' => $request->input('status'),
         ];
         $this->cateRepo->update($data, $id);
+
         return redirect()->route('admin.category.index')->with('success', 'Updated !');
     }
 

@@ -4,21 +4,55 @@
     <button class="btn btn-primary" onclick="submitForm();">Save</button>
 @stop
 
-@section('title','Create Category')
+@section('title','Danh Mục Sản Phẩm')
 
 @section('content')
     <div class="row">
       <div class="col-sm-12">
+          @include('Admin::errors.error_layout')
         <form method="POST" action="{{route('admin.category.store')}}" id="form" role="form" class="form-horizontal">
           {{Form::token()}}
+            <div class="form-group">
+                <label for="agency_id" class="col-md-2 control-label">Chọn Nhà Cung Cấp</label>
+                <div class="col-md-10">
+                    {!! Form::select('agency_id', ['' => 'Chọn Nhà Cung Cấp'] + $agency, old('agency_id'), ['class'=>'form-control', 'required'] ) !!}
+                </div>
+            </div>
           <div class="form-group">
-            <label class="col-md-2 control-label">Tiêu đề</label>
+            <label class="col-md-2 control-label">Tên: </label>
             <div class="col-md-10">
-              <input type="text" required="" placeholder="Title" id="title" class="form-control" name="title">
+                {!! Form::text('name', old('name'), ['class'=> 'form-control', 'placeholder' => 'Tên Danh Mục']) !!}
             </div>
           </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Mã Danh Mục: <p><small>(Từ 2-3 Ký Tự Hoa)</small></p></label>
+                <div class="col-md-10">
+                    {!! Form::text('sku_cate', old('sku_cate'), ['class'=> 'form-control', 'placeholder' => 'Mã Danh Mục']) !!}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label">Mô tả ngắn:</label>
+                <div class="col-md-10">
+                    {!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ...']) !!}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="description">Sắp xếp</label>
+                <div class="col-md-10">
+                    {{Form::text('order',old('order'), ['class'=>'form-control', 'placeholder'=>'order'])}}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="description">Trạng thái</label>
+                <div class="col-md-10">
+                    <label class="toggle">
+                        <input type="checkbox" name="status" value="1" {{$inst->status == 1 ? 'checked' : '' }}  >
+                        <span class="handle"></span>
+                    </label>
+                </div>
+            </div>
           <div class="form-group">
-            <label class="col-md-2 control-label">Hình đại diện:</label>
+            <label class="col-md-2 control-label">Hình Ảnh:</label>
             <div class="col-md-10">
                 <div class="input-group">
                  <span class="input-group-btn">
