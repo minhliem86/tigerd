@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="93de3afa-6479-45b5-b6f0-66406beec5f5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/Models/ProductAttribute.php" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_050923_create_product_attribute_table.php" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Http/Kernel.php" afterPath="$PROJECT_DIR$/app/Http/Kernel.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Controllers/Auth/AuthController.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Controllers/Auth/AuthController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Controllers/UserManagementController.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Controllers/UserManagementController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/auth/register.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/auth/register.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/auth/role.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/auth/role.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/layouts/header.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/layouts/header.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/layouts/navigation.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/layouts/navigation.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_050621_create_attributes_table.php" afterPath="$PROJECT_DIR$/database/migrations/2017_12_20_050621_create_attributes_table.php" />
-    </list>
+    <list default="true" id="93de3afa-6479-45b5-b6f0-66406beec5f5" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -238,12 +225,12 @@
       <option name="presentableId" value="Default" />
       <updated>1513739254407</updated>
       <workItem from="1513739255668" duration="16101000" />
-      <workItem from="1513824863382" duration="3621000" />
+      <workItem from="1513824863382" duration="3794000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19722000" />
+    <option name="totallyTimeSpent" value="19895000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
