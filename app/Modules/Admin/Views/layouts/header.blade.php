@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a href="#" class="navbar-brand">Dashboard</a>
+      <a href="#" class="navbar-brand">DASHBOARD</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -23,7 +23,7 @@
             @role('admin')
             <li><a href="{{route('admin.user.index')}}">Quản lý Quản Trị Viên</a></li>
             @endrole
-            <li><a href="{{route('admin.profile.index')}}">Quản lý tài khoản</a></li>
+            <li><a href="{{route('admin.profile.index')}}">Thông tin tài khoản</a></li>
             <li class="divider"></li>
             <li ><a href="{{url('admin/logout')}}">Thoát</a></li>
           </ul>

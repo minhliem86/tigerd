@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Feedbacks extends Model
 {
-    //
+    public $table = 'feedbacks';
+
+    protected $guard = ['id'];
 }

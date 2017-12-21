@@ -1,6 +1,6 @@
 @extends('Admin::layouts.main-layout')
 
-@section('title','Dashboard')
+@section('title','Thống Kê')
 
 @section('content')
     <div class="row">

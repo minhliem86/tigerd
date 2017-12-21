@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CompanyInfomations extends Model
+class PaymentSupplier extends Model
 {
-    public $table = 'company_infomations';
+    public $table = 'payment_suppliers';
 
     protected $guard = ['id'];
 }

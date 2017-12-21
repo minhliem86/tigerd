@@ -6,5 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Agencies extends Model
 {
-    //
+    public $table = 'agencies';
+
+    protected $guard = ['id'];
+
+    public function categories()
+    {
+        return $this->hasMany('App\Models\Category');
+    }
+
+    public function products()
+    {
+        return $this->hasManyThrough('App\Models\Product', 'App\Models\Category');
+    }
 }
