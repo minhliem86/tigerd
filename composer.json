@@ -8,8 +8,7 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "liemphan/modules": "1.0",
-        "darryldecode/cart": "3.0.0",
-        "iatstuti/laravel-cascade-soft-deletes": "^1.3"
+        "darryldecode/cart": "3.0.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

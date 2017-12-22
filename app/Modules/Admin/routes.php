@@ -103,7 +103,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('news/postAjaxUpdateOrder', ['as' => 'admin.news.postAjaxUpdateOrder', 'uses' => 'NewsController@postAjaxUpdateOrder']);
         Route::resource('news', 'NewsController');
 
-        /*NEWS*/
+        /*PAGES*/
         Route::get('pages/getData', ['as' => 'admin.pages.getData', 'uses' => 'PagesController@getData']);
         Route::post('pages/deleteAll', ['as' => 'admin.pages.deleteAll', 'uses' => 'PagesController@deleteAll']);
         Route::post('pages/updateStatus', ['as' => 'admin.pages.updateStatus', 'uses' => 'PagesController@updateStatus']);

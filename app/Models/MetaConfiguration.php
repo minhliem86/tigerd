@@ -8,6 +8,8 @@ class MetaConfiguration extends Model
 {
     public $table = 'meta_configurations';
 
+    protected $guarded = ['id'];
+
     public function metable()
     {
         return $this->morphTo();

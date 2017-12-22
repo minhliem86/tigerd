@@ -1,29 +1,14 @@
 @extends('Admin::layouts.main-layout')
 
 @section('link')
-    {{Html::link(route('admin.agency.create'),'Add New',['class'=>'btn btn-primary'])}}
+    {{Html::link(route('admin.pages.create'),'Add New',['class'=>'btn btn-primary'])}}
     <button type="button" class="btn btn-danger" id="btn-remove-all">Remove All Selected</button>
     <button type="button" class="btn btn-warning" id="btn-updateOrder">Update Order</button>
 @stop
 
-@section('title','Nhà Cung Cấp')
+@section('title','Các Trang Đơn')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-4 col-sm-6">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Nhà Cung Cấp</h3>
-                </div>
-                <div class="panel-body-dashboard">
-                    <div class="wrap-icon text-center">
-                        <i class="fa fa-cubes"></i>
-                        <h5><span class="badge badge-info badge-md">{{$agency_quality}}</span> Nhà Cung Cấp</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     @if(Session::has('error'))
     <div class="alert alert-danger alert-dismissable">
       <p>{{Session::get('error')}}</p>
@@ -40,8 +25,7 @@
           <thead>
             <tr>
               <th width="5%">ID</th>
-              <th width="20%"><i class="glyphicon glyphicon-search"></i> Nhà Cung Cấp </th>
-              <th width="20%">Hình ảnh</th>
+              <th width="20%"><i class="glyphicon glyphicon-search"></i> Trang</th>
               <th width="10%">Sắp xếp</th>
               <th width="10%">Trạng thái</th>
               <th width="20%">&nbsp;</th>
@@ -71,7 +55,7 @@
             processing: true,
             serverSide: true,
             ajax:{
-                url:  '{!! route('admin.agency.getData') !!}',
+                url:  '{!! route('admin.pages.getData') !!}',
                 data: function(d){
                     d.name = $('input[type="search"]').val();
                 }
@@ -79,7 +63,6 @@
             columns: [
                {data: 'id', name: 'id', 'orderable': false},
                {data: 'name', name: 'name'},
-               {data: 'img_url', name: 'img_url', 'orderable': false},
                {data: 'order', name: 'order'},
                {data: 'status', name: 'status'},
                {data: 'action', name: 'action', 'orderable': false}
@@ -96,7 +79,7 @@
                     alertify.confirm('You can not undo this action. Are you sure ?', function(e){
                         if(e){
                             $.ajax({
-                                'url':"{!!route('admin.agency.deleteAll')!!}",
+                                'url':"{!!route('admin.pages.deleteAll')!!}",
                                 'data' : {arr: data,_token:$('meta[name="csrf-token"]').attr('content')},
                                 'type': "POST",
                                 'success':function(result){
@@ -121,7 +104,7 @@
                         data_order[id] = va;
                     });
                     $.ajax({
-                        url: '{{route("admin.agency.postAjaxUpdateOrder")}}',
+                        url: '{{route("admin.pages.postAjaxUpdateOrder")}}',
                         type:'POST',
                         data: {data: data_order,  _token:$('meta[name="csrf-token"]').attr('content') },
                         success: function(rs){
@@ -140,7 +123,7 @@
                     const id_item = $(this).data('id');
                     console.log(id_item);
                     $.ajax({
-                        url: "{{route('admin.agency.updateStatus')}}",
+                        url: "{{route('admin.pages.updateStatus')}}",
                         type : 'POST',
                         data: {value: value, id: id_item, _token:$('meta[name="csrf-token"]').attr('content')},
                         success: function(data){

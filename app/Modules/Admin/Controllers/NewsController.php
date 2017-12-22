@@ -6,19 +6,20 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Repositories\AgencyRepository;
+use App\Repositories\NewsRepository;
 use Yajra\Datatables\Datatables;
 use App\Repositories\Eloquent\CommonRepository;
+use App\Repositories\MetaRepository;
 
-class AgencyController extends Controller
+class NewsController extends Controller
 {
-    protected $agency;
+    protected $news;
     protected $common;
     protected $_repalcePath;
 
-    public function __construct(AgencyRepository $agency, CommonRepository $common)
+    public function __construct(NewsRepository $news, CommonRepository $common)
     {
-        $this->agency = $agency;
+        $this->news = $news;
         $this->common = $common;
         $this->_repalcePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
     }
@@ -30,13 +31,13 @@ class AgencyController extends Controller
      */
     public function index()
     {
-        $agency_quality = $this->agency->all(['id'])->count();
-        return view('Admin::pages.agency.index', compact('agency_quality'));
+        $news_quality = $this->news->all(['id'])->count();
+        return view('Admin::pages.news.index', compact('news_quality'));
     }
 
     public function getData(Request $request)
     {
-        $data = $this->agency->query(['id', 'img_url', 'name' ,'order', 'status']);
+        $data = $this->news->query(['id', 'img_url', 'name' ,'order', 'status']);
         $datatable = Datatables::of($data)
             ->editColumn('img_url', function ($data){
                 $img = "<img src='".asset($data->img_url)."' style='max-width:100px'/>";
@@ -56,11 +57,11 @@ class AgencyController extends Controller
               ';
             })
             ->addColumn('action', function($data){
-                return '<a href="'.route('admin.agency.edit', $data->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>
-                <form method="POST" action=" '.route('admin.agency.destroy', $data->id).' " accept-charset="UTF-8" class="inline-block-span">
+                return '<a href="'.route('admin.news.edit', $data->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>
+                <form method="POST" action=" '.route('admin.news.destroy', $data->id).' " accept-charset="UTF-8" class="inline-block-span">
                     <input name="_method" type="hidden" value="DELETE">
                     <input name="_token" type="hidden" value="'.csrf_token().'">
-                               <button class="btn  btn-danger btn-xs remove-btn" type="button" attrid=" '.route('admin.agency.destroy', $data->id).' " onclick="confirm_remove(this);" > Remove </button>
+                               <button class="btn  btn-danger btn-xs remove-btn" type="button" attrid=" '.route('admin.news.destroy', $data->id).' " onclick="confirm_remove(this);" > Remove </button>
                </form>' ;
             })
             ->filter(function($query) use ($request){
@@ -79,7 +80,7 @@ class AgencyController extends Controller
      */
     public function create()
     {
-        return view('Admin::pages.agency.create');
+        return view('Admin::pages.news.create');
     }
 
     /**
@@ -95,17 +96,31 @@ class AgencyController extends Controller
         }else{
             $img_url = '';
         }
-        $order = $this->agency->getOrder();
+        $order = $this->news->getOrder();
         $data = [
             'name' => $request->input('name'),
             'slug' => \LP_lib::unicode($request->input('name')),
-            'description' => $request->input('description'),
+            'content' => $request->input('content'),
             'img_url' => $img_url,
             'order' => $order,
         ];
-        
-        $this->agency->create($data);
-        return redirect()->route('admin.agency.index')->with('success','Created !');
+
+        $news = $this->news->create($data);
+
+        if($request->has('meta_config')){
+            if($request->has('meta_img')){
+                $meta_img = $this->common->getPath($request->input('meta_img'),$this->_repalcePath);
+            }else{
+                $meta_img = '';
+            }
+            $data_seo = [
+                'meta_keywords' => $request->input('meta_keywords'),
+                'meta_description' => $request->input('meta_description'),
+                'meta_img' => $meta_img,
+            ];
+            $news->meta_configs()->save(new \App\Models\MetaConfiguration($data_seo));
+        }
+        return redirect()->route('admin.news.index')->with('success','Created !');
     }
 
     /**
@@ -127,8 +142,8 @@ class AgencyController extends Controller
      */
     public function edit($id)
     {
-        $inst = $this->agency->find($id);
-        return view('Admin::pages.agency.edit', compact('inst'));
+        $inst = $this->news->find($id);
+        return view('Admin::pages.news.edit', compact('inst'));
     }
 
     /**
@@ -138,7 +153,7 @@ class AgencyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, MetaRepository $meta)
     {
         $img_url = $this->common->getPath($request->input('img_url'),$this->_repalcePath);
         $data = [
@@ -150,8 +165,21 @@ class AgencyController extends Controller
             'status' => $request->input('status'),
         ];
 
-        $this->agency->update($data, $id);
-        return redirect()->route('admin.agency.index')->with('success', 'Updated !');
+        $news = $this->news->update($data, $id);
+
+        if($request->has('meta_config')){
+            $meta_img = $this->common->getPath($request->input('meta_img'),$this->_repalcePath);
+            $data_seo = [
+                'meta_keywords' => $request->input('meta_keywords'),
+                'meta_description' => $request->input('meta_description'),
+                'meta_img' => $meta_img,
+            ];
+            if(!$request->has('meta_config_id')){
+                $news->meta_configs()->save(new \App\Models\MetaConfiguration($data_seo));
+            }
+            $meta_config = $meta->update($data_seo,$request->input('meta_config_id'));
+        }
+        return redirect()->route('admin.news.index')->with('success', 'Updated !');
     }
 
     /**
@@ -162,8 +190,9 @@ class AgencyController extends Controller
      */
     public function destroy($id)
     {
-        $this->agency->delete($id);
-        return redirect()->route('admin.agency.index')->with('success','Deleted !');
+//        $this->news->find($id)->meta_configs()->delete();
+        $this->news->delete($id);
+        return redirect()->route('admin.news.index')->with('success','Deleted !');
     }
 
     /*DELETE ALL*/
@@ -173,7 +202,7 @@ class AgencyController extends Controller
             abort(404);
         }else{
             $data = $request->arr;
-            $response = $this->agency->deleteAll($data);
+            $response = $this->news->deleteAll($data);
             return response()->json(['msg' => 'ok']);
         }
     }
@@ -190,7 +219,7 @@ class AgencyController extends Controller
                 $upt  =  [
                     'order' => $v,
                 ];
-                $obj = $this->agency->find($k);
+                $obj = $this->news->find($k);
                 $obj->update($upt);
             }
             return response()->json(['msg' =>'ok', 'code'=>200], 200);
@@ -205,7 +234,7 @@ class AgencyController extends Controller
         }else{
             $value = $request->input('value');
             $id = $request->input('id');
-            $cate = $this->agency->find($id);
+            $cate = $this->news->find($id);
             $cate->status = $value;
             $cate->save();
             return response()->json([

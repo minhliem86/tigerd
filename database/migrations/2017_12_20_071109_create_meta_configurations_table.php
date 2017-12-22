@@ -15,7 +15,7 @@ class CreateMetaConfigurationsTable extends Migration
         Schema::create('meta_configurations', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('metable_id')->unsigned();
-            $table->integer('metable_type');
+            $table->string('metable_type');
             $table->string('meta_keywords')->nullable();
             $table->text('meta_description')->nullable();
             $table->string('meta_img')->nullable();

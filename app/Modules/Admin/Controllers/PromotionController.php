@@ -6,19 +6,19 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Repositories\AgencyRepository;
+use App\Repositories\PromotionRepository;
 use Yajra\Datatables\Datatables;
 use App\Repositories\Eloquent\CommonRepository;
 
-class AgencyController extends Controller
+class PagesController extends Controller
 {
-    protected $agency;
+    protected $promotion;
     protected $common;
     protected $_repalcePath;
 
-    public function __construct(AgencyRepository $agency, CommonRepository $common)
+    public function __construct(PromotionRepository $promotion, CommonRepository $common)
     {
-        $this->agency = $agency;
+        $this->promotion = $promotion;
         $this->common = $common;
         $this->_repalcePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
     }
@@ -30,18 +30,15 @@ class AgencyController extends Controller
      */
     public function index()
     {
-        $agency_quality = $this->agency->all(['id'])->count();
-        return view('Admin::pages.agency.index', compact('agency_quality'));
+        $promotion_active = $this->promotion->findByField('status',1,['id'])->count();
+        $promotion_deactive = $this->promotion->findByField('status',0,['id'])->count();
+        return view('Admin::promotion.promotion.index', compact('promotion_active', 'promotion_deactive'));
     }
 
     public function getData(Request $request)
     {
-        $data = $this->agency->query(['id', 'img_url', 'name' ,'order', 'status']);
+        $data = $this->promotion->query(['id', 'name', 'quality', 'value','order', 'status']);
         $datatable = Datatables::of($data)
-            ->editColumn('img_url', function ($data){
-                $img = "<img src='".asset($data->img_url)."' style='max-width:100px'/>";
-                return $img;
-            })
             ->editColumn('order', function($data){
                 return "<input type='text' name='order' class='form-control' data-id= '".$data->id."' value= '".$data->order."' />";
             })
@@ -56,11 +53,11 @@ class AgencyController extends Controller
               ';
             })
             ->addColumn('action', function($data){
-                return '<a href="'.route('admin.agency.edit', $data->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>
-                <form method="POST" action=" '.route('admin.agency.destroy', $data->id).' " accept-charset="UTF-8" class="inline-block-span">
+                return '<a href="'.route('admin.promotion.edit', $data->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>
+                <form method="POST" action=" '.route('admin.promotion.destroy', $data->id).' " accept-charset="UTF-8" class="inline-block-span">
                     <input name="_method" type="hidden" value="DELETE">
                     <input name="_token" type="hidden" value="'.csrf_token().'">
-                               <button class="btn  btn-danger btn-xs remove-btn" type="button" attrid=" '.route('admin.agency.destroy', $data->id).' " onclick="confirm_remove(this);" > Remove </button>
+                               <button class="btn  btn-danger btn-xs remove-btn" type="button" attrid=" '.route('admin.promotion.destroy', $data->id).' " onclick="confirm_remove(this);" > Remove </button>
                </form>' ;
             })
             ->filter(function($query) use ($request){
@@ -79,7 +76,7 @@ class AgencyController extends Controller
      */
     public function create()
     {
-        return view('Admin::pages.agency.create');
+        return view('Admin::promotion.promotion.create');
     }
 
     /**
@@ -90,22 +87,21 @@ class AgencyController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->has('img_url')){
-            $img_url = $this->common->getPath($request->input('img_url'),$this->_repalcePath);
-        }else{
-            $img_url = '';
-        }
-        $order = $this->agency->getOrder();
+        $order = $this->promotion->getOrder();
         $data = [
             'name' => $request->input('name'),
             'slug' => \LP_lib::unicode($request->input('name')),
             'description' => $request->input('description'),
-            'img_url' => $img_url,
+            'type' => $request->input('type'),
+            'target' => $request->input('target'),
+            'value' => trim(\Str::lower($request->input('value'))),
+            'quality' => $request->input('quality'),
             'order' => $order,
         ];
         
-        $this->agency->create($data);
-        return redirect()->route('admin.agency.index')->with('success','Created !');
+        $promotion = $this->promotion->create($data);
+
+        return redirect()->route('admin.promotion.index')->with('success','Created !');
     }
 
     /**
@@ -127,8 +123,8 @@ class AgencyController extends Controller
      */
     public function edit($id)
     {
-        $inst = $this->agency->find($id);
-        return view('Admin::pages.agency.edit', compact('inst'));
+        $inst = $this->promotion->find($id);
+        return view('Admin::promotion.promotion.edit', compact('inst'));
     }
 
     /**
@@ -138,20 +134,23 @@ class AgencyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, MetaRepository $meta)
     {
-        $img_url = $this->common->getPath($request->input('img_url'),$this->_repalcePath);
         $data = [
             'name' => $request->input('name'),
             'slug' => \LP_lib::unicode($request->input('name')),
             'description' => $request->input('description'),
-            'img_url' => $img_url,
+            'type' => $request->input('type'),
+            'target' => $request->input('target'),
+            'value' => trim(\Str::lower($request->input('value'))),
+            'quality' => $request->input('quality'),
             'order' => $request->input('order'),
             'status' => $request->input('status'),
         ];
 
-        $this->agency->update($data, $id);
-        return redirect()->route('admin.agency.index')->with('success', 'Updated !');
+        $promotion = $this->promotion->update($data, $id);
+
+        return redirect()->route('admin.promotion.index')->with('success', 'Updated !');
     }
 
     /**
@@ -162,8 +161,8 @@ class AgencyController extends Controller
      */
     public function destroy($id)
     {
-        $this->agency->delete($id);
-        return redirect()->route('admin.agency.index')->with('success','Deleted !');
+        $this->promotion->delete($id);
+        return redirect()->route('admin.promotion.index')->with('success','Deleted !');
     }
 
     /*DELETE ALL*/
@@ -173,7 +172,7 @@ class AgencyController extends Controller
             abort(404);
         }else{
             $data = $request->arr;
-            $response = $this->agency->deleteAll($data);
+            $response = $this->promotion->deleteAll($data);
             return response()->json(['msg' => 'ok']);
         }
     }
@@ -190,7 +189,7 @@ class AgencyController extends Controller
                 $upt  =  [
                     'order' => $v,
                 ];
-                $obj = $this->agency->find($k);
+                $obj = $this->promotion->find($k);
                 $obj->update($upt);
             }
             return response()->json(['msg' =>'ok', 'code'=>200], 200);
@@ -205,7 +204,7 @@ class AgencyController extends Controller
         }else{
             $value = $request->input('value');
             $id = $request->input('id');
-            $cate = $this->agency->find($id);
+            $cate = $this->promotion->find($id);
             $cate->status = $value;
             $cate->save();
             return response()->json([

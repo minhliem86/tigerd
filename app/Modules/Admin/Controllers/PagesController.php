@@ -6,19 +6,20 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Repositories\AgencyRepository;
+use App\Repositories\PagesRepository;
 use Yajra\Datatables\Datatables;
 use App\Repositories\Eloquent\CommonRepository;
+use App\Repositories\MetaRepository;
 
-class AgencyController extends Controller
+class PagesController extends Controller
 {
-    protected $agency;
+    protected $pages;
     protected $common;
     protected $_repalcePath;
 
-    public function __construct(AgencyRepository $agency, CommonRepository $common)
+    public function __construct(PagesRepository $pages, CommonRepository $common)
     {
-        $this->agency = $agency;
+        $this->pages = $pages;
         $this->common = $common;
         $this->_repalcePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
     }
@@ -30,18 +31,14 @@ class AgencyController extends Controller
      */
     public function index()
     {
-        $agency_quality = $this->agency->all(['id'])->count();
-        return view('Admin::pages.agency.index', compact('agency_quality'));
+        $pages_quality = $this->pages->all(['id'])->count();
+        return view('Admin::pages.pages.index', compact('pages_quality'));
     }
 
     public function getData(Request $request)
     {
-        $data = $this->agency->query(['id', 'img_url', 'name' ,'order', 'status']);
+        $data = $this->pages->query(['id', 'name' ,'order', 'status']);
         $datatable = Datatables::of($data)
-            ->editColumn('img_url', function ($data){
-                $img = "<img src='".asset($data->img_url)."' style='max-width:100px'/>";
-                return $img;
-            })
             ->editColumn('order', function($data){
                 return "<input type='text' name='order' class='form-control' data-id= '".$data->id."' value= '".$data->order."' />";
             })
@@ -56,11 +53,11 @@ class AgencyController extends Controller
               ';
             })
             ->addColumn('action', function($data){
-                return '<a href="'.route('admin.agency.edit', $data->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>
-                <form method="POST" action=" '.route('admin.agency.destroy', $data->id).' " accept-charset="UTF-8" class="inline-block-span">
+                return '<a href="'.route('admin.pages.edit', $data->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>
+                <form method="POST" action=" '.route('admin.pages.destroy', $data->id).' " accept-charset="UTF-8" class="inline-block-span">
                     <input name="_method" type="hidden" value="DELETE">
                     <input name="_token" type="hidden" value="'.csrf_token().'">
-                               <button class="btn  btn-danger btn-xs remove-btn" type="button" attrid=" '.route('admin.agency.destroy', $data->id).' " onclick="confirm_remove(this);" > Remove </button>
+                               <button class="btn  btn-danger btn-xs remove-btn" type="button" attrid=" '.route('admin.pages.destroy', $data->id).' " onclick="confirm_remove(this);" > Remove </button>
                </form>' ;
             })
             ->filter(function($query) use ($request){
@@ -79,7 +76,7 @@ class AgencyController extends Controller
      */
     public function create()
     {
-        return view('Admin::pages.agency.create');
+        return view('Admin::pages.pages.create');
     }
 
     /**
@@ -90,22 +87,30 @@ class AgencyController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->has('img_url')){
-            $img_url = $this->common->getPath($request->input('img_url'),$this->_repalcePath);
-        }else{
-            $img_url = '';
-        }
-        $order = $this->agency->getOrder();
+        $order = $this->pages->getOrder();
         $data = [
             'name' => $request->input('name'),
             'slug' => \LP_lib::unicode($request->input('name')),
             'description' => $request->input('description'),
-            'img_url' => $img_url,
             'order' => $order,
         ];
         
-        $this->agency->create($data);
-        return redirect()->route('admin.agency.index')->with('success','Created !');
+        $pages = $this->pages->create($data);
+
+        if($request->has('meta_config')){
+            if($request->has('meta_img')){
+                $meta_img = $this->common->getPath($request->input('meta_img'),$this->_repalcePath);
+            }else{
+                $meta_img = '';
+            }
+            $data_seo = [
+                'meta_keywords' => $request->input('meta_keywords'),
+                'meta_description' => $request->input('meta_description'),
+                'meta_img' => $meta_img,
+            ];
+            $pages->meta_configs()->save(new \App\Models\MetaConfiguration($data_seo));
+        }
+        return redirect()->route('admin.pages.index')->with('success','Created !');
     }
 
     /**
@@ -127,8 +132,8 @@ class AgencyController extends Controller
      */
     public function edit($id)
     {
-        $inst = $this->agency->find($id);
-        return view('Admin::pages.agency.edit', compact('inst'));
+        $inst = $this->pages->find($id);
+        return view('Admin::pages.pages.edit', compact('inst'));
     }
 
     /**
@@ -138,20 +143,32 @@ class AgencyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id, MetaRepository $meta)
     {
-        $img_url = $this->common->getPath($request->input('img_url'),$this->_repalcePath);
         $data = [
             'name' => $request->input('name'),
             'slug' => \LP_lib::unicode($request->input('name')),
             'description' => $request->input('description'),
-            'img_url' => $img_url,
             'order' => $request->input('order'),
             'status' => $request->input('status'),
         ];
 
-        $this->agency->update($data, $id);
-        return redirect()->route('admin.agency.index')->with('success', 'Updated !');
+        $pages = $this->pages->update($data, $id);
+
+        if($request->has('meta_config')){
+            $meta_img = $this->common->getPath($request->input('meta_img'),$this->_repalcePath);
+            $data_seo = [
+                'meta_keywords' => $request->input('meta_keywords'),
+                'meta_description' => $request->input('meta_description'),
+                'meta_img' => $meta_img,
+            ];
+            if(!$request->has('meta_config_id')){
+                $pages->meta_configs()->save(new \App\Models\MetaConfiguration($data_seo));
+            }
+            $meta_config = $meta->update($data_seo,$request->input('meta_config_id'));
+        }
+
+        return redirect()->route('admin.pages.index')->with('success', 'Updated !');
     }
 
     /**
@@ -162,8 +179,8 @@ class AgencyController extends Controller
      */
     public function destroy($id)
     {
-        $this->agency->delete($id);
-        return redirect()->route('admin.agency.index')->with('success','Deleted !');
+        $this->pages->delete($id);
+        return redirect()->route('admin.pages.index')->with('success','Deleted !');
     }
 
     /*DELETE ALL*/
@@ -173,7 +190,7 @@ class AgencyController extends Controller
             abort(404);
         }else{
             $data = $request->arr;
-            $response = $this->agency->deleteAll($data);
+            $response = $this->pages->deleteAll($data);
             return response()->json(['msg' => 'ok']);
         }
     }
@@ -190,7 +207,7 @@ class AgencyController extends Controller
                 $upt  =  [
                     'order' => $v,
                 ];
-                $obj = $this->agency->find($k);
+                $obj = $this->pages->find($k);
                 $obj->update($upt);
             }
             return response()->json(['msg' =>'ok', 'code'=>200], 200);
@@ -205,7 +222,7 @@ class AgencyController extends Controller
         }else{
             $value = $request->input('value');
             $id = $request->input('id');
-            $cate = $this->agency->find($id);
+            $cate = $this->pages->find($id);
             $cate->status = $value;
             $cate->save();
             return response()->json([
