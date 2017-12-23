@@ -16,6 +16,7 @@ class CreatePromotionsTable extends Migration
             $table->increments('id');
             $table->string('name')->nullable()->unique();
             $table->string('slug')->nullable();
+            $table->string('sku_promotion');
             $table->text('description')->nullable();
             $table->string('type')->nullable();
             $table->string('target')->default('subtotal');

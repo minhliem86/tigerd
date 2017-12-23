@@ -19,8 +19,8 @@ class CreateOrdersTable extends Migration
             $table->string('discount')->nullable();
             $table->string('shipping_cost')->default(0);
             $table->string('total')->default(0);
-            $table->integer('user_id')->unsigned();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('customer_id')->unsigned();
+            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
             $table->integer('promotion_id')->unsigned();
             $table->foreign('promotion_id')->references('id')->on('promotions')->onDelete('cascade');
             $table->integer('shipcost_id')->unsigned();
