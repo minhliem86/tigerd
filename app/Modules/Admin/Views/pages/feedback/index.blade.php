@@ -1,24 +1,22 @@
 @extends('Admin::layouts.main-layout')
 
 @section('link')
-    {{Html::link(route('admin.promotion.create'),'Add New',['class'=>'btn btn-primary'])}}
     <button type="button" class="btn btn-danger" id="btn-remove-all">Remove All Selected</button>
-    <button type="button" class="btn btn-warning" id="btn-updateOrder">Update Order</button>
 @stop
 
-@section('title','Khuyến Mãi')
+@section('title','Ý Kiến Khách Hàng')
 
 @section('content')
     <div class="row">
         <div class="col-md-4 col-sm-6">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Khuyến Mãi Đang Áp Dụng</h3>
+                    <h3 class="panel-title">Ý Kiến Khách Hàng</h3>
                 </div>
                 <div class="panel-body-dashboard">
                     <div class="wrap-icon text-center">
                         <i class="fa fa-cubes"></i>
-                        <h5><span class="badge badge-info badge-md">{{$promotion_active}}</span> Khuyến Mãi</h5>
+                        <h5><span class="badge badge-info badge-md">{{$feedback_quality}}</span></h5>
                     </div>
                 </div>
             </div>
@@ -26,12 +24,12 @@
         <div class="col-md-4 col-sm-6">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Khuyến Mãi Đã Ngưng</h3>
+                    <h3 class="panel-title">Chưa Kiểm Duyệt</h3>
                 </div>
                 <div class="panel-body-dashboard">
                     <div class="wrap-icon text-center">
                         <i class="fa fa-cubes"></i>
-                        <h5><span class="badge badge-info badge-md">{{$promotion_deactive}}</span> Khuyến Mãi</h5>
+                        <h5><span class="badge badge-info badge-md">{{$feedback_not_check}}</span></h5>
                     </div>
                 </div>
             </div>
@@ -52,15 +50,11 @@
         <table class="table table-hover">
           <thead>
             <tr>
-                <th width="3%">ID</th>
-                <th width="0%">Số Lượng Sử Dụng</th>
-                <th width="100px"><i class="glyphicon glyphicon-search"></i> Mã</th>
-                <th width="120px"><i class="glyphicon glyphicon-search"></i> Tên Khuyến Mãi</th>
-                <th width="80px">Giá Trị</th>
-                <th width="80px">Số Lượng Tồn</th>
-                <th width="100px">Ngày Hết Hạn</th>
-                <th width="80px">Trạng thái</th>
-                <th width="20%">&nbsp;</th>
+              <th width="5%">ID</th>
+              <th width="150"><i class="glyphicon glyphicon-search"></i> Tên Khách Hàng</th>
+              <th width="100">Email</th>
+              <th width="100">Đã xem</th>
+              <th width="20%">&nbsp;</th>
             </tr>
           </thead>
         </table>
@@ -87,20 +81,16 @@
             processing: true,
             serverSide: true,
             ajax:{
-                url:  '{!! route('admin.promotion.getData') !!}',
+                url:  '{!! route('admin.feedback.getData') !!}',
                 data: function(d){
                     d.name = $('input[type="search"]').val();
                 }
             },
             columns: [
                {data: 'id', name: 'id', 'orderable': false},
-               {data: 'num_use', name: 'num_use', 'visible': false},
-               {data: 'sku_promotion', sku_promotion: 'name'},
-               {data: 'name', name: 'name'},
-               {data: 'value', value: 'value'},
-               {data: 'quality', value: 'quality'},
-               {data: 'to_time', value: 'to_time'},
-               {data: 'status', name: 'status'},
+               {data: 'fullname', name: 'fullname'},
+               {data: 'email', name: 'email'},
+               {data: 'status', name: 'status', 'orderable': false},
                {data: 'action', name: 'action', 'orderable': false}
            ],
            initComplete: function(){
@@ -115,7 +105,7 @@
                     alertify.confirm('You can not undo this action. Are you sure ?', function(e){
                         if(e){
                             $.ajax({
-                                'url':"{!!route('admin.promotion.deleteAll')!!}",
+                                'url':"{!!route('admin.feedback.deleteAll')!!}",
                                 'data' : {arr: data,_token:$('meta[name="csrf-token"]').attr('content')},
                                 'type': "POST",
                                 'success':function(result){
@@ -140,7 +130,7 @@
                         data_order[id] = va;
                     });
                     $.ajax({
-                        url: '{{route("admin.promotion.postAjaxUpdateOrder")}}',
+                        url: '{{route("admin.feedback.postAjaxUpdateOrder")}}',
                         type:'POST',
                         data: {data: data_order,  _token:$('meta[name="csrf-token"]').attr('content') },
                         success: function(rs){
@@ -159,7 +149,7 @@
                     const id_item = $(this).data('id');
                     console.log(id_item);
                     $.ajax({
-                        url: "{{route('admin.promotion.updateStatus')}}",
+                        url: "{{route('admin.feedback.updateStatus')}}",
                         type : 'POST',
                         data: {value: value, id: id_item, _token:$('meta[name="csrf-token"]').attr('content')},
                         success: function(data){

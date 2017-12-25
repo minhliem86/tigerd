@@ -10,6 +10,7 @@
 @section('content')
     <div class="row">
       <div class="col-sm-12">
+          @include('Admin::errors.error_layout')
         {{Form::model($inst, ['route'=>['admin.category.update',$inst->id], 'method'=>'put' , 'class'=>'form-horizontal' ])}}
           <div class="form-group">
               <label for="agency_id" class="col-md-2 control-label">Chọn Nhà Cung Cấp</label>

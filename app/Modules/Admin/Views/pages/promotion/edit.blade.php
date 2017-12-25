@@ -5,29 +5,76 @@
     <button class="btn btn-primary" onclick="submitForm();">Save Changes</button>
 @stop
 
-@section('title','Tin Tức')
+@section('title','Khuyến Mãi')
 
 @section('content')
     <div class="row">
       <div class="col-sm-12">
-        {{Form::model($inst, ['route'=>['admin.news.update',$inst->id], 'method'=>'put', 'class' => 'form-horizontal' ])}}
+          @include('Admin::errors.error_layout')
+        {{Form::model($inst, ['route'=>['admin.promotion.update',$inst->id], 'method'=>'put', 'class' => 'form-horizontal' ])}}
           <fieldset>
               <div class="form-group">
-                  <label class="col-md-2 control-label">Tên:</label>
+                  <label class="col-md-2 control-label">Tên Chương Trình Khuyến Mãi:</label>
                   <div class="col-md-10">
-                      {{Form::text('name',old('name'), ['class'=>'form-control', 'placeholder'=>'Tiêu đề'])}}
+                      {!! Form::text('name',old('name'), ['class'=>'form-control', 'placeholder' => 'Chương Trình Khuyến Mãi']) !!}
                   </div>
               </div>
               <div class="form-group">
-                  <label class="col-md-2 control-label">Nội dung:</label>
+                  <label class="col-md-2 control-label">Mã Khuyến Mãi:
+                      <p><small>(Các chữ cái viết hoa. EX: VALENTINE, MOMDAY ...)</small></p>
+                  </label>
                   <div class="col-md-10">
-                      {!! Form::textarea('description',old('description'), ['class'=> 'form-control my-editor', 'placeholder' => 'Nội dung ...']) !!}
+                      {!! Form::text('sku_promotion',old('sku_promotion'), ['class'=>'form-control', 'placeholder' => 'Mã Khuyến Mãi']) !!}
                   </div>
               </div>
               <div class="form-group">
-                  <label class="col-md-2 control-label" for="description">Sắp xếp</label>
+                  <label class="col-md-2 control-label">Mô tả:</label>
                   <div class="col-md-10">
-                      {{Form::text('order',old('order'), ['class'=>'form-control', 'placeholder'=>'order'])}}
+                      {!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ...']) !!}
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="col-md-2 control-label">Áp Dụng:</label>
+                  <div class="col-md-10">
+                      {!! Form::select('target', ['subtotal' => 'Giá trị đơn hàng'], old('target') ,['class'=>'form-control']) !!}
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="col-md-2 control-label">Giá Trị Khuyến Mãi:
+                  </label>
+                  <div class="col-md-10">
+                      <div class="row">
+                          <div class="col-md-6">
+                              <label class="control-label">Giá trị <small>(VND: -50000 giảm 50.000 VND)</small> <small>(%: -10 giảm 10%)</small></label>
+                              <div class="input-group input-group-editor">
+                                  {!! Form::number('value', old('value'), ['class' => 'form-control',]) !!}
+                                  <div class="input-group-btn">
+                                      {!! Form::select('value_type',['vnd' => 'VND', '%' => '%'], old('type') ,['class' => 'form-control']) !!}
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                              <label class="control-label">Số lượng</label>
+                              {!! Form::number('quality', old('quality'), ['class'=>'form-control', 'placeholder' => 'Số Lượng']) !!}
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <label class="col-md-2 control-label">Thời Gian Chạy Khuyến Mãi:</label>
+                  <div class="col-md-10">
+                      <div class="container-fluid">
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <label class="control-label">Bắt đầu</label>
+                                  {!! Form::text('from_time', \Carbon\Carbon::createFromFormat('Y-m-d', $inst->from_time)->format('d-m-Y'), ['class' => 'form-control datePicker']) !!}
+                              </div>
+                              <div class="col-md-6">
+                                  <label class="control-label">Kết thúc</label>
+                                  {!! Form::text('to_time', \Carbon\Carbon::createFromFormat('Y-m-d', $inst->to_time)->format('d-m-Y'), ['class' => 'form-control datePicker2']) !!}
+                              </div>
+                          </div>
+                      </div>
                   </div>
               </div>
               <div class="form-group">
@@ -39,57 +86,7 @@
                       </label>
                   </div>
               </div>
-              <div class="form-group">
-                  <label class="col-md-2 control-label">Hình Ảnh:</label>
-                  <div class="col-md-10">
-                      <div class="input-group">
-                 <span class="input-group-btn">
-                   <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                     <i class="fa fa-picture-o"></i> Chọn
-                   </a>
-                 </span>
-                          {{Form::hidden('img_url',old('img_url'), ['class'=>'form-control', 'id'=>'thumbnail' ])}}
-                      </div>
-                      <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($inst->img_url)}}">
-                  </div>
-              </div>
-          </fieldset>
 
-          <fieldset>
-              <legend>
-                  <div class="checkbox my-checkbox">
-                      <input type="checkbox" name="meta_config" id="meta_config" {!! $inst->meta_configs()->count() ? 'checked' : null !!}> CẤU HÌNH SEO
-                  </div>
-              </legend>
-              <div class="wrap-seo">
-                  <div class="form-group">
-                      <label class="col-md-2 control-label">Meta Keywords:</label>
-                      <div class="col-md-10">
-                          {!! Form::text('meta_keywords', $inst->meta_configs()->count() ? $inst->meta_configs()->first()->meta_keywords : '' , ['class'=> 'form-control', 'placeholder'=>"Từ khóa bài viết (ngăn cách bởi dấu `,`. Ex: quầy tây, quần kaki)"]) !!}
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label class="col-md-2 control-label">Meta Description:</label>
-                      <div class="col-md-10">
-                          {!! Form::text('meta_description', $inst->meta_configs()->count() ? $inst->meta_configs()->first()->meta_description : '', ['class'=> 'form-control', 'placeholder'=>"Mô tả bài viết"]) !!}
-                      </div>
-                  </div>
-                  <div class="form-group">
-                      <label class="col-md-2 control-label">Hình ảnh SEO:</label>
-                      <div class="col-md-10">
-                          <div class="input-group">
-                            <span class="input-group-btn">
-                            <a id="lfm_meta" data-input="thumbnail_meta" data-preview="holder_meta" class="btn btn-primary">
-                            <i class="fa fa-picture-o"></i> Chọn
-                            </a>
-                            </span>
-                              {{Form::hidden('meta_img',$inst->meta_configs()->count() ? $inst->meta_configs()->first()->meta_img : '', ['class'=>'form-control', 'id'=>'thumbnail_meta' ])}}
-                          </div>
-                          <img id="holder_meta" style="margin-top:15px;max-height:100px;" src="{!! $inst->meta_configs()->count() ? asset($inst->meta_configs()->first()->meta_img) : null !!}">
-                      </div>
-                  </div>
-                  {!! Form::hidden('meta_config_id',$inst->meta_configs()->count() ? $inst->meta_configs()->first()->id : '') !!}
-              </div>
           </fieldset>
         {!! Form::close() !!}
       </div>
@@ -100,30 +97,32 @@
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script src="{{asset('public')}}/vendor/laravel-filemanager/js/lfm.js"></script>
     <script src="{{asset('public/assets/admin/dist/js/script.js')}}"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
     <script>
     const url = "{{url('/')}}"
     init_tinymce(url);
     // BUTTON ALONE
     init_btnImage(url,'#lfm');
-    init_btnImage(url,'#lfm_meta');
     // SUBMIT FORM
     function submitForm(){
      $('form').submit();
     }
 
-    /*CONTROL SEO*/
-    var flag = '{!! $inst->meta_configs()->count() ? true : false !!}';
-    if(flag){
-        $('.wrap-seo').show();
-    }else{
-        $('.wrap-seo').hide();
-    }
-    $('input#meta_config').on('ifChecked', function (event) {
-        $('.wrap-seo').slideDown();
+    $(document).ready(function(){
+        $('.datePicker2').datepicker({
+            format: 'dd-mm-yyyy',
+        });
+        $('.datePicker').datepicker({
+            endDate: '0d',
+            format: 'dd-mm-yyyy',
+        }).on('changeDate', function(e){
+            $('.datePicker2').datepicker({
+                format: 'dd-mm-yyyy',
+                startDate: e.date
+            })
+        });
     })
-    $('input#meta_config').on('ifUnchecked', function (event) {
-        $('.wrap-seo').slideUp();
-    })
-
     </script>
 @stop

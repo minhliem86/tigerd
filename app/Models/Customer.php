@@ -8,7 +8,18 @@ class Customer extends Model
 {
     public $table = 'customers';
 
-    protected $guarded = ['id'];
+    protected $fillable = [
+        'firstname', 'lastname', 'email', 'username','password', 'phone', 'gender', 'birthday'
+    ];
+
+    /**
+     * The attributes that should be hidden for arrays.
+     *
+     * @var array
+     */
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
 
     public function orders()
     {

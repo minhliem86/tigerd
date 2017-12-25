@@ -9,8 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Repositories\PromotionRepository;
 use Yajra\Datatables\Datatables;
 use App\Repositories\Eloquent\CommonRepository;
+use Carbon\Carbon;
 
-class PagesController extends Controller
+class PromotionController extends Controller
 {
     protected $promotion;
     protected $common;
@@ -21,7 +22,37 @@ class PagesController extends Controller
         $this->promotion = $promotion;
         $this->common = $common;
         $this->_repalcePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
+        $this->checkPromotionExpire();
     }
+
+    public function checkPromotionExpire(){
+        $rs = $this->promotion->query()->where('to_time','<', Carbon::now()->toDateString())->get();
+        foreach($rs as $item)
+        {
+            $item->status = 0;
+            $item->update();
+        }
+    }
+
+    protected $rule = [
+        'sku_promotion' => 'required|min:3|max:10',
+        'value' => 'required|integer',
+        'quality' => 'required|integer',
+        'from_time' => 'required',
+        'to_time' => 'required',
+    ];
+
+    protected $message = [
+        'sku_promotion.required' => 'Vui lòng nhập Mã Khuyến Mãi',
+        'sku_promotion.min' => 'Mã Khuyến Mãi phải có ít nhất 3 ký tự',
+        'sku_promotion.max' => 'Mã Khuyến Mãi phải có nhiều nhất 10 ký tự',
+        'value.required' => 'Vui lòng nhập Giá Trị',
+        'value.integer' => 'Giá trị là dạng số',
+        'quality.required' => 'Vui lòng nhập Số Lượng Mã',
+        'quality.integer' => 'Số Lượng Mã là dạng số',
+        'from_time.required' => 'Vui lòng nhập Ngày bắt đầu',
+        'to_time.required' => 'Vui lòng nhập Ngày kết thúc',
+    ];
 
     /**
      * Display a listing of the resource.
@@ -32,15 +63,19 @@ class PagesController extends Controller
     {
         $promotion_active = $this->promotion->findByField('status',1,['id'])->count();
         $promotion_deactive = $this->promotion->findByField('status',0,['id'])->count();
-        return view('Admin::promotion.promotion.index', compact('promotion_active', 'promotion_deactive'));
+        return view('Admin::pages.promotion.index', compact('promotion_active', 'promotion_deactive'));
     }
 
     public function getData(Request $request)
     {
-        $data = $this->promotion->query(['id', 'name', 'quality', 'value','order', 'status']);
+        $data = $this->promotion->query(['id', 'name', 'sku_promotion', 'num_use' ,'quality', 'value', 'status', 'to_time']);
         $datatable = Datatables::of($data)
-            ->editColumn('order', function($data){
-                return "<input type='text' name='order' class='form-control' data-id= '".$data->id."' value= '".$data->order."' />";
+            ->editColumn('quality', function($data){
+                $quality = $data->quality - $data->num_use;
+                return $quality;
+            })
+            ->editColumn('to_time', function($data){
+                return \Carbon\Carbon::parse($data->to_time)->format('d/m/Y');
             })
             ->editColumn('status', function($data){
                 $status = $data->status ? 'checked' : '';
@@ -62,7 +97,7 @@ class PagesController extends Controller
             })
             ->filter(function($query) use ($request){
                 if (request()->has('name')) {
-                    $query->where('name', 'like', "%{$request->input('name')}%");
+                    $query->where('name', 'like', "%{$request->input('name')}%")->orWhere('sku_promotion', 'like', "%{$request->input('name')}%");
                 }
             })
             ->make(true);
@@ -76,7 +111,7 @@ class PagesController extends Controller
      */
     public function create()
     {
-        return view('Admin::promotion.promotion.create');
+        return view('Admin::pages.promotion.create');
     }
 
     /**
@@ -87,16 +122,30 @@ class PagesController extends Controller
      */
     public function store(Request $request)
     {
+        $valid = \Validator::make($request->all(), $this->rule, $this->message);
+        if($valid->fails()){
+            return redirect()->back()->withInput()->withErrors($valid->errors());
+        }
         $order = $this->promotion->getOrder();
+        if($request->input('value_type') == '%'){
+            $value = trim(\Str::lower($request->input('value'))).$request->input('value_type');
+        }else{
+            $value = trim(\Str::lower($request->input('value')));
+        }
+        $from_time = Carbon::createFromFormat('d-m-Y', $request->input('from_time'))->format('Y-m-d');
+        $to_time = Carbon::createFromFormat('d-m-Y', $request->input('to_time'))->format('Y-m-d');
+
         $data = [
             'name' => $request->input('name'),
             'slug' => \LP_lib::unicode($request->input('name')),
+            'sku_promotion' => \Str::upper(trim($request->input('sku_promotion'))),
             'description' => $request->input('description'),
             'type' => $request->input('type'),
             'target' => $request->input('target'),
-            'value' => trim(\Str::lower($request->input('value'))),
+            'value' => $value,
             'quality' => $request->input('quality'),
-            'order' => $order,
+            'from_time' => $from_time,
+            'to_time' => $to_time,
         ];
         
         $promotion = $this->promotion->create($data);
@@ -124,7 +173,7 @@ class PagesController extends Controller
     public function edit($id)
     {
         $inst = $this->promotion->find($id);
-        return view('Admin::promotion.promotion.edit', compact('inst'));
+        return view('Admin::pages.promotion.edit', compact('inst'));
     }
 
     /**
@@ -134,17 +183,31 @@ class PagesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id, MetaRepository $meta)
+    public function update(Request $request, $id)
     {
+        $valid = \Validator::make($request->all(), $this->rule, $this->message);
+        if($valid->fails()){
+            return redirect()->back()->withInput()->withErrors($valid->errors());
+        }
+        if($request->input('value_type') == '%'){
+            $value = trim(\Str::lower($request->input('value'))).$request->input('value_type');
+        }else{
+            $value = trim(\Str::lower($request->input('value')));
+        }
+        $from_time = Carbon::createFromFormat('d-m-Y', $request->input('from_time'))->format('Y-m-d');
+        $to_time = Carbon::createFromFormat('d-m-Y', $request->input('to_time'))->format('Y-m-d');
+
         $data = [
             'name' => $request->input('name'),
             'slug' => \LP_lib::unicode($request->input('name')),
+            'sku_promotion' => \Str::upper(trim($request->input('sku_promotion'))),
             'description' => $request->input('description'),
             'type' => $request->input('type'),
             'target' => $request->input('target'),
-            'value' => trim(\Str::lower($request->input('value'))),
+            'value' => $value,
             'quality' => $request->input('quality'),
-            'order' => $request->input('order'),
+            'from_time' => $from_time,
+            'to_time' => $to_time,
             'status' => $request->input('status'),
         ];
 

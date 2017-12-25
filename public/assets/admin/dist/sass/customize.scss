@@ -94,3 +94,28 @@ div.checkboxbyme-wrap{
   	color: #5D5D5D;
   }
 }
+
+.stepper {
+  position:relative;
+  .stepper-arrow{
+    right:0;
+
+  }
+}
+ .input-group.input-group-editor{
+   display:flex;
+   display:-webkit-flex;
+   .input-group-btn{
+      width:120px;
+   }
+   .stepper{
+     flex-grow:1;
+   }
+ }
+ .datepicker{
+   background:white;
+   border:1px solid #c7ccd3;
+ }
+ .datepicker table tr td.new, .datepicker table tr td.old{
+   font-weight:600;
+ }

@@ -122,7 +122,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('customer/deleteAll', ['as' => 'admin.customer.deleteAll', 'uses' => 'CustomerController@deleteAll']);
         Route::post('customer/updateStatus', ['as' => 'admin.customer.updateStatus', 'uses' => 'CustomerController@updateStatus']);
         Route::post('customer/postAjaxUpdateOrder', ['as' => 'admin.customer.postAjaxUpdateOrder', 'uses' => 'CustomerController@postAjaxUpdateOrder']);
-        Route::resource('customer', 'CustomerController');
+        Route::resource('customer', 'CustomerController', ['expect'=>['index', 'show', 'destroy']]);
 
         /* COMPANY */
         Route::any('company/{id?}', ['as' => 'admin.company.index', 'uses' => 'CompanyController@getInformation']);

@@ -6,5 +6,8 @@
     <li class="list-group-item {{LP_lib::setActive(2,'category')}}"><a href="{{route('admin.category.index')}}"><i class="fa fa-user-secret"></i>Danh Mục Sản Phẩm</a></li>
     <li class="list-group-item {{LP_lib::setActive(2,'news')}}"><a href="{{route('admin.news.index')}}"><i class="fa fa-user-secret"></i>Tin Tức</a></li>
     <li class="list-group-item {{LP_lib::setActive(2,'pages')}}"><a href="{{route('admin.pages.index')}}"><i class="fa fa-user-secret"></i>Danh Mục Các Trang Đơn</a></li>
+    <li class="list-group-item {{LP_lib::setActive(2,'promotion')}}"><a href="{{route('admin.promotion.index')}}"><i class="fa fa-user-secret"></i>Quản Lý Khuyến Mãi</a></li>
+    <li class="list-group-item {{LP_lib::setActive(2,'feedback')}}"><a href="{{route('admin.feedback.index')}}"><i class="fa fa-user-secret"></i>Ý Kiến Khách Hàng</a></li>
+    <li class="list-group-item {{LP_lib::setActive(2,'customer')}}"><a href="{{route('admin.customer.index')}}"><i class="fa fa-user-secret"></i>Tài Khoản Khách Hàng</a></li>
   </ul>
 </div>

@@ -20,7 +20,8 @@ class CreatePromotionsTable extends Migration
             $table->text('description')->nullable();
             $table->string('type')->nullable();
             $table->string('target')->default('subtotal');
-            $table->string('value')->default('10%');
+            $table->integer('value')->default('-10');
+            $table->string('value_type')->default('%');
             $table->integer('quality')->default(100);
             $table->boolean('status')->default(1);
             $table->timestamps();

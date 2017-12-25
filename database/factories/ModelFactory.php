@@ -101,3 +101,12 @@ $factory->define(App\Models\PaymentSupplier::class, function (Faker\Generator $f
         'order'=> 1
     ] ;
 });
+
+$factory->define(App\Models\Feedback::class, function (Faker\Generator $faker){
+   return [
+      'fullname' => $faker->name,
+       'phone' => $faker->tollFreePhoneNumber,
+       'email' => $faker->safeEmail,
+       'messages' => $faker->paragraph(),
+   ] ;
+});

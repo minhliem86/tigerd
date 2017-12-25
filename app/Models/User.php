@@ -27,9 +27,4 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    public function useraddres()
-    {
-        return $this->hasMany('App\Models\UserAddress');
-    }
 }

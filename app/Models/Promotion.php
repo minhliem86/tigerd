@@ -8,7 +8,7 @@ class Promotion extends Model
 {
     public $table = 'promotions';
 
-    protected $guard = ['id'];
+    protected $guarded = ['id'];
 
     public function orders()
     {
