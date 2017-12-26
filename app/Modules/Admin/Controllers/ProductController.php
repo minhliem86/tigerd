@@ -7,15 +7,17 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Repositories\ProductRepository;
+use App\Repositories\CategoryRepository;
+use App\Repositories\AttributeRepository;
 use App\Repositories\PhotoRepository;
 use App\Repositories\Eloquent\CommonRepository;
 use Datatables;
-use DB;
 
 class ProductController extends Controller
 {
-    protected $_bigsize = 'public/upload/bigsize';
-    protected $_thumbnail = 'public/upload/thumbnails';
+    protected $_big;
+    protected $_small;
+    protected $_repalcePath;
     protected $productRepo;
     protected $common;
     protected $photo;
@@ -25,6 +27,9 @@ class ProductController extends Controller
         $this->productRepo = $product;
         $this->common = $common;
         $this->photo = $photo;
+        $this->_repalcePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
+        $this->_big = env('THUMBNAIL_PATH_BIG') ? env('THUMBNAIL_PATH_BIG') : '';
+        $this->_small = env('THUMBNAIL_PATH_SMALL') ? env('THUMBNAIL_PATH_SMALL') : '';
     }
     /**
      * Display a listing of the resource.
@@ -38,8 +43,9 @@ class ProductController extends Controller
 
     public function getData(Request $request)
     {
-        $product = DB::table('products')->join('categories', 'products.category_id', '=','categories.id')->select(['products.id', 'products.title', 'products.avatar_img', 'products.price', 'products.order', 'products.status', 'products.hot']);
+//        $product = DB::table('products')->join('categories', 'products.category_id', '=','categories.id')->select(['products.id', 'products.title', 'products.avatar_img', 'products.price', 'products.order', 'products.status', 'products.hot']);
 
+        $product = $this->productRepo->query(['products.id as id', 'products.name as name', 'products.sku_product as sku_product', 'products.price as price', 'products.discount as discount', 'products.stock_quality as quality', 'products.img_url as img_url', 'products.hot as hot' ,  'products.order as order', 'products.status as status', 'categories.name as cate_name'])->join('categories', 'categories.id', '=', 'products.category_id');
         return Datatables::of($product)
         ->addColumn('action', function($product){
             return '<a href="'.route('admin.product.edit', $product->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>
@@ -68,14 +74,16 @@ class ProductController extends Controller
                <span class="handle"></span>
              </label>
          ';
-     })->editColumn('avatar_img',function($product){
-          return '<img src="'.asset('public/upload').'/'.$product->avatar_img.'" width="120" class="img-responsive">';
-        })->filter(function($query) use ($request){
+     })->editColumn('price', function($product){
+        $price = number_format($product->price);
+        return $price;
+     })->editColumn('img_url',function($product){
+          return '<img src="'.asset('public/upload').'/'.$product->img_url.'" width="80" class="img-responsive">';
+     })->filter(function($query) use ($request){
            if (request()->has('name')) {
-               $query->where('products.title', 'like', "%{$request->input('name')}%");
+               $query->where('products.name', 'like', "%{$request->input('name')}%")->orWhere('products.sku_product', 'like', "%{$request->input('name')}%");
            }
-       })->setRowId('id')->make(true);
-
+     })->setRowId('id')->make(true);
     }
 
     /**
@@ -83,9 +91,11 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(CategoryRepository $category, AttributeRepository $attribute )
     {
-        return view('Admin::pages.product.create');
+        $cate = $category->query(['id', 'name'])->lists('name', 'id')->toArray();
+        $attribute_list = $attribute->all(['id', 'name', 'slug']);
+        return view('Admin::pages.product.create', compact('cate', 'attribute_list'));
     }
 
     /**
@@ -312,5 +322,23 @@ class ProductController extends Controller
               'error'=> false,
           ], 200);
       }
+    }
+
+    /*ADD ATTRIBUTE AJAX*/
+    public function postAddAttribute(Request $request, AttributeRepository $attribute)
+    {
+        if(!$request->ajax()){
+            abort('404', 'Not Access');
+        }else{
+            $data = [
+                'name' => $request->input('name_att'),
+                'slug' => \LP_lib::unicodenospace($request->input('name_att')),
+                'description' => $request->input('att_description'),
+            ];
+            $attribute->create($data);
+            $attribute_list = $attribute->all(['id','name','slug']);
+            $view = view('Admin::ajax.attribute.attribute', compact('attribute_list'))->render();
+            return response()->json(['rs'=>'ok', 'data' => $view], 200);
+        }
     }
 }

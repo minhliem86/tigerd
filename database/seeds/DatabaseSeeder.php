@@ -11,27 +11,27 @@ class DatabaseSeeder extends Seeder
      */
 
     protected $tables = [
-//        'agencies',
-//        'categories',
-//        'company_informations',
-//        'customers',
-//        'news',
-//        'pages',
-//        'payment_methods',
-//        'payment_suppliers',
-//        'promotions',
+        'agencies',
+        'categories',
+        'company_informations',
+        'customers',
+        'news',
+        'pages',
+        'payment_methods',
+        'payment_suppliers',
+        'promotions',
         'feedbacks'
     ];
 
     protected $seeders = [
-//        AgencyTableDataSeeder::class,
-//        CompanyTableDataSeeder::class,
-//        CustomerTableDataSeeder::class,
-//        NewsTableDataSeeder::class,
-//        PagesTableDataSeeder::class,
-//        PaymentMethodTableDataSeeder::class,
-//        PaymentSupplierTableDataSeeder::class,
-//        PromotionTableDataSeeder::class,
+        AgencyTableDataSeeder::class,
+        CompanyTableDataSeeder::class,
+        CustomerTableDataSeeder::class,
+        NewsTableDataSeeder::class,
+        PagesTableDataSeeder::class,
+        PaymentMethodTableDataSeeder::class,
+        PaymentSupplierTableDataSeeder::class,
+        PromotionTableDataSeeder::class,
         FeedbackTableDataSeeder::class,
 
     ];

@@ -37,34 +37,19 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label" for="description">Sắp xếp</label>
+                <label class="col-md-2 control-label">Hình Ảnh:</label>
                 <div class="col-md-10">
-                    {{Form::text('order',old('order'), ['class'=>'form-control', 'placeholder'=>'order'])}}
+                    <div class="input-group">
+                     <span class="input-group-btn">
+                       <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                         <i class="fa fa-picture-o"></i> Chọn
+                       </a>
+                     </span>
+                     <input id="thumbnail" class="form-control" type="hidden" name="img_url">
+                    </div>
+                    <img id="holder" style="margin-top:15px;max-height:100px;">
                 </div>
             </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label" for="description">Trạng thái</label>
-                <div class="col-md-10">
-                    <label class="toggle">
-                        <input type="checkbox" name="status" value="1" {{$inst->status == 1 ? 'checked' : '' }}  >
-                        <span class="handle"></span>
-                    </label>
-                </div>
-            </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label">Hình Ảnh:</label>
-            <div class="col-md-10">
-                <div class="input-group">
-                 <span class="input-group-btn">
-                   <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                     <i class="fa fa-picture-o"></i> Chọn
-                   </a>
-                 </span>
-                 <input id="thumbnail" class="form-control" type="hidden" name="img_url">
-                </div>
-                <img id="holder" style="margin-top:15px;max-height:100px;">
-            </div>
-          </div>
         </form>
       </div>
     </div>

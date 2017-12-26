@@ -1,7 +1,9 @@
 @extends('Admin::layouts.main-layout')
 
 @section('link')
+    @role('admin')
     <button type="button" class="btn btn-danger" id="btn-remove-all">Remove All Selected</button>
+    @endrole
 @stop
 
 @section('title','Tài Khoản Khách Hàng')

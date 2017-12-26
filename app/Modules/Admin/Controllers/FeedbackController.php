@@ -59,6 +59,8 @@ class FeedbackController extends Controller
     public function show($id)
     {
         $inst = $this->feedback->find($id);
+        $inst->status = 1;
+        $inst->save();
         return view('Admin::pages.feedback.edit', compact('inst'));
     }
 

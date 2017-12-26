@@ -69,6 +69,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('product/AjaxUpdatePhoto', ['as' => 'admin.product.AjaxUpdatePhoto', 'uses' => 'ProductController@AjaxUpdatePhoto']);
         Route::post('product/updateStatus', ['as' => 'admin.product.updateStatus', 'uses' => 'ProductController@updateStatus']);
         Route::post('product/updateHotProduct', ['as' => 'admin.product.updateHotProduct', 'uses' => 'ProductController@updateHotProduct']);
+        Route::post('product/createAttreibute', ['as' => 'admin.product.createAttribute', 'uses' => 'ProductController@postAddAttribute']);
         Route::resource('product', 'ProductController');
 
         /*COMMENT*/

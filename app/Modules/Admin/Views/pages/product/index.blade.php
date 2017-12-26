@@ -6,7 +6,7 @@
     <button type="button" class="btn btn-warning" id="btn-updateOrder">Update Order</button>
 @stop
 
-@section('title','Quản lý Sản Phẩm')
+@section('title','Sản Phẩm')
 
 @section('content')
     @if(Session::has('error'))
@@ -24,13 +24,18 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <th width="5%">ID</th>
-              <th width="20%"><i class="glyphicon glyphicon-search"></i> Sản phẩm</th>
-              <th width="20%">Hình đại diện</th>
-              <th width="10%">Sắp xếp</th>
-              <th width="10%">Trạng thái</th>
-              <th width="10%">Nổi bật</th>
-              <th width="20%">&nbsp;</th>
+                <th width="15">ID</th>
+                <th width="80">Hình Ảnh</th>
+                <th width="100"><i class="glyphicon glyphicon-search"></i> Mã Sản Phẩm</th>
+                <th width="120"><i class="glyphicon glyphicon-search"></i> Sản phẩm</th>
+                <th width="80">Tồn Kho</th>
+                <th width="80">Giá</th>
+                <th width="80">Giảm Giá <br/>(nếu có)</th>
+                <th width="50">Sắp xếp</th>
+                <th width="50">Trạng thái</th>
+                <th width="50">Nổi bật</th>
+                <th width="90">Danh Mục Sản Phẩm</th>
+                <th width="90">&nbsp;</th>
             </tr>
           </thead>
         </table>
@@ -65,11 +70,16 @@
             },
             columns: [
                {data: 'id', name: 'id', 'orderable': false},
-               {data: 'title', name: 'title'},
-               {data: 'avatar_img', name: 'Avatar Photo', 'orderable': false},
+               {data: 'img_urm', name: 'img_url', 'orderable': false},
+                {data: 'sku_product', name: 'sku_product'},
+                {data: 'name', name: 'name'},
+                {data: 'quality', name: 'quality'},
+                {data: 'price', name: 'price'},
+                {data: 'discount', name: 'discount'},
                {data: 'order', name: 'order'},
                {data: 'status', name: 'status', 'orderable': false},
                {data: 'hot', name: 'hot', 'orderable': false},
+               {data: 'cate_name', name: 'cate_name', 'orderable': false},
                {data: 'action', name: 'action', 'orderable': false}
            ],
            initComplete: function(){

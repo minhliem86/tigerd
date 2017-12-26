@@ -43,7 +43,7 @@ class CustomerController extends Controller
                 return $create_date;
             })
             ->addColumn('action', function($data){
-                return '<a href="'.route('admin.customer.show', $data->id).'" class="btn btn-info btn-xs inline-block-span"> Information </a>' ;
+                return '<a href="'.route('admin.customer.show', $data->id).'" class="btn btn-info btn-xs inline-block-span"> Thông tin </a>' ;
             })
             ->filter(function($query) use ($request){
                 if (request()->has('name')) {

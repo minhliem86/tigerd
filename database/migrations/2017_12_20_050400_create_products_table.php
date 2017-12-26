@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->text('content')->nullable();
             $table->string('sku_product')->nullable()->unique();
             $table->integer('price')->nullable();
-            $table->integer('price_promotion')->nullable();
+            $table->integer('discount')->nullable();
             $table->integer('stock_quality')->nullable();
             $table->string('img_url')->nullable();
             $table->boolean('hot')->default(0);

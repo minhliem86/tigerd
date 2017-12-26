@@ -91,4 +91,9 @@ div.checkboxbyme-wrap {
 .datepicker table tr td.new, .datepicker table tr td.old {
   font-weight: 600; }
 
+fieldset {
+  margin-bottom: 10px; }
+  fieldset:last-child {
+    margin-bottom: 0; }
+
 /*# sourceMappingURL=customize.min.css.map */

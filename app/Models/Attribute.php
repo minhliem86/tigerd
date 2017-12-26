@@ -8,7 +8,7 @@ class Attribute extends Model
 {
     public $table = "attributes";
 
-    protected $guard = ['id'];
+    protected $guarded = ['id'];
 
     public function products()
     {
