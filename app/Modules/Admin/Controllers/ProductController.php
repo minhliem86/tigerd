@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\ProductRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\AttributeRepository;
+use App\Repositories\AttributeValueRepository;
 use App\Repositories\PhotoRepository;
 use App\Repositories\Eloquent\CommonRepository;
 use Datatables;
@@ -336,9 +337,27 @@ class ProductController extends Controller
                 'description' => $request->input('att_description'),
             ];
             $attribute->create($data);
-            $attribute_list = $attribute->all(['id','name','slug']);
+            $attribute_list = $attribute->all(['id','name','slug'],['attribute_values']);
             $view = view('Admin::ajax.attribute.attribute', compact('attribute_list'))->render();
+            $view_value = view('Admin::ajax.attribute.attribute_value_att', compact('attribute_list'))->render();
             return response()->json(['rs'=>'ok', 'data' => $view], 200);
+        }
+    }
+
+    /*ATTACH ATTRIBUTE TO PRODUCT*/
+    public function postCreateAttreibuteValueArea(Request $request, AttributeRepository $att)
+    {
+        if(!$request->ajax()){
+            abort('404', 'Not Access');
+        }else{
+            $arr_att = $request->input('arr_att');
+            if(count($arr_att)){
+                return response()->json(['error'=> true], 200);
+            }else{
+                $attribute = $att_value->findWhereIn('id',$arr_att,['id', 'value']);
+                $view = view('Admin::ajax.attribute.attribute_value_att', compact('attribute_value'))->render();
+                return response()->json(['error'=> false, 'data' => $view], 200);
+            }
         }
     }
 }

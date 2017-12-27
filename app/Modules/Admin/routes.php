@@ -70,6 +70,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('product/updateStatus', ['as' => 'admin.product.updateStatus', 'uses' => 'ProductController@updateStatus']);
         Route::post('product/updateHotProduct', ['as' => 'admin.product.updateHotProduct', 'uses' => 'ProductController@updateHotProduct']);
         Route::post('product/createAttreibute', ['as' => 'admin.product.createAttribute', 'uses' => 'ProductController@postAddAttribute']);
+        Route::post('product/createAttreibuteValueArea', ['as' => 'admin.product.createAttributeValueArea', 'uses' => 'ProductController@postCreateAttreibuteValueArea']);
         Route::resource('product', 'ProductController');
 
         /*COMMENT*/

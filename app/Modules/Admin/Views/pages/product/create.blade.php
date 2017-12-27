@@ -97,15 +97,16 @@
               <legend>
                   <div class="flex-container">
                       <div class="checkbox flex-item">
-                          <input type="checkbox" name="attribute_section" id="attribute_section" class="trigger_input"> THUỘC TÍNH SẢN PHẨM
+                          <input type="checkbox" name="attribute_section" id="attribute_section" class="trigger_input" data-trigger=".btn-att"> THUỘC TÍNH SẢN PHẨM
                       </div>
                       <div class="flex-item text-right">
-                          <button onclick="openModal('modal-add-attribute')" type="button" disabled class="btn btn-primary btn-create-att"><i class="fa fa-plus"></i> Thêm Mới</button>
+                          <button onclick="openModal('modal-add-attribute')" type="button" disabled class="btn btn-primary btn-att" ><i class="fa fa-plus"></i> Thêm Mới</button>
                       </div>
                   </div>
               </legend>
               <div class="wrap-attribute_section wrap_general">
                   @include('Admin::ajax.attribute.attribute')
+
               </div>
           </fieldset>
 
@@ -172,6 +173,35 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-add-value">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Thêm Giá Trị</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="" class="control-label">Tên Thuộc Tính</label>
+                        <input type="text" name="att_name" class="form-control att">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label">Tên Thuộc Tính</label>
+                        <input type="text" name="att_name" class="form-control att">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label">Mô tả</label>
+                        <textarea name="att_description" rows="3" class="form-control att"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="addAttribute( '{!! route('admin.product.createAttribute') !!}','modal-add-attribute')">Thêm</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @endsection
 
 @section('script')
@@ -195,11 +225,20 @@
          $('form').submit();
         }
 
-        /*FUNCTION BOOTSTRAP*/
-        function openModal(id){
+        /*FUNCTION MODAL*/
+        function openModal(id, id_att){
+            if(id_att){
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                })
+            }else{
+
+            }
             $('#'+id).modal('show');
+
         }
 
+        /*ADD ATTRIBUTE*/
         function addAttribute(url,idModal){
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -213,16 +252,32 @@
                         $('#'+idModal).modal('hide');
                         $('input[name=att_name]').val('');
                         $('textarea[name=att_description]').val('');
+                        $(document).trigger('icheck');
                     }
-                },
-                done: function(){
-                    $(document).trigger('icheck');
+                }
+            })
+        }
+
+        /*ADD ATTRIBUTE VALUE AREA*/
+        function addAttArea(url)
+        {
+            var arr_att = $('input[name="att[]"]').map(function(){
+                if($(this). prop("checked") == true){
+                    return $(this).val();
+                }
+            }).get();
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                url: url,
+                type: 'POST',
+                data: {arr_att: arr_att},
+                success: function(data){
+
                 }
             })
         }
 
         $(document).ready(function(){
-            /*CONTROL SEO*/
             $('.wrap-seo').hide();
             $('input#meta_config').on('ifChecked', function (event) {
                 $('.wrap-seo').slideDown();
@@ -231,23 +286,36 @@
                 $('.wrap-seo').slideUp();
             });
 
-            $('.wrap_general').hide();
+            $('.wrap_general, .wrap-att-value').hide();
 
             $('input.trigger_input').on('ifChecked', function (event) {
                 var name = $(this).attr('name');
                 $('.wrap-'+name).slideDown();
-                $('.btn-create-att').prop('disabled', false);
+                $($(this).data('trigger')).prop('disabled',false);
 
             }).on('ifUnchecked', function (event) {
                 var name = $(this).attr('name');
                 $('.wrap-'+name).slideUp();
-                $('.btn-create-att').prop('disabled', true);
+                $($(this).data('trigger')).prop('disabled',true);
             })
+            $(document).on('icheck', function() {
+                $('.checkbox-att input').iCheck({
+                    checkboxClass:"icheckbox_flat",
+                    increaseArea:"20%"
+                }).on('ifChecked', function(event){
+                    var id_trigger = $(this).data('trigger');
+                    console.log(id_trigger);
+                    $('#btn-att-create-'+id_trigger).prop('disabled',false);
+                    $('#att_value_'+id_trigger).slideDown();
+                }).on('ifUnchecked', function(event){
+                    var id_trigger = $(this).data('trigger');
+                    $('#btn-att-create-'+id_trigger).prop('disabled',true);
+                    $('#att_value_'+id_trigger).slideUp();
+                });
+            }).trigger('icheck');
         })
 
-        $(document).on('icheck', function() {
-            $('.att_icheck').iCheck();
-        }).trigger('icheck');
+
 
         $(document).ready(function(){
           // var footerTemplate = '<div class="file-thumbnail-footer" style ="height:94px">\n' +
