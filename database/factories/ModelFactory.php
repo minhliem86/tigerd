@@ -110,3 +110,27 @@ $factory->define(App\Models\Feedback::class, function (Faker\Generator $faker){
        'messages' => $faker->paragraph(),
    ] ;
 });
+
+$factory->define(App\Models\Product::class, function (Faker\Generator $faker){
+   return [
+       'name' => $faker->lexify('Sản Phẩm ???'),
+       'description' => $faker->paragraph(),
+       'content' => $faker->paragraph(),
+       'sku_product'=> $faker->word,
+       'price' => $faker->numberBetween('100000', '9999999'),
+       'stock_quality' => 200,
+   ];
+});
+
+$factory->define(App\Models\Attribute::class, function (Faker\Generator $faker){
+    return[
+        'name' => $faker->lexify('Màu Sắc ???'),
+        'description' => $faker->paragraph(),
+    ];
+});
+
+$factory->define(App\Models\AttributeValue::class, function (Faker\Generator $faker){
+   return [
+       'value' => 'xanh'
+   ];
+});

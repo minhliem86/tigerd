@@ -12,7 +12,7 @@ class Product extends Model
 
     public function attributes()
     {
-        return $this->hasMany('App\Models\Attributes');
+        return $this->belongsToMany('App\Models\Product','product_attributes','product_id', 'attribute_id');
     }
 
     public function orders()

@@ -8,7 +8,7 @@ class AttributeValue extends Model
 {
     public $table = 'attribute_values';
 
-    protected $guard = ['id'];
+    protected $guarded = ['id'];
 
     public function attributes()
     {
