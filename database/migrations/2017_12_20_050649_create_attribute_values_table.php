@@ -17,7 +17,6 @@ class CreateAttributeValuesTable extends Migration
             $table->string('value')->nullable();
             $table->integer('order')->nullable();
             $table->boolean('status')->default(1);
-            $table->integer('product_id')->unsigned();
             $table->integer('attribute_id')->unsigned();
             $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
             $table->timestamps();

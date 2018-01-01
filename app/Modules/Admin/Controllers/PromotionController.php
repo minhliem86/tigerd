@@ -15,13 +15,13 @@ class PromotionController extends Controller
 {
     protected $promotion;
     protected $common;
-    protected $_repalcePath;
+    protected $_replacePath;
 
     public function __construct(PromotionRepository $promotion, CommonRepository $common)
     {
         $this->promotion = $promotion;
         $this->common = $common;
-        $this->_repalcePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
+        $this->_replacePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
         $this->checkPromotionExpire();
     }
 

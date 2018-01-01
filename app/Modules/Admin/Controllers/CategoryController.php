@@ -18,14 +18,14 @@ class CategoryController extends Controller
     protected $cateRepo;
     protected $agency;
     protected $common;
-    protected $_repalcePath;
+    protected $_replacePath;
 
     public function __construct(CategoryRepository $cate, CommonRepository $common, AgencyRepository $agency)
     {
         $this->cateRepo = $cate;
         $this->agency = $agency;
         $this->common = $common;
-        $this->_repalcePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
+        $this->_replacePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
     }
     /**
      * Display a listing of the resource.
@@ -75,6 +75,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        if(!$this->agency->query()->count()){
+            return redirect()->route('admin.agency.index')->with('error','Vui lòng Tạo nhà cung cấp');
+        }
         $agency = $this->agency->query(['name','id'])->lists('name', 'id')->toArray();
         return view('Admin::pages.category.create', compact('agency'));
     }
@@ -100,7 +103,7 @@ class CategoryController extends Controller
             return redirect()->back()->withInput()->withErrors($valid->errors());
         }
         if($request->has('img_url')){
-            $img_url = $this->common->getPath($request->input('img_url'),$this->_repalcePath);
+            $img_url = $this->common->getPath($request->input('img_url'),$this->_replacePath);
         }else{
             $img_url = '';
         }
@@ -165,7 +168,7 @@ class CategoryController extends Controller
             return redirect()->back()->withInput()->withErrors($valid->errors());
         }
 
-        $img_url = $this->common->getPath($request->input('img_url'),$this->_repalcePath);
+        $img_url = $this->common->getPath($request->input('img_url'),$this->_replacePath);
 
         $data = [
             'name' => $request->input('name'),

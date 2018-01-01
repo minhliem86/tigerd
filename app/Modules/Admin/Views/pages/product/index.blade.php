@@ -70,7 +70,7 @@
             },
             columns: [
                {data: 'id', name: 'id', 'orderable': false},
-               {data: 'img_urm', name: 'img_url', 'orderable': false},
+               {data: 'img_url', name: 'img_url', 'orderable': false},
                 {data: 'sku_product', name: 'sku_product'},
                 {data: 'name', name: 'name'},
                 {data: 'quality', name: 'quality'},
