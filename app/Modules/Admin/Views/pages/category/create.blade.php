@@ -25,7 +25,7 @@
             </div>
           </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">Mã Danh Mục: <p><small>(Từ 2-3 Ký Tự Hoa)</small></p></label>
+                <label class="col-md-2 control-label">Mã Danh Mục: <p><small>(Từ 2-10 Ký Tự Hoa)</small></p></label>
                 <div class="col-md-10">
                     {!! Form::text('sku_cate', old('sku_cate'), ['class'=> 'form-control', 'placeholder' => 'Mã Danh Mục']) !!}
                 </div>

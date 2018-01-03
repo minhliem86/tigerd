@@ -12,11 +12,20 @@ class Attribute extends Model
 
     public function products()
     {
-        return $this->belongsToMany('App\Models\Product','product_attributes','attribute_id', 'product_id');
+        return $this->belongsToMany('App\Models\Attribute','product_attribute','attribute_id', 'product_id');
     }
 
     public function attribute_values()
     {
         return $this->hasMany('App\Models\AttributeValue');
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($att){
+           $att->products()->detach();
+        });
     }
 }

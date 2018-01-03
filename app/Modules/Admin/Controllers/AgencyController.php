@@ -14,13 +14,13 @@ class AgencyController extends Controller
 {
     protected $agency;
     protected $common;
-    protected $_repalcePath;
+    protected $_replacePath;
 
     public function __construct(AgencyRepository $agency, CommonRepository $common)
     {
         $this->agency = $agency;
         $this->common = $common;
-        $this->_repalcePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
+        $this->_replacePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
     }
 
     /**
@@ -91,7 +91,7 @@ class AgencyController extends Controller
     public function store(Request $request)
     {
         if($request->has('img_url')){
-            $img_url = $this->common->getPath($request->input('img_url'),$this->_repalcePath);
+            $img_url = $this->common->getPath($request->input('img_url'),$this->_replacePath);
         }else{
             $img_url = '';
         }
@@ -140,7 +140,7 @@ class AgencyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $img_url = $this->common->getPath($request->input('img_url'),$this->_repalcePath);
+        $img_url = $this->common->getPath($request->input('img_url'),$this->_replacePath);
         $data = [
             'name' => $request->input('name'),
             'slug' => \LP_lib::unicode($request->input('name')),

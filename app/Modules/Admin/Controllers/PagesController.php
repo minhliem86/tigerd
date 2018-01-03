@@ -15,13 +15,13 @@ class PagesController extends Controller
 {
     protected $pages;
     protected $common;
-    protected $_repalcePath;
+    protected $_replacePath;
 
     public function __construct(PagesRepository $pages, CommonRepository $common)
     {
         $this->pages = $pages;
         $this->common = $common;
-        $this->_repalcePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
+        $this->_replacePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
     }
 
     /**
@@ -99,7 +99,7 @@ class PagesController extends Controller
 
         if($request->has('meta_config')){
             if($request->has('meta_img')){
-                $meta_img = $this->common->getPath($request->input('meta_img'),$this->_repalcePath);
+                $meta_img = $this->common->getPath($request->input('meta_img'),$this->_replacePath);
             }else{
                 $meta_img = '';
             }
@@ -156,7 +156,7 @@ class PagesController extends Controller
         $pages = $this->pages->update($data, $id);
 
         if($request->has('meta_config')){
-            $meta_img = $this->common->getPath($request->input('meta_img'),$this->_repalcePath);
+            $meta_img = $this->common->getPath($request->input('meta_img'),$this->_replacePath);
             $data_seo = [
                 'meta_keywords' => $request->input('meta_keywords'),
                 'meta_description' => $request->input('meta_description'),

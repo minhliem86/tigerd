@@ -26,9 +26,9 @@ class CommonRepository{
     if($fullfile){
       $arr_thumb = explode('/',$fullfile);
       $item = end($arr_thumb);
-      $folder = $location . '/'.$width.'x'.$height;
+      $folder = $location.$width.'x'.$height;
       if(!\File::exists($folder)){
-        \File::makeDirectory($folder, 0775);
+        \File::makeDirectory($folder, 0775, true);
       }
       $filename = time();
       \Image::make($fullfile)->fit($width, $height)->save($folder.'/'.$item);

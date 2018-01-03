@@ -69,8 +69,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('product/AjaxUpdatePhoto', ['as' => 'admin.product.AjaxUpdatePhoto', 'uses' => 'ProductController@AjaxUpdatePhoto']);
         Route::post('product/updateStatus', ['as' => 'admin.product.updateStatus', 'uses' => 'ProductController@updateStatus']);
         Route::post('product/updateHotProduct', ['as' => 'admin.product.updateHotProduct', 'uses' => 'ProductController@updateHotProduct']);
-        Route::post('product/createAttreibute', ['as' => 'admin.product.createAttribute', 'uses' => 'ProductController@postAddAttribute']);
-        Route::post('product/createAttreibuteValueArea', ['as' => 'admin.product.createAttributeValueArea', 'uses' => 'ProductController@postCreateAttreibuteValueArea']);
+        Route::post('product/createAttribute', ['as' => 'admin.product.createAttribute', 'uses' => 'ProductController@postAddAttribute']);
+        Route::post('product/createAttValue', ['as' => 'admin.product.createAttValue', 'uses' => 'ProductController@createAttValue']);
+        Route::post('product/removeAttribute', ['as' => 'admin.product.removeAttribute', 'uses' => 'ProductController@removeAttribute']);
+        Route::post('product/removeAttributeValue', ['as' => 'admin.product.removeAttributeValue', 'uses' => 'ProductController@removeAttributeValue']);
         Route::resource('product', 'ProductController');
 
         /*COMMENT*/

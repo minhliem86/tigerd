@@ -1,41 +1,39 @@
-@if(!$attribute_list->isEmpty())
-    <div class="row">
-    @foreach($attribute_list as $item_attr)
-        <div class="col-md-4 col-sm-6">
-            <div class="wrap-attribute flex-container">
-                <div class="form-group flex-item">
-                    <div class="checkbox checkbox-att">
-                        <input type="checkbox" name="att[]" value="{!! $item_attr->id !!}" class="att_icheck" data-trigger="{!! $item_attr->slug !!}"> <b>{!! $item_attr->name !!}</b>
-                    </div>
-                </div>
-                <div class="wrap-btn flex-item text-right">
-                    <button class="btn btn-xs btn-warning" disabled id="btn-att-create-{!! $item_attr->slug !!}"><i class="fa fa-plus"></i> Thêm Giá Trị</button>
-                </div>
-            </div>
-            <div class="wrap-att-value clearfix" id="att_value_{!! $item_attr->slug !!}">
-                @if(!$item_attr->attribute_values->isEmpty())
-                    @foreach($item_attr->attribute_values as $item_value)
-                    <div class="col-md-4">
-                        <div class="checkbox">
-                            <input type="checkbox" name="att_value[]"> {!! $item_value->value !!}
+<div class="container-fluid">
+    @if(!$attribute_list->isEmpty())
+        @foreach($attribute_list->chunk(2) as $item_chunk)
+            <div class="row">
+                @foreach($item_chunk as $item_attr)
+                    <div class="col-md-6">
+                        <div class="wrap-attribute flex-container">
+                            <div class="form-group flex-item">
+                                <div class="checkbox checkbox-att">
+                                    <input type="checkbox" name="att[]" value="{!! $item_attr->id !!}"
+                                           class="att_icheck"
+                                           data-trigger="{!! $item_attr->slug !!}"
+                                            {!! count($array_att) && in_array($item_attr->id, $array_att) ? 'checked' : null   !!} >
+                                    <b>{!! $item_attr->name !!}</b>
+                                </div>
+                            </div>
+                            <div class="wrap-btn flex-item text-right">
+                                <button type="button" class="btn btn-xs btn-warning btn-create-value" data-toggle="modal"
+                                        data-target="#modal-add-value" data-att-id="{!! $item_attr->id !!}"
+                                        data-att-slug="{!! $item_attr->slug !!}" disabled
+                                        id="btn-att-create-{!! $item_attr->slug !!}" data-toggle="tooltip"
+                                        title="Thêm Giá Trị"><i class="fa fa-plus"></i> Thêm Giá Trị
+                                </button>
+
+                            </div>
+                        </div>
+                        <div class="wrap-att-value clearfix" id="att_value_{!! $item_attr->slug !!}">
+                            <div class="container-fluid append-value-{!! $item_attr->slug !!}">
+                                @include('Admin::ajax.attribute.attribute_value')
+                            </div>
                         </div>
                     </div>
-                    @endforeach
-                @else
-                    <p>Chưa có giá trị. Vui lòng tạo mới.</p>
-                @endif
+                @endforeach
             </div>
-        </div>
-    @endforeach
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <button onclick="addAttArea()" type="button" disabled class="btn btn-primary btn-att"><i class="fa fa-tag"></i> Gán Vào Sản Phẩm</button>
-            <button type="button"  disabled class="btn btn-danger btn-att"><i class="fa fa-trash"></i> Xóa Thuộc Tính</button>
-        </div>
-    </div>
-
-@else
-    <p>Chưa có thuộc tính. Vui lòng tạo mới.</p>
-@endif
+        @endforeach
+    @else
+        <p>Chưa có thuộc tính. Vui lòng tạo mới.</p>
+    @endif
+</div>

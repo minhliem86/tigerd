@@ -26,7 +26,7 @@ class CreateProductsTable extends Migration
             $table->boolean('hot')->default(0);
             $table->string('count_number')->nullable()->default(0);
             $table->integer('order')->nullable();
-            $table->boolean('status')->default();
+            $table->boolean('status')->default(1);
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
