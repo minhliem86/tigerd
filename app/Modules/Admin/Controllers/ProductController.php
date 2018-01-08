@@ -31,7 +31,7 @@ class ProductController extends Controller
         $this->common = $common;
         $this->photo = $photo;
         $this->_replacePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
-        $this->_removePath = asset('public/uploads/');
+        $this->_removePath = asset('public/upload/');
         $this->_big = env('THUMBNAIL_PATH_BIG') ? env('THUMBNAIL_PATH_BIG') : '';
         $this->_small = env('THUMBNAIL_PATH_SMALL') ? env('THUMBNAIL_PATH_SMALL') : '';
     }
