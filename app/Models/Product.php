@@ -26,7 +26,7 @@ class Product extends Model
     }
     public function meta_configs()
     {
-        return $this->morphMany('App\Models\MetaCongiguration', 'metable');
+        return $this->morphMany('App\Models\MetaConfiguration', 'metable');
     }
 
     public function photos()

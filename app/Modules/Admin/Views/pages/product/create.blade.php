@@ -9,8 +9,8 @@
 @section('content')
     <div class="row">
         @include("Admin::errors.error_layout")
-        <form method="POST" action="{{route('admin.product.store')}}" id="form" role="form" class="form-horizontal form-create-product" enctype="multipart/form-data">
-            {{Form::token()}}
+        <form method="POST" action="{!!route('admin.product.store')!!}" id="form" role="form" class="form-horizontal form-create-product" enctype="multipart/form-data">
+            {!!Form::token()!!}
             <div class="col-md-7 col-sm-6">
                 <fieldset>
                     <div class="form-group">
@@ -22,7 +22,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Tên Sản phẩm</label>
                         <div class="col-md-10">
-                            {{Form::text('name',old('name'), ['class'=>'form-control', 'placeholder'=>'Tên Sản Phẩm'])}}
+                            {!!Form::text('name',old('name'), ['class'=>'form-control', 'placeholder'=>'Tên Sản Phẩm'])!!}
                         </div>
                     </div>
                     <div class="form-group">
@@ -31,37 +31,37 @@
                             <p><small>(từ 2,3 ký tự hoa. EX: Quần Tây -> QT)</small></p>
                         </label>
                         <div class="col-md-10">
-                            {{Form::text('sku_product',old('sku_product'), ['class'=>'form-control', 'placeholder'=>'Mã Sản Phẩm'])}}
+                            {!!Form::text('sku_product',old('sku_product'), ['class'=>'form-control', 'placeholder'=>'Mã Sản Phẩm'])!!}
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">Mô tả</label>
                         <div class="col-md-10">
-                            {{Form::textarea('description',old('description'), ['class'=>'form-control', 'placeholder' => 'Mô tả'])}}
+                            {!!Form::textarea('description',old('description'), ['class'=>'form-control', 'placeholder' => 'Mô tả'])!!}
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">Bài viết Sản Phẩm</label>
                         <div class="col-md-10">
-                            {{Form::textarea('content',old('content'), ['class'=>'form-control my-editor', 'placeholder' => 'Bài viết Sản Phẩm'])}}
+                            {!!Form::textarea('content',old('content'), ['class'=>'form-control my-editor', 'placeholder' => 'Bài viết Sản Phẩm'])!!}
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">Giá</label>
                         <div class="col-md-10">
-                            {{Form::number('price',old('price'), ['class'=>'form-control number', 'placeholder'=>'Giá'])}}
+                            {!!Form::number('price',old('price'), ['class'=>'form-control number', 'placeholder'=>'Giá'])!!}
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">Giảm Giá</label>
                         <div class="col-md-10">
-                            {{Form::number('discount',old('discount'), ['class'=>'form-control number', 'placeholder'=>'0'])}}
+                            {!!Form::number('discount',old('discount'), ['class'=>'form-control number', 'placeholder'=>'0'])!!}
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">Nhập Kho</label>
                         <div class="col-md-10">
-                            {{Form::number('stock_quality',old('stock_quality'), ['class'=>'form-control number', 'placeholder'=>'0'])}}
+                            {!!Form::number('stock_quality',old('stock_quality'), ['class'=>'form-control number', 'placeholder'=>'0'])!!}
                         </div>
                     </div>
                     <div class="form-group">
@@ -87,9 +87,7 @@
                     </legend>
                     <div class="container-fluid">
                         <div class="wrap-img_detail wrap_general">
-                            <div class="form-group col-md-12">
-                                <input type="file" name="thumb-input[]" id="thumb-input" multiple >
-                            </div>
+                            <input type="file" name="thumb-input[]" id="thumb-input" multiple >
                         </div>
                     </div>
                 </fieldset>
@@ -208,16 +206,16 @@
     <script src="{!! asset('public/assets/admin/dist/js/plugins/alertify/alertify.js') !!}"></script>
     <script src="{!! asset('public/assets/admin/dist/js/plugins/jquery.number.min.js') !!}"></script>
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-    <script src="{{asset('public')}}/vendor/laravel-filemanager/js/lfm.js"></script>
-    <script src="{{asset('public/assets/admin/dist/js/script.js')}}"></script>
+    <script src="{!!asset('public')!!}/vendor/laravel-filemanager/js/lfm.js"></script>
+    <script src="{!!asset('public/assets/admin/dist/js/script.js')!!}"></script>
 
     <!--BT Upload-->
-    <link rel="stylesheet" href="{{asset('/public/assets/admin')}}/dist/js/plugins/bootstrap-input/css/fileinput.min.css">
-    <script src="{{asset('/public/assets/admin')}}/dist/js/plugins/bootstrap-input/js/plugins/sortable.min.js"></script>
-    <script src="{{asset('/public/assets/admin')}}/dist/js/plugins/bootstrap-input/js/plugins/purify.min.js"></script>
-    <script src="{{asset('/public/assets/admin')}}/dist/js/plugins/bootstrap-input/js/fileinput.min.js"></script>
+    <link rel="stylesheet" href="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/css/fileinput.min.css">
+    <script src="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/js/plugins/sortable.min.js"></script>
+    <script src="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/js/plugins/purify.min.js"></script>
+    <script src="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/js/fileinput.min.js"></script>
     <script>
-        const url = "{{url('/')}}"
+        const url = "{!!url('/')!!}"
         init_tinymce(url);
         // BUTTON ALONE
         init_btnImage(url,'#lfm');
@@ -392,7 +390,7 @@
             // '   {size} {progress} {actions}\n' +
             // '</div>';
             $("#thumb-input").fileinput({
-                uploadUrl: "{{route('admin.product.store')}}", // server upload action
+                uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
                 uploadAsync: true,
                 showUpload: false,
                 showCaption: false,

@@ -2,6 +2,7 @@
 
 namespace App\Modules\Admin\Controllers;
 
+use App\Repositories\MetaRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -30,6 +31,7 @@ class ProductController extends Controller
         $this->productRepo = $product;
         $this->common = $common;
         $this->photo = $photo;
+
         $this->_replacePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
         $this->_removePath = asset('public/upload/');
         $this->_big = env('THUMBNAIL_PATH_BIG') ? env('THUMBNAIL_PATH_BIG') : '';
@@ -38,7 +40,7 @@ class ProductController extends Controller
 
     public $rules = [
         'category_id'=> 'required',
-        'sku_product' => 'required|min:2|max:5|unique:products,sku_product',
+        'sku_product' => 'required|min:2|max:10|unique:products,sku_product',
         'price' => 'required',
         'stock_quality' => 'required'
     ];
@@ -47,7 +49,23 @@ class ProductController extends Controller
         'category_id.required' => 'Vui lòng chọn Danh Mục Sản Phẩm',
         'sku_product.required' => 'Vui lòng nhập Mã Sản Phẩm',
         'sku_product.min' => 'Mã Sản Phẩm tối thiểu 2 ký tự hoa',
-        'sku_product.max' => 'Mã Sản Phẩm tối đa 5 ký tự hoa',
+        'sku_product.max' => 'Mã Sản Phẩm tối đa 10 ký tự hoa',
+        'sku_product.unique' => 'Mã Sản Phẩm này đã tồn tại',
+        'price.required' => 'Vui lòng nhập Giá sản phẩm',
+        'stock_quality.required' => 'Vui lòng nhập Số lượng nhập kho'
+    ];
+
+    public $rules_edit = [
+        'category_id'=> 'required',
+        'price' => 'required',
+        'stock_quality' => 'required'
+    ];
+
+    public $messages_edit = [
+        'category_id.required' => 'Vui lòng chọn Danh Mục Sản Phẩm',
+        'sku_product.required' => 'Vui lòng nhập Mã Sản Phẩm',
+        'sku_product.min' => 'Mã Sản Phẩm tối thiểu 2 ký tự hoa',
+        'sku_product.max' => 'Mã Sản Phẩm tối đa 10 ký tự hoa',
         'sku_product.unique' => 'Mã Sản Phẩm này đã tồn tại',
         'price.required' => 'Vui lòng nhập Giá sản phẩm',
         'stock_quality.required' => 'Vui lòng nhập Số lượng nhập kho'
@@ -64,8 +82,6 @@ class ProductController extends Controller
 
     public function getData(Request $request)
     {
-//        $product = DB::table('products')->join('categories', 'products.category_id', '=','categories.id')->select(['products.id', 'products.title', 'products.avatar_img', 'products.price', 'products.order', 'products.status', 'products.hot']);
-
         $product = $this->productRepo->query(['products.id as id', 'products.name as name', 'products.sku_product as sku_product', 'products.price as price', 'products.discount as discount', 'products.stock_quality as quality', 'products.img_url as img_url', 'products.hot as hot' ,  'products.order as order', 'products.status as status', 'categories.name as cate_name'])->join('categories', 'categories.id', '=', 'products.category_id');
         return Datatables::of($product)
             ->addColumn('action', function($product){
@@ -98,6 +114,9 @@ class ProductController extends Controller
             })->editColumn('price', function($product){
                 $price = number_format($product->price);
                 return $price;
+            })->editColumn('discount', function($product){
+                $discount = number_format($product->discount);
+                return $discount;
             })->editColumn('img_url',function($product){
                 return '<img src="'.asset($product->img_url).'" width="80" class="img-responsive">';
             })->filter(function($query) use ($request){
@@ -119,7 +138,9 @@ class ProductController extends Controller
         }
         $cate = $category->query(['id', 'name'])->lists('name', 'id')->toArray();
         $attribute_list = $attribute->all(['id', 'name', 'slug']);
-        return view('Admin::pages.product.create', compact('cate', 'attribute_list'));
+        $array_att = [];
+        $array_value = [];
+        return view('Admin::pages.product.create', compact('cate', 'attribute_list', 'array_value', 'array_att'));
     }
 
     /**
@@ -171,12 +192,11 @@ class ProductController extends Controller
             ];
             $product->meta_configs()->save(new \App\Models\MetaConfiguration($data));
         }
-        if($request->file('img_detail')){
+        if($request->has('img_detail')){
             $data_photo = [];
             foreach($request->file('thumb-input') as $k=>$thumb){
                 $bigsize = $this->common->uploadImage($request, $thumb, $this->_big,$resize = false);
                 $smallsize = $this->common->createThumbnail($bigsize,$this->_small,100, 100);
-
                 $order = $this->photo->getOrder();
                 $data = new \App\Models\Photo(
                     [
@@ -220,11 +240,20 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($id, CategoryRepository $cate, AttributeRepository $attribute)
     {
-        // dd($this->productRepo->make(['photos'])->find(19));
-        $inst = $this->productRepo->find($id,['*'],['photos']);
-        return view('Admin::pages.product.edit', compact('inst'));
+        $attribute_list = $attribute->all(['id', 'name', 'slug']);
+        $cate = $cate->query(['id','name'])->lists('name', 'id')->toArray();
+        $inst = $this->productRepo->find($id,['*'],['photos','attributes','values']);
+        $array_att = [];
+        $array_value = [];
+        foreach($inst->attributes as $item_att){
+            array_push($array_att,$item_att->id);
+        };
+        foreach($inst->values as $item_value){
+            array_push($array_value,$item_value->id);
+        };
+        return view('Admin::pages.product.edit', compact('inst', 'cate', 'attribute_list', 'array_att', 'array_value'));
     }
 
     /**
@@ -234,41 +263,77 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,  CategoryRepository $cate, MetaRepository $meta,  $id)
     {
-        $img_url = $this->common->getPath($request->input('avatar_img'));
-        $meta_image = $this->common->getPath($request->input('meta_image'));
+        $valid = Validator::make($request->all(), $this->rules_edit, $this->messages_edit);
+        if($valid->fails()){
+            return redirect()->back()->withInput()->withErrors($valid->errors());
+        }
+        $img_url = $this->common->getPath($request->input('img_url'), $this->_replacePath);
 
-//        $data = [
-//                'name' => $request->input('name'),
-//                'slug' => \LP_lib::unicode($request->input('name')),
-//                'description' => $request->input('description'),
-//                'content' => $request->input('content'),
-//                'price' => $request->input('price'),
-//                'category_id' => 1,
-//                'avatar_img' => $img_url,
-//                'meta_keywords' => $request->input('meta_keywords'),
-//                'meta_description' => $request->input('meta_description'),
-//                'meta_images' => $meta_image,
-//                'order' => $request->input('order'),
-//                'status' => $request->input('status'),
-//        ];
-//        $product = $this->productRepo->update($data, $id);
-//
-//        if($request->hasFile('thumb-input')){
-//          foreach($request->file('thumb-input') as $k=>$thumb){
-//            $img = $this->common->uploadImage($request, $thumb, $this->_bigsize,$resize = false);
-//            $thumbnail = $this->common->createThumbnail($img,$this->_thumbnail,100, 100);
-//
-//            $order = $this->photo->getOrder();
-//            $product->photos()->save(new \App\Models\Photo([
-//              'img_url' => $this->common->getPath($img, asset('public/upload')),
-//              'thumb_url' => $this->common->getPath($thumbnail, asset('public/upload')),
-//              'order'=>$order,
-//            ]));
-//          }
-//        }
-//        return redirect()->route('admin.product.index')->with('success', 'Updated !');
+        $sku_cate = $cate->find($request->input('category_id'));
+        $order = $this->productRepo->getOrder();
+        $data = [
+            'name' => $request->input('name'),
+            'slug' => \LP_lib::unicode($request->input('name')),
+            'description' => $request->input('description'),
+            'content' => $request->input('content'),
+            'price' => $request->input('price'),
+            'discount' => $request->input('discount'),
+            'stock_quality' => $request->input('stock_quality'),
+            'img_url' => $img_url,
+            'order' => $request->input('order'),
+            'status' => $request->input('status'),
+            'category_id' => $request->input('category_id'),
+        ];
+
+        $product = $this->productRepo->update($data, $id);
+
+        if($request->has('meta_config')){
+            $meta_img = $this->common->getPath($request->input('meta_img'), $this->_replacePath);
+            $data = [
+                'meta_keywords' => $request->input('meta_keywords'),
+                'meta_description' => $request->input('meta_description'),
+                'meta_img' => $meta_img,
+            ];
+            if(!$request->has('meta_config_id')){
+                $product->meta_configs()->save(new \App\Models\MetaConfiguration($data));
+            }
+            $meta_config = $meta->update($data,$request->input('meta_config_id'));
+        }
+
+        if($request->has('img_detail')){
+            $data_photo = [];
+            foreach($request->file('thumb-input') as $k=>$thumb){
+                $bigsize = $this->common->uploadImage($request, $thumb, $this->_big,$resize = false);
+                $smallsize = $this->common->createThumbnail($bigsize,$this->_small,100, 100);
+
+                dd($this->_removePath);
+                $order = $this->photo->getOrder();
+                $data = new \App\Models\Photo(
+                    [
+                        'img_url' => $this->common->getPath($bigsize, $this->_replacePath, $this->_removePath),
+                        'thumb_url' => $this->common->getPath($smallsize, $this->_replacePath, $this->_removePath),
+                        'order'=>$order,
+                    ]
+                );
+                array_push($data_photo, $data);
+            }
+            $product->photos()->saveMany($data_photo);
+        }
+
+        if($request->has('attribute_section')){
+            if($request->has('att')){
+                $data_att = $request->input('att');
+                $product->attributes()->sync($data_att);
+                if($request->has('att_value')){
+                    $data_value = $request->input('att_value');
+                    $product->values()->sync($data_value);
+                }
+            }
+        }
+
+        return redirect()->route('admin.product.index')->with('success', 'Updated !');
     }
 
     /**
@@ -394,7 +459,9 @@ class ProductController extends Controller
             ];
             $attribute->create($data);
             $attribute_list = $attribute->all(['id','name','slug'],['attribute_values']);
-            $view = view('Admin::ajax.attribute.attribute', compact('attribute_list'))->render();
+            $array_att = [];
+            $array_value = [];
+            $view = view('Admin::ajax.attribute.attribute', compact('attribute_list', 'array_value', 'array_att'))->render();
             return response()->json(['rs'=>'ok', 'data' => $view], 200);
         }
     }
@@ -416,7 +483,9 @@ class ProductController extends Controller
             ];
             $attValue = $attvalue->create($data);
             $item_attr = $att->find($att_id);
-            $view = view('Admin::ajax.attribute.attribute_value', compact('item_attr'))->render();
+            $array_att = [];
+            $array_value = [];
+            $view = view('Admin::ajax.attribute.attribute_value', compact('item_attr', 'array_att', 'array_value'))->render();
             return response()->json(['error'=>false, 'data' => $view ]);
         }
     }
@@ -431,7 +500,9 @@ class ProductController extends Controller
             if(count($array_att)){
                 $att->deleteAll($array_att);
                 $attribute_list = $att->all(['id','name','slug'],['attribute_values']);
-                $view = view('Admin::ajax.attribute.attribute', compact('attribute_list'))->render();
+                $array_att = [];
+                $array_value = [];
+                $view = view('Admin::ajax.attribute.attribute', compact('attribute_list', 'array_value', 'array_att'))->render();
                 return response()->json(['error'=>false, 'mes' => 'Thuộc tính đã được xóa thành công', 'data' => $view], 200);
             }else{
                 return response()->json(['error'=>true, 'mes' => 'Vui lòng chọn thuộc tính cần xóa'], 200);
@@ -449,7 +520,9 @@ class ProductController extends Controller
             $att_id = $request->input('att_id');
             $attribute_value->delete($id);
             $item_attr = $att->find($att_id);
-            $view = view('Admin::ajax.attribute.attribute_value', compact('item_attr'))->render();
+            $array_att = [];
+            $array_value = [];
+            $view = view('Admin::ajax.attribute.attribute_value', compact('item_attr', 'array_value', 'array_att'))->render();
             return response()->json(['error'=>false, 'mes' => 'Giá trị đã được xóa', 'data'=>$view], 200);
         }
     }

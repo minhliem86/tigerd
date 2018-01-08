@@ -179,6 +179,7 @@ class NewsController extends Controller
             }
             $meta_config = $meta->update($data_seo,$request->input('meta_config_id'));
         }
+
         return redirect()->route('admin.news.index')->with('success', 'Updated !');
     }
 
