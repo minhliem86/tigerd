@@ -161,8 +161,7 @@ class ProductController extends Controller
             $img_url = "";
         }
 
-        $sku_cate = $cate->find($request->input('category_id'));
-        $sku_product = $sku_cate->sku_cate. '_' .\Str::upper(trim($request->input('sku_product')));
+        $sku_product = \Str::upper(trim($request->input('sku_product')));
         $order = $this->productRepo->getOrder();
         $data = [
             'name' => $request->input('name'),
@@ -271,7 +270,6 @@ class ProductController extends Controller
         }
         $img_url = $this->common->getPath($request->input('img_url'), $this->_replacePath);
 
-        $sku_cate = $cate->find($request->input('category_id'));
         $order = $this->productRepo->getOrder();
         $data = [
             'name' => $request->input('name'),
@@ -280,6 +278,7 @@ class ProductController extends Controller
             'content' => $request->input('content'),
             'price' => $request->input('price'),
             'discount' => $request->input('discount'),
+            'sku_product' => $request->input('sku_product'),
             'stock_quality' => $request->input('stock_quality'),
             'img_url' => $img_url,
             'order' => $request->input('order'),
@@ -308,7 +307,6 @@ class ProductController extends Controller
                 $bigsize = $this->common->uploadImage($request, $thumb, $this->_big,$resize = false);
                 $smallsize = $this->common->createThumbnail($bigsize,$this->_small,100, 100);
 
-                dd($this->_removePath);
                 $order = $this->photo->getOrder();
                 $data = new \App\Models\Photo(
                     [

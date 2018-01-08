@@ -49,19 +49,19 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Giá</label>
                         <div class="col-md-10">
-                            {!!Form::number('price',old('price'), ['class'=>'form-control number', 'placeholder'=>'Giá'])!!}
+                            {!!Form::text('price',old('price'), ['class'=>'form-control number', 'placeholder'=>'Giá'])!!}
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">Giảm Giá</label>
                         <div class="col-md-10">
-                            {!!Form::number('discount',old('discount'), ['class'=>'form-control number', 'placeholder'=>'0'])!!}
+                            {!!Form::text('discount',old('discount'), ['class'=>'form-control number', 'placeholder'=>'0'])!!}
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">Nhập Kho</label>
                         <div class="col-md-10">
-                            {!!Form::number('stock_quality',old('stock_quality'), ['class'=>'form-control number', 'placeholder'=>'0'])!!}
+                            {!!Form::number('stock_quality',old('stock_quality'), ['class'=>'form-control', 'placeholder'=>'0'])!!}
                         </div>
                     </div>
                     <div class="form-group">
@@ -201,13 +201,14 @@
 @endsection
 
 @section('script')
+    <script src="{!! asset('public/assets/admin/dist/js/plugins/jquery.masknumber.js') !!}"></script>
     {{--ALERT--}}
     <link rel="stylesheet" href="{!! asset('public/assets/admin/dist/js/plugins/alertify/alertify.css') !!}">
     <script src="{!! asset('public/assets/admin/dist/js/plugins/alertify/alertify.js') !!}"></script>
-    <script src="{!! asset('public/assets/admin/dist/js/plugins/jquery.number.min.js') !!}"></script>
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script src="{!!asset('public')!!}/vendor/laravel-filemanager/js/lfm.js"></script>
     <script src="{!!asset('public/assets/admin/dist/js/script.js')!!}"></script>
+
 
     <!--BT Upload-->
     <link rel="stylesheet" href="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/css/fileinput.min.css">
@@ -406,7 +407,8 @@
                 }
             })
 
-            $('input.number').number(true, 2);
+            $('input.number').maskNumber({
+            });
         })
     </script>
 @stop

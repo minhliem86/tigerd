@@ -31,7 +31,7 @@
                         <p><small>(từ 2,10 ký tự hoa. EX: Quần Tây -> QT)</small></p>
                     </label>
                     <div class="col-md-10">
-                        {!!Form::text('sku_product',old('sku_product'), ['class'=>'form-control', 'placeholder'=>'Mã Sản Phẩm', 'disabled'])!!}
+                        {!!Form::text('sku_product',old('sku_product'), ['class'=>'form-control', 'placeholder'=>'Mã Sản Phẩm'])!!}
                     </div>
                 </div>
                 <div class="form-group">
@@ -110,7 +110,7 @@
                                             <div class="col-md-3">
                                                 <div class="file-preview-frame krajee-default  file-preview-initial file-sortable kv-preview-thumb" data-template="image">
                                                     <div class="kv-file-content">
-                                                        <img src="{!!asset('public/upload')!!}/{!!$photo->img_url!!}" class="file-preview-image kv-preview-data img-responsive" title="" alt="" style="width:auto;height:120px;">
+                                                        <img src="{!!asset($photo->img_url)!!}" class="file-preview-image kv-preview-data img-responsive" title="" alt="" style="width:auto;height:120px;">
                                                     </div>
                                                     <div class="photo-order-input" style="margin-bottom:10px">
                                                         <input type="text" class="form-control text-center" name="photo_order" value="{!!$photo->order!!}">
