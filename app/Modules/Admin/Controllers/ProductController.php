@@ -303,21 +303,23 @@ class ProductController extends Controller
 
         if($request->has('img_detail')){
             $data_photo = [];
-            foreach($request->file('thumb-input') as $k=>$thumb){
-                $bigsize = $this->common->uploadImage($request, $thumb, $this->_big,$resize = false);
-                $smallsize = $this->common->createThumbnail($bigsize,$this->_small,100, 100);
+            if($request->hasFile('thumb-input')){
+                foreach($request->file('thumb-input') as $k=>$thumb){
+                    $bigsize = $this->common->uploadImage($request, $thumb, $this->_big,$resize = false);
+                    $smallsize = $this->common->createThumbnail($bigsize,$this->_small,100, 100);
 
-                $order = $this->photo->getOrder();
-                $data = new \App\Models\Photo(
-                    [
-                        'img_url' => $this->common->getPath($bigsize, $this->_replacePath, $this->_removePath),
-                        'thumb_url' => $this->common->getPath($smallsize, $this->_replacePath, $this->_removePath),
-                        'order'=>$order,
-                    ]
-                );
-                array_push($data_photo, $data);
+                    $order = $this->photo->getOrder();
+                    $data = new \App\Models\Photo(
+                        [
+                            'img_url' => $this->common->getPath($bigsize, $this->_replacePath, $this->_removePath),
+                            'thumb_url' => $this->common->getPath($smallsize, $this->_replacePath, $this->_removePath),
+                            'order'=>$order,
+                        ]
+                    );
+                    array_push($data_photo, $data);
+                }
+                $product->photos()->saveMany($data_photo);
             }
-            $product->photos()->saveMany($data_photo);
         }
 
         if($request->has('attribute_section')){
@@ -455,11 +457,11 @@ class ProductController extends Controller
                 'slug' => \LP_lib::unicodenospace($request->input('name_att')),
                 'description' => $request->input('att_description'),
             ];
-            $attribute->create($data);
+            $item_attr = $attribute->create($data);
             $attribute_list = $attribute->all(['id','name','slug'],['attribute_values']);
             $array_att = [];
-            $array_value = [];
-            $view = view('Admin::ajax.attribute.attribute', compact('attribute_list', 'array_value', 'array_att'))->render();
+            $view = view('Admin::ajax.attribute.att', compact('item_attr', 'array_att'))->render();
+
             return response()->json(['rs'=>'ok', 'data' => $view], 200);
         }
     }
@@ -479,11 +481,11 @@ class ProductController extends Controller
                 'order' => $order,
                 'attribute_id' => $att_id
             ];
-            $attValue = $attvalue->create($data);
+            $item_value = $attvalue->create($data);
             $item_attr = $att->find($att_id);
-            $array_att = [];
             $array_value = [];
-            $view = view('Admin::ajax.attribute.attribute_value', compact('item_attr', 'array_att', 'array_value'))->render();
+//            $view = view('Admin::ajax.attribute.attribute_value', compact('item_attr', 'array_att', 'array_value'))->render();
+            $view = view('Admin::ajax.attribute.att_value', compact('item_value', 'item_attr', 'array_value'))->render();
             return response()->json(['error'=>false, 'data' => $view ]);
         }
     }
@@ -497,11 +499,7 @@ class ProductController extends Controller
             $array_att = $request->input('arr_att');
             if(count($array_att)){
                 $att->deleteAll($array_att);
-                $attribute_list = $att->all(['id','name','slug'],['attribute_values']);
-                $array_att = [];
-                $array_value = [];
-                $view = view('Admin::ajax.attribute.attribute', compact('attribute_list', 'array_value', 'array_att'))->render();
-                return response()->json(['error'=>false, 'mes' => 'Thuộc tính đã được xóa thành công', 'data' => $view], 200);
+                return response()->json(['error'=>false, 'mes' => 'Thuộc tính đã được xóa thành công'], 200);
             }else{
                 return response()->json(['error'=>true, 'mes' => 'Vui lòng chọn thuộc tính cần xóa'], 200);
             }
@@ -517,11 +515,7 @@ class ProductController extends Controller
             $id = $request->input('id');
             $att_id = $request->input('att_id');
             $attribute_value->delete($id);
-            $item_attr = $att->find($att_id);
-            $array_att = [];
-            $array_value = [];
-            $view = view('Admin::ajax.attribute.attribute_value', compact('item_attr', 'array_value', 'array_att'))->render();
-            return response()->json(['error'=>false, 'mes' => 'Giá trị đã được xóa', 'data'=>$view], 200);
+            return response()->json(['error'=>false, 'mes' => 'Giá trị đã được xóa'], 200);
         }
     }
 }

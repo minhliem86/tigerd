@@ -407,8 +407,7 @@
                 }
             })
 
-            $('input.number').maskNumber({
-            });
+            $('input.number').maskNumber({});
         })
     </script>
 @stop

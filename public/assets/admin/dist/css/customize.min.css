@@ -96,7 +96,7 @@ fieldset {
   fieldset:last-child {
     margin-bottom: 0; }
 
-.form-create-product .checkbox {
+.form-create-product .checkbox, .form-edit-product .checkbox {
   padding-top: 0; }
 
 /*# sourceMappingURL=customize.min.css.map */
