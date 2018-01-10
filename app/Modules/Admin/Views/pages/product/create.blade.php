@@ -242,11 +242,10 @@
                 success: function (data)
                 {
                     if(data.rs == 'ok'){
-                        $('.wrap-attribute_section').html(data.data)
+                        $('.append-attribute').append(data.data)
                         $('#'+idModal).modal('hide');
                         $('input[name=att_name]').val('');
                         $('textarea[name=att_description]').val('');
-                        $('.wrap-att-value').hide();
                         $(document).trigger('icheck');
                         $(document).trigger('icheckValue');
                     }
@@ -267,7 +266,8 @@
                 type: 'POST',
                 data: {att_id: att_id, value: value},
                 success: function(data){
-                    $('.append-value-'+att_slug).html(data.data);
+//                    $('.append-value-'+att_slug).html(data.data);
+                    $('.append-value-'+att_slug).append(data.data)
                     $('#'+idModal).modal('hide');
                     $('input[name="att_value"]').val('');
                     $('input[name="att_slug"]').val('');
@@ -283,6 +283,7 @@
             var array_att = $('input[name="att[]"]').map(function(){
                 return $(this).prop('checked') == true ? $(this).val() : null;
             }).get();
+            console.log(array_att);
             alertify.confirm("Một số thuộc tính được gán vào các sản phẩm khác nhau. Nếu bạn xóa thuộc tính sản phẩm liên quan sẽ không còn thuộc tính. Bạn có muốn xóa?", function(){
                 $.ajax({
                     headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
@@ -294,8 +295,9 @@
                             alertify.error(data.mes);
                         }else{
                             alertify.success(data.mes);
-                            $('.wrap-attribute_section').html(data.data);
-                            $('.wrap-att-value').hide();
+                            array_att.forEach(function (ele) {
+                                $('#att-'+ele).remove();
+                            });
                             $(document).trigger('icheck');
                             $(document).trigger('icheckValue');
                         }
@@ -315,7 +317,9 @@
                     type: 'POST',
                     data: {id: id, att_id:att_id},
                     success: function(data){
-                        $('.append-value-'+att_slug).html(data.data);
+                        if(!data.error){
+                            $('#att-value-'+id).remove();
+                        }
                         $(document).trigger('icheck');
                         $(document).trigger('icheckValue');
                     }
@@ -361,7 +365,7 @@
                     var id_trigger = $(this).data('trigger');
                     $('#btn-att-create-'+id_trigger).prop('disabled',true);
                     $('#att_value_'+id_trigger).slideUp();
-                    $('.checkbox-value').iCheck('uncheck');
+                    $('#att_value_'+id_trigger).find('input').iCheck('uncheck')
                 });
             }).trigger('icheck');
 
