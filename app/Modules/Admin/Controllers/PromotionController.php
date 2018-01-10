@@ -143,6 +143,7 @@ class PromotionController extends Controller
             'type' => $request->input('type'),
             'target' => $request->input('target'),
             'value' => $value,
+            'value_type' => $request->input('value_type'),
             'quality' => $request->input('quality'),
             'from_time' => $from_time,
             'to_time' => $to_time,
@@ -189,7 +190,7 @@ class PromotionController extends Controller
         if($valid->fails()){
             return redirect()->back()->withInput()->withErrors($valid->errors());
         }
-        if($request->input('value_type') == '%'){
+        if($request->input('value_type') === '%'){
             $value = trim(\Str::lower($request->input('value'))).$request->input('value_type');
         }else{
             $value = trim(\Str::lower($request->input('value')));
@@ -205,6 +206,7 @@ class PromotionController extends Controller
             'type' => $request->input('type'),
             'target' => $request->input('target'),
             'value' => $value,
+            'value_type' => $request->input('value_type'),
             'quality' => $request->input('quality'),
             'from_time' => $from_time,
             'to_time' => $to_time,

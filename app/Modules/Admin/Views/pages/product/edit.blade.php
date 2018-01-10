@@ -49,13 +49,13 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">Giá</label>
                     <div class="col-md-10">
-                        {!!Form::text('price',old('price'), ['class'=>'form-control number', 'placeholder'=>'Giá'])!!}
+                        {!!Form::number('price',old('price'), ['class'=>'form-control', 'placeholder'=>'Giá'])!!}
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-md-2 control-label">Giảm Giá</label>
                     <div class="col-md-10">
-                        {!!Form::text('discount',old('discount'), ['class'=>'form-control number', 'placeholder'=>'0'])!!}
+                        {!!Form::number('discount',old('discount'), ['class'=>'form-control', 'placeholder'=>'0'])!!}
                     </div>
                 </div>
                 <div class="form-group">
