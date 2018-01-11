@@ -33,6 +33,12 @@ class SanPhamController extends Controller
         return view("Client::pages.cart", compact('cart'));
     }
 
+    public function payment(Request $request)
+    {
+        $cart = Cart::getContent();
+        return view('Client::pages.payment', compact('cart'));
+    }
+
     public function addToCart(Request $request)
     {
         if(!$request->ajax()){
@@ -51,23 +57,16 @@ class SanPhamController extends Controller
         }
     }
 
-    public function payment(Request $request)
-    {
-        $cart = Cart::getContent();
-        return view('Client::pages.payment', compact('cart'));
-    }
-
     public function applyPromotion(Request $request, PromotionRepository $promotion)
     {
         if(!$request->ajax()){
             abort(404);
         }else{
             $promote_code = $request->input('pr_code');
-            $pr = $promotion->query()->where('sku_promotion',$promote_code)->where('status',1)->select('name','target','value', 'value_type', 'quality', 'num_use')->first();
+            $pr = $promotion->query()->where('sku_promotion',$promote_code)->where('status',1)->select('name','target','value', 'value_type')->first();
             if(count($pr)){
                 if(Cart::getCondition($pr->name)){
                     $condition = Cart::getCondition($pr->name);
-                    return response()->json(['error'=>true, 'data'=> null, 'message' => 'Mã khuyến mãi đã được áp dụng cho đơn hàng này'], 200);
                 }else{
                     $cond = new \Darryldecode\Cart\CartCondition(
                         [
@@ -96,37 +95,5 @@ class SanPhamController extends Controller
                 return response()->json(['error'=>true, 'data'=> null, 'message' => 'Mã khuyến mãi đã hết hạn hoặc không tồn tại'], 200);
             }
         }
-    }
-
-
-
-    public function getPayment(PromotionRepository $promotion)
-    {
-        $list_promotion = $promotion->query(['id','sku_promotion', 'name'])->lists('name', 'sku_promotion')->toArray();
-        return view('Client::pages.promotion', compact('list_promotion'));
-    }
-
-    public function postPayment(Request $request, PromotionRepository $promotion)
-    {
-        $code = $request->input('code');
-        $pr = $promotion->query()->where('sku_promotion',$code)->where('status',1)->select('name','target','value', 'value_type')->first();
-        if(Cart::getCondition($code)){
-            $condition = Cart::getCondition($code);
-        }else{
-            $cond = new \Darryldecode\Cart\CartCondition(
-                [
-                    'name' => $pr->name,
-                    'type' => 'discount',
-                    'target' => $pr->target,
-                    'value' => $pr->value_type === '%' ? $pr->value.$pr->value_type : $pr->value,
-                ]
-            );
-            Cart::condition($cond);
-            $condition = Cart::getCondition($pr->name);
-        }
-        $subTotal = Cart::getSubTotal();
-        $subTotalAfterCondition = $condition->getCalculatedValue($subTotal);
-        $total = Cart::getTotal();
-        dd($subTotalAfterCondition, $total);
     }
 }

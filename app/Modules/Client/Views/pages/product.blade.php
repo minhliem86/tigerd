@@ -24,7 +24,7 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <a href="{!! route('client.payment') !!}"><i class="fa fa-shopping-cart"></i> Cart <span class="badge badge-light" id="quantity">{!! Cart::getTotalQuantity() !!}</span></a>
+            <a href="{!! route('client.cart') !!}"><i class="fa fa-shopping-cart"></i> Cart <span class="badge badge-light" id="quantity">{!! Cart::getTotalQuantity() !!}</span></a>
         </div>
     </div>
     <div class="row">
