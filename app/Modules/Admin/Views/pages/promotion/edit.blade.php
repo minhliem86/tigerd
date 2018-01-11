@@ -49,7 +49,7 @@
                               <div class="input-group input-group-editor">
                                   {!! Form::number('value', old('value'), ['class' => 'form-control',]) !!}
                                   <div class="input-group-btn">
-                                      {!! Form::select('value_type',['vnd' => 'VND', '%' => '%'], old('type') ,['class' => 'form-control']) !!}
+                                      {!! Form::select('value_type',['vnd' => 'VND', '%' => '%'], old('value_type') ,['class' => 'form-control']) !!}
                                   </div>
                               </div>
                           </div>

@@ -29,7 +29,7 @@
                 <th width="100"><i class="glyphicon glyphicon-search"></i> Mã Sản Phẩm</th>
                 <th width="120"><i class="glyphicon glyphicon-search"></i> Sản phẩm</th>
                 <th width="80">Tồn Kho</th>
-                <th width="80">Giá</th>
+                <th width="80">Đơn Giá</th>
                 <th width="80">Giảm Giá <br/>(nếu có)</th>
                 <th width="50">Sắp xếp</th>
                 <th width="50">Trạng thái</th>
