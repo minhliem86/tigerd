@@ -15,9 +15,22 @@ class SanPhamController extends Controller
 {
     protected $product;
 
+    protected $merchant;
+    protected $access;
+    protected $secure;
+
     public function __construct(ProductRepository $product)
     {
         $this->product = $product;
+        $this->merchant = env('OP_MERCHANT');
+        $this->access = env('OP_ACCESS');
+        $this->secure = env('OP_SECURE');
+    }
+
+    private function setupOnePay(){
+        $onepay = new \ClassOnepay();
+        $onepay->setupMerchant($this->merchant, $this->access, $this->secure);
+        return $onepay;
     }
 
     public function index()
@@ -126,27 +139,28 @@ class SanPhamController extends Controller
 
     public function doPayment(Request $request)
     {
-
-        $onepay = new \ClassOnepay();
-
-        $onepay->setupMerchant('TESTONEPAY', '6BEB2546', '6D0870CDE5F24F34F3915FB0045120DB');
-
-        $refer = $onepay->build_link_LP($request->all());
-
-//        return $refer;
+        $order_id = \LP_lib::unicodenospace($request->input('fullname')).'_'.time();
+        $onepay = $this->setupOnePay();
+        $refer = $onepay->build_link_global($request->all(),$order_id, Cart::getTotal(), 'PAYMENT ONLINE VIA ONEPAY', route('client.responsePayment'),  $order_id);
         return redirect($refer);
-
     }
 
-    public function responseFormOnePay()
+    public function responseFormOnePay(Request $request)
     {
-        $onepay = new \ClassOnepay();
-//
-        $onepay->setupMerchant('TESTONEPAY', '6BEB2546  ', '6D0870CDE5F24F34F3915FB0045120DB');
-//        dd($_GET);
+        $onepay = $this->setupOnePay();
 
-        $hashValidated = $onepay->validate($_GET);
+        $hashValidated = $onepay->check_response($request->all());
 
-        dd($hashValidated);
+        if($hashValidated === 'CORRECT' && $request->vpc_TxnResponseCode == "0"){
+            //thanh cong
+            return "thanh cong";
+        }elseif($hashValidated=="INVALID HASH" && $request->vpc_TxnResponseCode == "0"){
+            // pending
+            return "Pending";
+        }else{
+            //thatbai
+            $error_message = $onepay->getResponseDescription($request->vpc_TxnResponseCode);
+            return $error_message;
+        }
     }
 }
