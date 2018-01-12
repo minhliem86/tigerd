@@ -100,7 +100,7 @@ class ClassOnepay {
         return $vpcURL;
     }
 
-    public function build_link_LP($array_data, $order_id, $total_amount, $order_info, $url_return)
+    public function build_link_global($array_data, $order_id, $total_amount, $order_info, $url_return)
     {
         $vpcURL = $this->onepay_url . '?';
 
@@ -121,6 +121,17 @@ class ClassOnepay {
 // merchant secret has been provided.
 //$md5HashData = $SECURE_SECRET; Khởi tạo chuỗi dữ liệu mã hóa trống
         $md5HashData = "";
+
+        $array_data['vpc_Merchant'] = $this->merchant;
+        $array_data['vpc_AccessCode'] = $this->access;
+        $array_data['vpc_MerchTxnRef'] = $order_id;
+        $array_data['vpc_OrderInfo'] = $order_info;
+        $array_data['vpc_Amount'] = $total_amount * 100;
+        $array_data['vpc_ReturnURL'] = $url_return;
+        $array_data['vpc_Version'] = 2;
+        $array_data['vpc_Command'] = 'pay';
+        $array_data['vpc_Locale'] = 'vn';
+        $array_data['vpc_Currency'] = 'VND';
 
         ksort ($array_data);
 
@@ -158,6 +169,11 @@ class ClassOnepay {
         return $vpcURL;
     }
 
+    public function check_response($array_data)
+    {
+
+    }
+
     public function validate($mang) {
         $vpc_Txn_Secure_Hash = $mang["vpc_SecureHash"];
         unset($mang["vpc_SecureHash"]);
@@ -185,7 +201,7 @@ class ClassOnepay {
             } else {
                 // Secure Hash validation failed, add a data field to be displayed
                 // later.
-                $hashValidated = "INVALID HASH";
+                $hashValidated = "INVALID HASH 24";
             }
         } else {
             // Secure Hash was not validated, add a data field to be displayed later.
