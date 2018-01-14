@@ -7,7 +7,8 @@
  * @author Vinh Huynh <huynhtuvinh87@gmail.com>
  */
 
-class ClassOnepay {
+class ClassOnepay
+{
 
     //private $onepay_url = 'http://mtf.onepay.vn/onecomm-pay/vpc.op';
     // link thanh toan noi dia
@@ -24,20 +25,23 @@ class ClassOnepay {
 
     // function cài đặt cac bien private trong class
 
-    public function setupMerchant($merchant, $access, $secure) {
+    public function setupMerchant($merchant, $access, $secure)
+    {
         $this->merchant = $merchant;
         $this->access = $access;
         $this->secure = $secure;
     }
 
-    public function build_link_vn($order_id, $total_amount, $order_info, $url_return) {
+    /**
+    public function build_link_vn($order_id, $total_amount, $order_info, $url_return)
+    {
         // tạo chuỗi dữ liệu được bắt đầu bằng khóa bí mật
         $md5HashData = $this->secure;
         // sắp xếp dữ liệu theo thứ tự a-z trước khi nối lại
         // arrange array data a-z before make a hash
 
         $array = array
-            (
+        (
             'Title' => 'VPC 3-Party',
             'vpc_Merchant' => $this->merchant,
             'vpc_AccessCode' => $this->access,
@@ -65,14 +69,15 @@ class ClassOnepay {
         return $vpcURL;
     }
 
-    public function build_link($order_id, $total_amount, $order_info, $url_return) {
+    public function build_link($order_id, $total_amount, $order_info, $url_return)
+    {
         // tạo chuỗi dữ liệu được bắt đầu bằng khóa bí mật
         $md5HashData = $this->secure;
         // sắp xếp dữ liệu theo thứ tự a-z trước khi nối lại
         // arrange array data a-z before make a hash
 
         $array = array
-            (
+        (
             'Title' => 'VPC 3-Party',
             'vpc_Merchant' => $this->merchant,
             'vpc_AccessCode' => $this->access,
@@ -99,27 +104,28 @@ class ClassOnepay {
         }
         return $vpcURL;
     }
+    **/
 
-    public function build_link_global($array_data, $order_id, $total_amount, $order_info, $url_return)
+    public function build_link_global($array_data, $order_id, $total_amount, $order_info, $url_return, $customer_id)
     {
         $vpcURL = $this->onepay_url . '?';
 
-// Remove the Virtual Payment Client URL from the parameter hash as we
-// do not want to send these fields to the Virtual Payment Client.
+        // Remove the Virtual Payment Client URL from the parameter hash as we
+        // do not want to send these fields to the Virtual Payment Client.
 
-// The URL link for the receipt to do another transaction.
-// Note: This is ONLY used for this example and is not required for
-// production code. You would hard code your own URL into your application.
+        // The URL link for the receipt to do another transaction.
+        // Note: This is ONLY used for this example and is not required for
+        // production code. You would hard code your own URL into your application.
 
-// Get and URL Encode the AgainLink. Add the AgainLink to the array
-// Shows how a user field (such as application SessionIDs) could be added
-        $array_data['AgainLink']=urlencode($_SERVER['HTTP_REFERER']);
-//$array_data['AgainLink']=urlencode($_SERVER['HTTP_REFERER']);
-// Create the request to the Virtual Payment Client which is a URL encoded GET
-// request. Since we are looping through all the data we may as well sort it in
-// case we want to create a secure hash and add it to the VPC data if the
-// merchant secret has been provided.
-//$md5HashData = $SECURE_SECRET; Khởi tạo chuỗi dữ liệu mã hóa trống
+        // Get and URL Encode the AgainLink. Add the AgainLink to the array
+        // Shows how a user field (such as application SessionIDs) could be added
+        $array_data['AgainLink'] = urlencode($_SERVER['HTTP_REFERER']);
+        //$array_data['AgainLink']=urlencode($_SERVER['HTTP_REFERER']);
+        // Create the request to the Virtual Payment Client which is a URL encoded GET
+        // request. Since we are looping through all the data we may as well sort it in
+        // case we want to create a secure hash and add it to the VPC data if the
+        // merchant secret has been provided.
+        //$md5HashData = $SECURE_SECRET; Khởi tạo chuỗi dữ liệu mã hóa trống
         $md5HashData = "";
 
         $array_data['vpc_Merchant'] = $this->merchant;
@@ -132,13 +138,16 @@ class ClassOnepay {
         $array_data['vpc_Command'] = 'pay';
         $array_data['vpc_Locale'] = 'vn';
         $array_data['vpc_Currency'] = 'VND';
+        $array_data['vpc_Customer_Id'] = $customer_id;
 
-        ksort ($array_data);
+        unset($array_data['_token']);
 
-// set a parameter to show the first pair in the URL
+        ksort($array_data);
+
+        // set a parameter to show the first pair in the URL
         $appendAmp = 0;
 
-        foreach($array_data as $key => $value) {
+        foreach ($array_data as $key => $value) {
 
             // create the md5 input and URL leaving out any fields that have no value
             if (strlen($value) > 0) {
@@ -151,19 +160,19 @@ class ClassOnepay {
                     $vpcURL .= '&' . urlencode($key) . "=" . urlencode($value);
                 }
                 //$md5HashData .= $value; sử dụng cả tên và giá trị tham số để mã hóa
-                if ((strlen($value) > 0) && ((substr($key, 0,4)=="vpc_") || (substr($key,0,5) =="user_"))) {
+                if ((strlen($value) > 0) && ((substr($key, 0, 4) == "vpc_") || (substr($key, 0, 5) == "user_"))) {
                     $md5HashData .= $key . "=" . $value . "&";
                 }
             }
         }
-//xóa ký tự & ở thừa ở cuối chuỗi dữ liệu mã hóa
+        //xóa ký tự & ở thừa ở cuối chuỗi dữ liệu mã hóa
         $md5HashData = rtrim($md5HashData, "&");
-// Create the secure hash and append it to the Virtual Payment Client Data if
-// the merchant secret has been provided.
+        // Create the secure hash and append it to the Virtual Payment Client Data if
+        // the merchant secret has been provided.
         if (strlen($this->secure) > 0) {
             //$vpcURL .= "&vpc_SecureHash=" . strtoupper(md5($md5HashData));
             // Thay hàm mã hóa dữ liệu
-            $vpcURL .= "&vpc_SecureHash=" . strtoupper(hash_hmac('SHA256', $md5HashData, pack('H*',$this->secure)));
+            $vpcURL .= "&vpc_SecureHash=" . strtoupper(hash_hmac('SHA256', $md5HashData, pack('H*', $this->secure)));
         }
 
         return $vpcURL;
@@ -171,10 +180,53 @@ class ClassOnepay {
 
     public function check_response($array_data)
     {
+        $vpc_Txn_Secure_Hash = $array_data["vpc_SecureHash"];
+        unset($array_data["vpc_SecureHash"]);
 
+        // set a flag to indicate if hash has been validated
+        $errorExists = false;
+
+        if (strlen($this->secure) > 0 && $array_data["vpc_TxnResponseCode"] != "7" && $array_data["vpc_TxnResponseCode"] != "No Value Returned") {
+
+            ksort($array_data);
+            //$md5HashData = $this->>$this->secure;
+            //khởi tạo chuỗi mã hóa rỗng
+            $md5HashData = "";
+            // sort all the incoming vpc response fields and leave out any with no value
+            foreach ($array_data as $key => $value) {
+//        if ($key != "vpc_SecureHash" or strlen($value) > 0) {
+//            $md5HashData .= $value;
+//        }
+                //      chỉ lấy các tham số bắt đầu bằng "vpc_" hoặc "user_" và khác trống và không phải chuỗi hash code trả về
+                if ($key != "vpc_SecureHash" && (strlen($value) > 0) && ((substr($key, 0,4)=="vpc_") || (substr($key,0,5) =="user_"))) {
+                    $md5HashData .= $key . "=" . $value . "&";
+                }
+            }
+            //  Xóa dấu & thừa cuối chuỗi dữ liệu
+            $md5HashData = rtrim($md5HashData, "&");
+
+            //    if (strtoupper ( $vpc_Txn_Secure_Hash ) == strtoupper ( md5 ( $md5HashData ) )) {
+            //    Thay hàm tạo chuỗi mã hóa
+            if (strtoupper ( $vpc_Txn_Secure_Hash ) == strtoupper(hash_hmac('SHA256', $md5HashData, pack('H*',$this->secure)))) {
+                // Secure Hash validation succeeded, add a data field to be displayed
+                // later.
+                $hashValidated = "CORRECT";
+            } else {
+                // Secure Hash validation failed, add a data field to be displayed
+                // later.
+                $hashValidated = "INVALID HASH";
+            }
+        } else {
+            // Secure Hash was not validated, add a data field to be displayed later.
+            $hashValidated = "INVALID HASH";
+        }
+
+        return $hashValidated;
     }
 
-    public function validate($mang) {
+    /**
+    public function validate($mang)
+    {
         $vpc_Txn_Secure_Hash = $mang["vpc_SecureHash"];
         unset($mang["vpc_SecureHash"]);
 
@@ -201,7 +253,7 @@ class ClassOnepay {
             } else {
                 // Secure Hash validation failed, add a data field to be displayed
                 // later.
-                $hashValidated = "INVALID HASH 24";
+                $hashValidated = "INVALID HASH";
             }
         } else {
             // Secure Hash was not validated, add a data field to be displayed later.
@@ -209,15 +261,17 @@ class ClassOnepay {
         }
         return $hashValidated;
     }
+     **/
 
     // This method uses the QSI Response code retrieved from the Digital
     // Receipt and returns an appropriate description for the QSI Response Code
     //
-	// @param $responseCode String containing the QSI Response Code
+    // @param $responseCode String containing the QSI Response Code
     //
-	// @return String containing the appropriate description
+    // @return String containing the appropriate description
     //
-	public function getResponseDescription($responseCode) {
+    public function getResponseDescription($responseCode)
+    {
 
         switch ($responseCode) {
             case "0" :
@@ -273,7 +327,8 @@ class ClassOnepay {
 
     //  -----------------------------------------------------------------------------
     // If input is null, returns string "No Value Returned", else returns input
-    public function null2unknown($data) {
+    public function null2unknown($data)
+    {
         if ($data == "") {
             return "No Value Returned";
         } else {

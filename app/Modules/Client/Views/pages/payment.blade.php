@@ -31,19 +31,19 @@
                 <div class="information-wrapper">
                     <div class="form-group">
                         <label for="">Ho ten </label>
-                        {!! Form::text('fullname', old('fullname'), ['class'=>'form-control']) !!}
+                        {!! Form::text('vpc_Customer_Id', old('vpc_Customer_Id'), ['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group">
                         <label for="">So dien thoai</label>
-                        {!! Form::text('phone', old('phone'), ['class'=>'form-control']) !!}
+                        {!! Form::text('vpc_Customer_Phone', old('vpc_Customer_Phone'), ['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group">
                         <label for="">Email</label>
-                        {!! Form::text('email', old('email'), ['class'=>'form-control']) !!}
+                        {!! Form::text('vpc_Customer_Email', old('vpc_Customer_Email'), ['class'=>'form-control']) !!}
                     </div>
                     <div class="form-group">
                         <label for="">Dia chi giao hang</label>
-                        {!! Form::textarea('address', old('address'), ['class'=>'form-control']) !!}
+                        {!! Form::textarea('vpc_SHIP_Street01', old('vpc_SHIP_Street01'), ['class'=>'form-control']) !!}
                     </div>
                 </div>
             </div>

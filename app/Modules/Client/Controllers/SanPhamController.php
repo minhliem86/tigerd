@@ -141,19 +141,26 @@ class SanPhamController extends Controller
     {
         $order_id = \LP_lib::unicodenospace($request->input('fullname')).'_'.time();
         $onepay = $this->setupOnePay();
-        $refer = $onepay->build_link_global($request->all(),$order_id, Cart::getTotal(), 'PAYMENT ONLINE VIA ONEPAY', route('client.responsePayment'));
-
-//        return $refer;
+        $refer = $onepay->build_link_global($request->all(),$order_id, Cart::getTotal(), 'PAYMENT ONLINE VIA ONEPAY', route('client.responsePayment'),  $order_id);
         return redirect($refer);
-
     }
 
     public function responseFormOnePay(Request $request)
     {
         $onepay = $this->setupOnePay();
 
-        $hashValidated = $onepay->validate($request->all());
+        $hashValidated = $onepay->check_response($request->all());
 
-        dd($hashValidated);
+        if($hashValidated === 'CORRECT' && $request->vpc_TxnResponseCode == "0"){
+            //thanh cong
+            return "thanh cong";
+        }elseif($hashValidated=="INVALID HASH" && $request->vpc_TxnResponseCode == "0"){
+            // pending
+            return "Pending";
+        }else{
+            //thatbai
+            $error_message = $onepay->getResponseDescription($request->vpc_TxnResponseCode);
+            return $error_message;
+        }
     }
 }
