@@ -68,7 +68,7 @@ class PromotionController extends Controller
 
     public function getData(Request $request)
     {
-        $data = $this->promotion->query(['id', 'name', 'sku_promotion', 'num_use' ,'quality', 'value', 'status', 'to_time']);
+        $data = $this->promotion->query(['id', 'name', 'sku_promotion', 'num_use' ,'quality', 'value', 'status', 'to_time', 'value_type']);
         $datatable = Datatables::of($data)
             ->editColumn('quality', function($data){
                 $quality = $data->quality - $data->num_use;
@@ -76,6 +76,9 @@ class PromotionController extends Controller
             })
             ->editColumn('to_time', function($data){
                 return \Carbon\Carbon::parse($data->to_time)->format('d/m/Y');
+            })
+            ->editColumn('value', function($data){
+                return number_format($data->value).' '.$data->value_type;
             })
             ->editColumn('status', function($data){
                 $status = $data->status ? 'checked' : '';

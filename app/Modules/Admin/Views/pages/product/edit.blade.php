@@ -239,6 +239,11 @@
                         <label for="" class="control-label">Giá Trị</label>
                         <input type="text" name="att_value" class="form-control">
                     </div>
+
+                    <div class="form-group">
+                        <label for="" class="control-label">Giá Thuộc Tính (tùy chọn)</label>
+                        <input type="text" name="att_price" class="form-control">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -313,12 +318,13 @@
             var att_id = $('input[name="att_id"]').val();
             var att_slug = $('input[name="att_slug"]').val();
             var value = $('input[name="att_value"]').val();
+            var price = $('input[name="att_price"]').val();
 
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 url: url,
                 type: 'POST',
-                data: {att_id: att_id, value: value},
+                data: {att_id: att_id, value: value, price: price},
                 success: function(data){
 //                    $('.append-value-'+att_slug).html(data.data);
                     $('.append-value-'+att_slug).append(data.data)
@@ -326,6 +332,7 @@
                     $('input[name="att_value"]').val('');
                     $('input[name="att_slug"]').val('');
                     $('input[name="att_id"]').val('');
+                    var price = $('input[name="att_price"]').val('');
                     $(document).trigger('icheckValue');
                 }
             })

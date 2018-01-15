@@ -12,4 +12,6 @@ Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controlle
 
     Route::post('/doPayment', ['as' => 'client.doPayment', 'uses' => 'SanPhamController@doPayment']);
     Route::get('/responsePayment', ['as' => 'client.responsePayment', 'uses' => 'SanPhamController@responseFormOnePay']);
+
+    Route::get('/', ['as' => 'client.home', 'uses' => 'HomeController@index']);
 });

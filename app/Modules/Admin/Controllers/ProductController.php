@@ -473,13 +473,14 @@ class ProductController extends Controller
             abort('404', 'Not Access');
         }else{
             $att_id = $request->input('att_id');
-
             $att_value = trim($request->input('value'));
+            $att_price = $request->input('price');
             $order = $attvalue->getOrder();
             $data = [
                 'value' => $att_value,
                 'order' => $order,
-                'attribute_id' => $att_id
+                'attribute_id' => $att_id,
+                'value_price' => $att_price,
             ];
             $item_value = $attvalue->create($data);
             $item_attr = $att->find($att_id);
