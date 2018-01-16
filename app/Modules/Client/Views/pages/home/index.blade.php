@@ -23,9 +23,9 @@
                                     <div class="swiper-slide">
                                         <div class="each-product">
                                             <figure>
-                                                <a href="#"><img src="{!! asset($item_product->img_url) !!}" class="img-fluid mx-auto mb-2" alt="{!! $item_product->name !!}"></a>
+                                                <a href="{!! route('client.product', $item_product->slug) !!}"><img src="{!! asset($item_product->img_url) !!}" class="img-fluid mx-auto mb-2" alt="{!! $item_product->name !!}"></a>
                                                 <figcaption>
-                                                    <p class="product-name"><a href="#">{!! $item_product->name !!}</a></p>
+                                                    <p class="product-name"><a href="{!! route('client.product', $item_product->slug) !!}">{!! $item_product->name !!}</a></p>
                                                     <p class="price {!! $item_product->discount ? 'discount' : null !!}">{!! number_format($item_product->price) !!} VND</p>
                                                     @if($item_product->discount)
                                                     <p class="price">{!! number_format($item_product->discount) !!} VND</p>

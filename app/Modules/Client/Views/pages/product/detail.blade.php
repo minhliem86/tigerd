@@ -1,4 +1,4 @@
-@extends("Client::layouts.default")
+  @extends("Client::layouts.default")
 
 @section("meta")
 
@@ -36,7 +36,7 @@
                         <p class="description">{!! $product->description !!}</p>
                     </div>
                     @if($errors->any())
-                    <ul class="list-error">
+                    <ul class="list-errors">
                         @foreach($errors->all() as $error)
                             <li>{!! $error !!}</li>
                         @endforeach
@@ -47,6 +47,7 @@
                         <input type="hidden" name="price" value="{!! $product->discount ? $product->discount  : $product->price !!}">
                         @if(!$product->attributes->isEmpty() && !$product->values->isEmpty())
                             @foreach($product->attributes as $item_att)
+
                             <div class="each-attribute">
                                 <p class="att-title">{!! $item_att->name !!}</p>
                                 <select name="att_value_[{!! $item_att->slug !!}]" class="form-control">

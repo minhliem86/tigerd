@@ -45,9 +45,9 @@ class DatabaseSeeder extends Seeder
         if (\DB::connection()->getName() === 'mysql') {
             $this->truncateDatabase();
         }
-        foreach ($this->seeders as $seeder) {
-            $this->call($seeder);
-        }
+//        foreach ($this->seeders as $seeder) {
+//            $this->call($seeder);
+//        }
         Model::reguard();
     }
 
