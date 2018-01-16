@@ -80,7 +80,7 @@ abstract class BaseRepository implements RestfulInterface{
 	 * @param type
 	 * @return void
  */
-  public function findByField($field, $value, $columns = array('*'))
+  public function findByField($field, $value, $columns = array('*'), $with = [])
   {
     return $this->model->where($field,'=',$value)->select($columns);
   }

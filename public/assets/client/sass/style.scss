@@ -46,7 +46,19 @@ $text-black:#000;
   transition: $trans;
 }
 
-h1, h2, h3, h4, p{margin:0; padding:0; @include fontThin(600)}
+h1, h2, h3, h4{margin:0; padding:0; @include fontThin(600)}
+p{
+  margin:0;
+  padding:0;
+  @include fontbase(400);
+}
+
+ul.list-errors{
+  padding-left:15px;
+  li{
+    color:red;
+  }
+}
 
 .page{
   /*HEADER*/
@@ -468,6 +480,7 @@ h1, h2, h3, h4, p{margin:0; padding:0; @include fontThin(600)}
       h2.title-single-page{
         font-size:1.8rem;
         margin-bottom:1.5rem;
+        text-transform: uppercase;
       }
       .content-single-page, .content-single-page p{
         font-size:1.4rem;
@@ -484,10 +497,24 @@ h1, h2, h3, h4, p{margin:0; padding:0; @include fontThin(600)}
     .form-wrapper{
       label{
         font-size:1.4rem;
+        @include fontThin(600);
+      }
+      input, textarea {
+        font-size:1.4rem;
       }
       input[type="submit"]{
         font-size:1.4rem;
         padding:0.5rem 3rem;
+      }
+      &.thankyou{
+        padding:2rem 1rem;
+        background:#7cd1ef;
+        border-radius:8px;
+        p.success-inform{
+          font-size:1.6rem;
+          line-height:2rem;
+          color:white;
+        }
       }
     }
   }
@@ -542,12 +569,12 @@ h1, h2, h3, h4, p{margin:0; padding:0; @include fontThin(600)}
         margin-bottom:2rem;
       }
       h2.news-name{
-        font-size:1.7rem;
+        font-size:2rem;
         margin-bottom:0.8rem;
         font-weight:600;
       }
       p.create-date{
-        font-size:1.4rem;
+        font-size:1.3rem;
         color:$text-grey;
         font-style:italic;
         margin-bottom:1.5rem;
@@ -555,32 +582,41 @@ h1, h2, h3, h4, p{margin:0; padding:0; @include fontThin(600)}
       .body-news{
         font-size:1.3rem;
         line-height:2rem;
+        div.description{
+          p{
+            font-weight:600;
+            margin-bottom:1.2rem;
+            font-style:italic;
+          }
+        }
       }
     }
     .relate-news{
       h3.title-relate{
-        font-size:1.6rem;
+        font-size:2rem;
         text-transform: uppercase;
-        margin-bottom:0.5rem;
+        margin-bottom:3rem;
       }
       .box{
         padding-left:1rem;
         padding-right:1rem;
-        margin-bottom:0.8rem;
-        padding-bottom:0.8rem;
+        margin-bottom:2rem;
+        padding-bottom:1rem;
         border-bottom:1px solid lighten($text-grey, 20%);
         figure{
           img{
-            margin:0 auto;
+            margin:0 auto 1.5rem;
           }
           h4.news-name-relate{
             font-size:1.5rem;
             text-transform: capitalize;
             margin-bottom:0.6rem;
-            font-weight:600;
+            text-transform: uppercase;
           }
-          p.content{
-            font-size:1.3rem;
+          div.content-relate{
+            p{
+              font-size:1.2rem;
+            }
           }
           .wrap-readmore{
             text-align: right;
@@ -597,6 +633,13 @@ h1, h2, h3, h4, p{margin:0; padding:0; @include fontThin(600)}
   /*CATEGORY PAGE*/
   .category-page{
     .category-inner{
+      h3.title-cate{
+        font-size:1.8rem;
+        text-transform:uppercase;
+        color:$cl-pink;
+        margin-bottom:1.5rem;
+        @include fontThin(600);
+      }
       .each-cate{
         margin-bottom:1.5rem;
         figure.figure{
@@ -631,7 +674,7 @@ h1, h2, h3, h4, p{margin:0; padding:0; @include fontThin(600)}
                 color:$text-grey;
               };
             }
-            button.btn-add-to-cart{
+            button.btn-add-to-cart, a.btn-add-to-cart{
               background:transparent;
               border-width:2px;
               border-color: $text-grey;
@@ -693,6 +736,9 @@ h1, h2, h3, h4, p{margin:0; padding:0; @include fontThin(600)}
 
   /*PRODUCT*/
   .product-page{
+    .product-infomation-row{
+      margin-bottom:3rem;
+    }
     .product-info{
       margin-bottom:2rem;
       padding-bottom:1rem;
@@ -734,16 +780,39 @@ h1, h2, h3, h4, p{margin:0; padding:0; @include fontThin(600)}
     .product-attribute{
       max-width:400px;
       .each-attribute{
-        margin-bottom:1.5rem;
+        margin-bottom:2rem;
         select, input{
           max-width:50%;
-          font-size:1.2rem
+          font-size:1.4rem;
+          height:auto;
+        }
+        p.att-title{
+          @include fontThin(600);
+          font-size:1.6rem;
+          margin-bottom:1rem;
         }
       }
       button{
         font-size:1.5rem;
         padding:0.6rem 2rem;
         text-transform: uppercase;
+      }
+    }
+    .nav-wrapper{
+      #myTab{
+        li{
+          font-size:1.6rem;
+          color:$text-grey;
+          font-weight:600;
+        }
+      }
+      .tab-content{
+        padding:2rem;
+        .wrap-chitietsanpham{
+          font-size:1.4rem;
+          color:$text-grey;
+          line-height:2rem;
+        }
       }
     }
   }
@@ -778,7 +847,7 @@ h1, h2, h3, h4, p{margin:0; padding:0; @include fontThin(600)}
               color:$text-grey;
             };
           }
-          button.btn-add-to-cart{
+          button.btn-add-to-cart, a.btn-add-to-cart{
             background:transparent;
             border-width:2px;
             border-color: $text-grey;

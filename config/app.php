@@ -167,7 +167,8 @@ return [
         Laratrust\LaratrustServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         App\Modules\ModuleServiceProvider::class,
-        Darryldecode\Cart\CartServiceProvider::class
+        Darryldecode\Cart\CartServiceProvider::class,
+        App\Providers\ComposerProvider::class,
 
     ],
 
