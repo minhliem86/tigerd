@@ -9,10 +9,10 @@
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav nav-fill w-100 align-items-start" id="navigation-list">
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Home</a>
+                        <a href="{!! route('client.home') !!}" class="nav-link">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">About Us</a>
+                        <a href="{!! count($about) ? $about->slug : '#' !!}" class="nav-link">About Us</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -21,17 +21,16 @@
                         @if(!$cate->isEmpty())
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @foreach($cate as $item_cate)
-                            <a class="dropdown-item" href="#">{!! $item_cate->name !!}</a>
+                            <a class="dropdown-item" href="{!! route('client.category', $item_cate->slug) !!}">{!! $item_cate->name !!}</a>
                             @endforeach
-                            <a class="dropdown-item" href="#">Áo Sơ Mi</a>
                         </div>
                         @endif
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">News</a>
+                        <a href="{!! route('client.news') !!}" class="nav-link">News</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">Contact Us</a>
+                        <a href="{!! route('client.contact') !!}" class="nav-link">Contact Us</a>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0 form-search" method="POST">

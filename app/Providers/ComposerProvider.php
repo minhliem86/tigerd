@@ -13,7 +13,8 @@ class ComposerProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('Client::layouts.navigation', 'App\ViewComposers\ExampleComposer');
+        view()->composer('Client::layouts.navigation', 'App\ViewComposers\NavigationComposer');
+        view()->composer('Client::layouts.footer', 'App\ViewComposers\SinglePageComposer');
     }
 
     /**

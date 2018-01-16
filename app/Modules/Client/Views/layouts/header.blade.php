@@ -34,7 +34,7 @@
                     <div class="each-info">
                         <a href="#">
                             <img src="{!! asset('public/assets/client') !!}/images/cart-icon.png" class="img-fluid d-inline mr-2" alt="Cart">
-                            <span class="number-item">0</span>
+                            <span class="number-item">{!! Cart::getTotalQuantity() !!}</span>
                         </a>
                     </div>
                     <div class="each-info">

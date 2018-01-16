@@ -5,22 +5,23 @@
                 <div class="block-footer">
                     <h3 class="title-footer">About Tigerd</h3>
                     <ul class="list-footer">
-                        <li><a href="#">About Us</a></li>
                         <li><a href="#">Product Us</a></li>
-                        <li><a href="#">News</a></li>
-                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="{!! route('client.news') !!}">News</a></li>
+                        <li><a href="{!! route('client.contact') !!}">Contact Us</a></li>
                     </ul>
                 </div>
             </div>
             <div class="col-md-3 col-sm-4">
                 <div class="block-footer">
                     <h3 class="title-footer">Guide</h3>
+                    @if(!$page->isEmpty())
+
                     <ul class="list-footer">
-                        <li><a href="#">Regulation & Policy</a></li>
-                        <li><a href="#">Delivery</a></li>
-                        <li><a href="#">Customer Support</a></li>
-                        <li><a href="#">Ordering Guide</a></li>
+                        @foreach($page as $item_page)
+                        <li><a href="{!! route('client.single_page', $item_page->slug) !!}">{!! $item_page->name !!}</a></li>
+                        @endforeach
                     </ul>
+                    @endif
                 </div>
             </div>
             <div class="col-md-6 col-sm-4">

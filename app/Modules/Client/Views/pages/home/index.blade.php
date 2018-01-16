@@ -30,7 +30,11 @@
                                                     @if($item_product->discount)
                                                     <p class="price">{!! number_format($item_product->discount) !!} VND</p>
                                                     @endif
-                                                    <a href="#" class="btn btn-outline-default btn-add-to-cart">Chọn Sản Phẩm</a>
+                                                    @if($item_product->values->isEmpty())
+                                                        <button type="button" class="btn btn-outline-default btn-add-to-cart">Thêm Giỏ Hàng</button>
+                                                    @else
+                                                        <a href="{!! route('client.product', $item_product->slug) !!}" class="btn btn-outline-default btn-add-to-cart">Xem Sản Phẩm</a>
+                                                    @endif
                                                 </figcaption>
                                             </figure>
                                         </div>

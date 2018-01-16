@@ -10,6 +10,12 @@ class Product extends Model
 
     protected $guarded = ['id'];
 
+
+    public function categories()
+    {
+        return $this->belongsTo('App\Models\Category', 'category_id');
+    }
+
     public function attributes()
     {
         return $this->belongsToMany('App\Models\Attribute','product_attribute','product_id', 'attribute_id');

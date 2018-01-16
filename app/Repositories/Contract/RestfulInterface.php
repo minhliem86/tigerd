@@ -11,7 +11,7 @@ interface RestfulInterface{
 
   public function find($id, $columns = array('*'));
 
-  public function findByField($field, $value, $columns = array('*'));
+  public function findByField($field, $value, $columns = array('*'), $with = []);
 
   public function findWhereIn( $field, array $values, $columns = array('*'));
 

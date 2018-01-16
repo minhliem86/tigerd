@@ -21,11 +21,22 @@ a {
 /*
 DEFINE COLOR*/
 /*DEFINE MIXIN*/
-h1, h2, h3, h4, p {
+h1, h2, h3, h4 {
   margin: 0;
   padding: 0;
   font-family: 'Roboto Condensed', sans-serif;
   font-weight: 600; }
+
+p {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400; }
+
+ul.list-errors {
+  padding-left: 15px; }
+  ul.list-errors li {
+    color: red; }
 
 .page {
   /*HEADER*/
@@ -365,15 +376,28 @@ h1, h2, h3, h4, p {
         font-style: italic; }
   .page .single-page .single-page-inner h2.title-single-page {
     font-size: 1.8rem;
-    margin-bottom: 1.5rem; }
+    margin-bottom: 1.5rem;
+    text-transform: uppercase; }
   .page .single-page .single-page-inner .content-single-page, .page .single-page .single-page-inner .content-single-page p {
     font-size: 1.4rem;
     line-height: 2.2rem; }
   .page .contact-page .form-wrapper label {
+    font-size: 1.4rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 600; }
+  .page .contact-page .form-wrapper input, .page .contact-page .form-wrapper textarea {
     font-size: 1.4rem; }
   .page .contact-page .form-wrapper input[type="submit"] {
     font-size: 1.4rem;
     padding: 0.5rem 3rem; }
+  .page .contact-page .form-wrapper.thankyou {
+    padding: 2rem 1rem;
+    background: #7cd1ef;
+    border-radius: 8px; }
+    .page .contact-page .form-wrapper.thankyou p.success-inform {
+      font-size: 1.6rem;
+      line-height: 2rem;
+      color: white; }
   .page .news-page .each-news .media {
     margin-bottom: 3rem;
     padding-bottom: 3rem;
@@ -407,41 +431,52 @@ h1, h2, h3, h4, p {
     .page .news-detail-page .news-detail-inner {
       margin-bottom: 2rem; } }
   .page .news-detail-page .news-detail-inner h2.news-name {
-    font-size: 1.7rem;
+    font-size: 2rem;
     margin-bottom: 0.8rem;
     font-weight: 600; }
   .page .news-detail-page .news-detail-inner p.create-date {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     color: #414042;
     font-style: italic;
     margin-bottom: 1.5rem; }
   .page .news-detail-page .news-detail-inner .body-news {
     font-size: 1.3rem;
     line-height: 2rem; }
+    .page .news-detail-page .news-detail-inner .body-news div.description p {
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      font-style: italic; }
   .page .news-detail-page .relate-news h3.title-relate {
-    font-size: 1.6rem;
+    font-size: 2rem;
     text-transform: uppercase;
-    margin-bottom: 0.5rem; }
+    margin-bottom: 3rem; }
   .page .news-detail-page .relate-news .box {
     padding-left: 1rem;
     padding-right: 1rem;
-    margin-bottom: 0.8rem;
-    padding-bottom: 0.8rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
     border-bottom: 1px solid #747276; }
     .page .news-detail-page .relate-news .box figure img {
-      margin: 0 auto; }
+      margin: 0 auto 1.5rem; }
     .page .news-detail-page .relate-news .box figure h4.news-name-relate {
       font-size: 1.5rem;
       text-transform: capitalize;
       margin-bottom: 0.6rem;
-      font-weight: 600; }
-    .page .news-detail-page .relate-news .box figure p.content {
-      font-size: 1.3rem; }
+      text-transform: uppercase; }
+    .page .news-detail-page .relate-news .box figure div.content-relate p {
+      font-size: 1.2rem; }
     .page .news-detail-page .relate-news .box figure .wrap-readmore {
       text-align: right; }
       .page .news-detail-page .relate-news .box figure .wrap-readmore a.readmore {
         font-size: 1.3rem;
         font-style: italic; }
+  .page .category-page .category-inner h3.title-cate {
+    font-size: 1.8rem;
+    text-transform: uppercase;
+    color: #CB1F6A;
+    margin-bottom: 1.5rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 600; }
   .page .category-page .category-inner .each-cate {
     margin-bottom: 1.5rem; }
     .page .category-page .category-inner .each-cate figure.figure {
@@ -471,7 +506,7 @@ h1, h2, h3, h4, p {
           font-size: 1.4rem;
           line-height: 1.6rem;
           color: #414042; }
-      .page .category-page .category-inner .each-cate figure.figure figcaption button.btn-add-to-cart {
+      .page .category-page .category-inner .each-cate figure.figure figcaption button.btn-add-to-cart, .page .category-page .category-inner .each-cate figure.figure figcaption a.btn-add-to-cart {
         background: transparent;
         border-width: 2px;
         border-color: #414042;
@@ -489,7 +524,7 @@ h1, h2, h3, h4, p {
         -ms-transition: all 0.3s;
         -o-transition: all 0.3s;
         transition: all 0.3s; }
-        .page .category-page .category-inner .each-cate figure.figure figcaption button.btn-add-to-cart:hover {
+        .page .category-page .category-inner .each-cate figure.figure figcaption button.btn-add-to-cart:hover, .page .category-page .category-inner .each-cate figure.figure figcaption a.btn-add-to-cart:hover {
           background: #e13c84;
           border-color: #CB1F6A;
           color: white; }
@@ -522,6 +557,8 @@ h1, h2, h3, h4, p {
       .page .category-page .each-sidebar ul.list-cate li:hover a {
         padding-left: 15px;
         color: #b51c5e; }
+  .page .product-page .product-infomation-row {
+    margin-bottom: 3rem; }
   .page .product-page .product-info {
     margin-bottom: 2rem;
     padding-bottom: 1rem;
@@ -556,14 +593,30 @@ h1, h2, h3, h4, p {
   .page .product-page .product-attribute {
     max-width: 400px; }
     .page .product-page .product-attribute .each-attribute {
-      margin-bottom: 1.5rem; }
+      margin-bottom: 2rem; }
       .page .product-page .product-attribute .each-attribute select, .page .product-page .product-attribute .each-attribute input {
         max-width: 50%;
-        font-size: 1.2rem; }
+        font-size: 1.4rem;
+        height: auto; }
+      .page .product-page .product-attribute .each-attribute p.att-title {
+        font-family: 'Roboto Condensed', sans-serif;
+        font-weight: 600;
+        font-size: 1.6rem;
+        margin-bottom: 1rem; }
     .page .product-page .product-attribute button {
       font-size: 1.5rem;
       padding: 0.6rem 2rem;
       text-transform: uppercase; }
+  .page .product-page .nav-wrapper #myTab li {
+    font-size: 1.6rem;
+    color: #414042;
+    font-weight: 600; }
+  .page .product-page .nav-wrapper .tab-content {
+    padding: 2rem; }
+    .page .product-page .nav-wrapper .tab-content .wrap-chitietsanpham {
+      font-size: 1.4rem;
+      color: #414042;
+      line-height: 2rem; }
   .page .relate-product .each-product figure {
     text-align: center; }
     .page .relate-product .each-product figure figcaption p.product-name {
@@ -588,7 +641,7 @@ h1, h2, h3, h4, p {
         font-size: 1.4rem;
         line-height: 1.6rem;
         color: #414042; }
-    .page .relate-product .each-product figure figcaption button.btn-add-to-cart {
+    .page .relate-product .each-product figure figcaption button.btn-add-to-cart, .page .relate-product .each-product figure figcaption a.btn-add-to-cart {
       background: transparent;
       border-width: 2px;
       border-color: #414042;
@@ -606,7 +659,7 @@ h1, h2, h3, h4, p {
       -ms-transition: all 0.3s;
       -o-transition: all 0.3s;
       transition: all 0.3s; }
-      .page .relate-product .each-product figure figcaption button.btn-add-to-cart:hover {
+      .page .relate-product .each-product figure figcaption button.btn-add-to-cart:hover, .page .relate-product .each-product figure figcaption a.btn-add-to-cart:hover {
         background: #e13c84;
         border-color: #CB1F6A;
         color: white; }
