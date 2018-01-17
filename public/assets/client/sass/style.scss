@@ -871,6 +871,39 @@ ul.list-errors{
       }
     }
   }
+  .modal-addToCart-success{
+    .modal-header{
+      h5.modal-title {
+        font-size: 1.8rem;
+        @include fontThin(600);
+      }
+    }
+    .modal-body{
+      table{
+        tr td{
+          padding:1.5rem;
+        }
+      }
+      p.product-name{
+        @include fontThin(600);
+        font-size:1.6rem;
+        color: $text-black;
+      }
+      p.price{
+        font-size:1.4rem;
+        font-weight: 600;
+        color:$cl-pink;
+      }
+    }
+    .modal-footer{
+      flex-direction:column;
+      button.btn-modal-cart, a.btn-modal-cart{
+        font-size:1.4rem;
+        display:block;
+        margin-bottom:1.5rem;
+      }
+    }
+  }
 
   /*CART*/
   .cart-page{

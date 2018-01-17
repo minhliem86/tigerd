@@ -99,4 +99,7 @@ fieldset {
 .form-create-product .checkbox, .form-edit-product .checkbox {
   padding-top: 0; }
 
+.append-attribute > div {
+  min-height: 120px; }
+
 /*# sourceMappingURL=customize.min.css.map */

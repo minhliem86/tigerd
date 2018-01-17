@@ -17,9 +17,9 @@
                             <div class="col-md-3 col-sm-4">
                                 <div class="each-cate">
                                     <figure class="figure" >
-                                        <a href="#" ><img src="{!! asset($item_product->img_url) !!}" class="figure-img img-fluid rounded" alt="{!! $item_product->name !!}" ></a>
+                                        <a href="{!! route('client.product', $item_product->slug) !!}" ><img src="{!! asset($item_product->img_url) !!}" class="figure-img img-fluid rounded" alt="{!! $item_product->name !!}" ></a>
                                         <figcaption class="figure-caption">
-                                            <h2 class="product-name"><a href="#">{!! $item_product->name !!}</a></h2>
+                                            <h2 class="product-name"><a href="{!! route('client.product', $item_product->slug) !!}">{!! $item_product->name !!}</a></h2>
                                             <p class="price {!! $item_product->discount ? 'discount' : null !!}">{!! number_format($item_product->price) !!} VND</p>
                                             @if($item_product->discount)
                                                 <p class="price">{!! number_format($item_product->discount) !!} VND</p>

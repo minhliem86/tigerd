@@ -409,24 +409,29 @@
             /*CONFIG ATTRIBUTE*/
             var flag_att = '{!! $inst->attributes()->count() ? true : false !!}';
             if(flag_att){
-                $('.wrap-attribute_section').show();
+                $('.wrap-attribute').show();
                 $('.btn-att').prop('disabled', false);
 
             }else{
-                $('.wrap-attribute_section').hide();
+                $('.wrap-attribute').hide();
                 $('.btn-att').prop('disabled', true);
             }
 
             /*CONFIG ATTRIBUTE VALUE */
             var flag_att_value = '{!! $inst->values()->count() ? true : false !!}';
-            if(flag_att_value){
-                $('.wrap-att-value').show();
-                $('.btn-create-value').prop('disabled', false);
+            var flag_check = true;
 
-            }else{
-                $('.wrap-att-value').hide();
-                $('.btn-create-value').prop('disabled', true);
-            }
+            $('.checkbox-att input').each(function (e) {
+                if($(this).prop('checked')){
+                    var wrap_parent = $(this).parents('.wrap-attribute');
+                    wrap_parent.next().show();
+                    wrap_parent.find('.btn-create-value').prop('disabled',false);
+                }else{
+                    var wrap_parent = $(this).parents('.wrap-attribute');
+                    wrap_parent.next().hide();
+                    wrap_parent.find('.btn-create-value').prop('disabled',true);
+                }
+            })
 
             /*CONFIG DETAIL IMAGE*/
             var flag_img = '{!! $inst->photos()->count() ? true : false !!}';

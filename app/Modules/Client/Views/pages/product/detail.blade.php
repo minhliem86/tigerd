@@ -35,7 +35,7 @@
                         <p class="price"><span class="price-value">{!! $product->discount ? number_format($product->discount)  : number_format($product->price) !!}</span> <small>vnd</small></p>
                         <p class="description">{!! $product->description !!}</p>
                     </div>
-                    @if($errors->any())
+                    @if(count($errors))
                     <ul class="list-errors">
                         @foreach($errors->all() as $error)
                             <li>{!! $error !!}</li>
@@ -50,9 +50,12 @@
 
                             <div class="each-attribute">
                                 <p class="att-title">{!! $item_att->name !!}</p>
-                                <select name="att_value_[{!! $item_att->slug !!}]" class="form-control">
+                                <select name="att_value[{!! $item_att->slug !!}]" class="form-control att_value" onchange="handleChangeAttribute(this)" >
                                     <option value="">--Vui lòng chọn thuộc tính--</option>
-                                    @foreach($product->values as $item_value)
+                                    @php(
+                                        $arr_value = \App\Models\AttributeValue::where('attribute_id', $item_att->id)->whereIn('id',$arr_value_product)->get()
+                                    )
+                                    @foreach($arr_value as $item_value)
                                         <option value="{!! $item_value->id !!}">{!! $item_value->value !!}</option>
                                     @endforeach
                                 </select>
@@ -138,6 +141,39 @@
         </div>
     </section>
     <!--END RELATE PRODUCT-->
+
+    @if(Session::has('success'))
+        <div class="modal modal-addToCart-success" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Thêm vào giỏ hàng thành công</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <tbody>
+                                <tr>
+                                    <td width="150"><img src="{!! asset(Session::get('data')->img_url) !!}" style="max-width:120px" alt="{!! Session::get('data')->name !!}"></td>
+                                    <td>
+                                        <p class="product-name">{!! Session::get('data')->name !!}</p>
+                                        <p class="price">{!! number_format(Session::get('price')) !!}</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-outline-success btn-modal-cart">Tiếp Tục Mua Hàng</button>
+                        <a href="#" class="btn btn-info btn-modal-cart">Kiểm tra giỏ hàng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
 @stop
 
 @section("script")
@@ -147,6 +183,12 @@
     <script>
         function restrictMinus(e) {
             if (e.keyCode == 45) e.preventDefault();
+        }
+
+        function handleChangeAttribute(e){
+            var product_id = $('input[name=product_id]').val();
+//            var att_value_id = this.val();
+            console.log(e.val);
         }
         $(document).ready(function(){
             $('#image-gallery').lightSlider({
@@ -158,6 +200,27 @@
                 enableDrag: false,
                 currentPagerPosition:'left',
             })
+            @if(Session::has('success'))
+                $('.modal-addToCart-success').modal('show');
+            @endif
+
+            $('.att_value').on('change', function (e) {
+                var product_id = $('input[name=product_id]').val();
+                var att_value_id = $(this).val();
+
+                $.ajax({
+                    url: '{!! route("client.product.ajaxChangeAttributeValue") !!}',
+                    type: 'POST',
+                    data: {product_id: product_id, value_id: att_value_id},
+                    success: function (data){
+                        if(data.price){
+                            $('span.price-value').text(data.price_format);
+                            $('input[name=price]').val(data.price);
+                        }
+                    }
+                })
+            })
+
         })
     </script>
 @stop
