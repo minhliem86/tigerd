@@ -33,5 +33,17 @@ Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controlle
        Cart::clear();
     });
 
+    /*CUSTOMER*/
+    Route::get('/dang-nhap', ['as' => 'client.auth.login', 'uses' => 'Auth\AuthController@getLogin']);
+    Route::post('/dang-nhap', ['as' => 'client.auth.login.post', 'uses' => 'Auth\AuthController@postLogin']);
+    Route::post('/dang-ky', ['as' => 'client.auth.register.post', 'uses' => 'Auth\AuthController@postRegister']);
+
+    Route::get('/thong-tin-khach-hang', ['as'=> 'client.auth.profile', 'uses' => 'ProfileController@getProfile']);
+    Route::post('/update-profile', ['as' => 'client.auth.profile.post', 'uses' => 'ProfileController@postProfile']);
+
+    Route::post('/changePassword', ['as' => 'client.auth.changePassword.post', 'uses' => 'ProfileController@postChangePassword']);
+
+    Route::get('/dang-xuat', ['as' => 'client.auth.logout', 'uses' => 'Auth\AuthController@logout']);
+
     Route::get('/{slug}', ['as'=>'client.single_page', 'uses'=>'SingleController@index'])->where('slug', '[0-9a-zA-Z._\-]+');
 });

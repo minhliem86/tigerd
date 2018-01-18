@@ -98,6 +98,22 @@ ul.list-errors {
         text-transform: uppercase; }
       .page header .company-info .each-info:last-child {
         border-right: none; }
+      .page header .company-info .each-info .dropdown-menu {
+        top: 10px !important;
+        padding: 0.5rem 1rem;
+        background: #e13c84; }
+        .page header .company-info .each-info .dropdown-menu a.dropdown-item {
+          font-size: 1.2rem;
+          padding: 0.8rem 0;
+          font-weight: 600;
+          -webkit-transition: all 0.3s;
+          -moz-transition: all 0.3s;
+          -ms-transition: all 0.3s;
+          -o-transition: all 0.3s;
+          transition: all 0.3s; }
+          .page header .company-info .each-info .dropdown-menu a.dropdown-item:hover {
+            color: lightgrey;
+            background: none; }
   .page .logo-container {
     padding: 3.8rem 0;
     background: #e08da1;
@@ -672,10 +688,10 @@ ul.list-errors {
   .page .modal-addToCart-success .modal-body p.product-name {
     font-family: 'Roboto Condensed', sans-serif;
     font-weight: 600;
-    font-size: 1.9rem;
+    font-size: 1.6rem;
     color: #000; }
   .page .modal-addToCart-success .modal-body p.price {
-    font-size: 1.7rem;
+    font-size: 1.4rem;
     font-weight: 600;
     color: #CB1F6A; }
   .page .modal-addToCart-success .modal-footer {
@@ -683,8 +699,7 @@ ul.list-errors {
     .page .modal-addToCart-success .modal-footer button.btn-modal-cart, .page .modal-addToCart-success .modal-footer a.btn-modal-cart {
       font-size: 1.4rem;
       display: block;
-      margin-bottom: 1.5rem;
-      width: 100%; }
+      margin-bottom: 1.5rem; }
   .page .cart-page .cart-wrapper table thead tr {
     background: #f5c1d8;
     color: #CB1F6A;
@@ -787,6 +802,38 @@ ul.list-errors {
       color: red; }
   .page .login-page .login-wrapper {
     padding: 0 3rem; }
+    @media screen and (max-width: 575px) {
+      .page .login-page .login-wrapper {
+        margin-bottom: 4rem;
+        position: relative;
+        padding-bottom: 4rem; }
+        .page .login-page .login-wrapper:after {
+          content: '\2118';
+          font-size: 2.5rem;
+          line-height: 2.5rem;
+          position: absolute;
+          bottom: -1.2rem;
+          display: inline-block;
+          padding: 0 4.5rem;
+          background: white;
+          left: 50%;
+          -webkit-transform: translateX(-50%);
+          -moz-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+          -o-transform: translateX(-50%);
+          transform: translateX(-50%); }
+        .page .login-page .login-wrapper:before {
+          content: '';
+          width: 80%;
+          border-bottom: 1px solid #000;
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          -webkit-transform: translateX(-50%);
+          -moz-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+          -o-transform: translateX(-50%);
+          transform: translateX(-50%); } }
   .page .login-page .register-wrapper {
     padding: 0 3rem; }
   .page .profile-page .profile-wrapper #myTab li a {

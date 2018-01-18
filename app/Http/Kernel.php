@@ -52,5 +52,7 @@ class Kernel extends HttpKernel
         'guest.admin' => \App\Modules\Admin\Middlewares\AdminRedirectIfAuthMiddleware::class,
         'can_login' => \App\Modules\Admin\Middlewares\CheckCanLoginMiddleware::class,
         'check_admin' => \App\Modules\Admin\Middlewares\CheckIsAdminMiddleware::class,
+        'client_checklogin' => \App\Modules\Client\Middlewares\CheckLoginMiddleware::class,
+        'client_if_logined' => \App\Modules\Client\Middlewares\RedirectIfLogined::class,
     ];
 }
