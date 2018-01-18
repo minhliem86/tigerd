@@ -159,7 +159,7 @@
                                     <td width="150"><img src="{!! asset(Session::get('data')->img_url) !!}" style="max-width:120px" alt="{!! Session::get('data')->name !!}"></td>
                                     <td>
                                         <p class="product-name">{!! Session::get('data')->name !!}</p>
-                                        <p class="price">{!! number_format(Session::get('price')) !!}</p>
+                                        <p class="price">{!! number_format(Session::get('price')) !!} vnd</p>
                                     </td>
                                 </tr>
                             </tbody>

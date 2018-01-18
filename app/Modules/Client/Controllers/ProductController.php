@@ -93,10 +93,9 @@ class ProductController extends Controller
             if(!$product->values->isEmpty() && $request->has('att_value')){
                 foreach($product->values as $item_value){
                     if($item_value->value_price){
-                        array_push($data_price_check, $item_value->value_price);
+                        array_push($data_price_check, $product->discount ? $product->discount :  $product->price + $item_value->value_price);
                     }
                     array_push($array_value, $item_value->id);
-//                    $array_value[$item_value->attributes->slug] = $item_value->id;
                 }
                 if(!in_array($request->input('price'), $data_price_check)){
                     $errors = new \Illuminate\Support\MessageBag;
@@ -114,16 +113,12 @@ class ProductController extends Controller
 
                 /*WHEN EVERYTHING IS OK*/
                 /*GET DATA-ATT*/
-                $price = $request->input('price');
-
                 foreach($product->attributes as $item_att){
                     $value_name = $this->value->find($request->input('att_value')[$item_att->slug])->value;
                     $array_attribute[$item_att->name] = $value_name;
-                    if($this->value->find($request->input('att_value')[$item_att->slug])->value_price){
-                        $price += $this->value->find($request->input('att_value')[$item_att->slug])->value_price;
-                    }
                 }
             }
+            $price = $request->input('price');
 
             if(count($array_attribute)){
                 $data = [
@@ -157,11 +152,14 @@ class ProductController extends Controller
         }else{
             $product_id = $request->input('product_id');
             $value_id = $request->input('value_id');
+            $product = $this->product->find($product_id);
             if($value_id){
-                if($price = $this->value->find($value_id)->value_price){
+                if($this->value->find($value_id)->value_price){
+                    $price = $product->discount ? $product->discount : $product->price + $this->value->find($value_id)->value_price;
                     return response()->json(['price_format' => number_format($price),'price'=>$price, 'data' => 'Update Giá'], 200);
                 }else{
-                    return response()->json(['price_format' => null, 'data' => 'Không Update Giá'], 200);
+                    $price = $product->discount ? $product->discount : $product->price;
+                    return response()->json(['price_format' => number_format($price),'price'=>$price, 'data' => 'Không Update Giá'], 200);
                 }
             }else{
                 $product = $this->product->find($product_id);

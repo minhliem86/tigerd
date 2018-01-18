@@ -197,7 +197,7 @@
 
                     <div class="form-group">
                         <label for="" class="control-label">Giá Thuộc Tính (tùy chọn)</label>
-                        <input type="text" name="att_price" class="form-control">
+                        <input type="number" min="0" name="att_price" class="form-control">
                     </div>
                 </div>
                 <div class="modal-footer">

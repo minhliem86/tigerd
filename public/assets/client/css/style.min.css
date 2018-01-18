@@ -663,6 +663,28 @@ ul.list-errors {
         background: #e13c84;
         border-color: #CB1F6A;
         color: white; }
+  .page .modal-addToCart-success .modal-header h5.modal-title {
+    font-size: 1.8rem;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 600; }
+  .page .modal-addToCart-success .modal-body table tr td {
+    padding: 1.5rem; }
+  .page .modal-addToCart-success .modal-body p.product-name {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 600;
+    font-size: 1.9rem;
+    color: #000; }
+  .page .modal-addToCart-success .modal-body p.price {
+    font-size: 1.7rem;
+    font-weight: 600;
+    color: #CB1F6A; }
+  .page .modal-addToCart-success .modal-footer {
+    flex-direction: column; }
+    .page .modal-addToCart-success .modal-footer button.btn-modal-cart, .page .modal-addToCart-success .modal-footer a.btn-modal-cart {
+      font-size: 1.4rem;
+      display: block;
+      margin-bottom: 1.5rem;
+      width: 100%; }
   .page .cart-page .cart-wrapper table thead tr {
     background: #f5c1d8;
     color: #CB1F6A;
