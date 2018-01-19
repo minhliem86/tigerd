@@ -87,7 +87,9 @@ class ProductController extends Controller
                 $product->discount ? $product->discount :  $product->price,
             ];
             $array_value = [];
-            $array_attribute = [];
+            $array_attribute = [
+                'img_url' => $product->img_url
+            ];
 
             /*CHECK PRODUCT PRICE DO NOT MANUAL*/
             if(!$product->values->isEmpty() && $request->has('att_value')){
@@ -144,6 +146,13 @@ class ProductController extends Controller
         }
     }
 
+    public function getCart()
+    {
+        $cart = Cart::getContent();
+        return view('Client::pages.product.cart', compact('cart'));
+    }
+
+    /*AJAX*/
     /*CHANGE ATTRIBUTE VALUE*/
     public function ajaxChangeAttributeValue(Request $request)
     {

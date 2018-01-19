@@ -32,7 +32,7 @@
                                     </span>
                     </div>
                     <div class="each-info">
-                        <a href="#">
+                        <a href="{!! route('client.cart') !!}">
                             <img src="{!! asset('public/assets/client') !!}/images/cart-icon.png" class="img-fluid d-inline mr-2" alt="Cart">
                             <span class="number-item">{!! Cart::getTotalQuantity() !!}</span>
                         </a>
