@@ -27,6 +27,8 @@ class CreateProductsTable extends Migration
             $table->string('count_number')->nullable()->default(0);
             $table->integer('order')->nullable();
             $table->boolean('status')->default(1);
+            $table->boolean('visibility')->default(1);
+            $table->string('type')->default('simple');
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();

@@ -1,7 +1,7 @@
 @extends('Admin::layouts.main-layout')
 
 @section('link')
-    {{Html::link(route('admin.product.create'),'Add New',['class'=>'btn btn-primary'])}}
+    {{Html::link(route('admin.pre_create.product'),'Add New',['class'=>'btn btn-primary'])}}
     <button type="button" class="btn btn-danger" id="btn-remove-all">Remove All Selected</button>
     <button type="button" class="btn btn-warning" id="btn-updateOrder">Update Order</button>
 @stop
@@ -30,10 +30,11 @@
                 <th width="120"><i class="glyphicon glyphicon-search"></i> Sản phẩm</th>
                 <th width="80">Tồn Kho</th>
                 <th width="80">Đơn Giá</th>
-                <th width="80">Giảm Giá <br/>(nếu có)</th>
                 <th width="50">Sắp xếp</th>
                 <th width="50">Trạng thái</th>
                 <th width="50">Nổi bật</th>
+                <th width="50">Type</th>
+                <th width="50">Thuộc tính</th>
                 <th width="90">Danh Mục Sản Phẩm</th>
                 <th width="90">&nbsp;</th>
             </tr>
@@ -69,16 +70,17 @@
                 }
             },
             columns: [
-               {data: 'id', name: 'id', 'orderable': false},
+               {data: 'id', name: 'id', 'orderable': false, 'visible': false},
                {data: 'img_url', name: 'img_url', 'orderable': false},
                 {data: 'sku_product', name: 'sku_product'},
                 {data: 'name', name: 'name'},
                 {data: 'quality', name: 'quality'},
                 {data: 'price', name: 'price'},
-                {data: 'discount', name: 'discount'},
                {data: 'order', name: 'order'},
                {data: 'status', name: 'status', 'orderable': false},
                {data: 'hot', name: 'hot', 'orderable': false},
+               {data: 'type', name: 'type', 'orderable': false},
+               {data: 'attribute', name: 'attribute', 'orderable': false},
                {data: 'cate_name', name: 'cate_name', 'orderable': false},
                {data: 'action', name: 'action', 'orderable': false}
            ],
@@ -130,8 +132,8 @@
                     })
                 })
 
-                $('input[name="status"]').change(function(){
-                    let value = 0;
+                $('table').on('change','input[name="status"]',function(){
+                    var value = 0;
                     if($(this).is(':checked')){
                         value = 1;
                     }
@@ -149,8 +151,8 @@
                         }
                     })
                 })
-                $('input[name="hot"]').change(function(){
-                    let value = 0;
+                $('table').on('change','input[name="hot"]',function(){
+                    var value = 0;
                     if($(this).is(':checked')){
                         value = 1;
                     }

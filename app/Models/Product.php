@@ -39,4 +39,9 @@ class Product extends Model
     {
         return $this->morphMany('App\Models\Photo','photoable');
     }
+
+    public function product_links()
+    {
+        return $this->hasMany('App\Models\ProductLink');
+    }
 }

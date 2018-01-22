@@ -73,7 +73,20 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('product/createAttValue', ['as' => 'admin.product.createAttValue', 'uses' => 'ProductController@createAttValue']);
         Route::post('product/removeAttribute', ['as' => 'admin.product.removeAttribute', 'uses' => 'ProductController@removeAttribute']);
         Route::post('product/removeAttributeValue', ['as' => 'admin.product.removeAttributeValue', 'uses' => 'ProductController@removeAttributeValue']);
+
+            /*CONFIGURABLE PRODUCT*/
+        Route::get('product/pre-create', ['as' => 'admin.pre_create.product', 'uses' => 'ProductController@getPreCreateProduct']);
+        Route::post('product/pre-create', ['as' => 'admin.pre_create.product.post', 'uses' => 'ProductController@postPreCreateProduct']);
+        Route::post('product/configuable/create', ['as' => 'admin.create.product.configuable', 'uses' => 'ProductController@postCreateConfiguable']);
+        Route::get('product/configuable/getAttributeForProduct', ['as' => 'admin.create.product.getAttribute', 'uses' => 'ProductController@getAttributeForProduct']);
+        Route::post('product/configuable/getAttributeForProduct', ['as' => 'admin.create.product.postAttribute', 'uses' => 'ProductController@postAttributeForProduct']);
+
         Route::resource('product', 'ProductController');
+
+        /*ATTRIBUTE*/
+        Route::get('/attribute', ['as' => 'admin.attribute.create', 'uses' => 'AttributeController@getCreate']);
+        Route::post('/attribute', ['as' => 'admin.attribute.create.post', 'uses' => 'AttributeController@postCreate']);
+
 
         /*COMMENT*/
         Route::get('comment/getData', ['as' => 'admin.comment.getData', 'uses' => 'CommentController@getData']);
