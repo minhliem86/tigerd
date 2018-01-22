@@ -11,7 +11,7 @@ class AgencyTableDataSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Agencies::class, 5)->create()
+        factory(App\Models\Agencies::class, 2)->create()
             ->each(function ($agency){
             $agency->categories()->save(factory(App\Models\Category::class)->make())->each(function ($cate){
                 $cate->products()->save(factory(App\Models\Product::class)->make());

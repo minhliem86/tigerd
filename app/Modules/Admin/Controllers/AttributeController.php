@@ -37,10 +37,4 @@ class AttributeController extends Controller
 
         return redirect()->route('admin.product.index');
     }
-
-    public function postAttributeForProduct(Request $request){
-        if(!$request->has('att_choose')){
-            
-        }
-    }
 }

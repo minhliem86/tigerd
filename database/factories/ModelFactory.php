@@ -115,6 +115,7 @@ $factory->define(App\Models\Product::class, function (Faker\Generator $faker){
    return [
        'name' => $faker->lexify('Sản Phẩm ???'),
        'description' => $faker->paragraph(),
+       'sku_product' => 'MH'.$faker->numberBetween(10, 50),
        'content' => $faker->paragraph(),
        'price' => $faker->numberBetween('100000', '9999999'),
        'stock_quality' => 200,
