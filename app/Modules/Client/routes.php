@@ -1,18 +1,5 @@
 <?php
 Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controllers'], function(){
-    Route::get('/san-pham', ['as'=> 'client.product', 'uses' => 'SanPhamController@index' ]);
-    Route::post('/addtocart', ['as' => 'client.addToCart', 'uses' => 'SanPhamController@addToCart']);
-
-    Route::get('/cart', ['as' => 'client.cart', 'uses' => 'SanPhamController@getCart']);
-    Route::get('/cart-remove/{id}', ['as' => 'client.cart.remove', 'uses' => 'SanPhamController@getCartRemove']);
-    Route::get('/cart-removeAll', ['as' => 'client.cart.removeAll', 'uses' => 'SanPhamController@getCartRemoveAll']);
-    Route::get('/payment', ['as' => 'client.payment', 'uses' => 'SanPhamController@payment']);
-    Route::post('/process-promotion', ['as' => 'client.promotion', 'uses' => 'SanPhamController@applyPromotion']);
-    Route::get('/addtocart/{id}', ['as' => 'client.addToCart2', 'uses' => 'SanPhamController@addToCart2']);
-
-    Route::post('/doPayment', ['as' => 'client.doPayment', 'uses' => 'SanPhamController@doPayment']);
-    Route::get('/responsePayment', ['as' => 'client.responsePayment', 'uses' => 'SanPhamController@responseFormOnePay']);
-
     Route::get('/', ['as' => 'client.home', 'uses' => 'HomeController@index']);
 
     /*CONTACT US*/
@@ -29,14 +16,27 @@ Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controlle
     Route::get('/san-pham/{slug}', ['as' => 'client.product', 'uses' => 'ProductController@getProduct'])->where('slug','[0-9a-zA-Z._\-]+');
     Route::post('/san-pham/addToCart', ['as' => 'client.product.addToCart', 'uses' => 'ProductController@addToCart']);
     Route::post('/ajaxAttributeValue', ['as' => 'client.product.ajaxChangeAttributeValue', 'uses' => 'ProductController@ajaxChangeAttributeValue']);
-    Route::get('/clear', function(){
-       Cart::clear();
-    });
+
+    Route::get('/gio-hang', ['as' => 'client.cart', 'uses' => 'ProductController@getCart']);
+    Route::post('/update-soluong', ['as' => 'client.cart.updateQuantity', 'uses' => 'ProductController@updateQuantityAjax' ]);
+    Route::post('/remove-item', ['as' => 'client.cart.removeItem', 'uses' => 'ProductController@removeItemCart']);
+    Route::post('/them-gio-hang-ajax', ['as' => 'client.cart.addToCartAjax', 'uses' => 'ProductController@addToCartAjax']);
+    Route::get('/xoa-gio-hang',['as' => 'client.cart.clear', 'uses' => 'ProductController@clearCart']);
+
+    Route::get('/thanh-toan', ['as' => 'client.payment', 'uses' => 'ProductController@getPayment']);
+    Route::post('/process-promotion', ['as' => 'client.promotion', 'uses' => 'ProductController@applyPromotion']);
+    Route::post('/doPayment', ['as' => 'client.doPayment', 'uses' => 'ProductController@doPayment']);
+    Route::get('/responsePayment', ['as' => 'client.responsePayment', 'uses' => 'ProductController@responseFormOnePay']);
 
     /*CUSTOMER*/
     Route::get('/dang-nhap', ['as' => 'client.auth.login', 'uses' => 'Auth\AuthController@getLogin']);
     Route::post('/dang-nhap', ['as' => 'client.auth.login.post', 'uses' => 'Auth\AuthController@postLogin']);
     Route::post('/dang-ky', ['as' => 'client.auth.register.post', 'uses' => 'Auth\AuthController@postRegister']);
+
+    // Password Reset Routes...
+    Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+    Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+    Route::post('password/reset', 'Auth\PasswordController@reset');
 
     Route::get('/thong-tin-khach-hang', ['as'=> 'client.auth.profile', 'uses' => 'ProfileController@getProfile']);
     Route::post('/update-profile', ['as' => 'client.auth.profile.post', 'uses' => 'ProfileController@postProfile']);

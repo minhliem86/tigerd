@@ -63,6 +63,24 @@ class AuthController extends Controller
         ]);
     }
 
+    private function validator_create(array $data)
+    {
+        return Validator::make($data, [
+           'lastname' => 'required',
+            'firstname' => 'required',
+            'phone' => 'required',
+            'email'=> 'required|email|unique:customers',
+            'password' => 'required|min:6|confirmed',
+        ],[
+            'lastname.required' => 'Vui lòng nhập Họ',
+            'firstname.required' => 'Vui lòng nhập Tên',
+            'phone.required' => 'Vui lòng nhập số điện thoại',
+            'email.required' => 'Vui lòng nhập Email',
+            'email.email' => 'Định dạng Email: abc@..',
+            'password.required' => 'Vui lòng nhập Password'
+        ]);
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -98,12 +116,13 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $validator = $this->validator($request->all());
+        $validator = $this->validator_create($request->all());
 
         if ($validator->fails()) {
-            $this->throwValidationException(
-                $request, $validator
-            );
+//            $this->throwValidationException(
+//                $request, $validator
+//            );
+            return redirect()->back()->withInput()->withErrors($validator, 'register_error');
         }
         $user = $this->create($request->all());
         $this->auth->login($user);

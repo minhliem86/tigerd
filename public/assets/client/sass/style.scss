@@ -970,12 +970,17 @@ ul.list-errors{
   .payment-page{
     form.form-payment{
       input{
-        font-size:1.2rem;
+        font-size:1.4rem;
       }
       div.custom-control{
         padding-left:3rem;
         label.custom-control-label{
           cursor:pointer;
+          font-size:1.4rem;
+          font-weight:600;
+          small{
+            font-style:italic;
+          }
           &:before{
             width:1.5rem;
             height:1.5rem;
@@ -991,44 +996,68 @@ ul.list-errors{
       font-size:1.8rem;
       margin-bottom:1.2rem;
       text-transform: uppercase;
+      color:$cl-pink;
     }
     .shipper-info{
       margin-bottom:4rem;
-      ul.list-errors{
-        padding-left:15px;
-        li{
-          color:red;
+      .form-khachhang{
+        label{
+          font-size:1.4rem;
+          @include fontThin(600);
         }
       }
     }
 
     .cart-wrapper{
+      h4.title-summary{
+        font-size:1.8rem;
+        margin-bottom:1.2rem;
+        text-transform: uppercase;
+        color:$cl-pink;
+      }
       table{
         th{
           font-size:1.4rem;
         }
         td{
-          font-size:1.2rem;
+          font-size:1.3rem;
+          &.price-td{
+            font-weight: 600;
+          }
         }
       }
       .each-area{
         margin-bottom:2.5rem;
+        padding-bottom:1rem;
+        border-bottom:1px solid #c7ccd3;
         &.d-flex{
           justify-content: space-between;
         }
-        &.total{
-          color:$cl-pink;
+        &.wrap-total{
           p.text{
-            font-size:1.6rem;
+            font-size:1.4rem;
+            @include fontThin(600);
             text-transform: uppercase;
           }
           p.content{
-            font-size:1.8rem;
+            font-size:1.6rem;
+            .sub, .total{
+              font-weight:600;
+            }
           }
         }
-        button.btn-payment{
-          font-size:1.6rem;
-          padding:0.4rem 2rem;
+        button.btn-payment, .btn-promotion{
+          font-size:1.4rem;
+          padding:0.4rem 2rem
+        }
+        .btn-promotion{
+          color:white;
+        }
+      }
+      .btn-wrapper{
+        .btn-buy, .btn-payment{
+          font-size:1.4rem;
+          padding:0.4rem 2rem
         }
       }
     }

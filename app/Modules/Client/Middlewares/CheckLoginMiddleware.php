@@ -21,9 +21,7 @@ class CheckLoginMiddleware
     public function handle($request, Closure $next)
     {
         if(!$this->auth->check()){
-            $errors = new \Illuminate\Support\MessageBag;
-            $errors->add('error_login','Vui lòng đăng nhập trước khi thực hiện thao tác');
-            return route('client.auth.login')->with($errors);
+            return redirect()->route('client.auth.login')->with('error','Vui lòng đăng nhập để hoàn tất thao tác');
         }
         return $next($request);
     }

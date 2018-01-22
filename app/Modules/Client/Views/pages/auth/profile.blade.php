@@ -59,7 +59,7 @@
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label for="birthday">Ngày Sinh</label>
-                                                        {!! Form::text('birthday', \Carbon\Carbon::createFromFormat("Y-m-d",Auth::guard('customer')->user()->birthday)->format('d-m-Y'), ['class' => 'form-control']) !!}
+                                                        {!! Form::text('birthday', Auth::guard('customer')->user()->birthday ? \Carbon\Carbon::createFromFormat("Y-m-d",Auth::guard('customer')->user()->birthday)->format('d-m-Y') : '', ['class' => 'form-control']) !!}
                                                     </div>
                                                 </div>
                                             </div>

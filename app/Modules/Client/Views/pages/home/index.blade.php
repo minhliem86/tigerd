@@ -31,7 +31,7 @@
                                                     <p class="price">{!! number_format($item_product->discount) !!} VND</p>
                                                     @endif
                                                     @if($item_product->values->isEmpty())
-                                                        <button type="button" class="btn btn-outline-default btn-add-to-cart">Thêm Giỏ Hàng</button>
+                                                        <button type="button" class="btn btn-outline-default btn-add-to-cart" onclick="addToCartAjax('{!! route("client.cart.addToCartAjax") !!}', {!! $item_product->id !!})">Thêm Giỏ Hàng</button>
                                                     @else
                                                         <a href="{!! route('client.product', $item_product->slug) !!}" class="btn btn-outline-default btn-add-to-cart">Xem Sản Phẩm</a>
                                                     @endif
@@ -108,5 +108,11 @@
 @stop
 
 @section('script')
-
+    <script>
+        $(document).ready(function(){
+            @if(Session::has('error'))
+                alertify.error('{!! Session::get('error') !!}')
+            @endif
+        })
+    </script>
 @stop

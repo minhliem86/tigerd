@@ -27,7 +27,7 @@
                                 </div>
                             </div>
                         {!! Form::close() !!}
-                        @if($errors->any())
+                        @if($errors->first('error_login'))
                             <ul class="list-errors">
                                 <li>{!! $errors->first('error_login') !!}</li>
                             </ul>
@@ -39,20 +39,49 @@
                         <h3 class="title-login-page">Đăng Ký</h3>
                         {!! Form::open(['route'=>'client.auth.register.post', 'class' => 'form-register']) !!}
                             <div class="form-group">
-                                <label for="firstname">Họ Tên Khách Hàng</label>
-                                {!! Form::text('firstname',old('firstname'), ['class'=>'form-control', 'placeholder' => 'Họ Tên Khách Hàng' ]) !!}
+                                <label for="lastname">Họ Khách Hàng</label>
+                                {!! Form::text('lastname',old('lastname'), ['class'=>$errors->register_error->first("lastname") ? 'is-invalid form-control' : 'form-control'  , 'placeholder' => 'Họ Khách Hàng' ]) !!}
+                                @if($errors->register_error->first('lastname'))
+                                    <div class="invalid-feedback">
+                                        {!! $errors->register_error->first('lastname') !!}
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="form-group">
+                                <label for="firstname">Tên Khách Hàng</label>
+                                {!! Form::text('firstname',old('firstname'), ['class'=> $errors->register_error->first("firstname") ? 'is-invalid form-control' : 'form-control' , 'placeholder' => 'Tên Khách Hàng' ]) !!}
+                                @if($errors->register_error->first('firstname'))
+                                    <div class="invalid-feedback">
+                                        {!! $errors->register_error->first('firstname') !!}
+                                    </div>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="phone">Số Điện Thoại Khách Hàng</label>
-                                {!! Form::text('phone',old('phone'), ['class'=>'form-control', 'placeholder' => 'Số Điện Thoại Khách Hàng' ]) !!}
+                                {!! Form::text('phone',old('phone'), ['class'=> $errors->register_error->first("phone") ? 'is-invalid form-control' : 'form-control', 'placeholder' => 'Số Điện Thoại Khách Hàng' ]) !!}
+                                @if($errors->register_error->first('phone'))
+                                    <div class="invalid-feedback">
+                                        {!! $errors->register_error->first('phone') !!}
+                                    </div>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="email">Email Khách Hàng</label>
-                                {!! Form::text('email',old('email'), ['class'=>'form-control', 'placeholder' => 'Email Khách Hàng' ]) !!}
+                                {!! Form::text('email',old('email'), ['class'=>$errors->register_error->first("email") ? 'is-invalid form-control' : 'form-control', 'placeholder' => 'Email Khách Hàng' ]) !!}
+                                @if($errors->register_error->first('email'))
+                                    <div class="invalid-feedback">
+                                        {!! $errors->register_error->first('email') !!}
+                                    </div>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="password">Mật khẩu</label>
-                                <input type="password" name="password" class="form-control" placeholder="Password">
+                                {!! Form::password('password', ['class'=>$errors->register_error->first("password") ? 'is-invalid form-control' : 'form-control', 'placeholder' => 'Mật khẩu' ]) !!}
+                                @if($errors->register_error->first('password'))
+                                    <div class="invalid-feedback">
+                                        {!! $errors->register_error->first('password') !!}
+                                    </div>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label for="password_confirmation">Xác Nhận Mật khẩu</label>
@@ -62,6 +91,7 @@
                                 <input type="submit" class="btn btn-info" value="Đăng Ký">
                             </div>
                         {!! Form::close() !!}
+
                     </div>
                 </div>
             </div>
@@ -71,5 +101,11 @@
 @stop
 
 @section("script")
-
+    <script>
+        $(document).ready(function(){
+            @if(Session::has('error'))
+            alertify.error('{!! Session::get('error') !!}')
+            @endif
+        })
+    </script>
 @stop

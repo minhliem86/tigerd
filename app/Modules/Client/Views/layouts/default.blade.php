@@ -22,6 +22,10 @@
     <script src="{!! asset('public/assets/client') !!}/js/plugins/swiper/js/swiper.min.js"></script>
     <script src="{!! asset('public/assets/client') !!}/js/plugins/swiper/js/swiper.esm.js"></script>
 
+    <link rel="stylesheet" href="{{asset('/public/assets/admin')}}/dist/js/plugins/alertify/alertify.css">
+    <link rel="stylesheet" href="{{asset('/public/assets/admin')}}/dist/js/plugins/alertify/bootstrap.min.css">
+    <script type="text/javascript" src="{{asset('/public/assets/admin')}}/dist/js/plugins/alertify/alertify.js"></script>
+
     <script>
         $(document).ready(function(){
             $.ajaxSetup({
@@ -53,6 +57,19 @@
                 },
             })
         })
+        function addToCartAjax(url,id){
+            $.ajax({
+                url: url,
+                type: 'POST',
+                data: {id: id},
+                success: function(data){
+                    if(!data.error){
+                        $('.number-item').text(data.data);
+                        alertify.success('Sản phẩm đã được thêm vào giỏ hàng ')
+                    }
+                }
+            })
+        }
     </script>
 
     <title>TigerD</title>

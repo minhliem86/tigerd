@@ -23,7 +23,7 @@ class RedirectIfLogined
     public function handle($request, Closure $next)
     {
         if($this->auth->check()){
-            return redirect()->back();
+            return redirect()->back()->with('error', 'Bạn đã đăng nhập.');
         }
         return $next($request);
     }
