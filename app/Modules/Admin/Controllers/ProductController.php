@@ -2,6 +2,7 @@
 
 namespace App\Modules\Admin\Controllers;
 
+use App\Models\AttributeValue;
 use App\Repositories\MetaRepository;
 use Illuminate\Http\Request;
 
@@ -80,13 +81,15 @@ class ProductController extends Controller
         return view('Admin::pages.product.index');
     }
 
-    public function getData(Request $request)
+    public function getData(Request $request, AttributeRepository $attribute)
     {
-        $product = $this->productRepo->query(['products.id as id', 'products.name as name', 'products.sku_product as sku_product', 'products.price as price', 'products.discount as discount', 'products.stock_quality as quality', 'products.img_url as img_url', 'products.hot as hot' ,  'products.order as order', 'products.status as status', 'categories.name as cate_name'])->join('categories', 'categories.id', '=', 'products.category_id');
+        $product = $this->productRepo->query(['products.id as id', 'products.name as name', 'products.sku_product as sku_product', 'products.price as price', 'products.stock_quality as quality', 'products.img_url as img_url', 'products.hot as hot', 'products.order as order', 'products.status as status', 'categories.name as cate_name', 'products.type as type'])->join('categories', 'categories.id', '=', 'products.category_id')->orderBy('id', 'ASC')->with(['values']);
+
         return Datatables::of($product)
             ->addColumn('action', function($product){
-                return '<a href="'.route('admin.product.edit', $product->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>
-            <form method="POST" action=" '.route('admin.product.destroy', $product->id).' " accept-charset="UTF-8" class="inline-block-span">
+                $link = $product->type == 'simple' ?  '<a href="'.route('admin.product.edit', $product->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>' : '';
+                return $link.
+            ' <form method="POST" action=" '.route('admin.product.destroy', $product->id).' " accept-charset="UTF-8" class="inline-block-span">
                 <input name="_method" type="hidden" value="DELETE">
                 <input name="_token" type="hidden" value="'.csrf_token().'">
                            <button class="btn  btn-danger btn-xs remove-btn" type="button" attrid=" '.route('admin.product.destroy', $product->id).' " onclick="confirm_remove(this);" > Remove </button>
@@ -100,8 +103,8 @@ class ProductController extends Controller
              <label class="toggle">
                 <input type="checkbox" name="status" value="1" '.$status.'   data-id ="'.$product_id.'">
                 <span class="handle"></span>
-              </label>
-          ';
+             </label>
+            ';
             })->editColumn('hot', function($product){
                 $hot = $product->hot ? 'checked' : '';
                 $product_id =$product->id;
@@ -110,20 +113,124 @@ class ProductController extends Controller
                <input type="checkbox" name="hot" value="1" '.$hot.'   data-id ="'.$product_id.'">
                <span class="handle"></span>
              </label>
-         ';
-            })->editColumn('price', function($product){
+            ';
+            })
+            ->addColumn('attribute', function($product) use ($attribute){
+                $array_att = [];
+                foreach($product->values as $item_value){
+                    $array_att[$item_value->attributes->name][$item_value->id] = $item_value->value;
+                }
+                $string = '';
+
+                foreach ($array_att as $k => $v){
+                    $string .= '<p>'.$k.':';
+                    foreach ($v as $item_v){
+                        if($item_v == end($v)){
+                            $string .= ' '.$item_v.'</p>';
+                        }else{
+                            $string .= ' '.$item_v.',';
+                        }
+                    }
+                }
+                return $string;
+            })
+
+            ->editColumn('price', function($product){
                 $price = number_format($product->price);
                 return $price;
-            })->editColumn('discount', function($product){
-                $discount = number_format($product->discount);
-                return $discount;
-            })->editColumn('img_url',function($product){
+            })
+            ->editColumn('img_url',function($product){
                 return '<img src="'.asset($product->img_url).'" width="80" class="img-responsive">';
-            })->filter(function($query) use ($request){
+            })
+            ->filter(function($query) use ($request){
                 if (request()->has('name')) {
                     $query->where('products.name', 'like', "%{$request->input('name')}%")->orWhere('products.sku_product', 'like', "%{$request->input('name')}%");
                 }
             })->setRowId('id')->make(true);
+    }
+
+    public function getPreCreateProduct()
+    {
+        return view('Admin::pages.product.pre_create');
+    }
+
+    public function postPreCreateProduct(Request $request, CategoryRepository $cate)
+    {
+        $valid = Validator::make($request->all(), ['type' => 'required'], ['type.required' => 'Vui lòng chọn loại sản phẩm']);
+        if($valid->fails()){
+            return redirect()->back()->withInput()->withErrors($valid);
+        }
+        $type = $request->input('type');
+        switch ($type){
+            case 'simple' :
+                return redirect()->route('admin.product.create');
+                break;
+            case 'configurable' :
+                $cate = $cate->query(['id', 'name'])->lists('name','id')->toArray();
+                return view('Admin::pages.product.attribute.create_configuable_s1', compact('cate'));
+                break;
+        }
+    }
+
+    public function postCreateConfiguable(Request $request)
+    {
+        $rule = [
+            'category_id' => 'required',
+            'name' => 'required',
+        ];
+        $mes = [
+            'category_id.required' => 'Vui lòng chọn Danh Mục',
+            'name.required' => 'Vui lòng nhập tên sản phẩm'
+        ];
+
+        $valid = Validator::make($request->all(), $rule, $mes);
+        if($valid->fails()){
+            return redirect()->back()->withInput()->withErrors($valid);
+        }
+        if($request->has('img_url')){
+            $img_url = $this->common->getPath($request->input('img_url'), $this->_replacePath);
+        }else{
+            $img_url = "";
+        }
+        $order = $this->productRepo->getOrder();
+        $data = [
+            'category_id' => $request->input('category_id'),
+            'name' => $request->input('name'),
+            'slug' => \LP_lib::unicode($request->input('slug')),
+            'description' => $request->input('description'),
+            'img_url' => $img_url,
+            'type' => 'configuable',
+            'order' => $order,
+            'visibility' => 0
+        ];
+        $parent_product = $this->productRepo->create($data);
+
+        if($request->has('meta_config')){
+            if($request->has('meta_img')){
+                $meta_img = $this->common->getPath($request->input('meta_img'), $this->_replacePath);
+            }else{
+                $meta_img = "";
+            }
+            $data = [
+                'meta_keywords' => $request->input('meta_keywords'),
+                'meta_description' => $request->input('meta_description'),
+                'meta_img' => $meta_img,
+            ];
+            $parent_product->meta_configs()->save(new \App\Models\MetaConfiguration($data));
+        }
+
+        $parent_product_id = $parent_product->id;
+
+        return view('Admin::pages.product.create_configuable_s2', compact('parent_product_id'));
+    }
+
+    public function getAttributeForProduct(Request $request, AttributeRepository $attribute)
+    {
+        $attribute = $attribute->all(['id', 'name', 'slug']);
+        if($attribute->isEmpty()){
+            return redirect()->route('admin.attribute.create')->with('url',$request->url());
+        }
+        return view('Admin::pages.product.attribute.create_configable_s2', compact('parent_product_id','attribute'));
     }
 
     /**

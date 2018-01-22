@@ -27,7 +27,7 @@
                                 @if(!$cart->isEmpty())
                                     @foreach($cart as $item_cart)
                                     <tr>
-                                        
+
                                         <td><img src="{!! $item_cart->attributes->has('img_url') ? '' : ''  !!}" class="img-fluid" alt="{!! $item_cart->name !!}"></td>
                                         <td>
                                             <p>{!! $item_cart->name !!}</p>

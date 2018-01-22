@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductValueTable extends Migration
+class CreateProductLinkTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,11 @@ class CreateProductValueTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_value', function (Blueprint $table) {
+        Schema::create('product_links', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
-            $table->integer('attribute_value_id')->unsigned();
-            $table->foreign('attribute_value_id')->references('id')->on('attribute_values')->onDelete('cascade');
-            $table->integer('price_att')->nullable();
+            $table->integer('link_to_product_id')->unsigned();
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateProductValueTable extends Migration
      */
     public function down()
     {
-        Schema::drop('product_value');
+        Schema::drop('product_links');
     }
 }
