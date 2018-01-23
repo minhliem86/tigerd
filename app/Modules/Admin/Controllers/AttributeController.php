@@ -40,7 +40,7 @@ class AttributeController extends Controller
 
     public function postAttributeForProduct(Request $request){
         if(!$request->has('att_choose')){
-            
+
         }
     }
 }
