@@ -69,8 +69,8 @@ class AuthController extends Controller
            'lastname' => 'required',
             'firstname' => 'required',
             'phone' => 'required',
-            'email'=> 'required|email',
-            'password' => 'required|comfirmed',
+            'email'=> 'required|email|unique:customers',
+            'password' => 'required|min:6|confirmed',
         ],[
             'lastname.required' => 'Vui lòng nhập Họ',
             'firstname.required' => 'Vui lòng nhập Tên',

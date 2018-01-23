@@ -26,32 +26,31 @@
                             <tbody>
                                 @if(!$cart->isEmpty())
                                     @foreach($cart as $item_cart)
-                                    <tr>
-
-                                        <td><img src="{!! $item_cart->attributes->has('img_url') ? '' : ''  !!}" class="img-fluid" alt="{!! $item_cart->name !!}"></td>
+                                    <tr id="{!! $item_cart->id !!}">
+                                        
+                                        <td><img src="{!! $item_cart->attributes->has('img_url') ? $item_cart->attributes->img_url : ''  !!}" class="img-fluid" alt="{!! $item_cart->name !!}"></td>
                                         <td>
                                             <p>{!! $item_cart->name !!}</p>
                                             @if(!$item_cart->attributes->isEmpty())
-                                            <p class="att">
-                                                @foreach($item_cart->attributes as $item_att)
-                                                    <small>{!! $item_att !!}</small>
+                                                @foreach($item_cart->attributes as $k=>$item_att)
+                                                    @if($k != 'img_url')
+                                                    <p class="att">
+                                                        <small>{!! $k !!}: {!!  $item_att !!}</small>
+                                                    </p>
+                                                    @endif
                                                 @endforeach
-                                            </p>
                                             @endif
                                         </td>
                                         <td><b>{!! number_format($item_cart->price) !!} vnd</b></td>
-                                        <td><input type="number" class="form-control" name="quantity" value="{!! $item_cart->quantity !!}" data-id="{!! $item_cart->id !!}"></td>
+                                        <td><input type="text" class="form-control" name="quantity" value="{!! $item_cart->quantity !!}" data-id="{!! $item_cart->id !!}" onkeypress="restrictMinus(event)"></td>
                                         <td>
-                                            <button class="btn btn-danger" data-id="{!! $item_cart->id !!}"><i class="fa fa-trash"></i></button>
+                                            <button type="button" onclick="removeItemInCart('{!! $item_cart->id !!}')" class="btn btn-danger"><i class="fa fa-trash"></i></button>
                                         </td>
                                     </tr>
                                     @endforeach
                                 @else
                                     <tr>
                                         <td colspan="5">Hiện chưa có sản phẩm.</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5"><a href="{!! route('client.home') !!}" class="btn btn-info">Mua Hàng</a></td>
                                     </tr>
                                 @endif
 
@@ -61,12 +60,16 @@
                     <div class="control-cart clearfix">
                         <div class="button-wrapper">
                             <a href="{!! route('client.home') !!}" class="btn btn-info">Tiếp tục mua hàng</a>
-                            <a href="#" class="btn btn-primary">Thanh Toán</a>
+                            @if(!Cart::isEmpty())
+                            <a href="{!! route('client.payment') !!}" class="btn btn-primary">Thanh Toán</a>
                             <a href="{!! route('client.cart.clear') !!}" class="btn btn-danger">Xóa Giỏ Hàng</a>
+                            @endif
                         </div>
+                        @if(!Cart::isEmpty())
                         <div class="amount-wrapper">
-                            <p class="amount">Tổng Tiền: <span class="price">{!! number_format(Cart::getSubTotal()) !!} VND</span></p>
+                            <p class="amount">Tổng Tiền: <span class="price">{!! number_format(Cart::getSubTotal()) !!} </span> VND</p>
                         </div>
+                          @endif
 
                     </div>
                 </div>
@@ -77,5 +80,45 @@
 @stop
 
 @section('script')
+    <script>
+        function restrictMinus(e) {
+            if (e.keyCode == 45) e.preventDefault();
+        }
 
+        function removeItemInCart(id)
+        {
+            alertify.confirm('Bạn có muốn xóa sản phẩm này', function (e) {
+                $.ajax({
+                    url: '{!! route("client.cart.removeItem") !!}' ,
+                    type: 'POST',
+                    data: {id: id},
+                    success: function(data){
+                        alertify.success('Xóa item thành  công.');
+                        $('.price').text(data.data);
+                        $('tr#'+id).remove();
+                    }
+                })
+            })
+
+        }
+        $(document).ready(function(){
+            $('input[name=quantity]').on('change', function(){
+                var quantity = $(this).val();
+                var id = $(this).data('id');
+                $.ajax({
+                    url: '{!! route("client.cart.updateQuantity") !!}',
+                    type: 'POST',
+                    data: {quantity: quantity, id: id},
+                    success: function (data) {
+                        if(data.error){
+                            alertify.error(data.data);
+                        }else{
+                            alertify.success('Số lượng được cập nhật.');
+                            $('.price').text(data.data);
+                        }
+                    }
+                })
+            })
+        })
+    </script>
 @stop

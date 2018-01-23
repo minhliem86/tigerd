@@ -101,5 +101,11 @@
 @stop
 
 @section("script")
-
+    <script>
+        $(document).ready(function(){
+            @if(Session::has('error'))
+            alertify.error('{!! Session::get('error') !!}')
+            @endif
+        })
+    </script>
 @stop

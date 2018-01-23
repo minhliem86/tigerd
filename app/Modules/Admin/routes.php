@@ -78,8 +78,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::get('product/pre-create', ['as' => 'admin.pre_create.product', 'uses' => 'ProductController@getPreCreateProduct']);
         Route::post('product/pre-create', ['as' => 'admin.pre_create.product.post', 'uses' => 'ProductController@postPreCreateProduct']);
         Route::post('product/configuable/create', ['as' => 'admin.create.product.configuable', 'uses' => 'ProductController@postCreateConfiguable']);
+        Route::get('product/configuable/create/s2', ['as' => 'admin.create.product.configuable.s2', 'uses' => 'ProductController@getCreateProductConfigS2']);
+        Route::post('product/configuable/create/s2', ['as' => 'admin.create.product.configuable.s2.post', 'uses' => 'ProductController@postCreateProductConfigS2']);
         Route::get('product/configuable/getAttributeForProduct', ['as' => 'admin.create.product.getAttribute', 'uses' => 'ProductController@getAttributeForProduct']);
         Route::post('product/configuable/getAttributeForProduct', ['as' => 'admin.create.product.postAttribute', 'uses' => 'ProductController@postAttributeForProduct']);
+
+        
 
         Route::resource('product', 'ProductController');
 

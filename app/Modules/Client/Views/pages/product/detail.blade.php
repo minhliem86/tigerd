@@ -50,7 +50,7 @@
 
                             <div class="each-attribute">
                                 <p class="att-title">{!! $item_att->name !!}</p>
-                                <select name="att_value[{!! $item_att->slug !!}]" class="form-control att_value" onchange="handleChangeAttribute(this)" >
+                                <select name="att_value[{!! $item_att->slug !!}]" class="form-control att_value" >
                                     <option value="">--Vui lòng chọn thuộc tính--</option>
                                     @php(
                                         $arr_value = \App\Models\AttributeValue::where('attribute_id', $item_att->id)->whereIn('id',$arr_value_product)->get()
@@ -167,7 +167,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" data-dismiss="modal" class="btn btn-outline-success btn-modal-cart">Tiếp Tục Mua Hàng</button>
-                        <a href="#" class="btn btn-info btn-modal-cart">Kiểm tra giỏ hàng</a>
+                        <a href="{!! route('client.cart') !!}" class="btn btn-info btn-modal-cart">Kiểm tra giỏ hàng</a>
                     </div>
                 </div>
             </div>
@@ -183,12 +183,6 @@
     <script>
         function restrictMinus(e) {
             if (e.keyCode == 45) e.preventDefault();
-        }
-
-        function handleChangeAttribute(e){
-            var product_id = $('input[name=product_id]').val();
-//            var att_value_id = this.val();
-            console.log(e.val);
         }
         $(document).ready(function(){
             $('#image-gallery').lightSlider({

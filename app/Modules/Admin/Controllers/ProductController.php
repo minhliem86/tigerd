@@ -177,10 +177,12 @@ class ProductController extends Controller
         $rule = [
             'category_id' => 'required',
             'name' => 'required',
+            'sku_product' => 'unique:products'
         ];
         $mes = [
             'category_id.required' => 'Vui lòng chọn Danh Mục',
-            'name.required' => 'Vui lòng nhập tên sản phẩm'
+            'name.required' => 'Vui lòng nhập tên sản phẩm',
+            'sku_product.unique' => 'Mã Sản Phẩm đã tồn tại',
         ];
 
         $valid = Validator::make($request->all(), $rule, $mes);
@@ -197,6 +199,7 @@ class ProductController extends Controller
             'category_id' => $request->input('category_id'),
             'name' => $request->input('name'),
             'slug' => \LP_lib::unicode($request->input('slug')),
+            'sku_product' => $request->input('sku_product'),
             'description' => $request->input('description'),
             'img_url' => $img_url,
             'type' => 'configuable',
@@ -221,7 +224,8 @@ class ProductController extends Controller
 
         $parent_product_id = $parent_product->id;
 
-        return view('Admin::pages.product.create_configuable_s2', compact('parent_product_id'));
+        \Session::put('product_parent_id', $parent_product_id);
+        return redirect()->route('admin.create.product.getAttribute');
     }
 
     public function getAttributeForProduct(Request $request, AttributeRepository $attribute)
@@ -230,7 +234,84 @@ class ProductController extends Controller
         if($attribute->isEmpty()){
             return redirect()->route('admin.attribute.create')->with('url',$request->url());
         }
-        return view('Admin::pages.product.attribute.create_configable_s2', compact('parent_product_id','attribute'));
+        return view('Admin::pages.product.attribute.getAttribute', compact('attribute'));
+    }
+
+    public function postAttributeForProduct(Request $request, AttributeRepository $attribute)
+    {
+        if(!$request->has('att_choose')){
+            return redirect()->route('admin.product.create');
+        }
+        $arr_att = [];
+        foreach($request->input('att_choose') as $item_att){
+            $arr_att[] = $item_att;
+        }
+        $att = $attribute->findWhereIn('id',$arr_att,['id', 'name']);
+        \Session::put('att', $att);
+        return redirect()->route('admin.create.product.configuable.s2');
+    }
+
+    public function getCreateProductConfigS2()
+    {
+        if(!\Session::has('att')){
+            return redirect()->route('admin.create.product.getAttribute');
+        }
+        $att = \Session::get('att');
+        return view('Admin::pages.product.attribute.create_configuable_s2', compact('att'));
+    }
+
+    public function postCreateProductConfigS2(Request $request, AttributeValueRepository $attribute_value)
+    {
+        $rule = [
+            'name' => 'required',
+            'sku_product' => 'unique:products',
+            'price' => 'required|numeric',
+            'stock_quality' => 'required|numeric',
+            'value' => 'required'
+        ];
+        $mes = [
+            'name.required' => 'Vui lòng nhập tên sản phẩm',
+            'sku_product.unique' => 'Mã Sản Phẩm đã tồn tại',
+            'price.required' => 'Vui lòng nhập giá',
+            'price.numeric' => 'Giá là dạng số',
+            'stock_quality.required' => 'Vui lòng nhập số lượng trong kho',
+            'stock_quality.numeric' => 'Số lượng là dạng số',
+            'value.required' => 'Vui lòng nhập giá trị thuộc tính',
+        ];
+
+        $valid = Validator::make($request->all(),$rule, $mes);
+        if($valid->fails()){
+            return redirect()->back()->withInput()->withErrors($valid);
+        }
+        if($request->has('img_url')){
+            $img_url = $this->common->getPath($request->input('img_url'), $this->_replacePath);
+        }else{
+            $img_url = "";
+        }
+        $order = $this->productRepo->getOrder();
+        $product_parent = $this->productRepo->find($request->product_parent_id);
+        $data = [
+            'name' => $request->name,
+            'slug'=> \LP_lib::unicode($request->name),
+            'description' => $request->description,
+            'content'=> $request->content,
+            'price' => $request->price,
+            'discount' => $request->discount,
+            'stock' => $request->stock,
+            'img_url' => $img_url,
+            'order'=>$order,
+            'type' => $request->type,
+            'visibility' => $request->visibility,
+            'category_id' => $product_parent->category_id,
+        ];
+        $product = $this->productRepo->create($data);
+
+        foreach($request->att as $k=>$item_att){
+            $value = $attribute_value->create(['value' => $request->value[$k], 'attribute_id'=>$item_att]);
+            $product->values->attach($value->id);
+        }
+
+        $product->product_links()->save(new \App\Models\ProductLink(['product_id'=>$product_parent->id, 'link_to_product_id'=> $product->id]));
     }
 
     /**

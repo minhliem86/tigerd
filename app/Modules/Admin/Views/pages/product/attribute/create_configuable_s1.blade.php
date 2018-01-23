@@ -100,6 +100,7 @@
         const url = "{!!url('/')!!}"
         // BUTTON ALONE
         init_btnImage(url,'#lfm-meta');
+        init_btnImage(url,'#lfm');
         // SUBMIT FORM
         function submitForm(){
             $('form').submit();

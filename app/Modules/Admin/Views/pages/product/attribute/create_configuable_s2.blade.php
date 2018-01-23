@@ -11,9 +11,9 @@
         <div class="col-md-12">
             <div class="col-sm-12">
                 @include('Admin::errors.error_layout')
-                <form method="POST" action="{{route('admin.create.product.configuable')}}" id="form" role="form" class="form-horizontal">
+                <form method="POST" action="{{route('admin.create.product.configuable.s2.post')}}" id="form" role="form" class="form-horizontal">
                     {{Form::token()}}
-                    {!! Form::hidden('parent_product_id', $parent_product_id) !!}
+                    {!! Form::hidden('product_parent_id', Session::get('product_parent_id')) !!}
                     {!! Form::hidden('type', 'simple') !!}
                     {!! Form::hidden('visibility', '1') !!}
                     <div class="form-group">
@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Nhập Kho</label>
                         <div class="col-md-10">
-                            {!!Form::number('stock_quality',old('stock_quality'), ['class'=>'form-control', 'placeholder'=>'0'])!!}
+                            {!!Form::number('stock',old('stock'), ['class'=>'form-control', 'placeholder'=>'0'])!!}
                         </div>
                     </div>
                     <div class="form-group">
@@ -72,6 +72,20 @@
                             <img id="holder" style="margin-top:15px;max-height:100px;">
                         </div>
                     </div>
+                    <fieldset>
+                        <legend>Thuộc tính</legend>
+                        @foreach($att as $item_att)
+                            <div class="form-group">
+                                {!! Form::hidden('att[]', $item_att->id) !!}
+                                <label class="col-md-2 control-label" for="">{!! $item_att->name !!}</label>
+                                <div class="col-md-10">
+                                    {!! Form::text('value[]',old('value'),['class'=>'form-control']) !!}
+                                </div>
+                            </div>
+                        @endforeach
+                    </fieldset>
+
+
                 </form>
             </div>
         </div>
@@ -79,5 +93,21 @@
 @endsection
 
 @section('script')
-
+    {{--ALERT--}}
+    <link rel="stylesheet" href="{!! asset('public/assets/admin/dist/js/plugins/alertify/alertify.css') !!}">
+    <script src="{!! asset('public/assets/admin/dist/js/plugins/alertify/alertify.js') !!}"></script>
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script src="{!!asset('public')!!}/vendor/laravel-filemanager/js/lfm.js"></script>
+    <script src="{!!asset('public/assets/admin/dist/js/script.js')!!}"></script>
+    <script>
+        const url = "{!!url('/')!!}"
+        init_tinymce(url);
+        // BUTTON ALONE
+        init_btnImage(url,'#lfm');
+        init_btnImage(url,'#lfm-meta');
+        // SUBMIT FORM
+        function submitForm(){
+            $('form').submit();
+        }
+    </script>
 @stop
