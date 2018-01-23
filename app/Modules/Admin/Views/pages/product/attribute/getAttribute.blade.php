@@ -2,7 +2,7 @@
 
 @section('link')
     <button class="btn btn-primary" onclick="submitForm();">Tiếp tục</button>
-    <a class="btn btn-info">Tạo thuộc tính mới</a>
+    <a class="btn btn-info" href="{!! route('admin.attribute.create') !!}">Tạo thuộc tính mới</a>
 @stop
 
 @section('title','Thêm Thuộc Tính Sản Phẩm')

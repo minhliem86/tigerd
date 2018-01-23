@@ -61,7 +61,7 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">Nhập Kho</label>
                     <div class="col-md-10">
-                        {!!Form::number('stock_quality',old('stock_quality'), ['class'=>'form-control ', 'placeholder'=>'0'])!!}
+                        {!!Form::number('stock',old('stock'), ['class'=>'form-control ', 'placeholder'=>'0'])!!}
                     </div>
                 </div>
                 <div class="form-group">
@@ -127,30 +127,6 @@
                             @endif
                         </div>
                         <input type="file" name="thumb-input[]" id="thumb-input" multiple >
-                    </div>
-                </div>
-            </fieldset>
-            <fieldset class="area-control attribute-section">
-                <legend>
-                    <div class="flex-container">
-                        <div class="checkbox flex-item">
-                            <input type="checkbox" name="attribute_section" id="attribute_section" class="trigger_input" data-trigger=".btn-att" {!! $inst->attributes()->count() ? 'checked' : null !!}> THUỘC TÍNH SẢN PHẨM
-                        </div>
-                        <div class="flex-item text-right">
-                            <button onclick="openModal('modal-add-attribute')" type="button" disabled class="btn btn-primary btn-att btn-xs" ><i class="fa fa-plus"></i> Thêm Mới</button>
-                            <button type="button" onclick="removeATT('{!! route('admin.product.removeAttribute') !!}')" disabled class="btn btn-danger btn-remove-att btn-att btn-xs"><i class="fa fa-trash"></i> Xóa Thuộc Tính</button>
-                        </div>
-                    </div>
-                </legend>
-                <div class="wrap-attribute_section wrap_general">
-                    <div class="container-fluid">
-                        <div class="row append-attribute">
-                            @if(!$attribute_list->isEmpty())
-                                @foreach($attribute_list as $item_attr)
-                                    @include("Admin::ajax.attribute.att")
-                                @endforeach
-                            @endif
-                        </div>
                     </div>
                 </div>
             </fieldset>

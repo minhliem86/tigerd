@@ -373,36 +373,53 @@ class ProductController extends Controller
     }
 
     /*EDIT SAM PHAM CON*/
-    public function postEditProductConfig(Request $request, $id)
+    public function postEditProductConfig(Request $request, $id, AttributeValueRepository $value)
     {
         $rule = [
             'name' => 'required',
-            'sku_product' => 'unique:products',
+            'sku_product' => 'required',
             'price' => 'required|numeric',
             'stock' => 'required|numeric',
-            'value' => 'required'
+            'value.*' => 'required'
         ];
         $mes = [
             'name.required' => 'Vui lòng nhập tên sản phẩm',
-            'sku_product.unique' => 'Mã Sản Phẩm đã tồn tại',
             'price.required' => 'Vui lòng nhập giá',
             'price.numeric' => 'Giá là dạng số',
             'stock.required' => 'Vui lòng nhập số lượng trong kho',
             'stock.numeric' => 'Số lượng là dạng số',
-            'value.required' => 'Vui lòng nhập giá trị thuộc tính',
+            'value.*.required' => 'Vui lòng nhập giá trị thuộc tính',
         ];
         $valid = Validator::make($request->all(),$rule, $mes);
         if($valid->fails()){
-            return redirect()->back()->withInput()->withErrors($valid);
+            return redirect()->back()->withErrors($valid->errors());
         }
         $img_url = $this->common->getPath($request->input('img_url'), $this->_replacePath);
+        $data = [
+            'name' => $request->name,
+            'slug'=> \LP_lib::unicode($request->name),
+            'sku_product'=> $request->sku_product,
+            'description' => $request->description,
+            'content'=> $request->content,
+            'price' => $request->price,
+            'discount' => $request->discount,
+            'stock' => $request->stock,
+            'img_url' => $img_url,
+        ];
+        $this->productRepo->update($data, $id);
+        foreach($request->value as $k=>$item_att){
+            $value = $value->find($request->value_id[$k]);
+            $value->value = $item_att;
+            $value->save();
+        }
+        return redirect()->route('admin.product.configuable.index',$request->product_parent_id)->with('success', 'Cập nhật thành công');
     }
 
     /*REMOVE SAN PHAM*/
     public function postRemoveConfiguable($id)
     {
         $this->productRepo->delete($id);
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Sản Phẩm thuộc tính đã xóa.');
     }
 
     /**

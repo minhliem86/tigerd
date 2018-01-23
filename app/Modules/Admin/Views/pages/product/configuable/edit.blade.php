@@ -11,8 +11,8 @@
         <div class="col-md-12">
             <div class="col-sm-12">
                 @include('Admin::errors.error_layout')
-                {!! Form::modal($product,['route'=> 'admin.product.configuable.edit.post', 'class' => 'form-horizontal']) !!}
-                    {!! Form::hidden('product_parent_id', $parent_product->id !!}
+                {!! Form::model($product,['route'=> ['admin.product.configuable.edit.post',$product->id], 'class' => 'form-horizontal']) !!}
+                    {!! Form::hidden('product_parent_id', $parent_product->id) !!}
                     {!!Form::hidden('type', 'simple')!!}
                     {!!Form::hidden('visibility', '0')!!}
                     <div class="form-group">
@@ -76,9 +76,10 @@
                         @foreach($product->values as $item_att)
                             <div class="form-group">
                                 {!! Form::hidden('att[]', $item_att->attributes->id) !!}
-                                <label class="col-md-2 control-label" for="">{!! $item_att->name !!}</label>
+                                <label class="col-md-2 control-label" for="">{!! $item_att->attributes->name !!}</label>
                                 <div class="col-md-10">
-                                    {!! Form::text('value[]',$item_att->id ? $item_att->id : '',['class'=>'form-control']) !!}
+                                    {!! Form::hidden('value_id[]', $item_att->id) !!}
+                                    {!! Form::text('value[]',$item_att->value ? $item_att->value : '',['class'=>'form-control']) !!}
                                 </div>
                             </div>
                         @endforeach

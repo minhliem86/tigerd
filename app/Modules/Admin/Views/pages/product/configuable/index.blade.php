@@ -10,8 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="wrap-title">
-
-                <h4>Quản Lý Danh Mục Thuộc Tính Sản Phẩm: {!! $parent_product->name !!}</h4>
+                <p style="font-size:16px; text-transform: uppercase;">Sản Phẩm: <b>{!! $parent_product->name !!}</b></p>
             </div>
 
             <div class="wrap-table-config">
@@ -53,7 +52,7 @@
                             <td>{!! $string !!}</td>
                             <td><input type="radio" name="default[]" value="{!! $item_child->id !!}" {!! $item_child->default ? 'checked': '' !!}></td>
                             <td>
-                                <a href="{!! route('admin.product.edit', $item_child->id, $parent_product->id) !!}" class="btn btn-info btn-xs inline-block-span"> Edit </a>
+                                <a href="{!! route('admin.product.configuable.edit',[$item_child->id, $parent_product->id]) !!}" class="btn btn-info btn-xs inline-block-span"> Edit </a>
 
                                 <a href="{!! route('admin.product.configuable.remove', $item_child->id) !!}" class="btn btn-danger btn-xs inline-block-span"> Remove </a>
                             </td>
@@ -67,5 +66,19 @@
 @stop
 
 @section("script")
+    <!-- ALERTIFY -->
+    <link rel="stylesheet" href="{{asset('/public/assets/admin')}}/dist/js/plugins/alertify/alertify.css">
+    <link rel="stylesheet" href="{{asset('/public/assets/admin')}}/dist/js/plugins/alertify/bootstrap.min.css">
+    <script type="text/javascript" src="{{asset('/public/assets/admin')}}/dist/js/plugins/alertify/alertify.js"></script>
 
+    <script>
+        $(document).ready(function(){
+            @if(Session::has('error'))
+                alertify.error('{!! Session::get("error") !!}')
+            @endif
+            @if(Session::has('success'))
+                alertify.success('{!! Session::get("success") !!}')
+            @endif
+        })
+    </script>
 @stop
