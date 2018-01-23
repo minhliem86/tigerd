@@ -11,11 +11,10 @@
         <div class="col-md-12">
             <div class="col-sm-12">
                 @include('Admin::errors.error_layout')
-                <form method="POST" action="{{route('admin.create.product.configuable.s2.post')}}" id="form" role="form" class="form-horizontal">
-                    {{Form::token()}}
-                    {!! Form::hidden('product_parent_id', Session::get('product_parent_id')) !!}
-                    {!! Form::hidden('type', 'simple') !!}
-                    {!! Form::hidden('visibility', '0') !!}
+                {!! Form::modal($product,['route'=> 'admin.product.configuable.edit.post', 'class' => 'form-horizontal']) !!}
+                    {!! Form::hidden('product_parent_id', $parent_product->id !!}
+                    {!!Form::hidden('type', 'simple')!!}
+                    {!!Form::hidden('visibility', '0')!!}
                     <div class="form-group">
                         <label class="col-md-2 control-label">Tên Sản Phẩm:</label>
                         <div class="col-md-10">
@@ -67,26 +66,24 @@
                                     <i class="fa fa-picture-o"></i> Chọn
                                 </a>
                             </span>
-                            <input id="thumbnail" class="form-control" type="hidden" name="img_url">
-                        </div>
-                            <img id="holder" style="margin-top:15px;max-height:100px;">
+                                {!!Form::hidden('img_url',old('img_url'), ['class'=>'form-control', 'id'=>'thumbnail' ])!!}
+                            </div>
+                            <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($product->img_url)}}">
                         </div>
                     </div>
                     <fieldset>
                         <legend>Thuộc tính</legend>
-                        @foreach($att as $item_att)
+                        @foreach($product->values as $item_att)
                             <div class="form-group">
-                                {!! Form::hidden('att[]', $item_att->id) !!}
+                                {!! Form::hidden('att[]', $item_att->attributes->id) !!}
                                 <label class="col-md-2 control-label" for="">{!! $item_att->name !!}</label>
                                 <div class="col-md-10">
-                                    {!! Form::text('value[]',old('value'),['class'=>'form-control']) !!}
+                                    {!! Form::text('value[]',$item_att->id ? $item_att->id : '',['class'=>'form-control']) !!}
                                 </div>
                             </div>
                         @endforeach
                     </fieldset>
-
-
-                </form>
+                {!! Form::close() !!}
             </div>
         </div>
     </div>
@@ -104,7 +101,6 @@
         init_tinymce(url);
         // BUTTON ALONE
         init_btnImage(url,'#lfm');
-        init_btnImage(url,'#lfm-meta');
         // SUBMIT FORM
         function submitForm(){
             $('form').submit();

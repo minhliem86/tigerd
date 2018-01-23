@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             @include('Admin::errors.error_layout')
-            <form method="POST" action="{{route('admin.create.product.configuable')}}" id="form" role="form" class="form-horizontal">
+            <form method="POST" action="{{route('admin.create.product.configuable.s1')}}" id="form" role="form" class="form-horizontal">
                 {{Form::token()}}
                 <div class="form-group">
                     <label for="agency_id" class="col-md-2 control-label">Chọn Danh Mục Sản Phẩm</label>
