@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="17afa036-b3b5-46e4-ad1c-f1d93a557e79" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Controllers/AttributeController.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Controllers/AttributeController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/product/attribute/create_configuable_s1.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/product/attribute/create_configuable_s1.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/product/attribute/create_configuable_s2.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/product/attribute/create_configuable_s2.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/product/attribute/getAttribute.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/product/attribute/getAttribute.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/routes.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/factories/ModelFactory.php" afterPath="$PROJECT_DIR$/database/factories/ModelFactory.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/seeds/AgencyTableDataSeeder.php" afterPath="$PROJECT_DIR$/database/seeds/AgencyTableDataSeeder.php" />
-    </list>
+    <list default="true" id="17afa036-b3b5-46e4-ad1c-f1d93a557e79" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/vendor/landish/pagination/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -79,7 +70,7 @@
         <entry file="file://$PROJECT_DIR$/app/Modules/Admin/routes.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="390">
-              <caret line="85" column="8" lean-forward="false" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
+              <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -429,16 +420,15 @@
       <workItem from="1516352977706" duration="2921000" />
       <workItem from="1516589764045" duration="1060000" />
       <workItem from="1516591748762" duration="21596000" />
-      <workItem from="1516624678953" duration="14398000" />
+      <workItem from="1516624678953" duration="14443000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79592000" />
+    <option name="totallyTimeSpent" value="79637000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24040511" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -856,7 +846,7 @@
     <entry file="file://$PROJECT_DIR$/app/Modules/Admin/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="390">
-          <caret line="85" column="8" lean-forward="false" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
+          <caret line="85" column="0" lean-forward="false" selection-start-line="85" selection-start-column="0" selection-end-line="85" selection-end-column="0" />
           <folding />
         </state>
       </provider>

@@ -83,7 +83,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::get('product/configuable/getAttributeForProduct', ['as' => 'admin.create.product.getAttribute', 'uses' => 'ProductController@getAttributeForProduct']);
         Route::post('product/configuable/getAttributeForProduct', ['as' => 'admin.create.product.postAttribute', 'uses' => 'ProductController@postAttributeForProduct']);
 
-        
+
 
         Route::resource('product', 'ProductController');
 
