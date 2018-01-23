@@ -16,6 +16,7 @@ use App\Repositories\PhotoRepository;
 use App\Repositories\Eloquent\CommonRepository;
 use Datatables;
 use Validator;
+use Session;
 
 class ProductController extends Controller
 {
@@ -43,7 +44,7 @@ class ProductController extends Controller
         'category_id'=> 'required',
         'sku_product' => 'required|min:2|max:10|unique:products,sku_product',
         'price' => 'required',
-        'stock_quality' => 'required'
+        'stock' => 'required'
     ];
 
     public $messages = [
@@ -53,13 +54,13 @@ class ProductController extends Controller
         'sku_product.max' => 'Mã Sản Phẩm tối đa 10 ký tự hoa',
         'sku_product.unique' => 'Mã Sản Phẩm này đã tồn tại',
         'price.required' => 'Vui lòng nhập Giá sản phẩm',
-        'stock_quality.required' => 'Vui lòng nhập Số lượng nhập kho'
+        'stock.required' => 'Vui lòng nhập Số lượng nhập kho'
     ];
 
     public $rules_edit = [
         'category_id'=> 'required',
         'price' => 'required',
-        'stock_quality' => 'required'
+        'stock' => 'required'
     ];
 
     public $messages_edit = [
@@ -69,7 +70,7 @@ class ProductController extends Controller
         'sku_product.max' => 'Mã Sản Phẩm tối đa 10 ký tự hoa',
         'sku_product.unique' => 'Mã Sản Phẩm này đã tồn tại',
         'price.required' => 'Vui lòng nhập Giá sản phẩm',
-        'stock_quality.required' => 'Vui lòng nhập Số lượng nhập kho'
+        'stock.required' => 'Vui lòng nhập Số lượng nhập kho'
     ];
     /**
      * Display a listing of the resource.
@@ -83,11 +84,12 @@ class ProductController extends Controller
 
     public function getData(Request $request, AttributeRepository $attribute)
     {
-        $product = $this->productRepo->query(['products.id as id', 'products.name as name', 'products.sku_product as sku_product', 'products.price as price', 'products.stock_quality as quality', 'products.img_url as img_url', 'products.hot as hot', 'products.order as order', 'products.status as status', 'categories.name as cate_name', 'products.type as type'])->join('categories', 'categories.id', '=', 'products.category_id')->orderBy('id', 'ASC')->with(['values']);
+        $product = $this->productRepo->query(['products.id as id', 'products.name as name', 'products.sku_product as sku_product', 'products.price as price', 'products.stock as quality', 'products.img_url as img_url', 'products.hot as hot', 'products.order as order', 'products.status as status', 'categories.name as cate_name', 'products.type as type'])->join('categories', 'categories.id', '=', 'products.category_id')->orderBy('id', 'ASC')->where('visibility', 1)->with(['values']);
 
         return Datatables::of($product)
             ->addColumn('action', function($product){
-                $link = $product->type == 'simple' ?  '<a href="'.route('admin.product.edit', $product->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>' : '';
+                $link = $product->type == 'simple' ?  '<a href="'.route('admin.product.edit', $product->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>' : '<a href="'.route('admin.product.configuable.index', $product->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>';
+
                 return $link.
             ' <form method="POST" action=" '.route('admin.product.destroy', $product->id).' " accept-charset="UTF-8" class="inline-block-span">
                 <input name="_method" type="hidden" value="DELETE">
@@ -149,11 +151,14 @@ class ProductController extends Controller
             })->setRowId('id')->make(true);
     }
 
+    /*TAO SIMPLE OR CONFIGUABLE*/
     public function getPreCreateProduct()
     {
         return view('Admin::pages.product.pre_create');
     }
 
+
+    /*TAO SIMPLE OR CONFIGUABLE*/
     public function postPreCreateProduct(Request $request, CategoryRepository $cate)
     {
         $valid = Validator::make($request->all(), ['type' => 'required'], ['type.required' => 'Vui lòng chọn loại sản phẩm']);
@@ -172,7 +177,9 @@ class ProductController extends Controller
         }
     }
 
-    public function postCreateConfiguable(Request $request)
+
+    /*TAO GENERAL SAN PHAM CONFIG*/
+    public function postCreateConfiguableS1(Request $request)
     {
         $rule = [
             'category_id' => 'required',
@@ -204,7 +211,7 @@ class ProductController extends Controller
             'img_url' => $img_url,
             'type' => 'configuable',
             'order' => $order,
-            'visibility' => 0
+            'visibility' => 1
         ];
         $parent_product = $this->productRepo->create($data);
 
@@ -228,6 +235,8 @@ class ProductController extends Controller
         return redirect()->route('admin.create.product.getAttribute');
     }
 
+
+    /*ADD ATTRIBUTE TO PRODUCT*/
     public function getAttributeForProduct(Request $request, AttributeRepository $attribute)
     {
         $attribute = $attribute->all(['id', 'name', 'slug']);
@@ -237,6 +246,7 @@ class ProductController extends Controller
         return view('Admin::pages.product.attribute.getAttribute', compact('attribute'));
     }
 
+    /*ADD ATTRIBUTE TO PRODUCT*/
     public function postAttributeForProduct(Request $request, AttributeRepository $attribute)
     {
         if(!$request->has('att_choose')){
@@ -251,6 +261,7 @@ class ProductController extends Controller
         return redirect()->route('admin.create.product.configuable.s2');
     }
 
+    /*TAO SAN PHAM CON CHI TIET*/
     public function getCreateProductConfigS2()
     {
         if(!\Session::has('att')){
@@ -260,13 +271,14 @@ class ProductController extends Controller
         return view('Admin::pages.product.attribute.create_configuable_s2', compact('att'));
     }
 
+    /*TAO SAN PHAM CON CHI TIET*/
     public function postCreateProductConfigS2(Request $request, AttributeValueRepository $attribute_value)
     {
         $rule = [
             'name' => 'required',
             'sku_product' => 'unique:products',
             'price' => 'required|numeric',
-            'stock_quality' => 'required|numeric',
+            'stock' => 'required|numeric',
             'value' => 'required'
         ];
         $mes = [
@@ -274,8 +286,8 @@ class ProductController extends Controller
             'sku_product.unique' => 'Mã Sản Phẩm đã tồn tại',
             'price.required' => 'Vui lòng nhập giá',
             'price.numeric' => 'Giá là dạng số',
-            'stock_quality.required' => 'Vui lòng nhập số lượng trong kho',
-            'stock_quality.numeric' => 'Số lượng là dạng số',
+            'stock.required' => 'Vui lòng nhập số lượng trong kho',
+            'stock.numeric' => 'Số lượng là dạng số',
             'value.required' => 'Vui lòng nhập giá trị thuộc tính',
         ];
 
@@ -293,6 +305,7 @@ class ProductController extends Controller
         $data = [
             'name' => $request->name,
             'slug'=> \LP_lib::unicode($request->name),
+            'sku_product'=> $request->sku_product,
             'description' => $request->description,
             'content'=> $request->content,
             'price' => $request->price,
@@ -308,10 +321,88 @@ class ProductController extends Controller
 
         foreach($request->att as $k=>$item_att){
             $value = $attribute_value->create(['value' => $request->value[$k], 'attribute_id'=>$item_att]);
-            $product->values->attach($value->id);
+            $product->values()->attach($value->id);
         }
 
-        $product->product_links()->save(new \App\Models\ProductLink(['product_id'=>$product_parent->id, 'link_to_product_id'=> $product->id]));
+        $data_link = [
+            'product_id' => $request->product_parent_id,
+            'link_to_product_id' => $product->id
+        ];
+        \App\Models\ProductLink::create($data_link);
+
+        return redirect()->route('admin.product.configuable.index',$request->product_parent_id);
+        Session::forget('product_parent_id');
+        Session::forget('att');
+
+    }
+
+    /*QUAN LY LIST SAN PHAM CONFIG*/
+    public function getIndexProductConfig($parent_product_id)
+    {
+        $parent_product = $this->productRepo->find($parent_product_id);
+        if($parent_product->type == 'configuable'){
+            $array_product_link = [];
+            if(!$parent_product->product_links->isEmpty()){
+                foreach($parent_product->product_links as $item_link){
+                    array_push($array_product_link, $item_link->link_to_product_id);
+                }
+            }
+            $product_child = $this->productRepo->findWhereIn('id' , $array_product_link);
+            return view('Admin::pages.product.configuable.index', compact('product_child', 'parent_product'));
+        }else{
+            return redirect()->back()->with('error','Sản Phẩm này không thuộc dạng phức hợp');
+        }
+    }
+
+    /*TAO THEM SAN PHAM CON*/
+    public function getCreateProductConfig($parent_product_id)
+    {
+        $parent_product = $this->productRepo->find($parent_product_id);
+
+        Session::put('product_parent_id', $parent_product->id);
+        return redirect()->route('admin.create.product.getAttribute');
+    }
+
+    /*EDIT SAM PHAM CON*/
+    public function getEditProductConfig($id, $parent_product_id)
+    {
+        $parent_product = $this->productRepo->find($parent_product_id);
+        $product = $this->productRepo->find($id);
+
+        return view('Admin::pages.product.configuable.edit', compact('parent_product','product'));
+    }
+
+    /*EDIT SAM PHAM CON*/
+    public function postEditProductConfig(Request $request, $id)
+    {
+        $rule = [
+            'name' => 'required',
+            'sku_product' => 'unique:products',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric',
+            'value' => 'required'
+        ];
+        $mes = [
+            'name.required' => 'Vui lòng nhập tên sản phẩm',
+            'sku_product.unique' => 'Mã Sản Phẩm đã tồn tại',
+            'price.required' => 'Vui lòng nhập giá',
+            'price.numeric' => 'Giá là dạng số',
+            'stock.required' => 'Vui lòng nhập số lượng trong kho',
+            'stock.numeric' => 'Số lượng là dạng số',
+            'value.required' => 'Vui lòng nhập giá trị thuộc tính',
+        ];
+        $valid = Validator::make($request->all(),$rule, $mes);
+        if($valid->fails()){
+            return redirect()->back()->withInput()->withErrors($valid);
+        }
+        $img_url = $this->common->getPath($request->input('img_url'), $this->_replacePath);
+    }
+
+    /*REMOVE SAN PHAM*/
+    public function postRemoveConfiguable($id)
+    {
+        $this->productRepo->delete($id);
+        return redirect()->back();
     }
 
     /**
@@ -359,7 +450,7 @@ class ProductController extends Controller
             'sku_product' => $sku_product,
             'price' => $request->input('price'),
             'discount' => $request->input('discount'),
-            'stock_quality' => $request->input('stock_quality'),
+            'stock' => $request->input('stock'),
             'img_url' => $img_url,
             'order' => $order,
             'category_id' => $request->input('category_id'),
@@ -467,7 +558,7 @@ class ProductController extends Controller
             'price' => $request->input('price'),
             'discount' => $request->input('discount'),
             'sku_product' => $request->input('sku_product'),
-            'stock_quality' => $request->input('stock_quality'),
+            'stock' => $request->input('stock'),
             'img_url' => $img_url,
             'order' => $request->input('order'),
             'status' => $request->input('status'),

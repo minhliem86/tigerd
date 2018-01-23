@@ -118,19 +118,22 @@ $factory->define(App\Models\Product::class, function (Faker\Generator $faker){
        'sku_product' => 'MH'.$faker->numberBetween(10, 50),
        'content' => $faker->paragraph(),
        'price' => $faker->numberBetween('100000', '9999999'),
-       'stock_quality' => 200,
+       'stock' => 200,
    ];
 });
 
 $factory->define(App\Models\Attribute::class, function (Faker\Generator $faker){
-    return[
-        'name' => $faker->lexify('Màu Sắc ???'),
-        'description' => $faker->paragraph(),
-    ];
+
+    return
+        [
+            'name' => $faker->randomElement(['Màu Sắc','Size']),
+            'description' => $faker->paragraph(),
+        ];
 });
 
 $factory->define(App\Models\AttributeValue::class, function (Faker\Generator $faker){
-   return [
-       'value' => 'xanh'
+
+    return [
+       'value' => $faker->randomElement(['xanh','đỏ','S','M']),
    ];
 });

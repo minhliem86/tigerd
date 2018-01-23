@@ -11,7 +11,7 @@ class AttributeTableDataSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\Attribute::class, 1)->create()->each(function($att){
+        factory(App\Models\Attribute::class, 2)->create()->each(function($att){
            $att->attribute_values()->save(factory(App\Models\AttributeValue::class)->make());
         });
     }

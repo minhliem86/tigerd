@@ -21,7 +21,7 @@ class CreateProductsTable extends Migration
             $table->string('sku_product')->nullable()->unique();
             $table->integer('price')->nullable();
             $table->integer('discount')->nullable();
-            $table->integer('stock_quality')->nullable();
+            $table->integer('stock')->nullable();
             $table->string('img_url')->nullable();
             $table->boolean('hot')->default(0);
             $table->string('count_number')->nullable()->default(0);
@@ -29,6 +29,7 @@ class CreateProductsTable extends Migration
             $table->boolean('status')->default(1);
             $table->boolean('visibility')->default(1);
             $table->string('type')->default('simple');
+            $table->boolean('default')->default(0);
             $table->integer('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
