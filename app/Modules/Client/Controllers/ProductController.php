@@ -101,17 +101,44 @@ class ProductController extends Controller
 
     public function getProduct($slug)
     {
-        $product = $this->product->getProductBySlug($slug,['id','name', 'slug', 'description', 'content', 'sku_product', 'price', 'discount', 'img_url','category_id'], ['categories','photos', 'values', 'attributes']);
-
+        $product = $this->product->getProductBySlug($slug,['id','name', 'slug', 'description', 'content', 'sku_product', 'price', 'discount', 'img_url','category_id','type'], ['categories','photos', 'values', 'attributes','product_links']);
         if(count($product)){
-            $relate_product = $this->product->relateProduct([$product->id], ['id', 'slug', 'name', 'price', 'discount', 'img_url']);
-            $arr_value_product = [];
-            if(!$product->values->isEmpty()){
-                foreach($product->values as $item){
-                    array_push($arr_value_product, $item->id);
+            $array_att = [];
+            $result = [];
+            $option = "";
+            $relate_product = $this->product->relateProduct([$product->id], ['id', 'img_url', 'name','slug', 'price', 'discount','category_id', 'default'],['attributes', 'product_links']);
+
+            if($product->type == 'configuable'){
+                $array_product_id = [];
+                if(!$product->product_links->isEmpty()){
+                    foreach($product->product_links as $link){
+                        array_push($array_product_id, $link->link_to_product_id);
+                    }
                 }
+                $collect_product_child = $this->product->findWhereIn('id', $array_product_id);
+
+                foreach($collect_product_child as $item_child){
+                    foreach($item_child->values() as $item_value){
+                        if($item_value == end($item_child->values())){
+                            $option .= $item_value->attributes->name .': '.$item_value->value;
+                        }else{
+                            $option .= $item_value->attributes->name .': '.$item_value->value.', ';
+                        }
+                    }
+
+                    $rs_array = "<option value='".$item_child->id."'>".$option."</option>";
+                    array_push($result,$rs_array);
+                }
+
+                foreach($collect_product_child as $item_default){
+                    if($item_default->default){
+                        $product = $item_default;
+                    }
+                }
+
             }
-            return view('Client::pages.product.detail', compact('product', 'relate_product', 'arr_value_product'));
+
+            return view('Client::pages.product.detail', compact('product', 'relate_product', 'array_att'));
         }
         return abort(404);
     }
@@ -291,7 +318,6 @@ class ProductController extends Controller
                 ];
                 $ship->create($data_ship);
 
-                return redirect()
                 break;
 
             case '2' :
@@ -334,23 +360,17 @@ class ProductController extends Controller
         if(!$request->ajax()){
             return abort(404);
         }else{
-            $product_id = $request->input('product_id');
             $value_id = $request->input('value_id');
-            $product = $this->product->find($product_id);
-            if($value_id){
-                if($this->value->find($value_id)->value_price){
-                    $price = $product->discount ? $product->discount : $product->price + $this->value->find($value_id)->value_price;
-                    return response()->json(['price_format' => number_format($price),'price'=>$price, 'data' => 'Update Giá'], 200);
-                }else{
-                    $price = $product->discount ? $product->discount : $product->price;
-                    return response()->json(['price_format' => number_format($price),'price'=>$price, 'data' => 'Không Update Giá'], 200);
-                }
-            }else{
-                $product = $this->product->find($product_id);
-                $price = $product->discount ? $product->discount : $product->price;
-
-                return response()->json(['price_format' => number_format($price),'price'=>$price, 'data' => 'Update Giá'], 200);
+            $value_obj = $this->value->find($value_id);
+            foreach($value_obj->products as $item_product)
+            {
+                $product_ajax = $item_product;
             }
+            $price = $product_ajax->discount ? number_format($product_ajax->discount) : number_format($product_ajax->price);
+            $content = strip_tags($product_ajax->content);
+            $photo_display = view('Client::extensions.photo_product')->with('product', $product_ajax)->render();
+
+            return response()->json(['error' => false, 'data'=>$product_ajax, 'price' => $price, 'content'=>$content, 'photo'=>$photo_display], 200);
 
         }
     }

@@ -20,25 +20,49 @@
                             <div class="swiper-container" id="swiper-product">
                                 <div class="swiper-wrapper">
                                     @foreach($product as $item_product)
-                                    <div class="swiper-slide">
-                                        <div class="each-product">
-                                            <figure>
-                                                <a href="{!! route('client.product', $item_product->slug) !!}"><img src="{!! asset($item_product->img_url) !!}" class="img-fluid mx-auto mb-2" alt="{!! $item_product->name !!}"></a>
-                                                <figcaption>
-                                                    <p class="product-name"><a href="{!! route('client.product', $item_product->slug) !!}">{!! $item_product->name !!}</a></p>
-                                                    <p class="price {!! $item_product->discount ? 'discount' : null !!}">{!! number_format($item_product->price) !!} VND</p>
-                                                    @if($item_product->discount)
-                                                    <p class="price">{!! number_format($item_product->discount) !!} VND</p>
-                                                    @endif
-                                                    @if($item_product->values->isEmpty())
-                                                        <button type="button" class="btn btn-outline-default btn-add-to-cart" onclick="addToCartAjax('{!! route("client.cart.addToCartAjax") !!}', {!! $item_product->id !!})">Thêm Giỏ Hàng</button>
-                                                    @else
-                                                        <a href="{!! route('client.product', $item_product->slug) !!}" class="btn btn-outline-default btn-add-to-cart">Xem Sản Phẩm</a>
-                                                    @endif
-                                                </figcaption>
-                                            </figure>
-                                        </div>
-                                    </div>
+                                        @php
+                                            $slug = $item_product->slug;
+                                        @endphp
+                                        @if($item_product->product_links->isEmpty())
+                                            <div class="swiper-slide">
+                                                <div class="each-product">
+                                                    <figure>
+                                                        <a href="{!! route('client.product', $item_product->slug) !!}"><img src="{!! asset($item_product->img_url) !!}" class="img-fluid mx-auto mb-2" alt="{!! $item_product->name !!}"></a>
+                                                        <figcaption>
+                                                            <p class="product-name"><a href="{!! route('client.product', $item_product->slug) !!}">{!! $item_product->name !!}</a></p>
+                                                            <p class="price {!! $item_product->discount ? 'discount' : null !!}">{!! number_format($item_product->price) !!} VND</p>
+                                                            @if($item_product->discount)
+                                                            <p class="price">{!! number_format($item_product->discount) !!} VND</p>
+                                                            @endif
+                                                                <button type="button" class="btn btn-outline-default btn-add-to-cart" onclick="addToCartAjax('{!! route("client.cart.addToCartAjax") !!}', {!! $item_product->id !!})">Thêm Giỏ Hàng</button>
+                                                        </figcaption>
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                        @else
+                                            @foreach($item_product->product_links as $item_link)
+                                                @php
+                                                    $product_child = App\Models\Product::find($item_link->link_to_product_id);
+                                                @endphp
+                                                @if($product_child->default)
+                                                    <div class="swiper-slide">
+                                                        <div class="each-product">
+                                                            <figure>
+                                                                <a href="{!! route('client.product', $item_product->slug) !!}"><img src="{!! asset($product_child->img_url) !!}" class="img-fluid mx-auto mb-2" alt="{!! $product_child->name !!}"></a>
+                                                                <figcaption>
+                                                                    <p class="product-name"><a href="{!! route('client.product', $item_product->slug) !!}">{!! $item_product->name !!}</a></p>
+                                                                    <p class="price {!! $product_child->discount ? 'discount' : null !!}">{!! number_format($product_child->price) !!} VND</p>
+                                                                    @if($product_child->discount)
+                                                                        <p class="price">{!! number_format($product_child->discount) !!} VND</p>
+                                                                    @endif
+                                                                    <a href="{!! route('client.product', $item_product->slug) !!}" class="btn btn-outline-default btn-add-to-cart">Xem Sản Phẩm</a>
+                                                                </figcaption>
+                                                            </figure>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     @endforeach
                                 </div>
                                 <!-- If we need navigation buttons -->

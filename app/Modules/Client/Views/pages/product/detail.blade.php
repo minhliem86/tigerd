@@ -11,17 +11,7 @@
             <div class="row product-infomation-row">
                 <div class="col-md-4 col-sm-5">
                     <div class="wrap-gallery">
-                        @if(!$product->photos->isEmpty())
-                        <ul id="image-gallery" class="gallery">
-                            @foreach($product->photos as $item_photo)
-                            <li data-thumb="{!! asset($item_photo->thumb_url) !!}">
-                                <img src="{!! asset($item_photo->img_url) !!}" class="img-fluid" />
-                            </li>
-                            @endforeach
-                        </ul>
-                        @else
-                            <img src="{!! asset($product->img_url) !!}" class="img-fluid" alt="{!! $product->name !!}">
-                        @endif
+                        @include("Client::extensions.photo_product")
                     </div>
                 </div>
                 <div class="col-md-8 col-sm-7">
@@ -44,24 +34,8 @@
                     @endif
                     <div class="product-attribute">
                         <input type="hidden" name="product_id" value="{!! $product->id !!}">
-                        <input type="hidden" name="price" value="{!! $product->discount ? $product->discount  : $product->price !!}">
-                        @if(!$product->attributes->isEmpty() && !$product->values->isEmpty())
-                            @foreach($product->attributes as $item_att)
 
-                            <div class="each-attribute">
-                                <p class="att-title">{!! $item_att->name !!}</p>
-                                <select name="att_value[{!! $item_att->slug !!}]" class="form-control att_value" >
-                                    <option value="">--Vui lòng chọn thuộc tính--</option>
-                                    @php(
-                                        $arr_value = \App\Models\AttributeValue::where('attribute_id', $item_att->id)->whereIn('id',$arr_value_product)->get()
-                                    )
-                                    @foreach($arr_value as $item_value)
-                                        <option value="{!! $item_value->id !!}">{!! $item_value->value !!}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            @endforeach
-                        @endif
+                        @include("Client::extensions.attribute_product")
 
                         <div class="each-attribute quantity">
                             <p class="att-title">Số Lượng</p>
@@ -106,28 +80,51 @@
                     <h2 class="title-section mx-auto">Sản Phẩm Khác</h2>
                     @if(!$relate_product->isEmpty())
                     <div class="swiper-container" id="swiper-product">
-
                         <div class="swiper-wrapper">
-                            @foreach($relate_product as $item_product_relate)
-                            <div class="swiper-slide">
-                                <div class="each-product">
-                                    <figure>
-                                        <a href="{!! route('client.product', $item_product_relate->slug) !!}"><img src="{!! asset($item_product_relate->img_url) !!}" class="img-fluid mx-auto mb-2" alt="{!! $item_product_relate->name !!}"></a>
-                                        <figcaption>
-                                            <p class="product-name"><a href="{!! route('client.product', $item_product_relate->slug) !!}">{!! $item_product_relate->name !!}</a></p>
-                                            <p class="price {!! $item_product_relate->discount ? 'discount' : null !!}">{!! number_format($item_product_relate->price) !!} VND</p>
-                                            @if($item_product_relate->discount)
-                                                <p class="price">{!! number_format($item_product_relate->discount) !!} VND</p>
-                                            @endif
-                                            @if($item_product_relate->values->isEmpty())
-                                                <button type="button" class="btn btn-outline-default btn-add-to-cart">Thêm Giỏ Hàng</button>
-                                            @else
-                                                <a href="{!! route('client.product', $item_product_relate->slug) !!}" class="btn btn-outline-default btn-add-to-cart">Xem Sản Phẩm</a>
-                                            @endif
-                                        </figcaption>
-                                    </figure>
-                                </div>
-                            </div>
+                            @foreach($relate_product as $item_product)
+                                @php
+                                    $slug = $item_product->slug;
+                                @endphp
+                                @if($item_product->product_links->isEmpty())
+                                    <div class="swiper-slide">
+                                        <div class="each-product">
+                                            <figure>
+                                                <a href="{!! route('client.product', $item_product->slug) !!}"><img src="{!! asset($item_product->img_url) !!}" class="img-fluid mx-auto mb-2" alt="{!! $item_product->name !!}"></a>
+                                                <figcaption>
+                                                    <p class="product-name"><a href="{!! route('client.product', $item_product->slug) !!}">{!! $item_product->name !!}</a></p>
+                                                    <p class="price {!! $item_product->discount ? 'discount' : null !!}">{!! number_format($item_product->price) !!} VND</p>
+                                                    @if($item_product->discount)
+                                                        <p class="price">{!! number_format($item_product->discount) !!} VND</p>
+                                                    @endif
+                                                    <button type="button" class="btn btn-outline-default btn-add-to-cart" onclick="addToCartAjax('{!! route("client.cart.addToCartAjax") !!}', {!! $item_product->id !!})">Thêm Giỏ Hàng</button>
+                                                </figcaption>
+                                            </figure>
+                                        </div>
+                                    </div>
+                                @else
+                                    @foreach($item_product->product_links as $item_link)
+                                        @php
+                                            $product_child = App\Models\Product::find($item_link->link_to_product_id);
+                                        @endphp
+                                        @if($product_child->default)
+                                            <div class="swiper-slide">
+                                                <div class="each-product">
+                                                    <figure>
+                                                        <a href="{!! route('client.product', $item_product->slug) !!}"><img src="{!! asset($product_child->img_url) !!}" class="img-fluid mx-auto mb-2" alt="{!! $product_child->name !!}"></a>
+                                                        <figcaption>
+                                                            <p class="product-name"><a href="{!! route('client.product', $item_product->slug) !!}">{!! $item_product->name !!}</a></p>
+                                                            <p class="price {!! $product_child->discount ? 'discount' : null !!}">{!! number_format($product_child->price) !!} VND</p>
+                                                            @if($product_child->discount)
+                                                                <p class="price">{!! number_format($product_child->discount) !!} VND</p>
+                                                            @endif
+                                                            <a href="{!! route('client.product', $item_product->slug) !!}" class="btn btn-outline-default btn-add-to-cart">Xem Sản Phẩm</a>
+                                                        </figcaption>
+                                                    </figure>
+                                                </div>
+                                            </div>
+                                        @endif
+                                    @endforeach
+                                @endif
                             @endforeach
                         </div>
 
@@ -197,19 +194,24 @@
             @if(Session::has('success'))
                 $('.modal-addToCart-success').modal('show');
             @endif
+                    
 
-            $('.att_value').on('change', function (e) {
-                var product_id = $('input[name=product_id]').val();
-                var att_value_id = $(this).val();
+                    
+            $('.value_product').on('change', function (e) {
+                var value_id = $(this).val();
 
                 $.ajax({
                     url: '{!! route("client.product.ajaxChangeAttributeValue") !!}',
                     type: 'POST',
-                    data: {product_id: product_id, value_id: att_value_id},
+                    data: {value_id: value_id},
                     success: function (data){
-                        if(data.price){
-                            $('span.price-value').text(data.price_format);
-                            $('input[name=price]').val(data.price);
+                        if(!data.error){
+                            $('h2.product-name').text(data.data.name);
+                            $('p.description').text(data.data.description);
+                            $('.price-value').text(data.price);
+                            $('input[name=product_id]').val(data.data.id);
+                            $('.wrap-chitietsanpham').text(data.content);
+                            $('.wrap-gallery').html(data.photo);
                         }
                     }
                 })

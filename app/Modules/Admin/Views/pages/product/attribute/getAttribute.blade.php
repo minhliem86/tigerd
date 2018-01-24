@@ -1,6 +1,7 @@
 @extends('Admin::layouts.main-layout')
 
 @section('link')
+    <a class="btn btn-warning" href="{!! url()->previous() !!}">Back</a>
     <button class="btn btn-primary" onclick="submitForm();">Tiếp tục</button>
     <a class="btn btn-info" href="{!! route('admin.attribute.create') !!}">Tạo thuộc tính mới</a>
 @stop

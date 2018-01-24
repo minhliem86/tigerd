@@ -22,7 +22,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $product = $this->product->all(['id', 'img_url', 'name','slug', 'price', 'discount'], ['attributes']);
+        $product = $this->product->getProductHomePage(['id', 'img_url', 'name','slug', 'price', 'discount','category_id', 'default'], ['attributes','product_links']);
         $news = $this->news->all(['name','slug', 'description', 'img_url']);
 
         return view('Client::pages.home.index', compact('product', 'news'));

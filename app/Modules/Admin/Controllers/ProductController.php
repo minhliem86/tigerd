@@ -42,7 +42,7 @@ class ProductController extends Controller
 
     public $rules = [
         'category_id'=> 'required',
-        'sku_product' => 'required|min:2|max:10|unique:products,sku_product',
+        'sku_product' => 'required|unique:products',
         'price' => 'required',
         'stock' => 'required'
     ];
@@ -50,8 +50,6 @@ class ProductController extends Controller
     public $messages = [
         'category_id.required' => 'Vui lòng chọn Danh Mục Sản Phẩm',
         'sku_product.required' => 'Vui lòng nhập Mã Sản Phẩm',
-        'sku_product.min' => 'Mã Sản Phẩm tối thiểu 2 ký tự hoa',
-        'sku_product.max' => 'Mã Sản Phẩm tối đa 10 ký tự hoa',
         'sku_product.unique' => 'Mã Sản Phẩm này đã tồn tại',
         'price.required' => 'Vui lòng nhập Giá sản phẩm',
         'stock.required' => 'Vui lòng nhập Số lượng nhập kho'
@@ -60,15 +58,13 @@ class ProductController extends Controller
     public $rules_edit = [
         'category_id'=> 'required',
         'price' => 'required',
-        'stock' => 'required'
+        'stock' => 'required',
+        'sku_product' => 'required',
     ];
 
     public $messages_edit = [
         'category_id.required' => 'Vui lòng chọn Danh Mục Sản Phẩm',
         'sku_product.required' => 'Vui lòng nhập Mã Sản Phẩm',
-        'sku_product.min' => 'Mã Sản Phẩm tối thiểu 2 ký tự hoa',
-        'sku_product.max' => 'Mã Sản Phẩm tối đa 10 ký tự hoa',
-        'sku_product.unique' => 'Mã Sản Phẩm này đã tồn tại',
         'price.required' => 'Vui lòng nhập Giá sản phẩm',
         'stock.required' => 'Vui lòng nhập Số lượng nhập kho'
     ];
@@ -205,7 +201,7 @@ class ProductController extends Controller
         $data = [
             'category_id' => $request->input('category_id'),
             'name' => $request->input('name'),
-            'slug' => \LP_lib::unicode($request->input('slug')),
+            'slug' => \LP_lib::unicode($request->input('name')),
             'sku_product' => $request->input('sku_product'),
             'description' => $request->input('description'),
             'img_url' => $img_url,
@@ -420,6 +416,30 @@ class ProductController extends Controller
     {
         $this->productRepo->delete($id);
         return redirect()->back()->with('success', 'Sản Phẩm thuộc tính đã xóa.');
+    }
+
+    /*AJAX CHANGE DEFAULT*/
+    public function postChangeDefault(Request $request)
+    {
+        if(!$request->ajax()){
+            abort(404);
+        }else{
+            $id = $request->input('id');
+            $parent_id = $request->input('parent_id');
+            $parent_product = $this->productRepo->find($parent_id);
+            $array_child_id = [];
+            foreach($parent_product->product_links as $item_link)
+            {
+                array_push($array_child_id, $item_link->link_to_product_id);
+            }
+            $collect_product_child = $this->productRepo->query()->whereIn('id', $array_child_id);
+            $collect_product_child->update(['default'=>0]);
+            $data = [
+                'default' => 1
+            ];
+            $this->productRepo->update($data, $id);
+            return response()->json(['error', false, 'data' => $this->productRepo->find($id)->name]);
+        }
     }
 
     /**

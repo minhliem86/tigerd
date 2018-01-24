@@ -1,6 +1,7 @@
 @extends('Admin::layouts.main-layout')
 
 @section('link')
+    <a class="btn btn-warning" href="{!! url()->previous() !!}">Back</a>
     <button class="btn btn-primary" onclick="submitForm();">Save</button>
 @stop
 

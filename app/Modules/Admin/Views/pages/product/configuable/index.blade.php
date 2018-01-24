@@ -4,7 +4,7 @@
     <a href="{!! route('admin.product.configuable.create', $parent_product->id) !!}" class="btn btn-primary">Tạo thêm sản phẩm</a>
 @stop
 
-@section('title','Thêm Thuộc Tính Sản Phẩm')
+@section('title','Quản lý Sản phẩm phức hợp')
 
 @section("content")
     <div class="row">
@@ -48,9 +48,13 @@
                         <tr>
                             <td><img src="{!! asset($item_child->img_url) !!}" class="img-responsive" style="width:80px" alt="{!! $item_child->name !!}"></td>
                             <td>{!! $item_child->name !!}</td>
-                            <td>{!! number_format($item_child->price) !!}</td>
+                            <td>{!! number_format($item_child->price) !!} VND</td>
                             <td>{!! $string !!}</td>
-                            <td><input type="radio" name="default[]" value="{!! $item_child->id !!}" {!! $item_child->default ? 'checked': '' !!}></td>
+                            <td>
+                                <div class="radio">
+                                    <input type="radio" name="default_att" data-parent="{!! $parent_product->id !!}"  value="{!! $item_child->id !!}" {!! $item_child->default ? 'checked': '' !!}>
+                                </div>
+                            </td>
                             <td>
                                 <a href="{!! route('admin.product.configuable.edit',[$item_child->id, $parent_product->id]) !!}" class="btn btn-info btn-xs inline-block-span"> Edit </a>
 
@@ -79,6 +83,22 @@
             @if(Session::has('success'))
                 alertify.success('{!! Session::get("success") !!}')
             @endif
+
+            $('input[name=default_att]').on('ifChecked', function(e){
+                var id = $(this).val();
+                var parent_id = $(this).data('parent');
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    url: '{!! route("admin.product.configuable.changeDefault") !!}',
+                    type: 'POST',
+                    data: {id: id, parent_id: parent_id},
+                    success: function(data){
+                        if(!data.error){
+                            alertify.success('Sản phẩm mặc định: '+ data.data);
+                        }
+                    }
+                })
+            })
         })
     </script>
 @stop
