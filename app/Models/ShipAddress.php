@@ -8,7 +8,7 @@ class ShipAddress extends Model
 {
     public $table = 'ship_addresses';
 
-    protected $guard = ['id'];
+    protected $guarded = ['id'];
 
     public function orders()
     {

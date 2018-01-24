@@ -19,10 +19,7 @@ class CreateOrdersTable extends Migration
             $table->string('total')->default(0);
             $table->integer('customer_id')->unsigned();
             $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade');
-            $table->integer('promotion_id')->unsigned();
-            $table->foreign('promotion_id')->references('id')->on('promotions')->onDelete('cascade');
-            $table->integer('shipcost_id')->unsigned();
-            $table->foreign('shipcost_id')->references('id')->on('ship_payments')->onDelete('cascade');
+            $table->integer('promotion_id')->unsigned()->nullable();
             $table->integer('paymentmethod_id')->unsigned();
             $table->foreign('paymentmethod_id')->references('id')->on('payment_methods')->onDelete('cascade');
             $table->integer('shipstatus_id')->unsigned();

@@ -126,7 +126,7 @@ $factory->define(App\Models\Attribute::class, function (Faker\Generator $faker){
 
     return
         [
-            'name' => $faker->randomElement(['Màu Sắc','Size']),
+            'name' => $faker->randomElement(['Màu Sắc','Size','Thể Tích']),
             'description' => $faker->paragraph(),
         ];
 });

@@ -98,7 +98,7 @@
                {data: 'sku_promotion', sku_promotion: 'name'},
                {data: 'name', name: 'name'},
                {data: 'value', value: 'value'},
-               {data: 'quality', value: 'quality'},
+               {data: 'quantity', value: 'quantity'},
                {data: 'to_time', value: 'to_time'},
                {data: 'status', name: 'status'},
                {data: 'action', name: 'action', 'orderable': false}

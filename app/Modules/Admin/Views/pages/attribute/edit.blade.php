@@ -10,8 +10,7 @@
     <div class="row">
         <div class="col-sm-12">
             @include('Admin::errors.error_layout')
-            <form method="POST" action="{{route('admin.attribute.create.post')}}" id="form" role="form" class="form-horizontal">
-                {{Form::token()}}
+            {!! Form::model($attribute,['route' => ['admin.attribute.update',$attribute->id], 'class'=>'form-horizontal']) !!}
                 {!! Form::hidden('url', Session::has('url') ? Session::get('url') : '') !!}
                 <div class="form-group">
                     <label class="col-md-2 control-label">Tên Thuộc Tính: </label>

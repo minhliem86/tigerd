@@ -942,6 +942,24 @@ ul.list-errors{
           }
         }
       }
+      &.thank-wrapper{
+        max-width:600px;
+        margin:0 auto;
+        padding:3rem;
+        background: #f4c1d7;
+        border-radius:6px;
+        text-align:center;
+        font-size:2rem;
+        line-height:3rem;
+        color:white;
+        .wrap-btn{
+          margin-top:2rem;
+          a.btn{
+            font-size:1.4rem;
+            padding:0.4rem 2rem;
+          }
+        }
+      }
     }
     .control-cart{
       .button-wrapper{

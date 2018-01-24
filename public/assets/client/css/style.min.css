@@ -712,6 +712,21 @@ ul.list-errors {
       max-width: 140px; }
     .page .cart-page .cart-wrapper table tbody td input {
       font-size: 1.4rem; }
+  .page .cart-page .cart-wrapper.thank-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 3rem;
+    background: #f4c1d7;
+    border-radius: 6px;
+    text-align: center;
+    font-size: 2rem;
+    line-height: 3rem;
+    color: white; }
+    .page .cart-page .cart-wrapper.thank-wrapper .wrap-btn {
+      margin-top: 2rem; }
+      .page .cart-page .cart-wrapper.thank-wrapper .wrap-btn a.btn {
+        font-size: 1.4rem;
+        padding: 0.4rem 2rem; }
   .page .cart-page .control-cart .button-wrapper {
     float: left; }
     .page .cart-page .control-cart .button-wrapper a.btn {

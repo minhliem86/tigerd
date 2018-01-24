@@ -8,5 +8,5 @@ class PaymentSupplier extends Model
 {
     public $table = 'payment_suppliers';
 
-    protected $guard = ['id'];
+    protected $guarded = ['id'];
 }

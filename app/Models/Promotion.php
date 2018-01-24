@@ -10,8 +10,4 @@ class Promotion extends Model
 
     protected $guarded = ['id'];
 
-    public function orders()
-    {
-        return $this->hasMany('App\Models\Order');
-    }
 }

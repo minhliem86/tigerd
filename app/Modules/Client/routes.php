@@ -28,6 +28,8 @@ Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controlle
     Route::post('/doPayment', ['as' => 'client.doPayment', 'uses' => 'ProductController@doPayment']);
     Route::get('/responsePayment', ['as' => 'client.responsePayment', 'uses' => 'ProductController@responseFormOnePay']);
 
+    Route::get('/thanh-toan-thanh-cong', ['as' => 'client.payment_success.thank','uses' => 'ProductController@getThankyou']);
+
     /*CUSTOMER*/
     Route::get('/dang-nhap', ['as' => 'client.auth.login', 'uses' => 'Auth\AuthController@getLogin']);
     Route::post('/dang-nhap', ['as' => 'client.auth.login.post', 'uses' => 'Auth\AuthController@postLogin']);

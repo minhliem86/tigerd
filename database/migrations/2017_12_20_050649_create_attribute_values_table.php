@@ -15,9 +15,9 @@ class CreateAttributeValuesTable extends Migration
         Schema::create('attribute_values', function (Blueprint $table) {
             $table->increments('id');
             $table->string('value')->nullable();
-            $table->string('value_price')->default(0)->nullable();
             $table->integer('order')->nullable();
             $table->boolean('status')->default(1);
+            $table->integer('product_id');
             $table->integer('attribute_id')->unsigned();
             $table->foreign('attribute_id')->references('id')->on('attributes')->onDelete('cascade');
             $table->timestamps();

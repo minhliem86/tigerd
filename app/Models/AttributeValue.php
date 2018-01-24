@@ -14,4 +14,8 @@ class AttributeValue extends Model
     {
         return $this->belongsTo('App\Models\Attribute', 'attribute_id');
     }
+    public function products()
+    {
+        return $this->belongsToMany('App\Models\Product','product_value', 'attribute_value_id', 'product_id');
+    }
 }

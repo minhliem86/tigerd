@@ -55,7 +55,7 @@
                           </div>
                           <div class="col-md-6">
                               <label class="control-label">Số lượng</label>
-                              {!! Form::number('quality', old('quality'), ['class'=>'form-control', 'placeholder' => 'Số Lượng']) !!}
+                              {!! Form::number('quantity', old('quantity'), ['class'=>'form-control', 'placeholder' => 'Số Lượng']) !!}
                           </div>
                       </div>
                   </div>

@@ -8,7 +8,7 @@ class ShipPayment extends Model
 {
     public $table = 'ship_payments';
 
-    protected $guard = ['id'];
+    protected $guarded = ['id'];
 
     public function orders()
     {

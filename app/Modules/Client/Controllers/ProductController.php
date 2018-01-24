@@ -53,6 +53,7 @@ class ProductController extends Controller
           'customer_name' => 'required',
             'vpc_Customer_Phone' => 'required',
             'vpc_Customer_Email' => 'required|email',
+            'vpc_SHIP_Street01' => 'required',
             'payment_method' => 'required'
         ];
     }
@@ -63,28 +64,8 @@ class ProductController extends Controller
             'vpc_Customer_Phone.required' => 'Vui lòng nhập Số điện thoại',
             'vpc_Customer_Email.required' => 'Vui lòng nhập Email',
             'vpc_Customer_Email.email' => 'Vui lòng nhập định dạng Email',
+            'vpc_SHIP_Street01.required' => 'Vui lòng nhập địa chỉ giao hàng',
             'payment_method.required' => 'Vui lòng chọn Phương thức thanh toán',
-        ];
-    }
-
-    private function _rulesAddToCart()
-    {
-        return [
-          'price' => 'required|min:1',
-            'quantity' => 'required|min:1|max:10',
-            'att_value.*'=> 'required'
-        ];
-    }
-
-    private function _messageAddToCart()
-    {
-        return [
-          'price.required' => 'Lỗi trong quá trình xử lý Giá.',
-          'price.min' => 'Lỗi trong quá trình xử lý Giá.',
-          'quantity.required' => 'Lỗi trong quá trình xử lý Số lượng.',
-          'quantity.min' => 'Lỗi trong quá trình xử lý Số lượng tối thiểu.',
-          'quantity.max' => 'Lỗi trong quá trình xử lý Số lượng tối đa.',
-          'att_value.*.required' => 'Vui lòng chọn 1 thuộc tính sản phẩm.'
         ];
     }
 
@@ -101,90 +82,77 @@ class ProductController extends Controller
 
     public function getProduct($slug)
     {
-        $product = $this->product->getProductBySlug($slug,['id','name', 'slug', 'description', 'content', 'sku_product', 'price', 'discount', 'img_url','category_id'], ['categories','photos', 'values', 'attributes']);
-
+        $product = $this->product->getProductBySlug($slug,['id','name', 'slug', 'description', 'content', 'sku_product', 'price', 'discount', 'img_url','category_id','type'], ['categories','photos', 'values', 'attributes','product_links']);
         if(count($product)){
-            $relate_product = $this->product->relateProduct([$product->id], ['id', 'slug', 'name', 'price', 'discount', 'img_url']);
-            $arr_value_product = [];
-            if(!$product->values->isEmpty()){
-                foreach($product->values as $item){
-                    array_push($arr_value_product, $item->id);
+            $array_option_att = [];
+            $option = "";
+            $relate_product = $this->product->relateProduct([$product->id], ['id', 'img_url', 'name','slug', 'price', 'discount','category_id', 'default'],['attributes', 'product_links']);
+
+            if($product->type == 'configuable'){
+                $array_product_id = [];
+                if(!$product->product_links->isEmpty()){
+                    foreach($product->product_links as $link){
+                        array_push($array_product_id, $link->link_to_product_id);
+                    }
                 }
+                $collect_product_child = $this->product->findWhereIn('id', $array_product_id);
+
+                foreach($collect_product_child as $item_child){
+                    foreach($item_child->values as $item_value){
+                        if($item_value == $item_child->values->last()){
+                            $option .= $item_value->attributes->name .': '.$item_value->value;
+                        }else {
+                            $option .= $item_value->attributes->name . ': ' . $item_value["value"] . ', ';
+                        }
+                    }
+                    $rs_array = "<option value='".$item_child->id."'>".$option."</option>";
+                    array_push($array_option_att,$rs_array);
+                    $option = "";
+                }
+                foreach($collect_product_child as $item_default){
+                    if($item_default->default){
+                        $product = $item_default;
+                        break;
+                    }
+                }
+
             }
-            return view('Client::pages.product.detail', compact('product', 'relate_product', 'arr_value_product'));
+
+            return view('Client::pages.product.detail', compact('product', 'relate_product', 'array_option_att'));
         }
         return abort(404);
     }
 
     public function addToCart(Request $request)
     {
-        $valid = Validator::make($request->all(),$this->_rulesAddToCart(), $this->_messageAddToCart());
+        $valid = Validator::make($request->all(), ['att_value.*' => 'required', 'quantity' => 'required|min:1'] , ['att_value.*.required' => 'Vui lòng chọn 1 sản phẩm.', 'quantity.required' => 'Vui lòng chọn số lượng sản phẩn cần mua.', 'quantity.min' => 'Số lượng tối thiểu là 1.']);
         if($valid->fails()){
-            return redirect()->back()->withInput()->withErrors($valid->errors());
+            return redirect()->back()->withErrors($valid);
         }
-        $product = $this->product->find($request->input('product_id'),['id','price','discount','name','slug' ,'img_url'],['attributes', 'values']);
-
+        $id = $request->input('product_id');
+        $product = $this->product->find($id, ['id', 'name','price', 'discount', 'img_url'], ['values']);
         if(count($product)){
-            $data_price_check = [
-                $product->discount ? $product->discount :  $product->price,
+            $att = [
+                'img_url' => $product->img_url,
             ];
-            $array_value = [];
-            $array_attribute = [
-                'img_url' => $product->img_url
-            ];
-
-            /*CHECK PRODUCT PRICE DO NOT MANUAL*/
-            if(!$product->values->isEmpty() && $request->has('att_value')){
+            if(!$product->values->isEmpty()){
                 foreach($product->values as $item_value){
-                    if($item_value->value_price){
-                        array_push($data_price_check, $product->discount ? $product->discount :  $product->price + $item_value->value_price);
-                    }
-                    array_push($array_value, $item_value->id);
-                }
-                if(!in_array($request->input('price'), $data_price_check)){
-                    $errors = new \Illuminate\Support\MessageBag;
-                    $errors->add('error_system','Xảy ra lỗi trong quá trình xử lý: Giá sản phẩm không chính xác.');
-                    return redirect()->back()->withInput()->withErrors($errors);
-                }
-                /*CHECK VALUE BELONG PRODUCT*/
-                foreach($request->input('att_value') as $item_value_from_web){
-                    if(!in_array($item_value_from_web, $array_value)){
-                        $errors = new \Illuminate\Support\MessageBag;
-                        $errors->add('error_system','Xảy ra lỗi trong quá trình xử lý: Thuộc tính không thuộc sản phẩm này.');
-                        return redirect()->back()->withInput()->withErrors($errors);
-                    }
-                }
-
-                /*WHEN EVERYTHING IS OK*/
-                /*GET DATA-ATT*/
-                foreach($product->attributes as $item_att){
-                    $value_name = $this->value->find($request->input('att_value')[$item_att->slug])->value;
-                    $array_attribute[$item_att->name] = $value_name;
+                    $att[$item_value->attributes->name] = $item_value->value;
                 }
             }
-            $price = $request->input('price');
+            $data = [
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->discount ? $product->discount : $product->price,
+                'quantity' => $request->quantity,
+                'attributes' => $att,
+            ];
 
-            if(count($array_attribute)){
-                $data = [
-                    'id' => $product->slug.'_'.$product->id.'_'.$price,
-                    'name' => $product->name,
-                    'price' => $price,
-                    'quantity' => $request->input('quantity'),
-                    'attributes' => $array_attribute,
-                ];
-            }else{
-                $data = [
-                    'id' => $product->slug.'_'.$product->id.'_'.$price,
-                    'name' => $product->name,
-                    'price' => $price,
-                    'quantity' => $request->input('quantity'),
-                ];
-            }
             Cart::add($data);
-
-            return redirect()->back()->with(['success'=>'Sản Phẩm đã được thêm vào giỏ hàng', 'data' => $product, 'price' => $price]);
+            $price = $product->discount ? $product->discount : $product->price * $request->quantity;
+            return redirect()->back()->with(['success'=>'Sản Phẩm đã được thêm vào giỏ hàng', 'data' => $product, 'attribute' => $att ,'price' =>$price]);
         }else{
-            return redirect()->back()->withInput()->with('errors','Xảy ra lỗi trong quá trình xử lý: Sản Phẩm không tồn tại.');
+            return redirect()->back()->withInput()->with('errors','Sản Phẩm không tồn tại.');
         }
     }
 
@@ -239,10 +207,10 @@ class ProductController extends Controller
                         $condition = Cart::getCondition($pr->name);
 
                         $subTotal = Cart::getSubTotal();
-                        $subTotalAfterCondition = $condition->getCalculatedValue($subTotal);
 
-                        $total = Cart::getTotal();
-                        return response()->json(['error' => false, 'data' => json_encode(['total' => $total]), 'message' => 'Mã khuyến mãi đã được áp dụng'], 200);
+                        $total = number_format(Cart::getTotal());
+                        $view = view('Client::extensions.promotion_payment')->render();
+                        return response()->json(['error' => false, 'total' => $total, 'view'=>$view , 'message' => 'Mã khuyến mãi đã được áp dụng'], 200);
                     }
                 }else{
                     return response()->json(['error'=>true, 'data'=> null, 'message' => 'Mã khuyến mãi đã hết hạn hoặc không tồn tại'], 200);
@@ -266,12 +234,15 @@ class ProductController extends Controller
         switch ($payment_method){
             case '1' :
                 if($request->has('promotion_name')){
-                    $promotion_id = $promotion->query(['id', 'name','status'])->where('status','1')->where('name', $request->input('promotion'));
+                    $pr = $promotion->query(['id', 'name','status','sku_promotion'])->where('status','1')->where('sku_promotion', $request->input('promotion_name'))->first();
+                    $promotion_id = $pr->id;
                 }else{
                     $promotion_id = '';
                 }
+                /*LUU GIO HANG*/
                 $data = [
                     'order_date' => Carbon::now(),
+                    'shipping_cost' => 0,
                     'total' => Cart::getTotal(),
                     'customer_id' => $this->auth->user()->id,
                     'promotion_id' => $promotion_id,
@@ -281,6 +252,7 @@ class ProductController extends Controller
                 ];
                 $current_order = $order->create($data);
 
+                /*LUU SHIP ADDRESS*/
                 $data_ship = [
                     'fullname' => $request->customer_name,
                     'phone' => $request->input('vpc_Customer_Phone'),
@@ -291,7 +263,26 @@ class ProductController extends Controller
                 ];
                 $ship->create($data_ship);
 
-                return redirect()
+                /*LUU GIO HANG CHI TIET*/
+                $cart = Cart::getContent();
+                foreach($cart as $item){
+                    $product_array = explode('_',$item->id);
+                    $product_id = $product_array[1];
+
+                    $product = $this->product->find($product_id);
+                    $product->stock = $product->stock - 1;
+                    $product->save();
+
+                    $current_order->products()->attach($product_id, ['quantity'=>$item->quantity, 'unit_price'=>'VND']);
+                }
+                $pr->quantity = $pr->quantity - 1;
+                $pr->save();
+
+
+                Cart::clearCartConditions();
+                Cart::clear();
+
+                return redirect()->route('client.payment_success.thank')->with('success',true);
                 break;
 
             case '2' :
@@ -325,6 +316,13 @@ class ProductController extends Controller
         }
     }
 
+    public function getThankyou(){
+        if(session('success')){
+            return view('Client::pages.product.payment_success');
+        }
+        return redirect()->route('client.home');
+    }
+
 
 
     /*AJAX*/
@@ -334,23 +332,14 @@ class ProductController extends Controller
         if(!$request->ajax()){
             return abort(404);
         }else{
-            $product_id = $request->input('product_id');
-            $value_id = $request->input('value_id');
-            $product = $this->product->find($product_id);
-            if($value_id){
-                if($this->value->find($value_id)->value_price){
-                    $price = $product->discount ? $product->discount : $product->price + $this->value->find($value_id)->value_price;
-                    return response()->json(['price_format' => number_format($price),'price'=>$price, 'data' => 'Update Giá'], 200);
-                }else{
-                    $price = $product->discount ? $product->discount : $product->price;
-                    return response()->json(['price_format' => number_format($price),'price'=>$price, 'data' => 'Không Update Giá'], 200);
-                }
-            }else{
-                $product = $this->product->find($product_id);
-                $price = $product->discount ? $product->discount : $product->price;
+            $product_id = $request->input('value_id');
+            $product_ajax = $this->product->find($product_id);
 
-                return response()->json(['price_format' => number_format($price),'price'=>$price, 'data' => 'Update Giá'], 200);
-            }
+            $price = $product_ajax->discount ? number_format($product_ajax->discount) : number_format($product_ajax->price);
+            $content = strip_tags($product_ajax->content);
+            $photo_display = view('Client::extensions.photo_product')->with('product', $product_ajax)->render();
+
+            return response()->json(['error' => false, 'data'=>$product_ajax, 'price' => $price, 'content'=>$content, 'photo'=>$photo_display], 200);
 
         }
     }

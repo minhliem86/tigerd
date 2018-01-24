@@ -74,7 +74,7 @@
                     @endif
                     @if(Cart::getConditions()->isEmpty())
                     <div class="promotion-wrapper">
-                            <input class="form-control mr-sm-2" name="promition" type="text" placeholder="Promotion" aria-label="Promotion">
+                            <input class="form-control mr-sm-2" name="promotion" type="text" placeholder="Promotion" aria-label="Promotion">
                             <button class="btn btn-outline-success" id="btn-payment" type="button" onclick="applyPromotion()">Áp Dụng</button>
                     </div>
                     @endif
@@ -113,26 +113,27 @@
 <script>
     function applyPromotion()
     {
-        var promotion = $('input[name="promition"]').val();
-        $.ajax({
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            url: '{!! route("client.promotion") !!}',
-            type: 'POST',
-            data: {pr_code: promotion},
-            success: function(data){
-                if(data.error){
-                    alertify.error(data.message);
-                    $('input[name="promition"]').val('');
-                }else{
-                    var badge = '<span class="badge badge-info">'+promotion+'</span>';
-                    $('input[name="promition"]').prop('disabled', true);
-                    $('#btn-payment').prop('disabled',true);
-                    $('.display-promotion').append(badge);
-                    $('#total').text(data.data.total);
-                    console.log(data.data)
-                }
-            }
-        })
+        var promotion = $('input[name="promotion"]').val();
+        console.log(promotion);
+        {{--$.ajax({--}}
+            {{--headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},--}}
+            {{--url: '{!! route("client.promotion") !!}',--}}
+            {{--type: 'POST',--}}
+            {{--data: {pr_code: promotion},--}}
+            {{--success: function(data){--}}
+                {{--if(data.error){--}}
+                    {{--alertify.error(data.message);--}}
+                    {{--$('input[name="promotion"]').val('');--}}
+                {{--}else{--}}
+                    {{--var badge = '<span class="badge badge-info">'+promotion+'</span>';--}}
+                    {{--$('input[name="promotion"]').prop('disabled', true);--}}
+                    {{--$('#btn-payment').prop('disabled',true);--}}
+                    {{--$('.display-promotion').append(badge);--}}
+                    {{--$('#total').text(data.data.total);--}}
+                    {{--console.log(data.data)--}}
+                {{--}--}}
+            {{--}--}}
+        {{--})--}}
     }
     $(document).ready(function(){
 

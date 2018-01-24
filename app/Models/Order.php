@@ -8,16 +8,11 @@ class Order extends Model
 {
     public $table = 'orders';
 
-    protected $guard = ['id'];
+    protected $guarded = ['id'];
 
     public function users()
     {
         return $this->belongsToMany('App\Models\User');
-    }
-
-    public function promotions()
-    {
-        return $this->belongsToMany('App\Models\Promotion');
     }
 
     public function ship_address()
@@ -27,7 +22,7 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany('App\Models\Product', 'order_products', 'order_id', 'product_id');
+        return $this->belongsToMany('App\Models\Product', 'order_products', 'order_id', 'product_id')->withPivot('quantity','unit_price')->withTimestamps();
     }
 
     public function shipstatus()

@@ -92,23 +92,17 @@
                             </div>
                             <div class="each-area wrap-total">
                                 <div class="input-group">
-                                    <input type="text" name="promotion" class="form-control" placeholder="Mã Khuyến Mãi">
+                                    <input type="text" name="promotion" class="form-control" placeholder="Mã Khuyến Mãi" {!! Cart::getConditions()->isEmpty() ? null : 'disabled' !!}>
                                     <div class="input-group-append">
-                                        <button class="btn btn-info btn-promotion" type="button" onclick="applyPromotion()">Áp Dụng</button>
+                                        <button class="btn btn-info btn-promotion" type="button" onclick="applyPromotion()" id="btn-payment" {!! Cart::getConditions()->isEmpty() ? null : 'disabled' !!}>Áp Dụng</button>
                                     </div>
                                 </div>
-                                @if(!Cart::getConditions()->isEmpty())
-                                <div class="display-promotion clearfix">
-                                    <p class="float-left">Khuyến mãi áp dụng</p>
-                                    <div class="float-right">
-                                            @foreach(Cart::getConditions() as $cartCondition)
-                                                {!! Form::hidden('promotion_name', $cartCondition->getName()) !!}
-                                                <span class="badge badge-info">{!! $cartCondition->getName() !!}</span>
-                                            @endforeach
-                                    </div>
-                                </div>
-                                @endif
                             </div>
+                            <div class="display-promotion each-area clearfix {!! Cart::getConditions()->isEmpty() ? 'd-none' : null !!}">
+                                @include("Client::extensions.promotion_payment")
+                            </div>
+
+
                             <div class="each-area wrap-total d-flex">
                                 <p class="text">Tổng tiền</p>
                                 <p class="content"><span class="total">{!! number_format(Cart::getTotal()) !!}</span> vnd</p>
@@ -132,7 +126,7 @@
     <script>
         function applyPromotion()
         {
-            var promotion = $('input[name="promition"]').val();
+            var promotion = $('input[name="promotion"]').val();
             $.ajax({
                 url: '{!! route("client.promotion") !!}',
                 type: 'POST',
@@ -140,13 +134,15 @@
                 success: function(data){
                     if(data.error){
                         alertify.error(data.message);
-                        $('input[name="promition"]').val('');
-                    }else{
-                        var badge = '<span class="badge badge-info">'+promotion+'</span>';
-                        $('input[name="promition"]').prop('disabled', true);
+                        $('input[name="promotion"]').val('');
+                    }
+                    if(!data.error){
+                        $('input[name="promotion"]').prop('disabled', true);
                         $('#btn-payment').prop('disabled',true);
-                        $('.display-promotion').append(badge);
-                        $('#total').text(data.data.total);
+                        $('.display-promotion').removeClass('d-none');
+                        $('.display-promotion').append(data.view);
+                        $('.total').text(data.total);
+                        alertify.success(data.message);
                     }
                 }
             })

@@ -28,7 +28,7 @@ class Product extends Model
 
     public function orders()
     {
-        return $this->belongsToMany('App\Models\OrderProduct', 'order_products', 'product_id', 'order_id');
+        return $this->belongsToMany('App\Models\OrderProduct', 'order_products', 'product_id', 'order_id')->withPivot('quantity','unit_price')->withTimestamps();
     }
     public function meta_configs()
     {

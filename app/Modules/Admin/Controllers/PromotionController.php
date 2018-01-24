@@ -37,7 +37,7 @@ class PromotionController extends Controller
     protected $rule = [
         'sku_promotion' => 'required|min:3|max:10',
         'value' => 'required|integer',
-        'quality' => 'required|integer',
+        'quantity' => 'required|integer',
         'from_time' => 'required',
         'to_time' => 'required',
     ];
@@ -48,8 +48,8 @@ class PromotionController extends Controller
         'sku_promotion.max' => 'Mã Khuyến Mãi phải có nhiều nhất 10 ký tự',
         'value.required' => 'Vui lòng nhập Giá Trị',
         'value.integer' => 'Giá trị là dạng số',
-        'quality.required' => 'Vui lòng nhập Số Lượng Mã',
-        'quality.integer' => 'Số Lượng Mã là dạng số',
+        'quantity.required' => 'Vui lòng nhập Số Lượng Mã',
+        'quantity.integer' => 'Số Lượng Mã là dạng số',
         'from_time.required' => 'Vui lòng nhập Ngày bắt đầu',
         'to_time.required' => 'Vui lòng nhập Ngày kết thúc',
     ];
@@ -61,18 +61,18 @@ class PromotionController extends Controller
      */
     public function index()
     {
-        $promotion_active = $this->promotion->findByField('status',1,['id'])->count();
-        $promotion_deactive = $this->promotion->findByField('status',0,['id'])->count();
+        $promotion_active = $this->promotion->query(['id','status'])->where('status',1)->where('quantity','>',0)->count();
+        $promotion_deactive = $this->promotion->query(['id','status'])->where('status',0)->where('quantity','<=',0)->count();
         return view('Admin::pages.promotion.index', compact('promotion_active', 'promotion_deactive'));
     }
 
     public function getData(Request $request)
     {
-        $data = $this->promotion->query(['id', 'name', 'sku_promotion', 'num_use' ,'quality', 'value', 'status', 'to_time', 'value_type']);
+        $data = $this->promotion->query(['id', 'name', 'sku_promotion', 'num_use' ,'quantity', 'value', 'status', 'to_time', 'value_type']);
         $datatable = Datatables::of($data)
-            ->editColumn('quality', function($data){
-                $quality = $data->quality - $data->num_use;
-                return $quality;
+            ->editColumn('quantity', function($data){
+                $quantity = $data->quantity - $data->num_use;
+                return $quantity;
             })
             ->editColumn('to_time', function($data){
                 return \Carbon\Carbon::parse($data->to_time)->format('d/m/Y');
@@ -147,7 +147,7 @@ class PromotionController extends Controller
             'target' => $request->input('target'),
             'value' => $value,
             'value_type' => $request->input('value_type'),
-            'quality' => $request->input('quality'),
+            'quantity' => $request->input('quantity'),
             'from_time' => $from_time,
             'to_time' => $to_time,
         ];
@@ -210,7 +210,7 @@ class PromotionController extends Controller
             'target' => $request->input('target'),
             'value' => $value,
             'value_type' => $request->input('value_type'),
-            'quality' => $request->input('quality'),
+            'quantity' => $request->input('quantity'),
             'from_time' => $from_time,
             'to_time' => $to_time,
             'status' => $request->input('status'),

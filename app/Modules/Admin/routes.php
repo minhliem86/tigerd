@@ -90,12 +90,16 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('/product/configuable/edit/{id}', ['as' => 'admin.product.configuable.edit.post', 'uses' => 'ProductController@postEditProductConfig'])->where('id','[0-9a-zA-Z._\-]+');
 
         Route::get('/product/configuable/remove/{id}', ['as'=>'admin.product.configuable.remove', 'uses' => 'ProductController@postRemoveConfiguable'])->where(['id'=>'[0-9a-zA-Z._\-]+']);
-
+        Route::post('/product/configuable/checkDefault', ['as' => 'admin.product.configuable.changeDefault', 'uses' => 'ProductController@postChangeDefault']);
         
 
         Route::resource('product', 'ProductController');
 
         /*ATTRIBUTE*/
+        Route::get('attribute/index', ['as' => 'admin.attribute.index', 'uses' => 'AttributeController@index']);
+        Route::get('attribute/getData', ['as' => 'admin.attribute.getData', 'uses' => 'AttributeController@getData']);
+        Route::get('attribute/edit/{id}', ['as' => 'admin.attribute.edit', 'uses' => 'AttributeController@edit'])->where('id','[0-9a-zA-Z._\-]+');
+        Route::post('attribute/update/{id}', ['as' => 'admin.attribute.update', 'uses' => 'AttributeController@update'])->where('id','[0-9a-zA-Z._\-]+');
         Route::get('/attribute', ['as' => 'admin.attribute.create', 'uses' => 'AttributeController@getCreate']);
         Route::post('/attribute', ['as' => 'admin.attribute.create.post', 'uses' => 'AttributeController@postCreate']);
 
