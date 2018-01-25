@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Địa chỉ giao hàng</label>
-                                    {!! Form::text('vpc_SHIP_Street01', old('vpc_SHIP_Street01'), ['class'=>'form-control']) !!}
+                                    {!! Form::text('AVS_Street01', old('AVS_Street01'), ['class'=>'form-control']) !!}
                                 </div>
                                 <div class="form-group">
                                     <label for="">Ghi chú</label>

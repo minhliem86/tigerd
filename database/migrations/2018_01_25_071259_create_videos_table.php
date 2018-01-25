@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTransactionTable extends Migration
+class CreateVideosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,11 @@ class CreateTransactionTable extends Migration
      */
     public function up()
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('videos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('order_id')->unsigned();
-            $table->string('transaction_id',12)->nullable();
-            $table->string('merchant_code',34)->nullable();
-            $table->string('total',10)->nullable();
+            $table->string('video_url')->nullable();
+            $table->boolean('status')->default(1);
+            $table->integer('order')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateTransactionTable extends Migration
      */
     public function down()
     {
-        Schema::drop('transactions');
+        Schema::drop('videos');
     }
 }

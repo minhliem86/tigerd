@@ -28,11 +28,18 @@
 
     <script>
         $(document).ready(function(){
+            @if(session('success'))
+                alertify.success("{!! session('success') !!}")
+            @endif
+            @if(session('error'))
+                alertify.error("{!! session('error') !!}")
+            @endif
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
+
             var productSwiper = new Swiper('#swiper-product', {
                 'slidesPerView' : 3,
                 navigation: {

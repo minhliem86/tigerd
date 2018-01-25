@@ -44,7 +44,7 @@
             position:'top-left'
         },
         glossary:{
-            title:'AlertifyJS',
+            title:'TigerD',
             ok: 'OK',
             cancel: 'Cancel',
             acccpt: 'Accept',

@@ -11,6 +11,20 @@ class PaymentMethodTableDataSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Models\PaymentMethod::class)->create();
+        $data = [
+            [
+                'name' => 'COD',
+                'slug' => 'cod',
+                'description' => 'Thanh toán khi giao hàng',
+                'order'=> 1
+            ],
+            [
+                'name' => 'Thanh Toán Online',
+                'slug' => 'thanh-toan-online',
+                'description' => 'Thanh toán trực tuyến thông qua cổng Onepay',
+                'order'=> 2
+            ]
+        ];
+        DB::table('payment_methods')->insert($data);
     }
 }

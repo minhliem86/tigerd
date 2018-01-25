@@ -57,7 +57,8 @@ class ProfileController extends Controller
 
     public function getProfile(Request $request)
     {
-        return view('Client::pages.auth.profile');
+        $order = $this->auth->user()->orders;
+        return view('Client::pages.auth.profile', compact('order'));
     }
 
     public function postProfile(Request $request)

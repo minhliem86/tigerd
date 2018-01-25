@@ -33,7 +33,7 @@
                         <a href="{!! route('client.contact') !!}" class="nav-link">Contact Us</a>
                     </li>
                 </ul>
-                <form class="form-inline my-2 my-lg-0 form-search" method="POST">
+                {!! Form::open(['route' => 'client.search.post', 'class' => 'form-inline my-2 my-lg-0 form-search']) !!}
                     <div class="search-container">
                         <button class="btn btn-search-trigger" type="button" data-toggle="collapse" data-target="#search-wrapper" aria-controls="search-wrapper" aria-expanded="false"><i class="fa fa-search"></i></button>
                         <div id="search-wrapper" class="collapse">
@@ -45,7 +45,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                {!! Form::close() !!}
             </div>
         </nav>
     </div>

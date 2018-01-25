@@ -168,7 +168,7 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         App\Modules\ModuleServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
-        App\Providers\ComposerProvider::class,
+        App\Providers\ComposerProvider::class
 
     ],
 

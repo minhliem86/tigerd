@@ -124,11 +124,27 @@
                                     <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Đơn Hàng</th>
+                                        <th>Mã Đơn Hàng</th>
                                         <th>Ngày Thanh Toán</th>
                                         <th>Hóa Đơn Điện Tử</th>
                                     </tr>
                                     </thead>
+                                    <tbody>
+                                    @if(!$orders->isEmpty())
+                                        @foreach($orders as $item_order)
+                                            <tr>
+                                                <td>{!! $item_order->id !!}</td>
+                                                <td>{!! $item_order->name !!}</td>
+                                                <td>{!! Carbon\Carbon::parse($item_order->created_at)->format('d/m/Y H:i') !!}</td>
+                                                <td><a href="#" class="btn btn-outline-secondary btn-order-detail">Chi Tiết</a></td>
+                                            </tr>
+                                        @endforeach
+                                    @else
+                                        <tr>
+                                            <td colspan="4">Hiện chưa cho đơn hàng</td>
+                                        </tr>
+                                    @endif
+                                    </tbody>
                                 </table>
                             </div>
                         </div>

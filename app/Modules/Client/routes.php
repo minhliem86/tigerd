@@ -30,6 +30,12 @@ Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controlle
 
     Route::get('/thanh-toan-thanh-cong', ['as' => 'client.payment_success.thank','uses' => 'ProductController@getThankyou']);
 
+    /*SUBCRIBE EMAIL*/
+    Route::post('/subcribe',['as' => 'client.subcribe.post', 'uses' => 'ExtensionController@postSubscribe']);
+
+    /*SEARCH*/
+    Route::post('/search', ['as' => 'client.search.post', 'uses' => 'ExtensionController@postSearch']);
+
     /*CUSTOMER*/
     Route::get('/dang-nhap', ['as' => 'client.auth.login', 'uses' => 'Auth\AuthController@getLogin']);
     Route::post('/dang-nhap', ['as' => 'client.auth.login.post', 'uses' => 'Auth\AuthController@postLogin']);

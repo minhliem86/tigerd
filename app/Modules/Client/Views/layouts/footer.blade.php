@@ -28,14 +28,21 @@
                 <div class="block-subcribe">
                     <h3 class="title-subcribe">NEWSLETTER SIGN UP</h3>
                     <p class="sub-title">Sign up to get information and more...</p>
-                    <form action="" method="POST" id="form-subcribe">
+                    {!! Form::open(['route'=>'client.subcribe.post', 'class' => 'form-subcribe']) !!}
                         <div class="input-group">
                             <div class="input-group-prepend">
-                                <input type="text" name="ema_subcribe" class="form-control">
+                                <input type="email" name="email_subcribe" class="form-control">
                                 <button type="submit" class="btn btn-subcribe"><i class="fa fa-chevron-right"></i></button>
+                                @if($errors->error_subcribe->any())
+                                    <div class="invalid-feedback">
+                                        @foreach($error->error_subcribe->all() as $item_subcribe)
+                                        <p>{!! $item_subcribe !!}</p>
+                                        @endforeach
+                                    </div>
+                                @endif
                             </div>
                         </div>
-                    </form>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

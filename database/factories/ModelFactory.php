@@ -59,7 +59,7 @@ $factory->define(App\Models\Promotion::class, function (Faker\Generator $faker){
         'name' => $faker->company,
         'description' => $faker->paragraph(),
         'sku_promotion' => 'PROMO',
-        'quality' => '100',
+        'quantity' => '100',
         'type' => $faker->paragraph(),
     ] ;
 });
@@ -86,21 +86,6 @@ $factory->define(App\Models\Customer::class, function (Faker\Generator $faker) {
    ];
 });
 
-$factory->define(App\Models\PaymentMethod::class, function (Faker\Generator $faker){
-    return [
-        'name' => 'COD',
-        'description' => 'Thanh toán khi giao hàng',
-        'order'=> 1
-    ] ;
-});
-
-$factory->define(App\Models\PaymentSupplier::class, function (Faker\Generator $faker){
-    return [
-        'name' => 'OnePay',
-        'description' => 'Thanh toán bằng OnePay',
-        'order'=> 1
-    ] ;
-});
 
 $factory->define(App\Models\Feedback::class, function (Faker\Generator $faker){
    return [
@@ -137,3 +122,4 @@ $factory->define(App\Models\AttributeValue::class, function (Faker\Generator $fa
        'value' => $faker->randomElement(['xanh','đỏ','S','M']),
    ];
 });
+

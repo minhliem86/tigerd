@@ -2,6 +2,7 @@
 
 namespace App\Modules\Client\Controllers;
 
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -12,27 +13,35 @@ use App\Repositories\AttributeValueRepository;
 use Validator;
 use Cart;
 use Auth;
+use Session;
 use Carbon\Carbon;
 use App\Repositories\PromotionRepository;
 use App\Repositories\PaymentMethodRepository;
 use App\Repositories\OrderRepository;
 use App\Repositories\ShipAddressRepository;
+use App\Repositories\TransactionRepository;
 
 class ProductController extends Controller
 {
     protected $cate;
     protected $product;
     protected $value;
+    protected $order;
+    protected $ship_address;
+    protected $promotion;
 
     protected $merchant;
     protected $access;
     protected $secure;
 
-    public function __construct(CategoryRepository $cate, ProductRepository $product, AttributeValueRepository $value)
+    public function __construct(CategoryRepository $cate, ProductRepository $product, AttributeValueRepository $value, OrderRepository $order, ShipAddressRepository $ship_address, PromotionRepository $promotion)
     {
         $this->cate = $cate;
         $this->product = $product;
         $this->value = $value;
+        $this->order = $order;
+        $this->ship_address = $ship_address;
+        $this->promotion = $promotion;
 
         $this->merchant = env('OP_MERCHANT');
         $this->access = env('OP_ACCESS');
@@ -53,7 +62,7 @@ class ProductController extends Controller
           'customer_name' => 'required',
             'vpc_Customer_Phone' => 'required',
             'vpc_Customer_Email' => 'required|email',
-            'vpc_SHIP_Street01' => 'required',
+            'AVS_Street01' => 'required',
             'payment_method' => 'required'
         ];
     }
@@ -64,7 +73,7 @@ class ProductController extends Controller
             'vpc_Customer_Phone.required' => 'Vui lòng nhập Số điện thoại',
             'vpc_Customer_Email.required' => 'Vui lòng nhập Email',
             'vpc_Customer_Email.email' => 'Vui lòng nhập định dạng Email',
-            'vpc_SHIP_Street01.required' => 'Vui lòng nhập địa chỉ giao hàng',
+            'AVS_Street01.required' => 'Vui lòng nhập địa chỉ giao hàng',
             'payment_method.required' => 'Vui lòng chọn Phương thức thanh toán',
         ];
     }
@@ -237,11 +246,14 @@ class ProductController extends Controller
                     $pr = $promotion->query(['id', 'name','status','sku_promotion'])->where('status','1')->where('sku_promotion', $request->input('promotion_name'))->first();
                     $promotion_id = $pr->id;
                 }else{
+                    $pr = [];
                     $promotion_id = '';
                 }
                 /*LUU GIO HANG*/
+                $order_id = \LP_lib::unicodenospace($request->input('customer_name')).'_'.time();
                 $data = [
                     'order_date' => Carbon::now(),
+                    'order_name' => $order_id,
                     'shipping_cost' => 0,
                     'total' => Cart::getTotal(),
                     'customer_id' => $this->auth->user()->id,
@@ -250,18 +262,18 @@ class ProductController extends Controller
                     'shipstatus_id' => 1,
                     'paymentstatus_id' =>1,
                 ];
-                $current_order = $order->create($data);
+                $current_order = $this->order->create($data);
 
                 /*LUU SHIP ADDRESS*/
                 $data_ship = [
                     'fullname' => $request->customer_name,
                     'phone' => $request->input('vpc_Customer_Phone'),
                     'email' => $request->input('vpc_Customer_Email'),
-                    'address' => $request->input('vpc_SHIP_Street01'),
+                    'address' => $request->input('AVS_Street01'),
                     'note' => $request->input('customer_note'),
                     'order_id' => $current_order->id,
                 ];
-                $ship->create($data_ship);
+                $this->ship_address->create($data_ship);
 
                 /*LUU GIO HANG CHI TIET*/
                 $cart = Cart::getContent();
@@ -275,8 +287,11 @@ class ProductController extends Controller
 
                     $current_order->products()->attach($product_id, ['quantity'=>$item->quantity, 'unit_price'=>'VND']);
                 }
-                $pr->quantity = $pr->quantity - 1;
-                $pr->save();
+                if(count($pr)){
+                    $pr->quantity = $pr->quantity - 1;
+                    $pr->save();
+                }
+
 
 
                 Cart::clearCartConditions();
@@ -286,10 +301,27 @@ class ProductController extends Controller
                 break;
 
             case '2' :
+                if($request->has('promotion_name')){
+                    $pr = $promotion->query(['id', 'name','status','sku_promotion'])->where('status','1')->where('sku_promotion', $request->input('promotion_name'))->first();
+                    $promotion_id = $pr->id;
+                }else{
+                    $promotion_id = '';
+                }
+
+                $data_ship = [
+                    'fullname' => $request->customer_name,
+                    'phone' => $request->input('vpc_Customer_Phone'),
+                    'email' => $request->input('vpc_Customer_Email'),
+                    'address' => $request->input('AVS_Street01'),
+                    'note' => $request->input('customer_note'),
+                ];
+                \Session::put('promotion_id', $promotion_id);
+                \Session::put('ship_address', $data_ship);
+
                 $order_id = \LP_lib::unicodenospace($request->input('customer_name')).'_'.time();
                 $customer_id = $this->auth->user()->firstname . '_'. $this->auth->user()->id ;
                 $onepay = $this->setupOnePay();
-                $refer = $onepay->build_link_global($request->all(),$order_id, Cart::getTotal(), $request->input('customer_name').' PAY ONLINE', route('client.responsePayment'),  $customer_id);
+                $refer = $onepay->build_link_global($request->all(),$order_id, Cart::getTotal(), $order_id, route('client.responsePayment',$promotion_id),  $customer_id);
                 return redirect($refer);
                 break;
         }
@@ -297,7 +329,7 @@ class ProductController extends Controller
 
     }
 
-    public function responseFormOnePay(Request $request)
+    public function responseFormOnePay(Request $request, TransactionRepository $transaction)
     {
         $onepay = $this->setupOnePay();
 
@@ -305,14 +337,67 @@ class ProductController extends Controller
 
         if($hashValidated === 'CORRECT' && $request->vpc_TxnResponseCode == "0"){
             //thanh cong
-            return "thanh cong";
+            /*LUU GIO HANG*/
+            $data_order = [
+                'order_date' => Carbon::now(),
+                'shipping_cost' => 0,
+                'total' => Cart::getTotal(),
+                'customer_id' => $this->auth->user()->id,
+                'promotion_id' => session('promotion_id'),
+                'paymentmethod_id' => 2,
+                'shipstatus_id' => 1,
+                'paymentstatus_id' =>2,
+            ];
+            $order = $this->order->create($data_order);
+
+            /*LUU THONG TIN SHIP*/
+            $data_ship = session('ship_address');
+            $data_ship['order_id'] = $order->id;
+
+            $this->ship_address->create($data_ship);
+
+            if(session('promotion_id')){
+                $promotion = $this->promotion->find(session('promotion'));
+                $promotion->quantity = $promotion->quantity - 1;
+                $promotion->save();
+            }
+            $cart = Cart::getContent();
+            foreach($cart as $item){
+                $product_array = explode('_',$item->id);
+                $product_id = $product_array[1];
+
+                $product = $this->product->find($product_id);
+                $product->stock = $product->stock - 1;
+                $product->save();
+
+                $order->products()->attach($product_id, ['quantity'=>$item->quantity, 'unit_price'=>'VND']);
+            }
+
+            /*LUU TRANSACTION*/
+            $data_transaction = [
+                'order_id' => $order->id,
+                'order_name' => $request->input('vpc_MerchTxnRef'),
+                'transaction_id' => $request->input('vpc_TransactionNo'),
+                'merchant_code' => $request->input('vpc_MerchTxnRef'),
+                'total' => $request->input('vpc_Amount')/100,
+            ];
+            $transaction->create($data_transaction);
+
+            Session::forget('promotion_id');
+            Session::forget('ship_address');
+
+            Cart::clearCartConditions();
+            Cart::clear();
+
+            return redirect()->route('client.payment_success.thank')->with('success',true);
+
         }elseif($hashValidated=="INVALID HASH" && $request->vpc_TxnResponseCode == "0"){
             // pending
-            return "Pending";
+            return redirect()->route('client.payment')->with('error','Giao dịch bị gián đoạn. Vui lòng thực hiện lại giao dịch khác.');
         }else{
             //thatbai
             $error_message = $onepay->getResponseDescription($request->vpc_TxnResponseCode);
-            return $error_message;
+            return redirect()->route('client.payment')->with('error',$error_message);
         }
     }
 
@@ -379,7 +464,7 @@ class ProductController extends Controller
         }else{
             $id = $request->input('id');
             $product = $this->product->find($id,['id', 'slug', 'name', 'price', 'img_url']);
-            $array_attribute = [
+            $att = [
                 'img_url' => $product->img_url,
             ];
             $itemCart = Cart::add([
@@ -387,9 +472,7 @@ class ProductController extends Controller
                 'name' => $product->name,
                 'price' => $product->price,
                 'quantity' => 1,
-                'attributes' => [
-                    $array_attribute
-                ]
+                'attributes' =>$att
             ]);
             $quantityCart = Cart::getTotalQuantity();
             return response()->json(['error' => false, 'data'=> $quantityCart]);

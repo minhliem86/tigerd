@@ -23,7 +23,9 @@ class DatabaseSeeder extends Seeder
         'feedbacks',
         'products',
         'attributes',
-        'attribute_values'
+        'attribute_values',
+        'paymentstatus',
+        'shipstatus'
     ];
 
     protected $seeders = [
@@ -37,6 +39,8 @@ class DatabaseSeeder extends Seeder
         PromotionTableDataSeeder::class,
         FeedbackTableDataSeeder::class,
         AttributeTableDataSeeder::class,
+        PaymentStatusTableDataSeeder::class,
+        ShipStatusTableDataSeeder::class,
 
     ];
     public function run()
