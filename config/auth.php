@@ -42,7 +42,8 @@ return [
         ],
         'customer' => [
             'driver' => 'session',
-            'provider' => 'customers'
+            'provider' => 'customers',
+            'passwords' => 'customers'
         ],
 
         'api' => [

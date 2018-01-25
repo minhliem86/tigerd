@@ -16,6 +16,7 @@ class CreateCustomerIdeasTable extends Migration
             $table->increments('id');
             $table->string('customer_name')->nullable();
             $table->string('slug')->nullable();
+            $table->string('img_url')->nullable();
             $table->text('content')->nullable();
             $table->boolean('status')->default(1);
             $table->integer('order')->nullable();

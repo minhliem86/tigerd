@@ -30,10 +30,16 @@ class ProductRepository extends BaseRepository implements RestfulInterface
         return $query->where('status',1)->where('visibility', 1)->whereNotIn('id',$array_id)->get($data);
     }
 
-    public function getProductBySlug($slug, $data = ['*'], $with = [])
+    public function getProductBySlug($slug, $columns = ['*'], $with = [])
     {
         $query = $this->make($with);
-        return $query->where('status', 1)->where('visibility', 1)->where('slug',$slug)->first($data);
+        return $query->where('status', 1)->where('visibility', 1)->where('slug',$slug)->first($columns);
+    }
+
+    public function getAllProduct($columns= ['*'], $with=[])
+    {
+        $query = $this->make($with);
+        return $query->where('status', 1)->where('visibility', 1)->get($columns);
     }
 
 }

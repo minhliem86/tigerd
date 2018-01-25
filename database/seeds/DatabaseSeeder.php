@@ -34,12 +34,12 @@ class DatabaseSeeder extends Seeder
         CustomerTableDataSeeder::class,
         NewsTableDataSeeder::class,
         PagesTableDataSeeder::class,
-        PaymentMethodTableDataSeeder::class,
+        PaymentStatusTableDataSeeder::class,
         PaymentSupplierTableDataSeeder::class,
         PromotionTableDataSeeder::class,
         FeedbackTableDataSeeder::class,
         AttributeTableDataSeeder::class,
-        PaymentStatusTableDataSeeder::class,
+        PaymentMethodTableDataSeeder::class,
         ShipStatusTableDataSeeder::class,
 
     ];

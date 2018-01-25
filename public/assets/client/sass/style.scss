@@ -441,6 +441,14 @@ ul.list-errors{
       }
     }
   }
+  /*VIDEO FANPAGE*/
+  .video-fanpage-container{
+    .fanpage-section{
+      .fanpage-wrapper{
+        text-align: center;
+      }
+    }
+  }
 
   /*TESTIMONIAL*/
   .testimonial-container{
@@ -1289,10 +1297,16 @@ ul.list-errors{
           color:white;
         }
         input{
+          font-size:1.4rem;
           outline:none;
           &:focus{
             outline:none;
           }
+        }
+        button{
+          font-size:1.4rem;
+          padding-left:1.2rem;
+          padding-right:1.2rem;
         }
       }
     }

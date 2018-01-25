@@ -46,6 +46,7 @@ ul.list-errors {
   /*SECTION REBUILD*/
   /*PRODUCT*/
   /*NEWS*/
+  /*VIDEO FANPAGE*/
   /*TESTIMONIAL*/
   /*END HOME SECTION*/
   /*SINGLE PAGE*/
@@ -357,6 +358,8 @@ ul.list-errors {
       font-size: 1rem;
       border-radius: 5px;
       border: none; }
+  .page .video-fanpage-container .fanpage-section .fanpage-wrapper {
+    text-align: center; }
   .page .testimonial-container {
     background: #000 url("../images/background-testiimonial.png") no-repeat;
     background-position: 100% 0;
@@ -954,8 +957,13 @@ ul.list-errors {
         background: #CB1F6A;
         color: white; }
       .page footer .block-subcribe .input-group-prepend input {
+        font-size: 1.4rem;
         outline: none; }
         .page footer .block-subcribe .input-group-prepend input:focus {
           outline: none; }
+      .page footer .block-subcribe .input-group-prepend button {
+        font-size: 1.4rem;
+        padding-left: 1.2rem;
+        padding-right: 1.2rem; }
 
 /*# sourceMappingURL=style.min.css.map */

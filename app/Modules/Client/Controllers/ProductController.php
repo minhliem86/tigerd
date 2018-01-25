@@ -89,6 +89,14 @@ class ProductController extends Controller
         return abort(404);
     }
 
+    public function getAllProduct()
+    {
+        $all_cate = $this->cate->all(['id', 'name', 'slug']);
+        $allProduct = $this->product->getAllProduct(['id','slug','name','price','discount','img_url','stock']);
+        $hotProduct = $this->product->hotProduct(['id', 'slug', 'name' , 'img_url']);
+        return view('Client::pages.product.all_product', compact('allProduct', 'all_cate', 'hotProduct'));
+    }
+
     public function getProduct($slug)
     {
         $product = $this->product->getProductBySlug($slug,['id','name', 'slug', 'description', 'content', 'sku_product', 'price', 'discount', 'img_url','category_id','type'], ['categories','photos', 'values', 'attributes','product_links']);
@@ -168,7 +176,7 @@ class ProductController extends Controller
     public function getCart()
     {
         if(Cart::isEmpty()){
-            return redirect()->route('client.home')->with('error','Giỏ hàng của bạn đang rỗng. Vui lòng chọn sản phẩm.');
+            return redirect()->route('client.product.showAll')->with('error','Giỏ hàng của bạn đang rỗng. Vui lòng chọn sản phẩm.');
         }
         $cart = $cart = Cart::getContent();
         return view('Client::pages.product.cart', compact('cart'));

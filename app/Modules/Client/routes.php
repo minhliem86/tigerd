@@ -13,6 +13,7 @@ Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controlle
 
     /*PRODUCT*/
     Route::get('/danh-muc/{slug}', ['as' => 'client.category', 'uses' => 'ProductController@getCategory'])->where('slug','[0-9a-zA-Z._\-]+');
+    Route::get('/san-pham', ['as' => 'client.product.showAll', 'uses' => 'ProductController@getAllProduct']);
     Route::get('/san-pham/{slug}', ['as' => 'client.product', 'uses' => 'ProductController@getProduct'])->where('slug','[0-9a-zA-Z._\-]+');
     Route::post('/san-pham/addToCart', ['as' => 'client.product.addToCart', 'uses' => 'ProductController@addToCart']);
     Route::post('/ajaxAttributeValue', ['as' => 'client.product.ajaxChangeAttributeValue', 'uses' => 'ProductController@ajaxChangeAttributeValue']);
@@ -42,8 +43,8 @@ Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controlle
     Route::post('/dang-ky', ['as' => 'client.auth.register.post', 'uses' => 'Auth\AuthController@postRegister']);
 
     // Password Reset Routes...
-    Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
-    Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+    Route::get('password/reset/{token?}',['as'=> 'client.password.reset.getForm', 'uses' => 'Auth\PasswordController@showResetForm']);
+    Route::post('password/email',['as' => 'client.password.email.post', 'uses' => 'Auth\PasswordController@sendResetLinkEmail']);
     Route::post('password/reset', 'Auth\PasswordController@reset');
 
     Route::get('/thong-tin-khach-hang', ['as'=> 'client.auth.profile', 'uses' => 'ProfileController@getProfile']);

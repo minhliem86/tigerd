@@ -9,14 +9,14 @@
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav nav-fill w-100 align-items-start" id="navigation-list">
                     <li class="nav-item">
-                        <a href="{!! route('client.home') !!}" class="nav-link">Home</a>
+                        <a href="{!! route('client.home') !!}" class="nav-link">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{!! count($about) ? $about->slug : '#' !!}" class="nav-link">About Us</a>
+                        <a href="{!! count($about) ? $about->slug : '#' !!}" class="nav-link">Giới Thiệu</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Product
+                            Danh Mục Sản Phẩm
                         </a>
                         @if(!$cate->isEmpty())
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -27,10 +27,10 @@
                         @endif
                     </li>
                     <li class="nav-item">
-                        <a href="{!! route('client.news') !!}" class="nav-link">News</a>
+                        <a href="{!! route('client.news') !!}" class="nav-link">Tin Tức</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{!! route('client.contact') !!}" class="nav-link">Contact Us</a>
+                        <a href="{!! route('client.contact') !!}" class="nav-link">Liên Hệ</a>
                     </li>
                 </ul>
                 {!! Form::open(['route' => 'client.search.post', 'class' => 'form-inline my-2 my-lg-0 form-search']) !!}

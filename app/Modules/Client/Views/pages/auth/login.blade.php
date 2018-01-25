@@ -23,7 +23,7 @@
                                     <input type="submit" class="btn btn-primary" value="Đăng Nhập">
                                 </div>
                                 <div class="col text-right">
-                                    <a href="#" class="forget_password">Bạn không nhớ mật khẩu ?</a>
+                                    <a href="{!! route('client.password.reset.getForm') !!}" class="forget_password">Bạn không nhớ mật khẩu ?</a>
                                 </div>
                             </div>
                         {!! Form::close() !!}
@@ -101,11 +101,4 @@
 @stop
 
 @section("script")
-    <script>
-        $(document).ready(function(){
-            @if(Session::has('error'))
-            alertify.error('{!! Session::get('error') !!}')
-            @endif
-        })
-    </script>
 @stop

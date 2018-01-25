@@ -25,8 +25,12 @@ class PasswordController extends Controller
      *
      * @return void
      */
-    protected $resetView = "Client::auth.reset.email_reset";
+    protected $resetView = "Client::pages.auth.passwords.email_reset";
     public $redirectPath = 'dang-nhap';
+
+
+    protected $guard = 'customer';
+
     public function __construct()
     {
         $this->middleware('guest');
@@ -34,7 +38,7 @@ class PasswordController extends Controller
 
     public function resetView()
     {
-      return 'Admin::auth.reset.email_reset';
+      return 'Client::pages.auth.passwords.email_reset';
     }
 
     public function showResetForm(Request $request, $token = null)
@@ -49,15 +53,20 @@ class PasswordController extends Controller
             return view($this->resetView)->with(compact('token', 'email'));
         }
 
-        if (view()->exists('auth.passwords.reset')) {
-            return view('auth.passwords.reset')->with(compact('token', 'email'));
+        if (view()->exists('Client::pages.auth.passwords.reset')) {
+            return view('Client::pages.auth.passwords.reset')->with(compact('token', 'email'));
         }
 
-        return view('Admin::auth.reset.email_reset')->with(compact('token', 'email'));
+        return view('Client::pages.auth.passwords.reset')->with(compact('token', 'email'));
     }
 
     public function getEmail()
     {
-      return view('Admin::auth.reset.email_reset');
+      return view('Client::pages.auth.passwords.email_reset');
+    }
+
+    protected function getSendResetLinkEmailFailureResponse($response)
+    {
+        return redirect()->back()->withErrors(['email' => "Không tìm thấy thông tin của email."], 'error_forget');
     }
 }
