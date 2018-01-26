@@ -7,6 +7,32 @@
         <div class="col-md-4 col-sm-6">
             <div class="panel panel-info">
                 <div class="panel-heading">
+                    <h3 class="panel-title">Ý kiến khách hàng</h3>
+                </div>
+                <div class="panel-body-dashboard">
+                    <div class="wrap-icon text-center">
+                        <i class="fa fa-envelope-o"></i>
+                        <h5><span class="badge badge-info badge-md">{{$number_agency}}</span> Nhà Cung Cấp</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Danh Mục</h3>
+                </div>
+                <div class="panel-body-dashboard">
+                    <div class="wrap-icon text-center">
+                        <i class="fa  fa-bullhorn"></i>
+                        <h5><span class="badge badge-info badge-md">{{$number_category}}</span> Danh Mục</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
                   <h3 class="panel-title">Sản Phẩm</h3>
                 </div>
                 <div class="panel-body-dashboard">
@@ -15,32 +41,6 @@
                          <h5><span class="badge badge-info badge-md">{{$number_product}}</span> Sản phẩm</h5>
                      </div>
 
-                </div>
-              </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Hỗ trợ viên</h3>
-                </div>
-                <div class="panel-body-dashboard">
-                    <div class="wrap-icon text-center">
-                        <i class="fa  fa-bullhorn"></i>
-                        <h5><span class="badge badge-info badge-md">{{$number_support}}</span> Hỗ trợ viên</h5>
-                    </div>
-                </div>
-              </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Ý kiến khách hàng</h3>
-                </div>
-                <div class="panel-body-dashboard">
-                    <div class="wrap-icon text-center">
-                        <i class="fa fa-envelope-o"></i>
-                        <h5><span class="badge badge-info badge-md">{{$number_contact}}</span> Ý kiến</h5>
-                    </div>
                 </div>
               </div>
         </div>

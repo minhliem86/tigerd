@@ -19,6 +19,7 @@ class CreatePaymentSuppliersTable extends Migration
             $table->string('img_url')->nullable();
             $table->integer('order')->nullable();
             $table->boolean('status')->default(1);
+            $table->boolean('default')->default(0);
             $table->timestamps();
         });
     }

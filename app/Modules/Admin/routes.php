@@ -150,6 +150,20 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('payment-supplier/postAjaxUpdateOrder', ['as' => 'admin.payment-supplier.postAjaxUpdateOrder', 'uses' => 'PaymentSupplierController@postAjaxUpdateOrder']);
         Route::resource('payment-supplier', 'PaymentSupplierController');
 
+        /*CUSTOMER DETAIL*/
+        Route::get('customer-idea/getData', ['as' => 'admin.customer-idea.getData', 'uses' => 'CustomerIdeaController@getData']);
+        Route::post('customer-idea/deleteAll', ['as' => 'admin.customer-idea.deleteAll', 'uses' => 'CustomerIdeaController@deleteAll']);
+        Route::post('customer-idea/updateStatus', ['as' => 'admin.customer-idea.updateStatus', 'uses' => 'CustomerIdeaController@updateStatus']);
+        Route::post('customer-idea/postAjaxUpdateOrder', ['as' => 'admin.customer-idea.postAjaxUpdateOrder', 'uses' => 'CustomerIdeaController@postAjaxUpdateOrder']);
+        Route::resource('customer-idea', 'CustomerIdeaController');
+
+        /*SUPPLIER*/
+        Route::get('supplier/getData', ['as' => 'admin.supplier.getData', 'uses' => 'PaymentSupplierController@getData']);
+        Route::post('supplier/deleteAll', ['as' => 'admin.supplier.deleteAll', 'uses' => 'PaymentSupplierController@deleteAll']);
+        Route::post('supplier/updateStatus', ['as' => 'admin.supplier.updateStatus', 'uses' => 'PaymentSupplierController@updateStatus']);
+        Route::post('supplier/postAjaxUpdateOrder', ['as' => 'admin.supplier.postAjaxUpdateOrder', 'uses' => 'PaymentSupplierController@postAjaxUpdateOrder']);
+        Route::resource('supplier', 'PaymentSupplierController');
+
         /*CUSTOMER MANAMENT*/
         Route::get('customer/getData', ['as' => 'admin.customer.getData', 'uses' => 'CustomerController@getData']);
         Route::post('customer/deleteAll', ['as' => 'admin.customer.deleteAll', 'uses' => 'CustomerController@deleteAll']);

@@ -42,4 +42,15 @@ class ProductRepository extends BaseRepository implements RestfulInterface
         return $query->where('status', 1)->where('visibility', 1)->get($columns);
     }
 
+    /*NEW PRODUCT*/
+    public function new_product($columns=['*'])
+    {
+        return $this->model->orderBy('id', 'DESC')->limit(5)->get($columns);
+    }
+
+    public function viewProduct($columns=['*'])
+    {
+        return $this->model->orderBy('count_number','DESC')->limit(10)->get($columns);
+    }
+
 }

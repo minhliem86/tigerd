@@ -11,5 +11,7 @@
     <li class="list-group-item {{LP_lib::setActive(2,'promotion')}}"><a href="{{route('admin.promotion.index')}}"><i class="fa fa-user-secret"></i>Quản Lý Khuyến Mãi</a></li>
     <li class="list-group-item {{LP_lib::setActive(2,'feedback')}}"><a href="{{route('admin.feedback.index')}}"><i class="fa fa-user-secret"></i>Ý Kiến Khách Hàng</a></li>
     <li class="list-group-item {{LP_lib::setActive(2,'customer')}}"><a href="{{route('admin.customer.index')}}"><i class="fa fa-user-secret"></i>Tài Khoản Khách Hàng</a></li>
+    <li class="list-group-item {{LP_lib::setActive(2,'customer-idea')}}"><a href="{{route('admin.customer-idea.index')}}"><i class="fa fa-user-secret"></i>Testimonial</a></li>
+    <li class="list-group-item {{LP_lib::setActive(2,'supplier')}}"><a href="{{route('admin.supplier.index')}}"><i class="fa fa-user-secret"></i>Nhà Cung Cấp Cổng Thanh Toán</a></li>
   </ul>
 </div>

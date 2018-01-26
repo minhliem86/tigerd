@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Seeder;
 
-class PaymentStatusTableDataSeeder extends Seeder
+class PaymentMethodTableDataSeeder extends Seeder
 {
     /**
      * Run the database seeds.

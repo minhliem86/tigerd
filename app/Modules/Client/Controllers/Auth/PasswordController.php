@@ -27,7 +27,7 @@ class PasswordController extends Controller
      */
     protected $resetView = "Client::pages.auth.passwords.reset";
 
-    public $redirectPath = 'dang-nhap';
+    public $redirectPath = '/';
 
     protected $broker = 'customers';
 
@@ -35,7 +35,7 @@ class PasswordController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('client_if_logined');
     }
 
     public function getEmail()

@@ -74,7 +74,7 @@
         const url = "{{url('/')}}"
         init_tinymce(url);
         // BUTTON ALONE
-        init_btnImage(url,'#lfm');
+        init_btnImage(url,'#lfm_meta');
         // SUBMIT FORM
         function submitForm(){
          $('form').submit();
