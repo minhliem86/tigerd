@@ -37,6 +37,11 @@
                                 @endforeach
                             </ul>
                         @endif
+                        @if(session('status'))
+                            <ul class="list-success">
+                                <li>{!! session('status') !!}</li>
+                            </ul>
+                        @endif
                     </div>
                 </div>
                 <div class="col-sm-6">

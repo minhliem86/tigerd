@@ -33,10 +33,13 @@ p {
   font-family: 'Roboto', sans-serif;
   font-weight: 400; }
 
-ul.list-errors {
+ul.list-errors, ul.list-success {
   padding-left: 15px; }
-  ul.list-errors li {
+  ul.list-errors li, ul.list-success li {
     color: red; }
+
+ul.list-success li {
+  color: green; }
 
 .page {
   /*HEADER*/
@@ -836,9 +839,9 @@ ul.list-errors {
     font-size: 1.3rem;
     font-style: italic;
     color: #e868a0; }
-  .page .login-page ul.list-errors {
+  .page .login-page ul.list-errors, .page .login-page ul.list-success {
     padding-left: 15px; }
-    .page .login-page ul.list-errors li {
+    .page .login-page ul.list-errors li, .page .login-page ul.list-success li {
       color: red; }
   .page .login-page .login-wrapper {
     padding: 0 3rem; }

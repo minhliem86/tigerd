@@ -59,6 +59,12 @@ ul.list-errors{
     color:red;
   }
 }
+ul.list-success{
+  @extend ul.list-errors;
+  li{
+    color:green;
+  }
+}
 
 .page{
   /*HEADER*/

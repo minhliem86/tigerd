@@ -113,9 +113,9 @@ return [
         ],
         'customers' => [
             'provider' => 'customers',
-            'email' => 'Client::auth.emails.password',
+            'email' => 'Client::emails.password',
             'table' => 'password_resets',
-            'exprire' => 60
+            'expire' => 60
         ]
     ],
 
