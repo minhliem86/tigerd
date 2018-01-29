@@ -8,5 +8,5 @@ class Company extends Model
 {
     public $table = "companies";
 
-    protected $fillable = ['email','address', 'phone', 'map'];
+    protected $guarded = ['id'];
 }

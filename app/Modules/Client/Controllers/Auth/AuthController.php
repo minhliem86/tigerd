@@ -69,6 +69,7 @@ class AuthController extends Controller
            'lastname' => 'required',
             'firstname' => 'required',
             'phone' => 'required',
+            'username' => 'required|unique:customers',
             'email'=> 'required|email|unique:customers',
             'password' => 'required|min:6|confirmed',
         ],[
@@ -77,7 +78,10 @@ class AuthController extends Controller
             'phone.required' => 'Vui lòng nhập số điện thoại',
             'email.required' => 'Vui lòng nhập Email',
             'email.email' => 'Định dạng Email: abc@..',
-            'password.required' => 'Vui lòng nhập Password'
+            'email.unique' => 'Email đã tồn tại',
+            'password.required' => 'Vui lòng nhập Password',
+            'username.required' => 'Vui lòng nhập Username',
+            'username.unique' => 'Username đã tồn tại',
         ]);
     }
 
@@ -91,8 +95,10 @@ class AuthController extends Controller
     {
         return Customer::create([
             'firstname' => $data['firstname'],
+            'lastname' => $data['lastname'],
             'email' => $data['email'],
             'phone' => $data['phone'],
+            'username' => $data['username'],
             'password' => bcrypt($data['password']),
         ]);
     }
@@ -148,7 +154,7 @@ class AuthController extends Controller
     public function logout()
     {
       $this->auth->logout();
-      return redirect('/');
+      return redirect('/')->with('success', 'Cảm ơn bạn đã ghé thăm website của chúng tôi.');
     }
 
 }

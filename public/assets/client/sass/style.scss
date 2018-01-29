@@ -515,14 +515,24 @@ ul.list-success{
       .content-single-page, .content-single-page p{
         font-size:1.4rem;
         line-height:2.2rem;
+        margin-bottom:0.5rem;
       }
     }
   }
 
   /*CONTACT PAGE*/
   .contact-page{
+    .wrap-info{
+      img{
+        width:30px;
+      }
+      .flex-item{
+        font-size:1.4rem;
+        color:$cl-pink;
+        @include fontThin(600);
+      }
+    }
     .map-wrapper{
-
     }
     .form-wrapper{
       label{
@@ -545,6 +555,13 @@ ul.list-success{
           line-height:2rem;
           color:white;
         }
+      }
+    }
+
+    .button-wrapper{
+      margin:1.5rem 0 0;
+      a.btn{
+        font-size:1.4rem;
       }
     }
   }
@@ -599,9 +616,10 @@ ul.list-success{
         margin-bottom:2rem;
       }
       h2.news-name{
-        font-size:2rem;
+        font-size:2.2rem;
         margin-bottom:0.8rem;
         font-weight:600;
+        text-transform:uppercase;
       }
       p.create-date{
         font-size:1.3rem;
@@ -610,14 +628,13 @@ ul.list-success{
         margin-bottom:1.5rem;
       }
       .body-news{
-        font-size:1.3rem;
-        line-height:2rem;
+        font-size:1.4rem;
+        line-height:2.2rem;
+        margin-bottom:0.5rem;
         div.description{
-          p{
-            font-weight:600;
-            margin-bottom:1.2rem;
-            font-style:italic;
-          }
+          font-weight:600;
+          margin-bottom:1.4rem;
+          font-style:italic;
         }
       }
     }
@@ -1208,8 +1225,12 @@ ul.list-success{
       .tab-content{
         padding:2rem;
         form{
-          input, button{
+          input, button, select{
             font-size:1.4rem;
+          }
+          select{
+            padding:0.5rem 1.2rem;
+            height:auto;
           }
           label{
             font-size:1.4rem;
@@ -1318,4 +1339,97 @@ ul.list-success{
     }
   }
 
+  /*INVOKE*/
+  .invoice-box {
+    max-width: 800px;
+    margin: auto;
+    padding: 30px;
+    border: 1px solid #eee;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+    font-size: 16px;
+    line-height: 24px;
+    font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    color: #555;
+  }
+
+  .invoice-box table {
+    width: 100%;
+    line-height: inherit;
+    text-align: left;
+  }
+
+  .invoice-box table td {
+    padding: 5px;
+    vertical-align: top;
+  }
+
+  .invoice-box table tr td:nth-child(2) {
+    text-align: right;
+  }
+
+  .invoice-box table tr.top table td {
+    padding-bottom: 20px;
+  }
+
+  .invoice-box table tr.top table td.title {
+    font-size: 45px;
+    line-height: 45px;
+    color: #333;
+  }
+
+  .invoice-box table tr.information table td {
+    padding-bottom: 40px;
+  }
+
+  .invoice-box table tr.heading td {
+    background: #eee;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+  }
+
+  .invoice-box table tr.details td {
+    padding-bottom: 20px;
+  }
+
+  .invoice-box table tr.item td{
+    border-bottom: 1px solid #eee;
+  }
+
+  .invoice-box table tr.item.last td {
+    border-bottom: none;
+  }
+
+  .invoice-box table tr.total td:nth-child(2) {
+    border-top: 2px solid #eee;
+    font-weight: bold;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .invoice-box table tr.top table td {
+      width: 100%;
+      display: block;
+      text-align: center;
+    }
+
+    .invoice-box table tr.information table td {
+      width: 100%;
+      display: block;
+      text-align: center;
+    }
+  }
+
+  /** RTL **/
+  .rtl {
+    direction: rtl;
+    font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+  }
+
+  .rtl table {
+    text-align: right;
+  }
+
+  .rtl table tr td:nth-child(2) {
+    text-align: left;
+  }
 }
+

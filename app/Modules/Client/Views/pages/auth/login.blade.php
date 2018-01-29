@@ -65,6 +65,15 @@
                                     </div>
                                 @endif
                             </div>
+                        <div class="form-group">
+                            <label for="phone">Username</label>
+                            {!! Form::text('username',old('username'), ['class'=> $errors->register_error->first("username") ? 'is-invalid form-control' : 'form-control', 'placeholder' => 'Username' ]) !!}
+                            @if($errors->register_error->first('username'))
+                                <div class="invalid-feedback">
+                                    {!! $errors->register_error->first('username') !!}
+                                </div>
+                            @endif
+                        </div>
                             <div class="form-group">
                                 <label for="email">Email Khách Hàng</label>
                                 {!! Form::text('email',old('email'), ['class'=>$errors->register_error->first("email") ? 'is-invalid form-control' : 'form-control', 'placeholder' => 'Email Khách Hàng' ]) !!}

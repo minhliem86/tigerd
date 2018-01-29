@@ -2,7 +2,7 @@
 <div class="navigation-container">
     <div class="container">
         <nav class="navbar navbar-expand-md navbar-light navbar-toggleable-md">
-            <a href="#" class="navbar-brand h1">TIGERD</a>
+            <a href="{!! route('client.home') !!}" class="navbar-brand h1">TIGERD</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar" aria-controls="mainNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -12,7 +12,7 @@
                         <a href="{!! route('client.home') !!}" class="nav-link">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{!! count($about) ? $about->slug : '#' !!}" class="nav-link">Giới Thiệu</a>
+                        <a href="{!! count($about) ? route('client.single_page',$about->slug) : '#' !!}" class="nav-link">Giới Thiệu</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

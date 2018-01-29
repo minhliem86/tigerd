@@ -31,6 +31,9 @@ Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controlle
 
     Route::get('/thanh-toan-thanh-cong', ['as' => 'client.payment_success.thank','uses' => 'ProductController@getThankyou']);
 
+    /*ORDER DETAIL*/
+    Route::get('/don-hang/{id}', ['as' => 'client.order_detail', 'uses'=> 'ProfileController@getInvoke'])->where('id','[0-9a-zA-Z._\-]+');
+
     /*SUBCRIBE EMAIL*/
     Route::post('/subcribe',['as' => 'client.subcribe.post', 'uses' => 'ExtensionController@postSubscribe']);
 

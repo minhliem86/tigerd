@@ -2,6 +2,7 @@
 
 namespace App\Modules\Client\Controllers;
 
+use App\Repositories\CompanyRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -37,9 +38,10 @@ class ContactController extends Controller
         ];
     }
 
-    public function getIndex()
+    public function getIndex(CompanyRepository $company)
     {
-        return view('Client::pages.contact.index');
+        $info = $company->getFirst(['map']);
+        return view('Client::pages.contact.index', compact('info'));
     }
 
     public function postIndex(Request $request)

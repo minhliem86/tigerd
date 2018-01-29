@@ -6,7 +6,6 @@
 
 @section('content')
     @include("Client::layouts.banner")
-
     <!--NEWS DETAILs-->
     <section class="news-container page-section news-detail-page">
         <div class="container">

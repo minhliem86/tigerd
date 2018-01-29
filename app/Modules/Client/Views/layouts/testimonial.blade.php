@@ -1,4 +1,5 @@
 <!--TESTIMONIAL-->
+@if(!$testimonial->isEmpty())
 <section class="testimonial-container">
     <div class="container">
         <div class="row">
@@ -6,32 +7,25 @@
                 <div class="testimonial-inner">
                     <div class="carousel slide" id="carouselTestimonial" data-ride="carousel" data-interval="5000">
                         <ol class="carousel-indicators">
-                            <li data-target="#carouselTestimonial" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselTestimonial" data-slide-to="1"></li>
+                            @foreach($testimonial as $k=>$item_indicators)
+                            <li data-target="#carouselTestimonial" data-slide-to="{!! $k !!}" class="active"></li>
+                            @endforeach
                         </ol>
                         <div class="carousel-inner">
+                            @foreach($testimonial as $k=>$item)
                             <div class="carousel-item active">
                                 <figure>
-                                    <img src="{!! asset('public/assets/client') !!}/images/news01.png" class="rounded img-fluid" alt="">
+                                    <img src="{!! asset($item->img_url) !!}" class="rounded-circle img-fluid" alt="{!! $item->customer_name !!}">
                                     <figcaption>
-                                        <h4 class="title-caption">Lorem text</h4>
-                                        <p class="content-caption">
-                                            Lorem text
-                                        </p>
+                                        <h4 class="title-caption">{!! $item->customer_name !!}</h4>
+                                        <div class="content-caption">
+                                            {!! Str::words($item->content,15) !!}
+                                        </div>
                                     </figcaption>
                                 </figure>
                             </div>
-                            <div class="carousel-item">
-                                <figure>
-                                    <img src="{!! asset('public/assets/client') !!}/images/news01.png" class="rounded img-fluid" alt="">
-                                    <figcaption>
-                                        <h4 class="title-caption">Lorem text</h4>
-                                        <p class="content-caption">
-                                            Lorem text
-                                        </p>
-                                    </figcaption>
-                                </figure>
-                            </div>
+                            @endforeach
+
                         </div>
                     </div>
                 </div>
@@ -39,4 +33,6 @@
         </div>
     </div>
 </section>
+@endif
 <!--END TESTIMONIAL-->
+

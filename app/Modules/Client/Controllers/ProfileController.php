@@ -2,6 +2,7 @@
 
 namespace App\Modules\Client\Controllers;
 
+use App\Repositories\OrderRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -23,7 +24,6 @@ class ProfileController extends Controller
           'firstname' => 'required',
             'lastname' => 'required',
             'phone' => 'required',
-            'username' => 'required|max:200',
         ];
     }
 
@@ -41,8 +41,6 @@ class ProfileController extends Controller
           'firstname.required' => 'Vui lòng điền Tên',
           'lastname.required' => 'Vui lòng điền Họ',
           'phone.required' => 'Vui lòng điền Số điện thoại',
-          'username.required' => 'Vui lòng điền Số điện thoại',
-          'username.max' => 'Tối đa 200 ký tự',
         ];
     }
 
@@ -65,13 +63,14 @@ class ProfileController extends Controller
     {
         $valid = Validator::make($request->all(), $this->_rulesProfile(), $this->_messageProfile());
         if($valid->fails()){
-            return redirect()->back()->withInput()->withErrors($valid->errors());
+            return redirect()->back()->withInput()->withErrors($valid->errors(), 'error_profile');
         }
-        $user =$this->auth()->user();
+        $user =$this->auth->user();
         $user->firstname = $request->firstname;
         $user->lastname = $request->lastname;
         $user->phone = $request->phone;
-        $user->username = $request->username;
+        $user->birthday = $request->birthday;
+        $user->gender = $request->gender;
         $user->save();
 
         return redirect()->back()->with('success', 'Cập Nhật Thành Công');
@@ -96,5 +95,14 @@ class ProfileController extends Controller
         $this->auth->logout();
 
         return redirect('/dang-nhap');
+    }
+
+    public function getInvoke(OrderRepository $order, $order_id)
+    {
+        $order_detail = $order->find($order_id,['*'],['customers', 'paymentmethods', 'products']);
+        if(!count($order_detail)){
+            return back()->with('error', 'Đơn Hàng không tồn tại.');
+        }
+        return view('Client::extensions.invoke', compact('order_detail'));
     }
 }

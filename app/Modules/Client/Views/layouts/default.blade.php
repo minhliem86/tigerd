@@ -5,6 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
     <meta name="csrf-token" content="{!! csrf_token() !!} ">
 
     @yield('meta')
@@ -98,7 +99,7 @@
         <div class="logo-container">
             <div class="container">
                 <div class="row">
-                    <a href="#" class="logo mx-auto">
+                    <a href="{!! route('client.home') !!}" class="logo mx-auto">
                         <img src="{!! asset('public/assets/client') !!}/images/logo.png" class="img-fluid" alt="TigerD">
                     </a>
                 </div>

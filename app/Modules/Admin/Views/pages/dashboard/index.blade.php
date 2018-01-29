@@ -4,6 +4,113 @@
 
 @section('content')
     <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Nhà Cung Cấp</h3>
+                </div>
+                <div class="panel-body-dashboard">
+                    <a href="{!! route('admin.agency.index') !!}">
+                        <div class="wrap-icon text-center">
+                            <i class="fa fa-users"></i>
+                            <h5><span class="badge badge-info badge-md">{{$number_agency}}</span> Nhà Cung Cấp</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Danh Mục</h3>
+                </div>
+                <div class="panel-body-dashboard">
+                    <a href="{!! route('admin.category.index') !!}">
+                        <div class="wrap-icon text-center">
+                            <i class="fa fa-server"></i>
+                            <h5><span class="badge badge-info badge-md">{{$number_category}}</span> Danh Mục</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Sản Phẩm</h3>
+                </div>
+                <div class="panel-body-dashboard">
+                    <a href="{!! route('admin.product.index') !!}">
+                        <div class="wrap-icon text-center">
+                            <i class="fa fa-television"></i>
+                            <h5><span class="badge badge-info badge-md">{{$number_product}}</span> Sản phẩm</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Tin Tức</h3>
+                </div>
+                <div class="panel-body-dashboard">
+                    <a href="{!! route('admin.news.index') !!}">
+                        <div class="wrap-icon text-center">
+                            <i class="fa fa-newspaper-o"></i>
+                            <h5><span class="badge badge-info badge-md">{{$number_news}}</span> Tin tức</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Khách Hàng Liên Hệ</h3>
+                </div>
+                <div class="panel-body-dashboard">
+                    <a href="{!! route('admin.feedback.index') !!}">
+                        <div class="wrap-icon text-center">
+                            <i class="fa fa-envelope"></i>
+                            <h5><span class="badge badge-info badge-md">{{$number_feedback}}</span> Liên hệ</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Ý Kiến Khách Hàng</h3>
+                </div>
+                <div class="panel-body-dashboard">
+                    <a href="{!! route('admin.customer-idea.index') !!}">
+                        <div class="wrap-icon text-center">
+                            <i class="fa fa-comment-o"></i>
+                            <h5><span class="badge badge-info badge-md">{{$number_customerIdea}}</span> Ý kiến</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Tài Khoản Khách Hàng</h3>
+                </div>
+                <div class="panel-body-dashboard">
+                    <a href="{!! route('admin.customer.index') !!}">
+                        <div class="wrap-icon text-center">
+                            <i class="fa fa-user"></i>
+                            <h5><span class="badge badge-info badge-md">{{$number_customer}}</span> Tài khoản</h5>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-sm-12">
             <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -45,57 +152,11 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-4 col-sm-6">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Nhà Cung Cấp</h3>
-                </div>
-                <div class="panel-body-dashboard">
-                    <a href="{!! route('admin.agency.index') !!}">
-                    <div class="wrap-icon text-center">
-                        <i class="fa fa-envelope-o"></i>
-                        <h5><span class="badge badge-info badge-md">{{$number_agency}}</span> Nhà Cung Cấp</h5>
-                    </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Danh Mục</h3>
-                </div>
-                <div class="panel-body-dashboard">
-                    <a href="{!! route('admin.category.index') !!}">
-                    <div class="wrap-icon text-center">
-                        <i class="fa  fa-bullhorn"></i>
-                        <h5><span class="badge badge-info badge-md">{{$number_category}}</span> Danh Mục</h5>
-                    </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4 col-sm-6">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Sản Phẩm</h3>
-                </div>
-                <div class="panel-body-dashboard">
-                    <a href="{!! route('admin.product.index') !!}">
-                    <div class="wrap-icon text-center">
-                        <i class="fa fa-cubes"></i>
-                        <h5><span class="badge badge-info badge-md">{{$number_product}}</span> Sản phẩm</h5>
-                    </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
     <div class="row">
-        <div class="col-md-7">
-            <div class="panel panel-warning">
+        <div class="col-md-12">
+            <div class="panel panel-success">
                 <div class="panel-heading">
                     <h3 class="panel-title">Sản phẩm mới cập nhật</h3>
                 </div>
@@ -126,7 +187,10 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5">
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
             <div class="panel panel-danger">
                 <div class="panel-heading">
                     <h3 class="panel-title">Sản phẩm được quan tâm nhiều nhất</h3>
@@ -141,7 +205,7 @@
                                 data: {
                                     labels: [
                                         @foreach($view_sp as $item_view_name)
-                                        '{!! $item_view_name->name !!}',
+                                            '{!! $item_view_name->name !!}',
                                         @endforeach
                                     ],
                                     datasets:[
@@ -149,7 +213,7 @@
                                             label: "Sản Phẩm Yêu Thích",
                                             data:[
                                                 @foreach($view_sp as $item_view_count)
-                                                    {!! $item_view_count->count_number !!},
+                                                {!! $item_view_count->count_number !!},
                                                 @endforeach
                                             ],
                                             backgroundColor: [
@@ -175,45 +239,37 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-primary">
+        <div class="col-md-6">
+            <div class="panel panel-danger">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Thống Kê Bán Hàng</h3>
+                    <h3 class="panel-title">Thống Kê Chương Trình Khuyến Mãi</h3>
                 </div>
                 <div class="panel-body-dashboard">
-                    <div class="wrap-chart-order">
-                        <canvas id="chart-order"></canvas>
+                    <div class="wrap-view-product">
+                        <canvas id="view-promotion"></canvas>
                         <script>
-                            const ctx_order = document.getElementById('chart-order');
-                            const myChart_order = new Chart(ctx_order, {
-                                type: "bar",
+                            const ctx_promotion = document.getElementById('view-promotion');
+                            const myChart_promotion = new Chart(ctx_promotion, {
+                                type: "pie",
                                 data: {
                                     labels: [
-                                        @foreach($data_bar_chart as $k => $v)
-                                            '{!! $k !!}',
-                                        @endforeach
+                                        'Khuyến mãi đang chạy',
+                                        'Khuyến mãi đã ngưng',
                                     ],
                                     datasets:[
                                         {
-                                            label: "Đơn hàng",
+                                            label: "Các Chương Trình Khuyến Mãi",
                                             data:[
-                                                @foreach($data_bar_chart as  $v)
-                                                    '{!! $v !!}',
-                                                @endforeach
-
+                                                '{!! $promotion_active !!}',
+                                                '{!! $promotion_deactive !!}'
                                             ],
                                             backgroundColor: [
-                                                @foreach($data_bar_chart as  $v)
-
-                                                @endforeach
+                                                "rgb(255, 99, 132)",
+                                                "rgb(54, 162, 235)",
                                             ],
                                             hoverBackgroundColor: [
                                                 "rgb(186,137,183)",
                                                 "rgb(82,136,170)",
-                                                "rgb(237,237,144)",
                                             ]
                                         }
                                     ],
@@ -229,14 +285,104 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Thống Kê Doanh Số</h3>
+                </div>
+                <div class="panel-body-dashboard">
+                    <div class="wrap-chart-order">
+                        <canvas id="chart-order"></canvas>
+                        <script>
+                            const ctx_order = document.getElementById('chart-order');
+                            const data = {
+                                labels: [
+                                    @foreach($data_bar_chart as $k => $v)
+                                        '{!! $k !!}',
+                                    @endforeach
+                                ],
+                                datasets: [
+                                    {
+                                        label: 'Đơn Hàng',
+                                        backgroundColor: "Blue",
+                                        hoverBackgroundColor: "Green",
+                                        data : [
+                                            @foreach($data_bar_chart as  $v)
+                                                '{!! $v !!}',
+                                            @endforeach
+                                        ]
+                                    }
+                                ]
+                            }
+                            const myChart_order = new Chart(ctx_order, {
+                                type: "bar",
+                                data: data,
+                                options: {
+                                    responsive: true,
+
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Thống Kê Doanh Thu</h3>
+                </div>
+                <div class="panel-body-dashboard">
+                    <div class="wrap-chart-order">
+                        <canvas id="chart-total"></canvas>
+                        <script>
+                            const ctx_total = document.getElementById('chart-total');
+                            const data2 = {
+                                labels: [
+                                    @foreach($data_bar_chart as $k => $v)
+                                        '{!! $k !!}',
+                                    @endforeach
+                                ],
+                                datasets: [
+                                    {
+                                        label: 'Doanh Thu',
+                                        backgroundColor: "Red",
+                                        hoverBackgroundColor: "Yellow",
+                                        data : [
+                                            @foreach($data_bar_order as  $v)
+                                                '{!! $v !!}',
+                                            @endforeach
+                                        ]
+                                    }
+                                ]
+                            }
+                            const myChart_total = new Chart(ctx_total, {
+                                type: "bar",
+                                data: data2,
+                                options: {
+                                    tooltips: {
+                                        mode: 'label',
+                                        label: 'mylabel',
+                                        callbacks: {
+                                            label: function(tooltipItem, data) {
+                                                return tooltipItem.yLabel.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); }, },
+                                    },
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
     <!--  DATE PICKER -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <!--CHART-->
-    <script src="{{asset('/public/assets/admin')}}/dist/js/Chart.js"></script>
 
     <script>
         $(document).ready(function(){

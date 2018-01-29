@@ -19,7 +19,7 @@
     @endif
     <div class="row">
       <div class="col-sm-12">
-        @if(!$inst)
+        @if(!count($inst))
         <form method="POST" action="{{route('admin.company.index')}}" id="form" role="form" class="form-horizontal form">
           {{Form::token()}}
           <div class="form-group">
@@ -40,12 +40,12 @@
               <input type="text" required="" placeholder="Phone Number" id="phone" class="form-control" name="phone">
             </div>
           </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label">Bản đồ</label>
-            <div class="col-md-10">
-              <input type="text" required="" placeholder="Map" id="map" class="form-control" name="map">
-            </div>
-          </div>
+          {{--<div class="form-group">--}}
+            {{--<label class="col-md-2 control-label">Bản đồ</label>--}}
+            {{--<div class="col-md-10">--}}
+              {{--<input type="text" required="" placeholder="Map" id="map" class="form-control" name="map">--}}
+            {{--</div>--}}
+          {{--</div>--}}
         </form>
         @else
         {{Form::model($inst,['route' =>['admin.company.index', $inst->id], 'method'=>'PUT', 'class'=>'form form-horizontal'])}}
@@ -67,12 +67,12 @@
               {{Form::text('phone',old($inst->phone),['class'=>'form-control', 'placeholder'=>'Phone', 'required'])}}
             </div>
           </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label">Bản đồ</label>
-            <div class="col-md-10">
-              {{ Form::text('map',old($inst->map),['class'=>'form-control']) }}
-            </div>
-          </div>
+          {{--<div class="form-group">--}}
+            {{--<label class="col-md-2 control-label">Bản đồ</label>--}}
+            {{--<div class="col-md-10">--}}
+              {{--{{ Form::text('map',old($inst->map),['class'=>'form-control']) }}--}}
+            {{--</div>--}}
+          {{--</div>--}}
         {{Form::close()}}
         @endif
       </div>

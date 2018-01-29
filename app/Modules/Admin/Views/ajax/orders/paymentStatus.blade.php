@@ -1,0 +1,1 @@
+{!! Form::select('payment_status',$payment_list,$data->paymentstatus_id,['class' => 'form-control']) !!}

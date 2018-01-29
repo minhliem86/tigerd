@@ -47,7 +47,6 @@
                                 <a class="dropdown-item" href="{!! route('client.auth.logout') !!}">Thoát</a>
                             </div>
                         @endif
-                        <a href="#"></a>
                     </div>
                 </div>
             </div>

@@ -13,15 +13,21 @@
         {{Form::model($inst, ['route'=>['admin.news.update',$inst->id], 'method'=>'put', 'class' => 'form-horizontal' ])}}
           <fieldset>
               <div class="form-group">
-                  <label class="col-md-2 control-label">Tên:</label>
+                  <label class="col-md-2 control-label">Bài viết:</label>
                   <div class="col-md-10">
                       {{Form::text('name',old('name'), ['class'=>'form-control', 'placeholder'=>'Tiêu đề'])}}
                   </div>
               </div>
               <div class="form-group">
+                  <label class="col-md-2 control-label">Mô tả:</label>
+                  <div class="col-md-10">
+                      {!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ngắn ...']) !!}
+                  </div>
+              </div>
+              <div class="form-group">
                   <label class="col-md-2 control-label">Nội dung:</label>
                   <div class="col-md-10">
-                      {!! Form::textarea('description',old('description'), ['class'=> 'form-control my-editor', 'placeholder' => 'Nội dung ...']) !!}
+                      {!! Form::textarea('content',old('content'), ['class'=> 'form-control my-editor', 'placeholder' => 'Nội dung ...']) !!}
                   </div>
               </div>
               <div class="form-group">

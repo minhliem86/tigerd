@@ -74,6 +74,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('product/removeAttribute', ['as' => 'admin.product.removeAttribute', 'uses' => 'ProductController@removeAttribute']);
         Route::post('product/removeAttributeValue', ['as' => 'admin.product.removeAttributeValue', 'uses' => 'ProductController@removeAttributeValue']);
 
+        /*ORDER*/
+        Route::get('/don-hang', ['as' => 'admin.order.index', 'uses' => 'OrderController@getIndex']);
+        Route::get('/don-hang/getData', ['as' => 'admin.order.getData', 'uses' => 'OrderController@getData']);
+        Route::get('/don-hang/{id}', ['as' => 'admin.order.detail', 'uses' => 'OrderController@getDetail'])->where('id','[0-9]+');
+        Route::post('don-hang/doi-trang-thai-ship', ['as' => 'admin.order.changeShipStatus', 'uses' => 'OrderController@postChangeShip']);
+        Route::post('don-hang/doi-trang-thai-payment', ['as' => 'admin.order.changePaymentStatus', 'uses' => 'OrderController@postChangePayment']);
+
             /*CONFIGURABLE PRODUCT*/
         Route::get('product/pre-create', ['as' => 'admin.pre_create.product', 'uses' => 'ProductController@getPreCreateProduct']);
         Route::post('product/pre-create', ['as' => 'admin.pre_create.product.post', 'uses' => 'ProductController@postPreCreateProduct']);

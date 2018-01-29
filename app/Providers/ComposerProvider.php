@@ -15,6 +15,7 @@ class ComposerProvider extends ServiceProvider
     {
         view()->composer('Client::layouts.navigation', 'App\ViewComposers\NavigationComposer');
         view()->composer('Client::layouts.footer', 'App\ViewComposers\SinglePageComposer');
+        view()->composer('Client::layouts.testimonial', 'App\ViewComposers\TestimonialComposer');
     }
 
     /**

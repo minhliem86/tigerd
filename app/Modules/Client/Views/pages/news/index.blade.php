@@ -19,7 +19,7 @@
                             <div class="media">
                                 <a href="{!! route('client.news.detail',$item_news->slug) !!}"><img src="{!! asset($item_news->img_url) !!}" class="mr-5" alt="{!! $item_news->name !!}"></a>
                                 <div class="media-body">
-                                    <h3 class="news-name"><a href="#">{!! $item_news->name !!}</a></h3>
+                                    <h3 class="news-name"><a href="{!! route('client.news.detail',$item_news->slug) !!}">{!! $item_news->name !!}</a></h3>
                                     <p>{!! $item_news->description !!}</p>
                                     <a href="{!! route('client.news.detail',$item_news->slug) !!}" class="readmore float-right">Read more ...</a>
                                 </div>

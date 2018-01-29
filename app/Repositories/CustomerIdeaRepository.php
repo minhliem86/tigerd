@@ -13,4 +13,9 @@ class CustomerIdeaRepository extends BaseRepository implements RestfulInterface{
     }
     // END
 
+    public function getTestimonial($columns=['*'])
+    {
+        return $this->model->where('status',1)->get($columns);
+    }
+
 }

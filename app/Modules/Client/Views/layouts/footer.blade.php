@@ -5,9 +5,9 @@
                 <div class="block-footer">
                     <h3 class="title-footer">About Tigerd</h3>
                     <ul class="list-footer">
-                        <li><a href="#">Product Us</a></li>
-                        <li><a href="{!! route('client.news') !!}">News</a></li>
-                        <li><a href="{!! route('client.contact') !!}">Contact Us</a></li>
+                        <li><a href="{!! route('client.product.showAll') !!}">Sản Phẩm</a></li>
+                        <li><a href="{!! route('client.news') !!}">Tin Tức</a></li>
+                        <li><a href="{!! route('client.contact') !!}">Liên Hệ</a></li>
                     </ul>
                 </div>
             </div>

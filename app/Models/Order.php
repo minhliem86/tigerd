@@ -10,9 +10,9 @@ class Order extends Model
 
     protected $guarded = ['id'];
 
-    public function users()
+    public function customers()
     {
-        return $this->belongsToMany('App\Models\User');
+        return $this->belongsTo('App\Models\Customer', 'customer_id');
     }
 
     public function ship_address()
@@ -27,10 +27,14 @@ class Order extends Model
 
     public function shipstatus()
     {
-        return $this->belongsToMany('App\Models\ShipStatus');
+        return $this->belongsTo('App\Models\ShipStatus', 'shipstatus_id');
     }
     public function paymentstatus()
     {
-        return $this->belongsToMany('App\Models\PaymentStatus');
+        return $this->belongsTo('App\Models\PaymentStatus', 'paymentstatus_id');
+    }
+    public function paymentmethods()
+    {
+        return $this->belongsTo('App\Models\PaymentMethod', 'paymentmethod_id');
     }
 }

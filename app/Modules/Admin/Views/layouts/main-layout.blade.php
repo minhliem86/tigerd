@@ -26,6 +26,9 @@
     <!-- CHART JS -->
     <script src="{{asset('/public/assets/admin')}}/dist/js/Chart.js"></script>
 
+    <!-- NUMBER JS -->
+    <script src="{{asset('/public/assets/client/js/plugins/numeral.js')}}"></script>
+
   </head>
   <body>
     @include('Admin::layouts.header')

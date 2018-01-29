@@ -20,6 +20,7 @@
                             <th>Hình Ảnh</th>
                             <th>Tên Sản Phẩm</th>
                             <th>Giá</th>
+                            <th>Tồn Kho</th>
                             <th>Thuộc tính</th>
                             <th>Default</th>
                             <th>Action</th>
@@ -49,6 +50,7 @@
                             <td><img src="{!! asset($item_child->img_url) !!}" class="img-responsive" style="width:80px" alt="{!! $item_child->name !!}"></td>
                             <td>{!! $item_child->name !!}</td>
                             <td>{!! number_format($item_child->price) !!} VND</td>
+                            <td>{!! $item_child->stock !!}</td>
                             <td>{!! $string !!}</td>
                             <td>
                                 <div class="radio">

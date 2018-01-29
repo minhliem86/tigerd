@@ -13,15 +13,21 @@
           {{Form::token()}}
             <fieldset>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Tiêu đề:</label>
+                    <label class="col-md-2 control-label">Bài viết:</label>
                     <div class="col-md-10">
                         <input type="text" required="" placeholder="Tiêu đề Tin Tức" id="name" class="form-control" name="name">
                     </div>
                 </div>
                 <div class="form-group">
+                    <label class="col-md-2 control-label">Mô tả:</label>
+                    <div class="col-md-10">
+                        {!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ngắn ...']) !!}
+                    </div>
+                </div>
+                <div class="form-group">
                     <label class="col-md-2 control-label">Nội Dung:</label>
                     <div class="col-md-10">
-                        {!! Form::textarea('description',old('description'), ['class'=> 'form-control my-editor', 'placeholder' => 'Nội dung ...']) !!}
+                        {!! Form::textarea('content',old('content'), ['class'=> 'form-control my-editor', 'placeholder' => 'Nội dung ...']) !!}
                     </div>
                 </div>
                 <div class="form-group">

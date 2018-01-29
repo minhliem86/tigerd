@@ -54,7 +54,7 @@
                                                                 <p class="price">{!! number_format($product_child->discount) !!} VND</p>
                                                             @endif
                                                             @if(!$product_child->stock <= 0)
-                                                                <button type="button" class="btn btn-outline-default btn-add-to-cart" onclick="addToCartAjax('{!! route("client.cart.addToCartAjax") !!}', {!! $product_child->id !!})">Thêm Giỏ Hàng</button>
+                                                                <a href="{!! route('client.product', $item_product->slug) !!}" class="btn btn-outline-default btn-add-to-cart">Xem Sản Phẩm</a>
                                                             @else
                                                                 <button type="button" class="btn btn-outline-default btn-add-to-cart" disabled="">Hết Hàng</button>
                                                             @endif

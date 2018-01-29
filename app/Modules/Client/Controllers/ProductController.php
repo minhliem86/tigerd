@@ -14,6 +14,7 @@ use Validator;
 use Cart;
 use Auth;
 use Session;
+use Cache;
 use Carbon\Carbon;
 use App\Repositories\PromotionRepository;
 use App\Repositories\PaymentMethodRepository;
@@ -97,7 +98,7 @@ class ProductController extends Controller
         return view('Client::pages.product.all_product', compact('allProduct', 'all_cate', 'hotProduct'));
     }
 
-    public function getProduct($slug)
+    public function getProduct(Request $request, $slug)
     {
         $product = $this->product->getProductBySlug($slug,['id','name', 'slug', 'description', 'content', 'sku_product', 'price', 'discount', 'img_url','category_id','type'], ['categories','photos', 'values', 'attributes','product_links']);
         if(count($product)){
@@ -133,6 +134,17 @@ class ProductController extends Controller
                     }
                 }
 
+            }
+
+            $ip = $request->ip();
+            $info_cache = $ip . '_' .$slug;
+            if(!Cache::has($info_cache)){
+                $product->count_number  = $product->count_number + 1 ;
+                $product->save();
+
+                Cache::remember($info_cache,15,function() use ($product){
+                   return $product->count_number;
+                });
             }
 
             return view('Client::pages.product.detail', compact('product', 'relate_product', 'array_option_att'));
@@ -186,7 +198,7 @@ class ProductController extends Controller
     {
         Cart::clear();
         Cart::clearCartConditions();
-        return redirect()->route('client.home')->with('error','Giỏ hàng của bạn đã được xóa.');;
+        return redirect()->route('client.product.showAll')->with('error','Giỏ hàng của bạn đã được xóa.');;
     }
 
     public function getPayment(Request $request, PaymentMethodRepository $paymentMethod)
@@ -300,12 +312,10 @@ class ProductController extends Controller
                     $pr->save();
                 }
 
-
-
                 Cart::clearCartConditions();
                 Cart::clear();
 
-                return redirect()->route('client.payment_success.thank')->with('success',true);
+                return redirect()->route('client.payment_success.thank')->with('success','Đặt hàng thành công.');
                 break;
 
             case '2' :
@@ -363,18 +373,17 @@ class ProductController extends Controller
             $data_ship['order_id'] = $order->id;
 
             $this->ship_address->create($data_ship);
-
             if(session('promotion_id')){
-                $promotion = $this->promotion->find(session('promotion'));
+                $promotion = $this->promotion->find(session('promotion_id'));
                 $promotion->quantity = $promotion->quantity - 1;
                 $promotion->save();
             }
             $cart = Cart::getContent();
             foreach($cart as $item){
-                $product_array = explode('_',$item->id);
-                $product_id = $product_array[1];
-
-                $product = $this->product->find($product_id);
+//                $product_array = explode('_',$item->id);
+//                $product_id = $product_array[1];
+                $product_id = $item->id;
+                $product = $this->product->find($item->id);
                 $product->stock = $product->stock - 1;
                 $product->save();
 
@@ -397,7 +406,7 @@ class ProductController extends Controller
             Cart::clearCartConditions();
             Cart::clear();
 
-            return redirect()->route('client.payment_success.thank')->with('success',true);
+            return redirect()->route('client.payment_success.thank')->with('success','Mua hàng thành công.');
 
         }elseif($hashValidated=="INVALID HASH" && $request->vpc_TxnResponseCode == "0"){
             // pending

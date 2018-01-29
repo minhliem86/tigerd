@@ -30,7 +30,7 @@
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="home-tab">
                                 <div class="profile-info">
-                                    <form action="" method="POST" class="form-profile form">
+
                                         {!! Form::open(['route' => 'client.auth.profile.post', 'class'=>'form-profile form']) !!}
                                         <fieldset>
                                             <legend>Thông tin khách hàng</legend>
@@ -38,67 +38,51 @@
                                                 <div class="form-row">
                                                     <div class="col">
                                                         <label for="lastname">Họ</label>
-                                                        {!! Form::text('lastname', Auth::guard('customer')->user()->lastname, ['class' => 'form-control']) !!}
+                                                        {!! Form::text('lastname', Auth::guard('customer')->user()->lastname, ['class' => $errors->error_profile->has('lastname') ? 'is-invalid  form-control' : 'form-control']) !!}
+                                                        @if($errors->error_profile->has('lastname'))
+                                                        <div class="invalid-feedback">
+                                                            {!! $errors->error_profile->first('lastname') !!}
+                                                        </div>
+                                                        @endif
                                                     </div>
                                                     <div class="col">
                                                         <label for="firstname">Tên</label>
-                                                        {!! Form::text('firstname', Auth::guard('customer')->user()->firstname, ['class' => 'form-control']) !!}
+                                                        {!! Form::text('firstname', Auth::guard('customer')->user()->firstname, ['class' => $errors->error_profile->has('firstname') ? 'is-invalid  form-control' : 'form-control']) !!}
+                                                        @if($errors->error_profile->has('firstname'))
+                                                            <div class="invalid-feedback">
+                                                                {!! $errors->error_profile->first('firstname') !!}
+                                                            </div>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <div class="form-row">
-
                                                     <div class="col-md-4">
-                                                        <label for="username">Username</label>
-                                                        {!! Form::text('username', Auth::guard('customer')->user()->username, ['class' => 'form-control']) !!}
+                                                        <label for="address">Giới tính</label>
+                                                        {!! Form::select('gender', [0 => 'Mrs.', 1=>'Mr.'],Auth::guard('customer')->user()->gender ,['class'=> 'form-control']) !!}
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label for="phone">Số điện thoại</label>
-                                                        {!! Form::text('phone', Auth::guard('customer')->user()->phone, ['class' => 'form-control']) !!}
+                                                        {!! Form::text('phone', Auth::guard('customer')->user()->phone, ['class' => $errors->error_profile->has('phone') ? 'is-invalid  form-control' : 'form-control']) !!}
+                                                        @if($errors->error_profile->has('phone'))
+                                                            <div class="invalid-feedback">
+                                                                {!! $errors->error_profile->first('phone') !!}
+                                                            </div>
+                                                        @endif
                                                     </div>
                                                     <div class="col-md-4">
                                                         <label for="birthday">Ngày Sinh</label>
-                                                        {!! Form::text('birthday', Auth::guard('customer')->user()->birthday ? \Carbon\Carbon::createFromFormat("Y-m-d",Auth::guard('customer')->user()->birthday)->format('d-m-Y') : '', ['class' => 'form-control']) !!}
+                                                        {!! Form::text('birthday', Auth::guard('customer')->user()->birthday, ['class' => 'form-control']) !!}
                                                     </div>
+
                                                 </div>
-                                            </div>
-                                        </fieldset>
-                                        <fieldset>
-                                            <legend>Thông tin giao hàng</legend>
-                                            <div class="form-group">
-                                                <label for="address">Địa chỉ giao hàng</label>
-                                                <input type="text" name="address" class="form-control">
-                                                <small id="address" class="form-text text-muted">
-                                                    <b>Lưu ý:</b> Thông tin này có thể thay đổi khi thanh toán đơn hàng
-                                                </small>
-                                            </div>
-                                            <div class="form-row">
-                                                <div class="col">
-                                                    <label for="city">Thành Phố</label>
-                                                    <select name="city" class="form-control">
-                                                        <option value="">-- Chọn Thành Phố --</option>
-                                                    </select>
-                                                </div>
-                                                <div class="col">
-                                                    <label for="district">Quận/huyện</label>
-                                                    <select name="district" class="form-control">
-                                                        <option value="">-- Chọn Quận/huyện --</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="postcole">Mã Bưu Điện</label>
-                                                <input type="text" name="postcode" class="form-control">
-                                                <small id="address" class="form-text text-muted">
-                                                    <b>Lưu ý:</b> Thông tin này không bắt buộc
-                                                </small>
                                             </div>
                                         </fieldset>
                                         <div class="form-group text-center">
                                             <button type="submit" class="btn btn-info btn-profile">Lưu Thông Tin</button>
                                         </div>
-                                    </form>
+                                    {!! Form::close() !!}
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="changePassword" role="tabpanel" aria-labelledby="profile-tab">
@@ -130,13 +114,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @if(!$orders->isEmpty())
-                                        @foreach($orders as $item_order)
+                                    @if(!$order->isEmpty())
+                                        @foreach($order as $item_order)
                                             <tr>
                                                 <td>{!! $item_order->id !!}</td>
-                                                <td>{!! $item_order->name !!}</td>
+                                                <td>{!! $item_order->order_name !!}</td>
                                                 <td>{!! Carbon\Carbon::parse($item_order->created_at)->format('d/m/Y H:i') !!}</td>
-                                                <td><a href="#" class="btn btn-outline-secondary btn-order-detail">Chi Tiết</a></td>
+                                                <td><a href="{!! route('client.order_detail', $item_order->id) !!}" class="btn btn-outline-secondary btn-order-detail">Chi Tiết</a></td>
                                             </tr>
                                         @endforeach
                                     @else
@@ -156,5 +140,17 @@
 @stop
 
 @section("script")
-
+    <!--  DATE PICKER -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('input[name=birthday]').datepicker({
+                dateFormat:'dd/mm/yy',
+                changeMonth: true,
+                changeYear: true,
+                yearRange: '1950:2018',
+            })
+        })
+    </script>
 @stop
