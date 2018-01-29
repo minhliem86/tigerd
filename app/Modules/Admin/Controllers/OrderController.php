@@ -2,6 +2,7 @@
 
 namespace App\Modules\Admin\Controllers;
 
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -28,7 +29,7 @@ class OrderController extends Controller
 
     public function getData(Request $request)
     {
-        $data = $this->order->query(['*'])
+        $data = $this->order->query(['orders.id', 'orders.order_name', 'orders.total', 'orders.customer_id', 'orders.promotion_id', 'orders.paymentmethod_id', 'orders.shipstatus_id', 'orders.paymentstatus_id'])
             ->join('customers', 'customers.id', '=', 'orders.customer_id')
             ->join('payment_methods', 'payment_methods.id', '=', 'orders.paymentmethod_id' )
             ->join('paymentstatus', 'paymentstatus.id', '=', 'orders.paymentstatus_id' )
@@ -36,9 +37,9 @@ class OrderController extends Controller
 
         return Datatables::of($data)
             ->addColumn('action', function($data){
-                return '<a href="'.route('admin.category.edit', $data->id).'" class="btn btn-info btn-xs inline-block-span"> Chi tiết </a>';
+                return '<a href="'.route('admin.order.detail', $data->id).'" class="btn btn-info btn-xs inline-block-span"> Chi tiết </a>';
             })->editColumn('orders.order_date', function($data){
-                $date = Carbon::parse($data->created_at)->format('d/m/Y');
+                $date = Carbon::parse($data->created_at)->format('d/m/Y H:i');
                 return $date;
             })->editColumn('orders.total', function($data){
                 $total = number_format($data->total);
@@ -47,17 +48,9 @@ class OrderController extends Controller
                 $name = $data->customers->lastname .' '.$data->customers->firstname;
                 return $name;
             })
-            ->editColumn('payment.method', function($data){
+            ->editColumn('method', function($data){
                 $method = $data->paymentmethods->name;
                 return $method;
-            })
-            ->editColumn('promotion.status', function($data){
-                if($data->promotion_id){
-                    $promotion = $this->promotion->find($$data->promotion_id)->sku_promotion;
-                }else{
-                    $promotion = "Không áp dụng";
-                }
-                return $promotion;
             })
             ->editColumn('shipstatus.name', function($data){
                 $ship_list = \App\Models\ShipStatus::lists('description','code')->toArray();
@@ -69,25 +62,48 @@ class OrderController extends Controller
                 $select = view('Admin::ajax.orders.paymentStatus', compact('payment_list','data'))->render() ;
                 return $select;
             })
-            ->filter(function($query) use ($request){
-                if (request()->has('name')) {
-                    $query->where('categories.name', 'like', "%{$request->input('name')}%")->orWhere('categories.sku_cate','like', "%{$request->input('name')}%");
-                }
-            })->setRowId('id')->make(true);
+           ->setRowId('id')->make(true);
     }
 
     public function getDetail(Request $request, $id)
     {
-
+        $order = $this->order->find($id, ['*'],['customers','paymentmethods', 'paymentstatus', 'shipstatus','products']);
+        return view('Admin::pages.order.show', compact('order'));
     }
 
     public function postChangeShip(Request $request)
     {
+        if(!$request->ajax()){
+            return response()->view('Admin::errors.404', '',404);
+        }else{
+            $value = $request->value;
+            $id = $request->id;
 
+            $order = $this->order->find($id);
+            $order->shipstatus_id = $value;
+            if($value == 3){
+                $order->paymentstatus_id = 2;
+                $order->save();
+            }else{
+                $order->save();
+            }
+
+            return response()->json(['error'=> false, 'data'=> $value], 200);
+        }
     }
 
     public function postChangePayment(Request $request)
     {
+        if(!$request->ajax()){
+            return response()->view('Admin::errors.404', '',404);
+        }else{
+            $value = $request->value;
+            $id = $request->id;
+            $order = $this->order->find($id);
+            $order->paymentstatus_id = $value;
+            $order->save();
 
+            return response()->json(['error'=> false, 'data'=> true], 200);
+        }
     }
 }

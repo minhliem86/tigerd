@@ -8,7 +8,22 @@
 
     <meta name="csrf-token" content="{!! csrf_token() !!} ">
 
-    @yield('meta')
+    @hasSection('meta')
+        @yield('meta')
+        <meta property="og:image:width" content="600">
+        <meta property="og:image:height" content="315">
+        <meta property="og:url" content="{!! url()->current() !!}">
+    @else
+        <meta name="keywords" content="">
+        <meta name="description" content="" >
+        <meta property="og:title" content="Tiger D">
+        <meta property="og:description" content="TigerD">
+        <meta property="og:image" content="{!! asset('public/assets/client/images/fb-sharing.jpg') !!}">
+        <meta property="og:image:width" content="600">
+        <meta property="og:image:height" content="315">
+        <meta property="og:url" content="{!! url()->current() !!}">
+    @endif
+
 
     <link rel="stylesheet" href="{!! asset('public/assets/client') !!}/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

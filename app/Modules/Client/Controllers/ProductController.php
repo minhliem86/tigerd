@@ -49,7 +49,7 @@ class ProductController extends Controller
         $this->secure = env('OP_SECURE');
 
         $this->auth = Auth::guard('customer');
-        $this->middleware('client_checklogin',['only'=>['doPayment', 'responseFormOnePay']]);
+        $this->middleware('client_checklogin',['only'=>['doPayment','getPayment', 'responseFormOnePay']]);
     }
 
     private function setupOnePay(){
@@ -101,6 +101,7 @@ class ProductController extends Controller
     public function getProduct(Request $request, $slug)
     {
         $product = $this->product->getProductBySlug($slug,['id','name', 'slug', 'description', 'content', 'sku_product', 'price', 'discount', 'img_url','category_id','type'], ['categories','photos', 'values', 'attributes','product_links']);
+        $meta = $product->meta_configs()->first()
         if(count($product)){
             $array_option_att = [];
             $option = "";
@@ -147,7 +148,7 @@ class ProductController extends Controller
                 });
             }
 
-            return view('Client::pages.product.detail', compact('product', 'relate_product', 'array_option_att'));
+            return view('Client::pages.product.detail', compact('product', 'relate_product', 'array_option_att', 'meta'));
         }
         return abort(404);
     }
@@ -272,7 +273,6 @@ class ProductController extends Controller
                 /*LUU GIO HANG*/
                 $order_id = \LP_lib::unicodenospace($request->input('customer_name')).'_'.time();
                 $data = [
-                    'order_date' => Carbon::now(),
                     'order_name' => $order_id,
                     'shipping_cost' => 0,
                     'total' => Cart::getTotal(),
@@ -299,8 +299,8 @@ class ProductController extends Controller
                 $cart = Cart::getContent();
                 foreach($cart as $item){
                     $product_array = explode('_',$item->id);
-                    $product_id = $product_array[1];
-
+//                    $product_id = $product_array[1];
+                    $product_id = $item->id;
                     $product = $this->product->find($product_id);
                     $product->stock = $product->stock - 1;
                     $product->save();
@@ -357,7 +357,6 @@ class ProductController extends Controller
             //thanh cong
             /*LUU GIO HANG*/
             $data_order = [
-                'order_date' => Carbon::now(),
                 'shipping_cost' => 0,
                 'total' => Cart::getTotal(),
                 'customer_id' => $this->auth->user()->id,

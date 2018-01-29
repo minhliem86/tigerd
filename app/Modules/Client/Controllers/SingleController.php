@@ -20,8 +20,9 @@ class SingleController extends Controller
     public function index(Request $request, $slug)
     {
         $page = $this->page->findByField('slug', $slug, ['id', 'name', 'slug', 'description'])->first();
+        $meta = $page->meta_configs()->first();
         if(count($page)){
-            return view('Client::pages.single.index', compact('page'));
+            return view('Client::pages.single.index', compact('page', 'meta'));
         }
             return redirect()->back();
     }

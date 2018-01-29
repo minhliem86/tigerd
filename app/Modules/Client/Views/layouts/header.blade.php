@@ -5,16 +5,13 @@
             <div class="col-md-4 icon-collect">
                 <div class="d-flex">
                         <span class="mr-2">
-                            <a href="#"><img src="{!! asset('public/assets/client') !!}/images/fb-icon.png" class="img-fluid" title="FaceBook" alt="FaceBook TigerD"></a>
+                            <a href="https://www.facebook.com/TigerD.vn/" target="_blank"><img src="{!! asset('public/assets/client') !!}/images/fb-icon.png" class="img-fluid" title="FaceBook" alt="FaceBook"></a>
                         </span>
                     <span class="mr-2">
-                            <a href="#"><img src="{!! asset('public/assets/client') !!}/images/instagram-icon.png" class="img-fluid" title="Instagram" alt="Instagram TigerD"></a>
-                        </span>
-                    <span class="mr-2">
-                            <a href="#"><img src="{!! asset('public/assets/client') !!}/images/twiter-icon.png" class="img-fluid" title="Twitter" alt="Twitter TigerD"></a>
+                            <a href="https://www.instagram.com/tigerd.vn/" target="_blank"><img src="{!! asset('public/assets/client') !!}/images/instagram-icon.png" class="img-fluid" title="Instagram" alt="Instagram"></a>
                         </span>
                     <span>
-                            <a href="#"><img src="{!! asset('public/assets/client') !!}/images/youtube-icon.png" class="img-fluid" title="Youtube" alt="Youtube TigerD"></a>
+                            <a href="https://www.youtube.com/channel/UCzzHqhAv0qI1HfYm1IqqMeg" target="_blank"><img src="{!! asset('public/assets/client') !!}/images/youtube-icon.png" class="img-fluid" title="Youtube" alt="Youtube"></a>
                         </span>
                 </div>
             </div>

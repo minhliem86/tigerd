@@ -1,9 +1,5 @@
 @extends("Client::layouts.default")
 
-@section("meta")
-
-@stop
-
 @section("content")
     <!--PRODUCT-->
     <section class="page-section category-page">
@@ -46,9 +42,9 @@
                                             <div class="col-md-3 col-sm-4">
                                                 <div class="each-cate">
                                                     <figure class="figure" >
-                                                        <a href="{!! route('client.product', $product_child->slug) !!}" ><img src="{!! asset($product_child->img_url) !!}" class="figure-img img-fluid rounded" alt="{!! $product_child->name !!}" ></a>
+                                                        <a href="{!! route('client.product', $item_product->slug) !!}" ><img src="{!! asset($product_child->img_url) !!}" class="figure-img img-fluid rounded" alt="{!! $product_child->name !!}" ></a>
                                                         <figcaption class="figure-caption">
-                                                            <h2 class="product-name"><a href="{!! route('client.product', $product_child->slug) !!}">{!! $product_child->name !!}</a></h2>
+                                                            <h2 class="product-name"><a href="{!! route('client.product', $item_product->slug) !!}">{!! $product_child->name !!}</a></h2>
                                                             <p class="price {!! $product_child->discount ? 'discount' : null !!}">{!! number_format($product_child->price) !!} VND</p>
                                                             @if($product_child->discount)
                                                                 <p class="price">{!! number_format($product_child->discount) !!} VND</p>

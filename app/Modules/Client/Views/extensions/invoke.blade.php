@@ -64,13 +64,8 @@
                                     Đơn Giá
                                 </td>
                             </tr>
-                            @php
-                                $total = 0;
-                            @endphp
+
                             @foreach($order_detail->products as $item_product)
-                                @php
-                                    $total += $item_product->discount ? $item_product->discount : $item_product->price;
-                                @endphp
                             <tr class="item ">
                                 <td>
                                     {!! $item_product->name !!}
@@ -84,7 +79,7 @@
 
                             <tr class="total">
                                 <td align="right" colspan="2">
-                                    <b>Tổng Cộng: {!! number_format($total) !!} VND</b>
+                                    <b>Tổng Cộng: {!! number_format($order_detail->total) !!} VND</b>
                                 </td>
                             </tr>
                         </table>

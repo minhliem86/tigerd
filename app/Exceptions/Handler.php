@@ -49,8 +49,6 @@ class Handler extends ExceptionHandler
             if(view()->exists('errors.'.$e->getStatusCode())){
                 return response()->view('errors.'.$e->getStatusCode(),[],
                     $e->getStatusCode());
-            }else{
-                return (new SymfonyDisplayer(config('app.debug')))->createResponse($e);
             }
         }
         return parent::render($request, $e);

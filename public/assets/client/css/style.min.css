@@ -651,10 +651,15 @@ ul.list-success li {
     font-weight: 600; }
   .page .product-page .nav-wrapper .tab-content {
     padding: 2rem; }
-    .page .product-page .nav-wrapper .tab-content .wrap-chitietsanpham {
+    .page .product-page .nav-wrapper .tab-content ul {
+      padding-left: 15px; }
+      .page .product-page .nav-wrapper .tab-content ul li {
+        font-size: 1.4rem; }
+    .page .product-page .nav-wrapper .tab-content p {
       font-size: 1.4rem;
       color: #414042;
-      line-height: 2rem; }
+      line-height: 2rem;
+      margin-bottom: 0.5rem; }
   .page .relate-product .each-product figure {
     text-align: center; }
     .page .relate-product .each-product figure figcaption p.product-name {

@@ -1,9 +1,5 @@
 @extends('Client::layouts.default')
 
-@section('meta')
-
-@stop
-
 @section('content')
     @include("Client::layouts.banner")
 
