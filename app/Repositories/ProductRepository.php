@@ -14,6 +14,8 @@ class ProductRepository extends BaseRepository implements RestfulInterface
     }
 
     // END
+
+    /*CLIENT*/
     public function getProductHomePage($columns = ['*'], $with = [])
     {
         $query = $this->make($with);
@@ -42,10 +44,11 @@ class ProductRepository extends BaseRepository implements RestfulInterface
         return $query->where('status', 1)->where('visibility', 1)->get($columns);
     }
 
+    /*ADMIN CUSTOM*/
     /*NEW PRODUCT*/
     public function new_product($columns=['*'])
     {
-        return $this->model->orderBy('id', 'DESC')->limit(5)->get($columns);
+        return $this->model->where('type', 'simple')->orderBy('id', 'DESC')->limit(5)->get($columns);
     }
 
     public function viewProduct($columns=['*'])
