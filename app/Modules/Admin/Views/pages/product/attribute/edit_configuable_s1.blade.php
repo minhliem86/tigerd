@@ -10,8 +10,8 @@
     <div class="row">
         <div class="col-md-12">
             @include('Admin::errors.error_layout')
-            <form method="POST" action="{{route('admin.create.product.configuable.s1')}}" id="form" role="form" class="form-horizontal" enctype="multipart/form-data">
-                {{Form::token()}}
+                {!! Form::model($product,['route' => ['admin.product.configuable.s1.edit.post', $product->id], 'class' => 'form-horizontal', 'id'=>'form', 'method' => 'POST', 'files' => true]) !!}
+
                 <div class="form-group">
                     <label for="agency_id" class="col-md-2 control-label">Chọn Danh Mục Sản Phẩm</label>
                     <div class="col-md-10">
@@ -40,14 +40,14 @@
                     <label class="col-md-2 control-label">Hình Ảnh:</label>
                     <div class="col-md-10">
                         <div class="input-group">
-                        <span class="input-group-btn">
-                            <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                                <i class="fa fa-picture-o"></i> Chọn
-                            </a>
-                        </span>
-                        <input id="thumbnail" class="form-control" type="hidden" name="img_url">
-                    </div>
-                        <img id="holder" style="margin-top:15px;max-height:100px;">
+                                <span class="input-group-btn">
+                                    <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                        <i class="fa fa-picture-o"></i> Chọn
+                                    </a>
+                                </span>
+                            {!!Form::hidden('img_url',old('img_url'), ['class'=>'form-control', 'id'=>'thumbnail' ])!!}
+                        </div>
+                        <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($product->img_url)}}">
                     </div>
                 </div>
                 <fieldset>
@@ -86,19 +86,43 @@
                     </div>
                 </fieldset>
 
-                <fieldset class="area-control img-detail">
-                    <legend>
-                        <div class="checkbox">
-                            <input type="checkbox" name="img_detail" id="img_detail" class="trigger_input"> HÌNH ẢNH CHI TIẾT
-                        </div>
-                    </legend>
-                    <div class="container-fluid">
-                        <div class="wrap-img_detail wrap_general">
-                            <input type="file" name="thumb-input[]" id="thumb-input" multiple >
-                        </div>
+            <fieldset class="area-control img-detail">
+                <legend>
+                    <div class="checkbox">
+                        <input type="checkbox" name="img_detail" id="img_detail" class="trigger_input" {!! $product->photos()->count() ? 'checked' : null !!}> HÌNH ẢNH CHI TIẾT
                     </div>
-                </fieldset>
-            </form>
+                </legend>
+                <div class="container-fluid">
+                    <div class="wrap-img_detail wrap_general">
+                        <div class="container-fluid">
+                            @if($product->photos->count())
+                                @foreach($product->photos->chunk(4) as $chunk )
+                                    <div class="row">
+                                        @foreach($chunk as $photo)
+                                            <div class="col-md-3">
+                                                <div class="file-preview-frame krajee-default  file-preview-initial file-sortable kv-preview-thumb" data-template="image">
+                                                    <div class="kv-file-content">
+                                                        <img src="{!!asset($photo->img_url)!!}" class="file-preview-image kv-preview-data img-responsive" title="" alt="" style="width:auto;height:120px;">
+                                                    </div>
+                                                    <div class="photo-order-input" style="margin-bottom:10px">
+                                                        <input type="text" class="form-control text-center" name="photo_order" value="{!!$photo->order!!}">
+                                                    </div>
+                                                    <div class="file-footer-buttons">
+                                                        <button type="button" class="kv-file-remove btn btn-xs btn-default" title="Cập nhật vị trí" onclick="updatePhoto(this,{!!$photo->id!!})"><i class="glyphicon glyphicon-refresh text-warning"></i></button>
+                                                        <button type="button" class="kv-file-remove btn btn-xs btn-default" title="Remove file" onclick="removePhoto(this,{!!$photo->id!!})"><i class="glyphicon glyphicon-trash text-danger"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                        <input type="file" name="thumb-input[]" id="thumb-input" multiple >
+                    </div>
+                </div>
+            </fieldset>
+            {!! Form::close() !!}
         </div>
 
     </div>
@@ -124,9 +148,16 @@
         function submitForm(){
             $('form').submit();
         }
-
         $(document).ready(function(){
             $('.wrap-seo').hide();
+            /*CONFIG DETAIL IMAGE*/
+            var flag_img = '{!! $product->photos()->count() ? true : false !!}';
+            if(flag_img){
+                $('.wrap-img_detail').show();
+            }else{
+                $('.wrap-img_detail').hide();
+            }
+
             $('input#meta_config').on('ifChecked', function (event) {
                 $('.wrap-seo').slideDown();
             }).on('ifUnchecked', function (event) {
@@ -146,18 +177,12 @@
                 $('.checkbox-att input').iCheck('uncheck');
             })
 
-
             $("#thumb-input").fileinput({
-                uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
+                uploadUrl: "{!!route('admin.product.update',$product->id)!!}", // server upload action
                 uploadAsync: true,
                 showUpload: false,
                 showCaption: false,
-                // layoutTemplates: {footer: footerTemplate},
-                // previewThumbTags: {
-                //     '{TAG_VALUE}': '',        // no value
-                //     '{TAG_CSS_NEW}': '',      // new thumbnail input
-                //     '{TAG_CSS_INIT}': 'hide'  // hide the initial input
-                // },
+                browseLabel: "Thêm hình",
                 dropZoneEnabled : false,
                 fileActionSettings:{
                     showUpload : false,

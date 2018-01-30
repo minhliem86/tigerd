@@ -18,7 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->text('content')->nullable();
-            $table->string('sku_product')->nullable()->unique();
+            $table->string('sku_product')->nullable();
             $table->integer('price')->nullable();
             $table->integer('discount')->nullable();
             $table->integer('stock')->nullable();

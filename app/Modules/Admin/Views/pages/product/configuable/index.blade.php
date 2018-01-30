@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="wrap-title">
-                <p style="font-size:16px; text-transform: uppercase;">Sản Phẩm: <b>{!! $parent_product->name !!}</b></p>
+                <p style="font-size:16px; text-transform: uppercase;">Sản Phẩm: <b><a href="{!! route('admin.product.configuable.s1.edit', $parent_product->id) !!}">{!! $parent_product->name !!}</a></b></p>
             </div>
 
             <div class="wrap-table-config">

@@ -61,7 +61,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Nhập Kho</label>
                         <div class="col-md-10">
-                            {!!Form::number('stock_quality',old('stock_quality'), ['class'=>'form-control', 'placeholder'=>'0'])!!}
+                            {!!Form::number('stock',old('stock'), ['class'=>'form-control', 'placeholder'=>'0'])!!}
                         </div>
                     </div>
                     <div class="form-group">
@@ -406,3 +406,4 @@
         })
     </script>
 @stop
+
