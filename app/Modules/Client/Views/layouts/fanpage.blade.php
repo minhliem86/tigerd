@@ -6,7 +6,7 @@
                 <div class="video-section">
                     <h3 class="title-section-h3">Tiger-d <br> Videos</h3>
                     <div class="video-wrapper">
-
+                        <div data-type="youtube" data-video-id="E2WP4VGlDh4"></div>
                     </div>
                 </div>
             </div>

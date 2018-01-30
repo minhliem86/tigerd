@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">
                             Mã Sản phẩm
-                            <p><small>(từ 2,3 ký tự hoa. EX: Quần Tây -> QT)</small></p>
+                            <p><small>(EX: Quần Tây -> QT)</small></p>
                         </label>
                         <div class="col-md-10">
                             {!!Form::text('sku_product',old('sku_product'), ['class'=>'form-control', 'placeholder'=>'Mã Sản Phẩm'])!!}

@@ -22,6 +22,7 @@ class CreateCustomersTable extends Migration
             $table->string('phone')->nullable();
             $table->boolean('gender')->default(1);
             $table->string('birthday')->nullable();
+            $table->text('address')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

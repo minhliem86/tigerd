@@ -1,8 +1,11 @@
-  @extends("Client::layouts.default")
-
-@section("meta")
-
+@extends("Client::layouts.default")
+@if(count($meta))
+@section('meta')
+    <meta name="keywords" content="{!! $meta->meta_keywords !!}">
+    <meta name="description" content="{!! $meta->meta_description !!}" >
+    <meta property="og:image" content="{!! asset($meta->meta_img) !!}">
 @stop
+@endif
 
 @section("content")
     <!--PRODUCT-->

@@ -37,14 +37,12 @@
                 <thead>
                 <tr>
                     <th width="5%">ID</th>
-                    <th width="50"><i class="glyphicon glyphicon-search"></i> Mã đơn hàng</th>
-                    <th width="80">Ngày Tạo</th>
-                    <th width="80">Giá trị</th>
-                    <th width="80">Thuộc Khách hàng</th>
-                    <th width="80">Khuyến Mãi Áp Dụng</th>
-                    <th width="50">PTTT</th>
-                    <th width="80">Trạng Thái Đơn Hàng</th>
-                    <th width="80">Trạng Thái Giao Dịch</th>
+                    <th width="50"><i class="glyphicon glyphicon-search"></i> MÃ ĐƠN</th>
+                    <th width="80">NGÀY TẠO</th>
+                    <th width="80">GIÁ TRỊ</th>
+                    <th width="80">PTTT</th>
+                    <th width="80">XỬ LÝ</th>
+                    <th width="80">GIAO DỊCH</th>
                     <th width="10%">&nbsp;</th>
                 </tr>
                 </thead>
@@ -55,7 +53,6 @@
 
 @section('script')
     <script type="text/javascript" src="{{asset('/public/assets/admin')}}/bootflat-admin/js/jquery-1.10.1.min.js"></script>
-    <script type="text/javascript" src="{{asset('/public/assets/admin')}}/dist/js/scroll/jquery.mCustomScrollbar.min.js"></script>
     <!-- DATA TABLE -->
     <link rel="stylesheet" href="{{asset('/public/assets/admin')}}/dist/js/plugins/datatables/jquery.dataTables.min.css">
     <script src="{{asset('/public/assets/admin')}}/dist/js/plugins/datatables/jquery.dataTables.min.js"></script>
@@ -70,8 +67,10 @@
             hideAlert('.alert');
             // REMOVE ALL
             var table = $('table').DataTable({
+
                 processing: true,
                 serverSide: true,
+                searching: false,
                 ajax:{
                     url:  '{!! route('admin.order.getData') !!}',
                     data: function(d){
@@ -79,13 +78,11 @@
                     }
                 },
                 columns: [
-                    {data: 'id', name: 'id', 'orderable': false, 'visible': false},
+                    {data: 'id', name: 'id', 'orderable': false,},
                     {data: 'order_name', name: 'order_name','orderable': false,},
                     {data: 'orders.order_date', name: 'orders.order_date', 'orderable': false,},
                     {data: 'orders.total', name: 'orders.total', 'orderable': false,},
-                    {data: 'customers.name', name: 'customers.name', 'orderable': false,},
-                    {data: 'promotion.status', name: 'promotion.status', 'orderable': false,},
-                    {data: 'payment.method', name: 'payment.method', 'orderable': false,},
+                    {data: 'method', name: 'method', 'orderable': false,},
                     {data: 'shipstatus.name', name: 'shipstatus.name', 'orderable': false,},
                     {data: 'paymentstatus.name', name: 'paymentstatus.name', 'orderable': false,},
                     {data: 'action', name: 'action', 'orderable': false,},
@@ -102,20 +99,54 @@
                         })
                     })
 
-                    $('table').on('change','input[name=ship_status]', function(){
-                        let value = 0;
-                        if($(this).is(':checked')){
-                            value = 1;
-                        }
-                        const id_item = $(this).data('id');
-                        console.log(id_item);
+                    $('table').on('change','select[name="ship_status"]', function(){
+                        const value = $(this).val();
+                        const element_id = $(this).data('id')
+
                         $.ajax({
-                            url: "{{route('admin.order.updateStatus')}}",
+                            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                            url: "{{route('admin.order.changeShipStatus')}}",
                             type : 'POST',
-                            data: {value: value, id: id_item, _token:$('meta[name="csrf-token"]').attr('content')},
+                            data: {value: value, id: element_id},
                             success: function(data){
                                 if(!data.error){
-                                    alertify.success('Status changed !');
+                                    alertify.success('Trạng thái xử lý được cập nhật !');
+
+                                    if(data.data == 3){
+                                        $('select[data-id="'+element_id+'"]').val(2);
+                                        $.ajax({
+                                            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                                            url: "{{route('admin.order.changePaymentStatus')}}",
+                                            type : 'POST',
+                                            data: {value: data.data, id: element_id},
+                                            success: function(data2){
+                                                if(!data2.error){
+                                                    alertify.success(' Trạng thái thanh toán được cập nhật !');
+                                                }else{
+                                                    alertify.error('Fail changed !');
+                                                }
+                                            }
+                                        })
+                                    }
+                                }else{
+                                    alertify.error('Fail changed !');
+                                }
+                            }
+                        })
+                    });
+
+                    $('table').on('change','select[name=payment_status]', function(){
+                        const value = $(this).val();
+                        const ele = $(this).data('id')
+
+                        $.ajax({
+                            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                            url: "{{route('admin.order.changePaymentStatus')}}",
+                            type : 'POST',
+                            data: {value: value, id: ele},
+                            success: function(data){
+                                if(!data.error){
+                                    alertify.success(' Trạng thái thanh toán được cập nhật !');
                                 }else{
                                     alertify.error('Fail changed !');
                                 }

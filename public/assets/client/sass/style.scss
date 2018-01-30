@@ -855,10 +855,20 @@ ul.list-success{
       }
       .tab-content{
         padding:2rem;
-        .wrap-chitietsanpham{
+        ul{
+          padding-left:15px;
+          li{
+            font-size:1.4rem;
+            color:$text-grey;
+            line-height:2rem;
+            margin-bottom:0.5rem;
+          }
+        }
+        p{
           font-size:1.4rem;
           color:$text-grey;
           line-height:2rem;
+          margin-bottom:0.5rem;
         }
       }
     }

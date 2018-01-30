@@ -25,11 +25,13 @@ class NewsController extends Controller
 
     public function getDetail($slug)
     {
+
         $news = $this->news->findByField('slug', $slug, ['id', 'name', 'slug', 'description', 'content', 'img_url', 'created_at'])->first();
+        $meta = $news->meta_configs()->first();
         if(count($news)){
             $relate_news = $this->news->findWhereNotIn('id',[$news->id], ['id', 'name', 'slug', 'description', 'img_url']);
-            return view('Client::pages.news.detail', compact('news', 'relate_news'));
+            return view('Client::pages.news.detail', compact('news', 'relate_news', 'meta'));
         }
-        return abort(404);
+        return response()->view('Admin::errors.404','',404);
     }
 }

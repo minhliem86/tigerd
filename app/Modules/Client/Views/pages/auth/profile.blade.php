@@ -1,9 +1,5 @@
 @extends("Client::layouts.default")
 
-@section("meta")
-
-@stop
-
 @section("content")
     @include("Client::layouts.banner")
     <section class="page-section profile-page">
@@ -75,7 +71,14 @@
                                                         <label for="birthday">Ngày Sinh</label>
                                                         {!! Form::text('birthday', Auth::guard('customer')->user()->birthday, ['class' => 'form-control']) !!}
                                                     </div>
-
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="form-row">
+                                                    <div class="col">
+                                                        <label for="address">Địa chỉ (dùng để giao hàng )</label>
+                                                        {!! Form::text('address', Auth::guard('customer')->user()->address, ['class'=>'form-control']) !!}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </fieldset>

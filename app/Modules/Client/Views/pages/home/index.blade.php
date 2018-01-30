@@ -1,9 +1,5 @@
 @extends('Client::layouts.default')
 
-@section('meta')
-
-@stop
-
 @section('content')
     @include('Client::layouts.banner')
 
@@ -102,11 +98,11 @@
                                         <div class="each-news">
                                             @foreach($item_news_chunk as $item_news)
                                             <div class="media">
-                                                <a href="#"><img src="{!! asset($item_news->img_url) !!}" class="mr-5" alt="{!! $item_news->name !!}"></a>
+                                                <a href="{!! route('client.news.detail', $item_news->slug) !!}"><img src="{!! asset($item_news->img_url) !!}" class="mr-5" alt="{!! $item_news->name !!}"></a>
                                                 <div class="media-body">
-                                                    <h3 class="news-name"><a href="#">{!! $item_news->name !!}</a></h3>
+                                                    <h3 class="news-name"><a href="{!! route('client.news.detail', $item_news->slug) !!}">{!! $item_news->name !!}</a></h3>
                                                     <p>{!! $item_news->description !!}</p>
-                                                    <a href="#" class="readmore float-right">Read more ...</a>
+                                                    <a href="{!! route('client.news.detail', $item_news->slug) !!}" class="readmore float-right">Read more ...</a>
                                                 </div>
                                             </div>
                                             @endforeach
@@ -140,4 +136,11 @@
 @stop
 
 @section('script')
+    <link rel="stylesheet" href="{!! asset('public/assets/client/js/plugins/video/plyr.css') !!}">
+    <script src="{!! asset('public/assets/client/js/plugins/video/plyr.js') !!}"></script>
+    <script>
+        $(document).ready(function(){
+            plyr.setup();
+        })
+    </script>
 @stop

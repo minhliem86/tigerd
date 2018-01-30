@@ -1,9 +1,5 @@
 @extends("Client::layouts.default")
 
-@section("meta")
-
-@stop
-
 @section("content")
     @include("Client::layouts.banner")
     <!--PAYMENT-->
@@ -40,7 +36,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Địa chỉ giao hàng</label>
-                                    {!! Form::text('AVS_Street01', old('AVS_Street01'), ['class'=>'form-control']) !!}
+                                    {!! Form::text('AVS_Street01', Auth::guard('customer')->check() ? Auth::guard('customer')->user()->address : '', ['class'=>'form-control']) !!}
                                 </div>
                                 <div class="form-group">
                                     <label for="">Ghi chú</label>

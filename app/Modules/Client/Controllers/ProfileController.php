@@ -71,6 +71,7 @@ class ProfileController extends Controller
         $user->phone = $request->phone;
         $user->birthday = $request->birthday;
         $user->gender = $request->gender;
+        $user->address = $request->address;
         $user->save();
 
         return redirect()->back()->with('success', 'Cập Nhật Thành Công');

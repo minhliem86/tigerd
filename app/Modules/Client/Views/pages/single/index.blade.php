@@ -1,7 +1,9 @@
 @extends('Client::layouts.default')
 
 @section('meta')
-
+    <meta name="keywords" content="{!! $meta->meta_keywords !!}">
+    <meta name="description" content="{!! $meta->meta_description !!}" >
+    <meta property="og:image" content="{!! asset($meta->meta_img) !!}">
 @stop
 
 @section('content')
