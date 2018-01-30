@@ -11,7 +11,13 @@
     <div class="row">
         <div class="col-md-12">
             <div class="col-sm-12">
-                @include('Admin::errors.error_layout')
+                @if(!$errors->errors_product_config->isEmpty())
+                    <div class="alert alert-danger alert-dismissable">
+                        @foreach($errors->errors_product_config->all() as $error)
+                            <p>{!! $error !!}</p>
+                        @endforeach
+                    </div>
+                @endif
                 <form method="POST" action="{{route('admin.create.product.configuable.s2.post')}}" id="form" role="form" class="form-horizontal">
                     {{Form::token()}}
                     {!! Form::hidden('product_parent_id', Session::get('product_parent_id')) !!}
@@ -76,11 +82,15 @@
                     <fieldset>
                         <legend>Thuộc tính</legend>
                         @foreach($att as $item_att)
+                            @php
+
+                            @endphp
                             <div class="form-group">
-                                {!! Form::hidden('att[]', $item_att->id) !!}
+                                <input type="hidden" name="att[]" value="{!! $item_att->id !!}">
+
                                 <label class="col-md-2 control-label" for="">{!! $item_att->name !!}</label>
                                 <div class="col-md-10">
-                                    {!! Form::text('value[]',old('value'),['class'=>'form-control']) !!}
+                                    <input type="text" name="value[]" class="form-control" value="{!! old('value[]') !!}">
                                 </div>
                             </div>
                         @endforeach
@@ -112,3 +122,4 @@
         }
     </script>
 @stop
+

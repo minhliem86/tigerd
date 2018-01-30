@@ -45,4 +45,13 @@ class Product extends Model
     {
         return $this->hasMany('App\Models\ProductLink');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function($product){
+           $product->photos()->detach();
+        });
+    }
 }

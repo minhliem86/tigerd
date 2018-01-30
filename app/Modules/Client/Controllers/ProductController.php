@@ -101,7 +101,7 @@ class ProductController extends Controller
     public function getProduct(Request $request, $slug)
     {
         $product = $this->product->getProductBySlug($slug,['id','name', 'slug', 'description', 'content', 'sku_product', 'price', 'discount', 'img_url','category_id','type'], ['categories','photos', 'values', 'attributes','product_links']);
-        $meta = $product->meta_configs()->first()
+        $meta = $product->meta_configs()->first();
         if(count($product)){
             $array_option_att = [];
             $option = "";

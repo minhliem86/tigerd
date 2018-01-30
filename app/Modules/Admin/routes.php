@@ -99,6 +99,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::get('/product/configuable/remove/{id}', ['as'=>'admin.product.configuable.remove', 'uses' => 'ProductController@postRemoveConfiguable'])->where(['id'=>'[0-9a-zA-Z._\-]+']);
         Route::post('/product/configuable/checkDefault', ['as' => 'admin.product.configuable.changeDefault', 'uses' => 'ProductController@postChangeDefault']);
         
+        Route::get('/product/configuable/S1/edit/{id}', ['as' => 'admin.product.configuable.s1.edit', 'uses' => 'ProductController@getEditConfigProduct'])->where(['id'=>'[0-9a-zA-Z._\-]+']);
+        Route::post('/product/configuable/S1/edit/{id}', ['as' => 'admin.product.configuable.s1.edit.post', 'uses' => 'ProductController@postEditConfigProduct'])->where(['id'=>'[0-9a-zA-Z._\-]+']);
 
         Route::resource('product', 'ProductController');
 

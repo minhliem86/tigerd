@@ -42,7 +42,7 @@ class ProductController extends Controller
 
     public $rules = [
         'category_id'=> 'required',
-        'sku_product' => 'required|unique:products',
+        'sku_product' => 'required',
         'price' => 'required',
         'stock' => 'required'
     ];
@@ -50,7 +50,6 @@ class ProductController extends Controller
     public $messages = [
         'category_id.required' => 'Vui lòng chọn Danh Mục Sản Phẩm',
         'sku_product.required' => 'Vui lòng nhập Mã Sản Phẩm',
-        'sku_product.unique' => 'Mã Sản Phẩm này đã tồn tại',
         'price.required' => 'Vui lòng nhập Giá sản phẩm',
         'stock.required' => 'Vui lòng nhập Số lượng nhập kho'
     ];
@@ -180,13 +179,14 @@ class ProductController extends Controller
         $rule = [
             'category_id' => 'required',
             'name' => 'required',
-            'sku_product' => 'unique:products'
+            'sku_product' => 'required'
         ];
         $mes = [
             'category_id.required' => 'Vui lòng chọn Danh Mục',
             'name.required' => 'Vui lòng nhập tên sản phẩm',
-            'sku_product.unique' => 'Mã Sản Phẩm đã tồn tại',
+            'sku_product.required' => 'Vui lòng nhập Mã Sản Phẩm',
         ];
+
 
         $valid = Validator::make($request->all(), $rule, $mes);
         if($valid->fails()){
@@ -225,12 +225,110 @@ class ProductController extends Controller
             $parent_product->meta_configs()->save(new \App\Models\MetaConfiguration($data));
         }
 
+        if($request->has('img_detail')){
+            $data_photo = [];
+            foreach($request->file('thumb-input') as $k=>$thumb){
+                $bigsize = $this->common->uploadImage($request, $thumb, $this->_big,$resize = false);
+                $smallsize = $this->common->createThumbnail($bigsize,$this->_small,100, 100);
+                $order = $this->photo->getOrder();
+                $data = new \App\Models\Photo(
+                    [
+                        'img_url' => $this->common->getPath($bigsize, $this->_replacePath, $this->_removePath),
+                        'thumb_url' => $this->common->getPath($smallsize, $this->_replacePath, $this->_removePath),
+                        'order'=>$order,
+                    ]
+                );
+                array_push($data_photo, $data);
+            }
+            $parent_product->photos()->saveMany($data_photo);
+        }
+
         $parent_product_id = $parent_product->id;
 
         \Session::put('product_parent_id', $parent_product_id);
         return redirect()->route('admin.create.product.getAttribute');
     }
 
+    /*EDIT CONFIG PRODUCT S1*/
+    public function getEditConfigProduct( $id, CategoryRepository $cate)
+    {
+        $cate = $cate->query(['id', 'name'])->lists('name','id')->toArray();
+        $product = $this->productRepo->find($id);
+        return view('Admin::pages.product.attribute.edit_configuable_s1', compact('cate', 'product'));
+    }
+
+    public function postEditConfigProduct(Request $request, $id)
+    {
+        $rule = [
+            'category_id' => 'required',
+            'name' => 'required',
+            'sku_product' => 'required'
+        ];
+        $mes = [
+            'category_id.required' => 'Vui lòng chọn Danh Mục',
+            'name.required' => 'Vui lòng nhập tên sản phẩm',
+            'sku_product.required' => 'Vui lòng nhập Mã Sản Phẩm',
+        ];
+
+        $valid = Validator::make($request->all(), $rule, $mes);
+        if($valid->fails()){
+            return redirect()->back()->withInput()->withErrors($valid);
+        }
+        if($request->has('img_url')){
+            $img_url = $this->common->getPath($request->input('img_url'), $this->_replacePath);
+        }else{
+            $img_url = "";
+        }
+        $order = $this->productRepo->getOrder();
+        $data = [
+            'category_id' => $request->input('category_id'),
+            'name' => $request->input('name'),
+            'slug' => \LP_lib::unicode($request->input('name')),
+            'sku_product' => $request->input('sku_product'),
+            'description' => $request->input('description'),
+            'img_url' => $img_url,
+            'type' => 'configuable',
+            'order' => $order,
+            'visibility' => 1
+        ];
+        $parent_product = $this->productRepo->update($data, $id);
+
+        if($request->has('meta_config')){
+            if($request->has('meta_img')){
+                $meta_img = $this->common->getPath($request->input('meta_img'), $this->_replacePath);
+            }else{
+                $meta_img = "";
+            }
+            $data = [
+                'meta_keywords' => $request->input('meta_keywords'),
+                'meta_description' => $request->input('meta_description'),
+                'meta_img' => $meta_img,
+            ];
+            $parent_product->meta_configs()->save(new \App\Models\MetaConfiguration($data));
+        }
+
+        if($request->has('img_detail')){
+            $data_photo = [];
+            foreach($request->file('thumb-input') as $k=>$thumb){
+                $bigsize = $this->common->uploadImage($request, $thumb, $this->_big,$resize = false);
+                $smallsize = $this->common->createThumbnail($bigsize,$this->_small,100, 100);
+                $order = $this->photo->getOrder();
+                $data = new \App\Models\Photo(
+                    [
+                        'img_url' => $this->common->getPath($bigsize, $this->_replacePath, $this->_removePath),
+                        'thumb_url' => $this->common->getPath($smallsize, $this->_replacePath, $this->_removePath),
+                        'order'=>$order,
+                    ]
+                );
+                array_push($data_photo, $data);
+            }
+            $parent_product->photos()->saveMany($data_photo);
+        }
+
+        $parent_product_id = $parent_product->id;
+
+        return redirect()->route('admin.product.configuable.index',$parent_product_id)->with('success', 'Cập nhật thành công');
+    }
 
     /*ADD ATTRIBUTE TO PRODUCT*/
     public function getAttributeForProduct(Request $request, AttributeRepository $attribute)
@@ -275,7 +373,7 @@ class ProductController extends Controller
             'sku_product' => 'unique:products',
             'price' => 'required|numeric',
             'stock' => 'required|numeric',
-            'value' => 'required'
+            'value.*' => 'required'
         ];
         $mes = [
             'name.required' => 'Vui lòng nhập tên sản phẩm',
@@ -284,12 +382,12 @@ class ProductController extends Controller
             'price.numeric' => 'Giá là dạng số',
             'stock.required' => 'Vui lòng nhập số lượng trong kho',
             'stock.numeric' => 'Số lượng là dạng số',
-            'value.required' => 'Vui lòng nhập giá trị thuộc tính',
+            'value.*.required' => 'Vui lòng nhập giá trị thuộc tính',
         ];
 
         $valid = Validator::make($request->all(),$rule, $mes);
         if($valid->fails()){
-            return redirect()->back()->withInput()->withErrors($valid);
+            return redirect()->back()->withInput()->withErrors($valid->errors(),'errors_product_config');
         }
         if($request->has('img_url')){
             $img_url = $this->common->getPath($request->input('img_url'), $this->_replacePath);
@@ -303,7 +401,7 @@ class ProductController extends Controller
             'slug'=> \LP_lib::unicode($request->name),
             'sku_product'=> $request->sku_product,
             'description' => $request->description,
-            'content'=> $request->content,
+            'content'=> $request->input('content'),
             'price' => $request->price,
             'discount' => $request->discount,
             'stock' => $request->stock,
@@ -396,13 +494,33 @@ class ProductController extends Controller
             'slug'=> \LP_lib::unicode($request->name),
             'sku_product'=> $request->sku_product,
             'description' => $request->description,
-            'content'=> $request->content,
+            'content'=> $request->input('content'),
             'price' => $request->price,
             'discount' => $request->discount,
             'stock' => $request->stock,
             'img_url' => $img_url,
         ];
         $this->productRepo->update($data, $id);
+        if($request->has('img_detail')){
+            $data_photo = [];
+            if($request->hasFile('thumb-input')){
+                foreach($request->file('thumb-input') as $k=>$thumb){
+                    $bigsize = $this->common->uploadImage($request, $thumb, $this->_big,$resize = false);
+                    $smallsize = $this->common->createThumbnail($bigsize,$this->_small,100, 100);
+
+                    $order = $this->photo->getOrder();
+                    $data = new \App\Models\Photo(
+                        [
+                            'img_url' => $this->common->getPath($bigsize, $this->_replacePath, $this->_removePath),
+                            'thumb_url' => $this->common->getPath($smallsize, $this->_replacePath, $this->_removePath),
+                            'order'=>$order,
+                        ]
+                    );
+                    array_push($data_photo, $data);
+                }
+                $product->photos()->saveMany($data_photo);
+            }
+        }
         foreach($request->value as $k=>$item_att){
             $value = $value->find($request->value_id[$k]);
             $value->value = $item_att;
