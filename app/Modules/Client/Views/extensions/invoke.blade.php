@@ -12,7 +12,7 @@
                     <div class="invoice-box">
                         <table cellpadding="0" cellspacing="0">
                             <tr class="top">
-                                <td colspan="2">
+                                <td colspan="3">
                                     <table>
                                         <tr>
                                             <td class="title">
@@ -29,7 +29,7 @@
                             </tr>
 
                             <tr class="information">
-                                <td colspan="2">
+                                <td colspan="3">
                                     <table>
                                         <tr>
                                             <td>
@@ -43,24 +43,45 @@
                             </tr>
 
                             <tr class="heading">
-                                <td colspan="2">
+                                <td colspan="3">
                                     Phương Thức Thanh Toán
                                 </td>
                             </tr>
 
                             <tr class="details">
-                                <td colspan="2">
+                                <td colspan="3">
                                     <p>{!! $order_detail->paymentmethods->name !!}</p>
                                     <p><small><i>{!! $order_detail->paymentmethods->description !!}</i></small></p>
                                 </td>
                             </tr>
+                            @if($order_detail->promotion_id)
+                            <tr class="heading">
+                                <td colspan="3">
+                                    Khuyến Mãi Áp Dụng
+                                </td>
+                            </tr>
+                                @php
+                                    $promotion = App\Models\Promotion::find($order_detail->promotion_id);
+                                @endphp
+                            <tr class="details">
+                                <td colspan="2">
+                                    <p class="badge badge-info">{!! $promotion->sku_promotion !!}</p>
+                                </td>
+                                <td>
+                                    <p class="badge badge-success">{!! $promotion->value !!} {!! $promotion->value_type !!}</p>
+                                </td>
+                            </tr>
+                            @endif
 
                             <tr class="heading">
-                                <td>
+                                <td width="60%">
                                     Sản Phẩm
                                 </td>
+                                <td width="20%" align="center">
+                                    Số Lượng
+                                </td>
 
-                                <td>
+                                <td width="20%" align="right">
                                     Đơn Giá
                                 </td>
                             </tr>
@@ -71,14 +92,18 @@
                                     {!! $item_product->name !!}
                                 </td>
 
-                                <td>
+                                <td align="center">
+                                    {!! $item_product->pivot->quantity !!}
+                                </td>
+
+                                <td align="right">
                                     {!! $item_product->discount ? number_format($item_product->discount) : number_format($item_product->price)  !!}
                                 </td>
                             </tr>
                             @endforeach
 
                             <tr class="total">
-                                <td align="right" colspan="2">
+                                <td align="right" colspan="3">
                                     <b>Tổng Cộng: {!! number_format($order_detail->total) !!} VND</b>
                                 </td>
                             </tr>

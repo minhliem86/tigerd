@@ -15,7 +15,7 @@
                   <h3 class="panel-title">Thông tin khách hàng</h3>
               </div>
               <div class="panel-body">
-                  {{Form::model($inst, ['route'=>['admin.customer.destroy',$inst->id], 'method'=>'DELETE', 'class' => 'form-horizontal' ])}}
+                  {{Form::model($inst, ['route'=>['admin.customer.update',$inst->id], 'method'=>'DELETE', 'class' => 'form-horizontal' ])}}
                   <div class="form-group">
                       <label class="col-md-2 control-label">Danh xưng: </label>
                       <div class="col-md-10">
@@ -52,7 +52,7 @@
                   <div class="form-group">
                       <label class="col-md-2 control-label">Ngày Sinh:</label>
                       <div class="col-md-10">
-                          {{Form::text('birthday',\Carbon\Carbon::createFromFormat('Y-m-d',$inst->birthday)->format('d-m-Y'), ['class'=>'form-control', 'disabled'])}}
+                          {{Form::text('birthday',$inst->birthday, ['class'=>'form-control', 'disabled'])}}
                       </div>
                   </div>
                   {!! Form::close() !!}
@@ -65,7 +65,8 @@
                     <h3 class="panel-title">Lịch Sử Mua Hàng</h3>
                 </div>
                 <div class="panel-body">
-                    @if($inst->orders()->count())
+
+                    @if(!$inst->orders->isEmpty())
                         <table class="table">
                             <thead>
                                 <tr>
@@ -77,16 +78,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($inst->orders() as $item_order)
+                                @foreach ($inst->orders as $item_order)
                                     <tr>
                                         <td>{!! $item_order->id !!}</td>
-                                        <td>{!! $item_order->id !!}</td>
+                                        <td>{!! $item_order->order_name !!}</td>
                                         <td>{!! date_create($item_order->created_at)->format('d-m-Y') !!}</td>
-                                        <td>Đã Thanh Toán</td>
-                                        <td><a href="#" class="btn  btn-xs btn-success">Chi tiết</a></td>
+                                        <td>{!! $item_order->paymentstatus->description !!}</td>
+                                        <td><button type="button" data-toggle="modal" data-target="#modalProduct" class="btn btn-xs btn-success" data-order-id="{!! $item_order->id !!}">Chi tiết</button></td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
                     @else
@@ -96,6 +96,26 @@
             </div>
         </div>
     </div>
+    {{--MODAL--}}
+    <div class="modal fade" id="modalProduct" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Chi Tiết Đơn Hàng</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="wrap-product-detail">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 @endsection
 
 @section('script')
@@ -108,6 +128,22 @@
     function submitForm(){
      $('form').submit();
     }
+    $(document).ready(function(){
+        $('#modalProduct').on('show.bs.modal', function(e){
+            $('.wrap-product-detail').empty();
+            var order_id = $(e.relatedTarget).data('order-id');
+            $.ajax({
+                url: '{!! route("admin.order.getProductDetail") !!}',
+                type: 'POST',
+                data: {_token: $('meta[name="csrf-token"]').attr('content'), id:order_id},
+                success: function(data){
+                    if(!data.error){
+                        $('.wrap-product-detail').append(data.data);
+                    }
+                }
+            })
+        })
+    })
 
     </script>
 @stop

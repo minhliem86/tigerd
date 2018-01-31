@@ -71,6 +71,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </section>
     <!--END PRODUCT-->
@@ -206,12 +207,9 @@
             @if(Session::has('success'))
                 $('.modal-addToCart-success').modal('show');
             @endif
-                    
 
-                    
             $('.value_product').on('change', function (e) {
                 var value_id = $(this).val();
-                console.log(value_id);
                 $.ajax({
                     url: '{!! route("client.product.ajaxChangeAttributeValue") !!}',
                     type: 'POST',
@@ -224,6 +222,17 @@
                             $('input[name=product_id]').val(data.data.id);
                             $('.wrap-chitietsanpham').text(data.content);
                             $('.wrap-gallery').html(data.photo);
+
+                            $('#image-gallery').lightSlider({
+                                gallery:true,
+                                item:1,
+                                loop:true,
+                                thumbItem:4,
+                                slideMargin:0,
+                                enableDrag: false,
+                                currentPagerPosition:'left',
+                            })
+
                         }
                     }
                 })

@@ -98,7 +98,7 @@
                                         @foreach($product->photos->chunk(4) as $chunk )
                                             <div class="row">
                                                 @foreach($chunk as $photo)
-                                                    <div class="col-md-3">
+                                                    <div class="col-lg-2 col-md-3 col-sm-4">
                                                         <div class="file-preview-frame krajee-default  file-preview-initial file-sortable kv-preview-thumb" data-template="image">
                                                             <div class="kv-file-content">
                                                                 <img src="{!!asset($photo->img_url)!!}" class="file-preview-image kv-preview-data img-responsive" title="" alt="" style="width:auto;height:120px;">

@@ -70,7 +70,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            {!! $order->promotion_id ? \App\Models\Promoton::find($order->promotion_id)->sku_promotion : 'Không Áp Dụng'!!}
+                                            {!! $order->promotion_id ? \App\Models\Promotion::find($order->promotion_id)->sku_promotion : 'Không Áp Dụng'!!}
                                         </td>
                                     </tr>
                                     <tr>

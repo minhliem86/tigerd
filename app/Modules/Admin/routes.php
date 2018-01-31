@@ -81,6 +81,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('don-hang/doi-trang-thai-ship', ['as' => 'admin.order.changeShipStatus', 'uses' => 'OrderController@postChangeShip']);
         Route::post('don-hang/doi-trang-thai-payment', ['as' => 'admin.order.changePaymentStatus', 'uses' => 'OrderController@postChangePayment']);
 
+        Route::post('/don-hang/getProductDetail', ['as' => 'admin.order.getProductDetail', 'uses' => 'OrderController@getProductDetail']);
+
             /*CONFIGURABLE PRODUCT*/
         Route::get('product/pre-create', ['as' => 'admin.pre_create.product', 'uses' => 'ProductController@getPreCreateProduct']);
         Route::post('product/pre-create', ['as' => 'admin.pre_create.product.post', 'uses' => 'ProductController@postPreCreateProduct']);
