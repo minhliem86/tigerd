@@ -24,7 +24,6 @@
         <meta property="og:url" content="{!! url()->current() !!}">
     @endif
 
-
     <link rel="stylesheet" href="{!! asset('public/assets/client') !!}/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;subset=vietnamese" rel="stylesheet">
@@ -111,7 +110,7 @@
     <div class="page">
     @include('Client::layouts.header')
         <!--LOGO-->
-        <div class="logo-container">
+        <div class="logo-container" >
             <div class="container">
                 <div class="row">
                     <a href="{!! route('client.home') !!}" class="logo mx-auto">
@@ -131,6 +130,16 @@
         @include('Client::layouts.footer')
     </div>
 
+    <!--AOS -->
+    <link rel="stylesheet" href="{!! asset('public/assets/client') !!}/js/plugins/aos/aos.css">
+    <script src="{!! asset('public/assets/client') !!}/js/plugins/aos/aos.js"></script>
+    <script>
+        AOS.init({
+            disable: 'mobile',
+            once: 'true',
+            placement : 'top-center'
+        });
+    </script>
 @yield('script')
 </body>
 </html>

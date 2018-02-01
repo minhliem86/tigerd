@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-9 order-sm-12">
-                    <div class="category-inner">
+                    <div class="category-inner" data-aos="zoom-in-up">
                         <h3 class="title-cate">Sản Phẩm</h3>
                         <div class="row">
                             @foreach($allProduct as $item_product)

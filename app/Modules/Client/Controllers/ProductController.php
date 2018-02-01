@@ -22,6 +22,8 @@ use App\Repositories\OrderRepository;
 use App\Repositories\ShipAddressRepository;
 use App\Repositories\TransactionRepository;
 
+use App\Modules\Client\Events\SendMail;
+
 class ProductController extends Controller
 {
     protected $cate;
@@ -310,6 +312,8 @@ class ProductController extends Controller
                     $pr->save();
                 }
 
+                event(new SendMail($cart, $this->auth->user()->id));
+
                 Cart::clearCartConditions();
                 Cart::clear();
 
@@ -395,6 +399,8 @@ class ProductController extends Controller
                 'total' => $request->input('vpc_Amount')/100,
             ];
             $transaction->create($data_transaction);
+
+            event(new SendMail($cart, $this->auth->user()->id));
 
             Session::forget('promotion_id');
             Session::forget('ship_address');

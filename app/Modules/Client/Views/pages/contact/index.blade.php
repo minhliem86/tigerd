@@ -5,8 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
-
-                    <div class="wrap-info">
+                    <div class="wrap-info" data-aos="flip-right">
                         <div class="d-flex mb-4">
                             <div class="ic mr-4">
                                 <img src="{!! asset('public/assets/client/images/location.svg') !!}" class="img-fluid" alt="Location">
@@ -38,7 +37,7 @@
                     </div>
                 </div>
                 <div class="col-sm-6">
-                    <div class="form-wrapper">
+                    <div class="form-wrapper" data-aos="flip-left">
                         @if($errors->any())
                         <ul class="list-errors">
                             @foreach($errors->all() as $error)

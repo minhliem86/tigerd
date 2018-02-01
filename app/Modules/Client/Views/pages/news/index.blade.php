@@ -11,7 +11,7 @@
                 <div class="col">
                     <div class="news-inner">
                         @foreach($news as $item_news)
-                        <div class="each-news">
+                        <div class="each-news" data-aos="flip-up">
                             <div class="media">
                                 <a href="{!! route('client.news.detail',$item_news->slug) !!}"><img src="{!! asset($item_news->img_url) !!}" class="mr-5" alt="{!! $item_news->name !!}"></a>
                                 <div class="media-body">
