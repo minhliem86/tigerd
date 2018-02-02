@@ -9,10 +9,10 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <div class="product-inner">
+                    <div class="product-inner" data-aos="fade-up">
                         <h2 class="title-section mx-auto">Tiger-d Products</h2>
 
-                        <div class="product-body">
+                        <div class="product-body" >
                             <div class="swiper-container" id="swiper-product">
                                 <div class="swiper-wrapper">
                                     @foreach($product as $item_product)
@@ -88,7 +88,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <div class="news-inner">
+                    <div class="news-inner" data-aos="fade-up">
                         <h2 class="title-section mx-auto">Tiger-d News</h2>
                         <div class="news-body">
                             <div class="swiper-container" id="swiper-news">

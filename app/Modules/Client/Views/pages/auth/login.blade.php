@@ -4,7 +4,7 @@
     <section class="page-section login-page">
         <div class="container">
             <div class="row">
-                <div class="col-sm-6">
+                <div class="col-sm-6" data-aos="zoom-out-up">
                     <div class="login-wrapper">
                         <h3 class="title-login-page">Đăng Nhập</h3>
                         {!! Form::open(['route'=> 'client.auth.login.post', 'class' => 'login-form']) !!}
@@ -30,7 +30,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" data-aos="zoom-out-up">
                     <div class="register-wrapper">
                         <h3 class="title-login-page">Đăng Ký</h3>
                         {!! Form::open(['route'=>'client.auth.register.post', 'class' => 'form-register']) !!}

@@ -1078,6 +1078,9 @@ ul.list-success{
           font-size:1.4rem;
           @include fontThin(600);
         }
+        textarea{
+          font-size:1.4rem
+        }
       }
     }
 

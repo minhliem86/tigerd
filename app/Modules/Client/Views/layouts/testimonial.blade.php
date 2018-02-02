@@ -1,6 +1,6 @@
 <!--TESTIMONIAL-->
 @if(!$testimonial->isEmpty())
-<section class="testimonial-container">
+<section class="testimonial-container" data-aos="fade-up">
     <div class="container">
         <div class="row">
             <div class="col">

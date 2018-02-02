@@ -806,6 +806,8 @@ ul.list-success li {
       font-size: 1.4rem;
       font-family: 'Roboto Condensed', sans-serif;
       font-weight: 600; }
+    .page .payment-page .shipper-info .form-khachhang textarea {
+      font-size: 1.4rem; }
   .page .payment-page .cart-wrapper h4.title-summary {
     font-size: 1.8rem;
     margin-bottom: 1.2rem;

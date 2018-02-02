@@ -106,4 +106,16 @@ class OrderController extends Controller
             return response()->json(['error'=> false, 'data'=> true], 200);
         }
     }
+
+    public function getProductDetail(Request $request)
+    {
+        if(!$request->ajax()){
+            return response()->view('Admin::errors.404', '',404);
+        }else{
+            $id = $request->input('id');
+            $order = $this->order->find($id,['*'],['products']);
+            $view = view('Admin::ajax.product_detail', compact('order'))->render();
+            return response()->json(['error'=> false, 'data' => $view], 200);
+        }
+    }
 }

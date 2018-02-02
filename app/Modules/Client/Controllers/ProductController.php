@@ -22,6 +22,8 @@ use App\Repositories\OrderRepository;
 use App\Repositories\ShipAddressRepository;
 use App\Repositories\TransactionRepository;
 
+use App\Modules\Client\Events\SendMail;
+
 class ProductController extends Controller
 {
     protected $cate;
@@ -298,8 +300,6 @@ class ProductController extends Controller
                 /*LUU GIO HANG CHI TIET*/
                 $cart = Cart::getContent();
                 foreach($cart as $item){
-                    $product_array = explode('_',$item->id);
-//                    $product_id = $product_array[1];
                     $product_id = $item->id;
                     $product = $this->product->find($product_id);
                     $product->stock = $product->stock - 1;
@@ -311,6 +311,8 @@ class ProductController extends Controller
                     $pr->quantity = $pr->quantity - 1;
                     $pr->save();
                 }
+
+                event(new SendMail($cart, $this->auth->user()->id));
 
                 Cart::clearCartConditions();
                 Cart::clear();
@@ -357,6 +359,7 @@ class ProductController extends Controller
             //thanh cong
             /*LUU GIO HANG*/
             $data_order = [
+                'order_name' => $request->input('vpc_OrderInfo'),
                 'shipping_cost' => 0,
                 'total' => Cart::getTotal(),
                 'customer_id' => $this->auth->user()->id,
@@ -379,8 +382,6 @@ class ProductController extends Controller
             }
             $cart = Cart::getContent();
             foreach($cart as $item){
-//                $product_array = explode('_',$item->id);
-//                $product_id = $product_array[1];
                 $product_id = $item->id;
                 $product = $this->product->find($item->id);
                 $product->stock = $product->stock - 1;
@@ -398,6 +399,8 @@ class ProductController extends Controller
                 'total' => $request->input('vpc_Amount')/100,
             ];
             $transaction->create($data_transaction);
+
+            event(new SendMail($cart, $this->auth->user()->id));
 
             Session::forget('promotion_id');
             Session::forget('ship_address');
@@ -484,7 +487,7 @@ class ProductController extends Controller
                 'img_url' => $product->img_url,
             ];
             $itemCart = Cart::add([
-                'id'=>$product->slug.'_'.$product->id.'_'.$product->price,
+                'id'=>$id,
                 'name' => $product->name,
                 'price' => $product->price,
                 'quantity' => 1,

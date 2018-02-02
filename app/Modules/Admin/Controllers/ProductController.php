@@ -259,7 +259,6 @@ class ProductController extends Controller
 
     public function postEditConfigProduct(Request $request, $id)
     {
-        dd($request->file('thumb-input'));
         $rule = [
             'category_id' => 'required',
             'name' => 'required',
@@ -527,6 +526,7 @@ class ProductController extends Controller
             return redirect()->back()->withErrors($valid->errors());
         }
         $img_url = $this->common->getPath($request->input('img_url'), $this->_replacePath);
+
         $data = [
             'name' => $request->name,
             'slug'=> \LP_lib::unicode($request->name),
@@ -538,7 +538,9 @@ class ProductController extends Controller
             'stock' => $request->stock,
             'img_url' => $img_url,
         ];
-        $this->productRepo->update($data, $id);
+
+        $product = $this->productRepo->update($data, $id);
+
         if($request->has('img_detail')){
             $data_photo = [];
             if($request->hasFile('thumb-input')){

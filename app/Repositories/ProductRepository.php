@@ -53,7 +53,7 @@ class ProductRepository extends BaseRepository implements RestfulInterface
 
     public function viewProduct($columns=['*'])
     {
-        return $this->model->orderBy('count_number','DESC')->limit(10)->get($columns);
+        return $this->model->where('type','simple')->orderBy('count_number','DESC')->limit(10)->get($columns);
     }
 
 }

@@ -11,7 +11,6 @@
         <div class="col-md-12">
             @include('Admin::errors.error_layout')
                 {!! Form::model($product,['route' => ['admin.product.configuable.s1.edit.post', $product->id], 'class' => 'form-horizontal', 'id'=>'form', 'method' => 'POST', 'files' => true]) !!}
-
                 <div class="form-group">
                     <label for="agency_id" class="col-md-2 control-label">Chọn Danh Mục Sản Phẩm</label>
                     <div class="col-md-10">
@@ -99,10 +98,10 @@
                                 @foreach($product->photos->chunk(4) as $chunk )
                                     <div class="row">
                                         @foreach($chunk as $photo)
-                                            <div class="col-md-3">
+                                            <div class="col-lg-2 col-md-3 col-sm-4">
                                                 <div class="file-preview-frame krajee-default  file-preview-initial file-sortable kv-preview-thumb" data-template="image">
                                                     <div class="kv-file-content">
-                                                        <img src="{!!asset($photo->img_url)!!}" class="file-preview-image kv-preview-data img-responsive" title="" alt="" style="width:auto;height:120px;">
+                                                        <img src="{!!asset($photo->img_url)!!}" class="file-preview-image kv-preview-data img-responsive" title="" alt="" style="width:auto;height:120px; margin:0 auto">
                                                     </div>
                                                     <div class="photo-order-input" style="margin-bottom:10px">
                                                         <input type="text" class="form-control text-center" name="photo_order" value="{!!$photo->order!!}">
@@ -132,6 +131,11 @@
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     <script src="{!!asset('public')!!}/vendor/laravel-filemanager/js/lfm.js"></script>
     <script src="{!!asset('public/assets/admin/dist/js/script.js')!!}"></script>
+
+    <!-- ALERTIFY -->
+    <link rel="stylesheet" href="{{asset('/public/assets/admin')}}/dist/js/plugins/alertify/alertify.css">
+    <link rel="stylesheet" href="{{asset('/public/assets/admin')}}/dist/js/plugins/alertify/bootstrap.min.css">
+    <script type="text/javascript" src="{{asset('/public/assets/admin')}}/dist/js/plugins/alertify/alertify.js"></script>
 
     <!--BT Upload-->
     <link rel="stylesheet" href="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/css/fileinput.min.css">
@@ -189,7 +193,31 @@
                 }
             })
 
-
         })
+        function removePhoto(e, id){
+            $.ajax({
+                url: '{!!route("admin.product.AjaxRemovePhoto")!!}',
+                type: 'POST',
+                data:{id_photo: id, _token:$('meta[name="csrf-token"]').attr('content')},
+                success:function(data){
+                    if(!data.error){
+                        e.parentNode.parentNode.parentNode.remove();
+                    }
+                }
+            })
+        }
+        function updatePhoto(e, id){
+            var value = e.parentNode.previousElementSibling.childNodes[1].value;
+            $.ajax({
+                url: '{!!route("admin.product.AjaxUpdatePhoto")!!}',
+                type: 'POST',
+                data:{id_photo: id, value: value, _token:$('meta[name="csrf-token"]').attr('content')},
+                success:function(data){
+                    if(!data.error){
+                        alertify.success('Cập nhật thay đổi.');
+                    }
+                }
+            })
+        }
     </script>
 @stop

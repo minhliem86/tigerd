@@ -10,7 +10,7 @@
             </div>
             {!! Form::open(["route"=>'client.doPayment', 'class' => 'form-payment']) !!}
                 <div class="row">
-                    <div class="col-md-8 col-sm-6" >
+                    <div class="col-md-8 col-sm-6" data-aos="zoom-out-left">
                         <div class="shipper-info">
                             <h3 class="title-payment">Thông tin khách hàng</h3>
                             @if($errors->error_payment->any())
@@ -57,7 +57,8 @@
                             </div>
                             @endif
                         </div>
-                    </div><div class="col-md-4 col-sm-6">
+                    </div>
+                    <div class="col-md-4 col-sm-6" data-aos="zoom-out-right">
                         <div class="cart-wrapper">
                             <h4 class="title-summary">Đơn Hàng của bạn</h4>
                             <div class="each-area">

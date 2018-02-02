@@ -62,7 +62,7 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        $inst = $this->customer->find($id);
+        $inst = $this->customer->find($id, ["*"],['orders']);
         return view('Admin::pages.customer.edit', compact('inst'));
     }
 
