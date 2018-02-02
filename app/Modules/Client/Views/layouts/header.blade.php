@@ -10,9 +10,20 @@
                     <span class="mr-2">
                             <a href="https://www.instagram.com/tigerd.vn/" target="_blank"><img src="{!! asset('public/assets/client') !!}/images/instagram-icon.png" class="img-fluid" title="Instagram" alt="Instagram"></a>
                         </span>
-                    <span>
+                    <span class="mr-2">
                             <a href="https://www.youtube.com/channel/UCzzHqhAv0qI1HfYm1IqqMeg" target="_blank"><img src="{!! asset('public/assets/client') !!}/images/youtube-icon.png" class="img-fluid" title="Youtube" alt="Youtube"></a>
                         </span>
+                    <span>
+                        {!! Form::open(['route'=>'client.subcribe-header.post', 'class' => 'form-subcribe-header']) !!}
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <input type="email" name="email_subcribe_header" class="{!! $errors->error_subcribe_header->any() ? 'invalid-form form-control' : 'form-control' !!}" placeholder="NEWSLETTER SIGN UP">
+                                <button type="submit" class="btn btn-subcribe"><i class="fa fa-chevron-right"></i></button>
+
+                            </div>
+                        </div>
+                        {!! Form::close() !!}
+                    </span>
                 </div>
             </div>
             <div class="col-md-8 company-info">

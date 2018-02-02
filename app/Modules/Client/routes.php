@@ -36,6 +36,8 @@ Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controlle
 
     /*SUBCRIBE EMAIL*/
     Route::post('/subcribe',['as' => 'client.subcribe.post', 'uses' => 'ExtensionController@postSubscribe']);
+    Route::post('/subcribe-header',['as' => 'client.subcribe-header.post', 'uses' => 'ExtensionController@postSubscribeHeader']);
+
 
     /*SEARCH*/
     Route::post('/search', ['as' => 'client.search.post', 'uses' => 'ExtensionController@postSearch']);

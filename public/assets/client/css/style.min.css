@@ -120,6 +120,15 @@ ul.list-success li {
           .page header .company-info .each-info .dropdown-menu a.dropdown-item:hover {
             color: lightgrey;
             background: none; }
+    .page header .form-subcribe-header input, .page header .form-subcribe-header button {
+      font-size: 1.3rem; }
+    .page header .form-subcribe-header button {
+      padding-left: 1.2rem;
+      padding-right: 1.2rem;
+      background: #1fb4cb;
+      color: white;
+      border-top-right-radius: 5px !important;
+      border-bottom-right-radius: 5px !important; }
   .page .logo-container {
     padding: 3.8rem 0;
     background: #e08da1;
@@ -654,7 +663,10 @@ ul.list-success li {
     .page .product-page .nav-wrapper .tab-content ul {
       padding-left: 15px; }
       .page .product-page .nav-wrapper .tab-content ul li {
-        font-size: 1.4rem; }
+        font-size: 1.4rem;
+        color: #414042;
+        line-height: 2rem;
+        margin-bottom: 0.5rem; }
     .page .product-page .nav-wrapper .tab-content p {
       font-size: 1.4rem;
       color: #414042;
