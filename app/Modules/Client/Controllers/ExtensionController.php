@@ -30,7 +30,7 @@ class ExtensionController extends Controller
             'email' => $request->input('email_subcribe'),
         ];
         $this->subcribe->create($data);
-        return back()->with('success', 'Cảm ơn bạn đã Subscribe website chúng tôi.');
+        return back()->with('success_subscribe', 'Cảm ơn bạn đã Subscribe website chúng tôi.');
     }
 
     public function postSearch(Request $request)

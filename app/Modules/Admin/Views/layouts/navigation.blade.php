@@ -17,8 +17,9 @@
     <li>
       <a href="#user" class="list-group-item " data-toggle="collapse"><b><i class="fa fa-comments"></i>Quản Lý User</b>  <span class="glyphicon glyphicon-chevron-right"></span></a>
       <div class="collapse" id="user">
-        <a class="list-group-item sub-item {{LP_lib::setActive(2,'feedback')}}" href="{{route('admin.feedback.index')}}"><i class="fa fa-envelope"></i>Phản Hồi Khách Hàng</a>
         <a class="list-group-item sub-item {{LP_lib::setActive(2,'customer-idea')}}" href="{{route('admin.customer-idea.index')}}"><i class="fa fa-commenting-o"></i>Ý kiến khách hàng</a>
+        <a class="list-group-item sub-item {{LP_lib::setActive(2,'feedback')}}" href="{{route('admin.feedback.index')}}"><i class="fa fa-envelope"></i>Khách Hàng Liên Hệ</a>
+        <a class="list-group-item sub-item {{LP_lib::setActive(2,'newsleter')}}" href="{{route('admin.subscribe.index')}}"><i class="fa fa-envelope"></i>Newsletter</a>
         <a class="list-group-item sub-item {{LP_lib::setActive(2,'customer')}}" href="{{route('admin.customer.index')}}"><i class="fa fa-user"></i>Tài Khoản Khách Hàng</a>
       </div>
     </li>

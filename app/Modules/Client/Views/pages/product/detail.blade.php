@@ -220,7 +220,7 @@
                             $('p.description').text(data.data.description);
                             $('.price-value').text(data.price);
                             $('input[name=product_id]').val(data.data.id);
-                            $('.wrap-chitietsanpham').text(data.content);
+                            $('.wrap-chitietsanpham').html(data.content);
                             $('.wrap-gallery').html(data.photo);
 
                             $('#image-gallery').lightSlider({

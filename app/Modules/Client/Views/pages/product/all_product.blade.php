@@ -85,7 +85,7 @@
                             <div class="swiper-wrapper">
                                 @foreach($hotProduct as $item_hot)
                                 <div class="swiper-slide">
-                                    <img src="{!! asset($item_hot->img_url) !!}" class="img-fluid" alt="{!! $item_hot->name !!}">
+                                    <a href="{!! route('client.product', $item_hot->slug) !!}"><img src="{!! asset($item_hot->img_url) !!}" class="img-fluid" alt="{!! $item_hot->name !!}"></a>
                                 </div>
                                 @endforeach
                             </div>
