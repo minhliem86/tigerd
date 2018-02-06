@@ -85,6 +85,7 @@ ul.list-success{
       .d-flex{
         @include media-max(767px){
           justify-content:space-around !important;
+          align-items: center;
         }
       }
       .each-info{
@@ -99,7 +100,7 @@ ul.list-success{
         @include media-max(575px){
           margin-right:0.7rem;
           padding-right:0.7rem;
-          font-size:1rem;
+          font-size:0.7rem;
         }
         a{
           color:white;
@@ -452,6 +453,9 @@ ul.list-success{
     .fanpage-section{
       .fanpage-wrapper{
         text-align: center;
+      }
+      @include media-max(767px){
+
       }
     }
   }

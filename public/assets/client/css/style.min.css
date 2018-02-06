@@ -77,7 +77,8 @@ ul.list-success li {
         justify-content: space-around; } }
     @media screen and (max-width: 767px) {
       .page header .company-info .d-flex {
-        justify-content: space-around !important; } }
+        justify-content: space-around !important;
+        align-items: center; } }
     .page header .company-info .each-info {
       border-right: 1px solid white;
       color: white;
@@ -91,7 +92,7 @@ ul.list-success li {
         .page header .company-info .each-info {
           margin-right: 0.7rem;
           padding-right: 0.7rem;
-          font-size: 1rem; } }
+          font-size: 0.7rem; } }
       .page header .company-info .each-info a {
         color: white;
         text-decoration: none; }
