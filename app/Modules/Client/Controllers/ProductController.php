@@ -440,7 +440,7 @@ class ProductController extends Controller
             $product_ajax = $this->product->find($product_id);
 
             $price = $product_ajax->discount ? number_format($product_ajax->discount) : number_format($product_ajax->price);
-            $content = strip_tags($product_ajax->content);
+            $content = $product_ajax->content;
             $photo_display = view('Client::extensions.photo_product')->with('product', $product_ajax)->render();
 
             return response()->json(['error' => false, 'data'=>$product_ajax, 'price' => $price, 'content'=>$content, 'photo'=>$photo_display], 200);

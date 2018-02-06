@@ -175,6 +175,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('supplier/postAjaxUpdateOrder', ['as' => 'admin.supplier.postAjaxUpdateOrder', 'uses' => 'PaymentSupplierController@postAjaxUpdateOrder']);
         Route::resource('supplier', 'PaymentSupplierController');
 
+        /*SUBSCRIBE*/
+        Route::get('/newsletter', ['as'=>'admin.subscribe.index', 'uses' => 'SubscribeController@getIndex']);
+        Route::get('/newsletter/download', ['as'=>'admin.subscribe.download', 'uses' => 'SubscribeController@postDownload']);
+
         /*CUSTOMER MANAMENT*/
         Route::get('customer/getData', ['as' => 'admin.customer.getData', 'uses' => 'CustomerController@getData']);
         Route::post('customer/deleteAll', ['as' => 'admin.customer.deleteAll', 'uses' => 'CustomerController@deleteAll']);

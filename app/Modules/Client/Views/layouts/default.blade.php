@@ -24,7 +24,7 @@
         <meta property="og:url" content="{!! url()->current() !!}">
     @endif
 
-    <link rel="shortcut icon" href="{!! asset('public/favicon.ico') !!}" />
+    <link rel="icon" href="{!! asset('public/favicon.ico') !!}">
     <link rel="stylesheet" href="{!! asset('public/assets/client') !!}/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&amp;subset=vietnamese" rel="stylesheet">
@@ -46,6 +46,9 @@
         $(document).ready(function(){
             @if(session('success'))
                 alertify.success("{!! session('success') !!}")
+            @endif
+            @if(session('success_subscribe'))
+             alertify.success("{!! session('success_subscribe') !!}")
             @endif
             @if(session('error'))
                 alertify.error("{!! session('error') !!}")
@@ -70,6 +73,22 @@
                         'slidesPerView' : 2,
                     }
                 }
+            })
+
+            var relateProduct = new Swiper('#hotProductSwiper', {
+                'slidesPerView' : 1,
+//                navigation: {
+//                    nextEl: '.swiper-button-next',
+//                    prevEl: '.swiper-button-prev',
+//                },
+//                breakpoints:{
+//                    575: {
+//                        'slidesPerView' : 1,
+//                    },
+//                    767: {
+//                        'slidesPerView' : 2,
+//                    }
+//                }
             })
 
             var newsSwiper = new Swiper('#swiper-news', {
