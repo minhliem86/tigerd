@@ -92,7 +92,9 @@ ul.list-success li {
         .page header .company-info .each-info {
           margin-right: 0.7rem;
           padding-right: 0.7rem;
-          font-size: 0.7rem; } }
+          font-size: 0.7rem; }
+          .page header .company-info .each-info img {
+            max-width: 60%; } }
       .page header .company-info .each-info a {
         color: white;
         text-decoration: none; }
@@ -121,6 +123,15 @@ ul.list-success li {
           .page header .company-info .each-info .dropdown-menu a.dropdown-item:hover {
             color: lightgrey;
             background: none; }
+    .page header .form-subcribe-header input, .page header .form-subcribe-header button {
+      font-size: 1.3rem; }
+    .page header .form-subcribe-header button {
+      padding-left: 1.2rem;
+      padding-right: 1.2rem;
+      background: #1fb4cb;
+      color: white;
+      border-top-right-radius: 5px !important;
+      border-bottom-right-radius: 5px !important; }
   .page .logo-container {
     padding: 3.8rem 0;
     background: #e08da1;
@@ -366,6 +377,9 @@ ul.list-success li {
       border: none; }
   .page .video-fanpage-container .fanpage-section .fanpage-wrapper {
     text-align: center; }
+  @media screen and (max-width: 767px) {
+    .page .video-fanpage-container .fanpage-section {
+      margin-bottom: 4rem; } }
   .page .testimonial-container {
     background: #000 url("../images/background-testiimonial.png") no-repeat;
     background-position: 100% 0;
@@ -598,6 +612,9 @@ ul.list-success li {
         color: #b51c5e; }
   .page .product-page .product-infomation-row {
     margin-bottom: 3rem; }
+  @media screen and (max-width: 575px) {
+    .page .product-page .wrap-gallery {
+      margin-bottom: 3rem; } }
   .page .product-page .product-info {
     margin-bottom: 2rem;
     padding-bottom: 1rem;
@@ -617,10 +634,16 @@ ul.list-success li {
       text-transform: uppercase; }
     .page .product-page .product-info div.brand-info {
       margin-bottom: 1.4rem; }
+      @media screen and (max-width: 575px) {
+        .page .product-page .product-info div.brand-info {
+          flex-direction: column; } }
       .page .product-page .product-info div.brand-info p {
         font-size: 1.4rem;
         color: #414042;
         font-weight: 400; }
+        @media screen and (max-width: 575px) {
+          .page .product-page .product-info div.brand-info p.product_code {
+            margin-bottom: 1rem; } }
     .page .product-page .product-info p.price {
       font-size: 3rem;
       line-height: 3.5rem;
