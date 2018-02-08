@@ -44,8 +44,8 @@
 
 @section('script')
     <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
-    <script src="{{asset('public')}}/vendor/laravel-filemanager/js/lfm.js"></script>
-    <script src="{{asset('public/assets/admin/dist/js/script.js')}}"></script>
+    <script src="{!! asset('public') !!}/vendor/laravel-filemanager/js/lfm.js"></script>
+    <script src="{!! asset('public/assets/admin/js/script.js') !!}"></script>
     <script>
         const url = "{{url('/')}}"
         init_tinymce(url);

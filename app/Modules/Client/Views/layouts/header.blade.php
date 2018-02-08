@@ -35,8 +35,7 @@
                     <div class="each-info ">
                         <img src="{!! asset('public/assets/client') !!}/images/phone-icon.png" class="img-fluid d-inline" alt="Phone">
                         <span class="d-inline">
-                                        <a href="tel:0943722227" class="d-inline">0943 722 227</a> -
-                                        <a href="tel:01666277772" class="d-inline">01666 277 772</a>
+                                        <a href="tel:0943722227" class="d-inline">0943 722 227</a>
                                     </span>
                     </div>
                     <div class="each-info">

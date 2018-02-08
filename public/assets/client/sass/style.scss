@@ -100,7 +100,7 @@ ul.list-success{
         @include media-max(575px){
           margin-right:0.7rem;
           padding-right:0.7rem;
-          font-size:0.7rem;
+          font-size:0.9rem;
           img{
             max-width:60%;
           }
@@ -163,6 +163,14 @@ ul.list-success{
     background: -moz-linear-gradient(top, #e08da1 0%, #ffffff 49%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top, #e08da1 0%,#ffffff 49%); /* Chrome10-25,Safari5.1-6 */
     background: linear-gradient(to bottom, #e08da1 0%,#ffffff 49%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    .logo{
+      text-align: center;
+      img{
+        @include media-max(575px){
+          max-width:50%
+        }
+      }
+    }
   }
 
   /*NAVIGATION*/
