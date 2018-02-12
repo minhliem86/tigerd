@@ -1319,6 +1319,7 @@ ul.list-success{
   /*FOOTER*/
   footer{
     padding:10rem 0;
+    background:lighten(#1a1a1a, 20%);
     @include media-max(767px){
       padding:3rem 0;
     }

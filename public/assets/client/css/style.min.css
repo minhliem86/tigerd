@@ -967,7 +967,8 @@ ul.list-success li {
         padding: 0 3rem;
         color: #CB1F6A; }
   .page footer {
-    padding: 10rem 0; }
+    padding: 10rem 0;
+    background: #4d4d4d; }
     @media screen and (max-width: 767px) {
       .page footer {
         padding: 3rem 0; } }
