@@ -128,7 +128,7 @@
 </head>
 <body>
     <div class="page">
-    @include('Client::layouts.header')
+        @include('Client::layouts.header')
         <!--LOGO-->
         <div class="logo-container" >
             <div class="container">
@@ -144,8 +144,6 @@
         @include('Client::layouts.navigation')
 
         @yield('content')
-
-        @include('Client::layouts.testimonial')
 
         @include('Client::layouts.footer')
     </div>

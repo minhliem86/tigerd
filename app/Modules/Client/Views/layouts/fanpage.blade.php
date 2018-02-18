@@ -1,16 +1,3 @@
-<!--VIDEO FANPAGE-->
-<section class="video-container page-section" data-aos="fade-up">
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h2 class="title-section mx-auto">Tiger-D Video</h2>
-                <div class="video-inner">
-                    <div data-type="youtube" data-video-id="E2WP4VGlDh4"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 <section class="video-fanpage-container page-section">
     <div class="container">
         <div class="row">
