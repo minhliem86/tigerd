@@ -51,7 +51,9 @@ class ProductController extends Controller
         $this->secure = env('OP_SECURE');
 
         $this->auth = Auth::guard('customer');
-        $this->middleware('client_checklogin',['only'=>['doPayment','getPayment', 'responseFormOnePay']]);
+//        $this->middleware('client_checklogin',
+//            ['only'=>['doPayment','getPayment', 'responseFormOnePay']]
+//        );
     }
 
     private function setupOnePay(){
@@ -255,9 +257,9 @@ class ProductController extends Controller
 
     public function doPayment(Request $request, OrderRepository $order, PromotionRepository $promotion, ShipAddressRepository $ship)
     {
-        if(!$this->auth->check()){
-            return redirect()->route('client.auth.login')->with('error','Vui lòng đăng nhập.');
-        }
+//        if(!$this->auth->check()){
+//            return redirect()->route('client.auth.login')->with('error','Vui lòng đăng nhập.');
+//        }
         $valid = Validator::make($request->all(), $this->_rulesPayment(), $this->_messagePayment());
         if($valid->fails()){
             return redirect()->back()->withInput()->withErrors($valid, 'error_payment');
@@ -278,7 +280,8 @@ class ProductController extends Controller
                     'order_name' => $order_id,
                     'shipping_cost' => 0,
                     'total' => Cart::getTotal(),
-                    'customer_id' => $this->auth->user()->id,
+//                    'customer_id' => $this->auth->user()->id,
+                    'customer_id' => 2,
                     'promotion_id' => $promotion_id,
                     'paymentmethod_id' => 1,
                     'shipstatus_id' => 1,
@@ -312,7 +315,7 @@ class ProductController extends Controller
                     $pr->save();
                 }
 
-                event(new SendMail($cart, $this->auth->user()->id));
+                event(new SendMail($cart, 2));
 
                 Cart::clearCartConditions();
                 Cart::clear();
@@ -339,7 +342,7 @@ class ProductController extends Controller
                 \Session::put('ship_address', $data_ship);
 
                 $order_id = \LP_lib::unicodenospace($request->input('customer_name')).'_'.time();
-                $customer_id = $this->auth->user()->firstname . '_'. $this->auth->user()->id ;
+                $customer_id = $this->auth->user()->firstname . '_'. 2 ;
                 $onepay = $this->setupOnePay();
                 $refer = $onepay->build_link_global($request->all(),$order_id, Cart::getTotal(), $order_id, route('client.responsePayment',$promotion_id),  $customer_id);
                 return redirect($refer);
@@ -362,7 +365,7 @@ class ProductController extends Controller
                 'order_name' => $request->input('vpc_OrderInfo'),
                 'shipping_cost' => 0,
                 'total' => Cart::getTotal(),
-                'customer_id' => $this->auth->user()->id,
+                'customer_id' => 2,
                 'promotion_id' => session('promotion_id'),
                 'paymentmethod_id' => 2,
                 'shipstatus_id' => 1,
@@ -400,7 +403,7 @@ class ProductController extends Controller
             ];
             $transaction->create($data_transaction);
 
-            event(new SendMail($cart, $this->auth->user()->id));
+            event(new SendMail($cart, 2));
 
             Session::forget('promotion_id');
             Session::forget('ship_address');
