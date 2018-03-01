@@ -1070,8 +1070,9 @@ ul.list-success{
   /*PAYMENT*/
   .payment-page{
     form.form-payment{
-      input{
+      input, select{
         font-size:1.4rem;
+        height:3.2rem;
       }
       div.custom-control{
         padding-left:3rem;
@@ -1319,7 +1320,7 @@ ul.list-success{
   /*FOOTER*/
   footer{
     padding:10rem 0;
-    background:lighten(#1a1a1a, 20%);
+    background:#f3f3f3;
     @include media-max(767px){
       padding:3rem 0;
     }

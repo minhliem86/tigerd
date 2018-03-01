@@ -21,16 +21,16 @@
             </div>
         </div>
     </div>
-    @if(Session::has('error'))
-        <div class="alert alert-danger alert-dismissable">
-            <p>{{Session::get('error')}}</p>
-        </div>
-    @endif
-    @if(Session::has('success'))
-        <div class="alert alert-success alert-dismissable">
-            <p>{{Session::get('success')}}</p>
-        </div>
-    @endif
+    {{--@if(Session::has('error'))--}}
+        {{--<div class="alert alert-danger alert-dismissable">--}}
+            {{--<p>{{Session::get('error')}}</p>--}}
+        {{--</div>--}}
+    {{--@endif--}}
+    {{--@if(Session::has('success'))--}}
+        {{--<div class="alert alert-success alert-dismissable">--}}
+            {{--<p>{{Session::get('success')}}</p>--}}
+        {{--</div>--}}
+    {{--@endif--}}
     <div class="row">
         <div class="col-sm-12">
             <table class="table table-hover">
@@ -80,7 +80,7 @@
                 columns: [
                     {data: 'id', name: 'id', 'orderable': false,},
                     {data: 'order_name', name: 'order_name','orderable': false,},
-                    {data: 'orders.order_date', name: 'orders.order_date', 'orderable': false,},
+                    {data: 'orders.created_at', name: 'orders.created_at', 'orderable': false,},
                     {data: 'orders.total', name: 'orders.total', 'orderable': false,},
                     {data: 'method', name: 'method', 'orderable': false,},
                     {data: 'shipstatus.name', name: 'shipstatus.name', 'orderable': false,},

@@ -42,24 +42,27 @@ Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controlle
     /*SEARCH*/
     Route::post('/search', ['as' => 'client.search.post', 'uses' => 'ExtensionController@postSearch']);
 
-//
-//    /*CUSTOMER*/
-//    Route::get('/dang-nhap', ['as' => 'client.auth.login', 'uses' => 'Auth\AuthController@getLogin']);
-//    Route::post('/dang-nhap', ['as' => 'client.auth.login.post', 'uses' => 'Auth\AuthController@postLogin']);
-//    Route::post('/dang-ky', ['as' => 'client.auth.register.post', 'uses' => 'Auth\AuthController@postRegister']);
-//
-//    // Password Reset Routes...
-//    Route::get('password/reset/{token?}',['as'=> 'client.password.reset.getForm', 'uses' => 'Auth\PasswordController@showResetForm']);
-//    Route::post('password/email',['as' => 'client.password.email.post', 'uses' => 'Auth\PasswordController@sendResetLinkEmail']);
-//    Route::post('password/reset', 'Auth\PasswordController@reset');
-//
-//    Route::get('/thong-tin-khach-hang', ['as'=> 'client.auth.profile', 'uses' => 'ProfileController@getProfile']);
-//    Route::post('/update-profile', ['as' => 'client.auth.profile.post', 'uses' => 'ProfileController@postProfile']);
-//
-//    Route::post('/changePassword', ['as' => 'client.auth.changePassword.post', 'uses' => 'ProfileController@postChangePassword']);
-//
-//    Route::get('/dang-xuat', ['as' => 'client.auth.logout', 'uses' => 'Auth\AuthController@logout']);
-//
-//    Route::get('/{slug}', ['as'=>'client.single_page', 'uses'=>'SingleController@index'])->where('slug', '[0-9a-zA-Z._\-]+');
-//
+
+    /*CUSTOMER*/
+    Route::get('/dang-nhap', ['as' => 'client.auth.login', 'uses' => 'Auth\AuthController@getLogin']);
+    Route::post('/dang-nhap', ['as' => 'client.auth.login.post', 'uses' => 'Auth\AuthController@postLogin']);
+    Route::post('/dang-ky', ['as' => 'client.auth.register.post', 'uses' => 'Auth\AuthController@postRegister']);
+
+    // Password Reset Routes...
+    Route::get('password/reset/{token?}',['as'=> 'client.password.reset.getForm', 'uses' => 'Auth\PasswordController@showResetForm']);
+    Route::post('password/email',['as' => 'client.password.email.post', 'uses' => 'Auth\PasswordController@sendResetLinkEmail']);
+    Route::post('password/reset', 'Auth\PasswordController@reset');
+
+    Route::get('/thong-tin-khach-hang', ['as'=> 'client.auth.profile', 'uses' => 'ProfileController@getProfile']);
+    Route::post('/update-profile', ['as' => 'client.auth.profile.post', 'uses' => 'ProfileController@postProfile']);
+
+    Route::post('/changePassword', ['as' => 'client.auth.changePassword.post', 'uses' => 'ProfileController@postChangePassword']);
+
+    Route::get('/dang-xuat', ['as' => 'client.auth.logout', 'uses' => 'Auth\AuthController@logout']);
+
+    Route::get('/{slug}', ['as'=>'client.single_page', 'uses'=>'SingleController@index'])->where('slug', '[0-9a-zA-Z._\-]+');
+
+    Route::post('/payment/getDistrict', ['as' => 'client.post.getDistrict', 'uses' => 'ProductController@getDistrict']);
+    Route::post('/payment/getWard', ['as' => 'client.post.getWard', 'uses' => 'ProductController@getWard']);
+
 });

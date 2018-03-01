@@ -44,17 +44,17 @@
                             <span class="number-item">{!! Cart::getTotalQuantity() !!}</span>
                         </a>
                     </div>
-                    {{--<div class="each-info">--}}
-                        {{--@if(!Auth::guard('customer')->check())--}}
-                            {{--<a href="{!! route('client.auth.login') !!}"><i class="fa fa-user"></i> <span class="user-text">Đăng Nhập</span></a>--}}
-                        {{--@else--}}
-                            {{--<a href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <span class="user-text">{!! Auth::guard('customer')->user()->firstname !!}</span></a>--}}
-                            {{--<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">--}}
-                                {{--<a class="dropdown-item" href="{!! route('client.auth.profile') !!}">Thông tin tài khoản</a>--}}
-                                {{--<a class="dropdown-item" href="{!! route('client.auth.logout') !!}">Thoát</a>--}}
-                            {{--</div>--}}
-                        {{--@endif--}}
-                    {{--</div>--}}
+                    <div class="each-info">
+                        @if(!Auth::guard('customer')->check())
+                            <a href="{!! route('client.auth.login') !!}"><i class="fa fa-user"></i> <span class="user-text">Đăng Nhập</span></a>
+                        @else
+                            <a href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> <span class="user-text">{!! Auth::guard('customer')->user()->firstname !!}</span></a>
+                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="{!! route('client.auth.profile') !!}">Thông tin tài khoản</a>
+                                <a class="dropdown-item" href="{!! route('client.auth.logout') !!}">Thoát</a>
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>

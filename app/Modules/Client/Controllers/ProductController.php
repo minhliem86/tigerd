@@ -15,6 +15,7 @@ use Cart;
 use Auth;
 use Session;
 use Cache;
+use DB;
 use Carbon\Carbon;
 use App\Repositories\PromotionRepository;
 use App\Repositories\PaymentMethodRepository;
@@ -67,6 +68,9 @@ class ProductController extends Controller
           'customer_name' => 'required',
             'vpc_Customer_Phone' => 'required',
             'vpc_Customer_Email' => 'required|email',
+            'vpc_SHIP_City' => 'required',
+            'vpc_SHIP_Provice' => 'required',
+            'ward' => 'required',
             'AVS_Street01' => 'required',
             'payment_method' => 'required'
         ];
@@ -79,6 +83,9 @@ class ProductController extends Controller
             'vpc_Customer_Email.required' => 'Vui lòng nhập Email',
             'vpc_Customer_Email.email' => 'Vui lòng nhập định dạng Email',
             'AVS_Street01.required' => 'Vui lòng nhập địa chỉ giao hàng',
+            'vpc_SHIP_City.required' => 'Vui lòng chọn Thành Phố',
+            'vpc_SHIP_Provice.required' => 'Vui lòng chọn Quận/Huyện',
+            'ward.required' => 'Vui lòng chọn Phường/Xã',
             'payment_method.required' => 'Vui lòng chọn Phương thức thanh toán',
         ];
     }
@@ -212,8 +219,9 @@ class ProductController extends Controller
             return redirect()->route('client.home')->with('error','Giỏ hàng của bạn đang rỗng. Vui lòng chọn sản phẩm.');
         }
         $cart = Cart::getContent();
+        $city = DB::table('cities')->lists('name_with_type', 'code');
         $pm = $paymentMethod->all(['id', 'name','description']);
-        return view('Client::pages.product.payment', compact('cart', 'pm'));
+        return view('Client::pages.product.payment', compact('cart', 'pm', 'city'));
     }
 
     public function applyPromotion(Request $request, PromotionRepository $promotion)
@@ -280,8 +288,8 @@ class ProductController extends Controller
                     'order_name' => $order_id,
                     'shipping_cost' => 0,
                     'total' => Cart::getTotal(),
-//                    'customer_id' => $this->auth->user()->id,
-                    'customer_id' => 2,
+                    'customer_id' => $this->auth->check() ? $this->auth->user()->id : 2 ,
+//                    'customer_id' => 2,
                     'promotion_id' => $promotion_id,
                     'paymentmethod_id' => 1,
                     'shipstatus_id' => 1,
@@ -294,6 +302,9 @@ class ProductController extends Controller
                     'fullname' => $request->customer_name,
                     'phone' => $request->input('vpc_Customer_Phone'),
                     'email' => $request->input('vpc_Customer_Email'),
+                    'city' => $request->input('vpc_SHIP_City'),
+                    'district' => $request->input('vpc_SHIP_Provice'),
+                    'ward' => $request->input('ward'),
                     'address' => $request->input('AVS_Street01'),
                     'note' => $request->input('customer_note'),
                     'order_id' => $current_order->id,
@@ -308,14 +319,14 @@ class ProductController extends Controller
                     $product->stock = $product->stock - 1;
                     $product->save();
 
-                    $current_order->products()->attach($product_id, ['quantity'=>$item->quantity, 'unit_price'=>'VND']);
+                    $current_order->products()->attach($product_id, ['quantity'=>$item->quantity, 'unit_price'=>'VND', 'attribute' => json_encode($item->attributes, JSON_UNESCAPED_UNICODE)]);
                 }
                 if(count($pr)){
                     $pr->quantity = $pr->quantity - 1;
                     $pr->save();
                 }
 
-                event(new SendMail($cart, 2));
+                event(new SendMail($cart,  $this->auth->check() ? $this->auth->user()->id : 2));
 
                 Cart::clearCartConditions();
                 Cart::clear();
@@ -335,6 +346,9 @@ class ProductController extends Controller
                     'fullname' => $request->customer_name,
                     'phone' => $request->input('vpc_Customer_Phone'),
                     'email' => $request->input('vpc_Customer_Email'),
+                    'city' => $request->input('vpc_SHIP_City'),
+                    'district' => $request->input('vpc_SHIP_Provice'),
+                    'ward' => $request->input('ward'),
                     'address' => $request->input('AVS_Street01'),
                     'note' => $request->input('customer_note'),
                 ];
@@ -342,7 +356,7 @@ class ProductController extends Controller
                 \Session::put('ship_address', $data_ship);
 
                 $order_id = \LP_lib::unicodenospace($request->input('customer_name')).'_'.time();
-                $customer_id = $this->auth->user()->firstname . '_'. 2 ;
+                $customer_id = $this->auth->user()->firstname . '_'. $this->auth->check ? $this->auth->user()->id : 2 ;
                 $onepay = $this->setupOnePay();
                 $refer = $onepay->build_link_global($request->all(),$order_id, Cart::getTotal(), $order_id, route('client.responsePayment',$promotion_id),  $customer_id);
                 return redirect($refer);
@@ -365,7 +379,7 @@ class ProductController extends Controller
                 'order_name' => $request->input('vpc_OrderInfo'),
                 'shipping_cost' => 0,
                 'total' => Cart::getTotal(),
-                'customer_id' => 2,
+                'customer_id' => $this->auth->check() ? $this->auth->user()->id : 2 ,
                 'promotion_id' => session('promotion_id'),
                 'paymentmethod_id' => 2,
                 'shipstatus_id' => 1,
@@ -390,7 +404,7 @@ class ProductController extends Controller
                 $product->stock = $product->stock - 1;
                 $product->save();
 
-                $order->products()->attach($product_id, ['quantity'=>$item->quantity, 'unit_price'=>'VND']);
+                $order->products()->attach($product_id, ['quantity'=>$item->quantity, 'unit_price'=>'VND', 'attribute' => json_encode($item->attributes, JSON_UNESCAPED_UNICODE) ]);
             }
 
             /*LUU TRANSACTION*/
@@ -403,7 +417,7 @@ class ProductController extends Controller
             ];
             $transaction->create($data_transaction);
 
-            event(new SendMail($cart, 2));
+            event(new SendMail($cart,  $this->auth->check() ? $this->auth->user()->id : 2));
 
             Session::forget('promotion_id');
             Session::forget('ship_address');
@@ -498,6 +512,29 @@ class ProductController extends Controller
             ]);
             $quantityCart = Cart::getTotalQuantity();
             return response()->json(['error' => false, 'data'=> $quantityCart]);
+        }
+    }
+
+    public function getDistrict(Request $request)
+    {
+        if(!$request->ajax()){
+            abort(404);
+        }else{
+            $city_id = $request->input('city_id');
+            $district = DB::table('district')->where('parent_code', $city_id)->lists('name_with_type', 'code');
+            $view = view('Client::ajax.district', compact('district'))->render();
+            return response()->json(['error' => false, 'data'=> $view]);
+        }
+    }
+    public function getWard(Request $request)
+    {
+        if(!$request->ajax()){
+            abort(404);
+        }else{
+            $district_id = $request->input('district_id');
+            $ward = DB::table('wards')->where('parent_code', $district_id)->lists('name_with_type', 'code');
+            $view = view('Client::ajax.ward', compact('ward'))->render();
+            return response()->json(['error' => false, 'data'=> $view]);
         }
     }
 }

@@ -82,8 +82,6 @@
     <!--END PRODUCT-->
     @endif
 
-    @include('Client::layouts.testimonial')
-
     <!--VIDEO FANPAGE-->
     <section class="video-container page-section" data-aos="fade-up">
         <div class="container">
@@ -91,7 +89,7 @@
                 <div class="col">
                     <h2 class="title-section mx-auto">Tiger-D Video</h2>
                     <div class="video-inner">
-                        <div data-type="youtube" data-video-id="E2WP4VGlDh4"></div>
+                        <div data-type="youtube" data-video-id="GaW0OYw7OMY"></div>
                     </div>
                 </div>
             </div>

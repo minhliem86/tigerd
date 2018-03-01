@@ -22,7 +22,7 @@ class Order extends Model
 
     public function products()
     {
-        return $this->belongsToMany('App\Models\Product', 'order_products', 'order_id', 'product_id')->withPivot('quantity','unit_price')->withTimestamps();
+        return $this->belongsToMany('App\Models\Product', 'order_products', 'order_id', 'product_id')->withPivot('quantity','unit_price','attribute')->withTimestamps();
     }
 
     public function shipstatus()
@@ -36,5 +36,10 @@ class Order extends Model
     public function paymentmethods()
     {
         return $this->belongsTo('App\Models\PaymentMethod', 'paymentmethod_id');
+    }
+
+    public function shipAddress()
+    {
+        return $this->hasOne('App\Models\ShipAddress');
     }
 }

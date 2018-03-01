@@ -168,7 +168,8 @@ return [
         Maatwebsite\Excel\ExcelServiceProvider::class,
         App\Modules\ModuleServiceProvider::class,
         Darryldecode\Cart\CartServiceProvider::class,
-        App\Providers\ComposerProvider::class
+        App\Providers\ComposerProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 
     ],
 
@@ -225,8 +226,8 @@ return [
         'Notification' => Krucas\Notification\Facades\Notification::class,
         'Laratrust'   => Laratrust\LaratrustFacade::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Cart' => Darryldecode\Cart\Facades\CartFacade::class
-
+        'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
     ],
 
 ];
