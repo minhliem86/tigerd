@@ -122,8 +122,7 @@ class OrderController extends Controller
     public function printPreview($order_id)
     {
         $order_detail = $this->order->find($order_id);
-//        $view = view('Admin::pages.order.printPreview', compact('order_detail'))->render();
         $pdf = \PDF::loadView('Admin::pages.order.printPreview', ['order_detail'=>$order_detail]);
-        return $pdf->stream();
+        return $pdf->stream('invoice_'.$order_detail->order_name.'.pdf');
     }
 }
