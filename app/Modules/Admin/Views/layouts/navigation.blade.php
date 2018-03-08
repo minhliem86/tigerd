@@ -11,6 +11,7 @@
         <a class="list-group-item sub-item {{LP_lib::setActive(2,'product')}}" href="{{route('admin.product.index')}}"><i class="fa fa-television"></i>Sản Phẩm</a>
         <a class="list-group-item sub-item {{LP_lib::setActive(2,'promotion')}}" href="{{route('admin.promotion.index')}}"><i class="fa fa-gift"></i>Khuyến Mãi</a>
         <a class="list-group-item sub-item {{LP_lib::setActive(2,'don-hang')}}" href="{{route('admin.order.index')}}"><i class="fa fa-gift"></i>Quản lý đơn hàng</a>
+        <a class="list-group-item sub-item {{LP_lib::setActive(2,'shippingcost')}}" href="{{route('admin.shippingcost.index')}}"><i class="fa fa-gift"></i>Quản lý Giá Ship</a>
       </div>
     </li>
     <li class="divider"></li>
