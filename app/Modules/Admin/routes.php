@@ -189,6 +189,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         /* COMPANY */
         Route::any('company/{id?}', ['as' => 'admin.company.index', 'uses' => 'CompanyController@getInformation']);
 
+        /*ORDER*/
+        Route::get('/print-preview/{order_id}', ['as' => 'admin.order.invoice', 'uses' => 'OrderController@printPreview'])->where('order_id','[0-9a-zA-Z]+');
     });
   });
 });

@@ -29,7 +29,7 @@ class OrderController extends Controller
 
     public function getData(Request $request)
     {
-        $data = $this->order->query(['orders.id', 'orders.order_name', 'orders.total', 'orders.customer_id', 'orders.promotion_id', 'orders.paymentmethod_id', 'orders.shipstatus_id', 'orders.paymentstatus_id'])
+        $data = $this->order->query(['orders.id', 'orders.order_name', 'orders.total','orders.created_at', 'orders.customer_id', 'orders.promotion_id', 'orders.paymentmethod_id', 'orders.shipstatus_id', 'orders.paymentstatus_id'])
             ->join('customers', 'customers.id', '=', 'orders.customer_id')
             ->join('payment_methods', 'payment_methods.id', '=', 'orders.paymentmethod_id' )
             ->join('paymentstatus', 'paymentstatus.id', '=', 'orders.paymentstatus_id' )
@@ -38,7 +38,7 @@ class OrderController extends Controller
         return Datatables::of($data)
             ->addColumn('action', function($data){
                 return '<a href="'.route('admin.order.detail', $data->id).'" class="btn btn-info btn-xs inline-block-span"> Chi tiết </a>';
-            })->editColumn('orders.order_date', function($data){
+            })->editColumn('orders.created_at', function($data){
                 $date = Carbon::parse($data->created_at)->format('d/m/Y H:i');
                 return $date;
             })->editColumn('orders.total', function($data){
@@ -67,7 +67,7 @@ class OrderController extends Controller
 
     public function getDetail(Request $request, $id)
     {
-        $order = $this->order->find($id, ['*'],['customers','paymentmethods', 'paymentstatus', 'shipstatus','products']);
+        $order = $this->order->find($id, ['*'],['customers','paymentmethods', 'paymentstatus', 'shipstatus','products','shipAddress']);
         return view('Admin::pages.order.show', compact('order'));
     }
 
@@ -117,5 +117,12 @@ class OrderController extends Controller
             $view = view('Admin::ajax.product_detail', compact('order'))->render();
             return response()->json(['error'=> false, 'data' => $view], 200);
         }
+    }
+
+    public function printPreview($order_id)
+    {
+        $order_detail = $this->order->find($order_id);
+        $pdf = \PDF::loadView('Admin::pages.order.printPreview', ['order_detail'=>$order_detail]);
+        return $pdf->stream('invoice_'.$order_detail->order_name.'.pdf');
     }
 }

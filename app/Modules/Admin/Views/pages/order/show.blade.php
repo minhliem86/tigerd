@@ -1,6 +1,7 @@
 @extends('Admin::layouts.main-layout')
 
 @section('link')
+    <a href="{!! route('admin.order.invoice', $order->id) !!}" class="btn btn-info btn-print">Print</a>
     <a href="{!! url()->previous() !!}" class="btn btn-warning">Back</a>
 @stop
 
@@ -60,7 +61,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            {!! \Carbon\Carbon::parse($order->created_at)->format('d-m-Y') !!}
+                                            {!! \Carbon\Carbon::parse($order->created_at)->format('d-m-Y H:m') !!}
                                         </td>
                                     </tr>
                                     <tr>
@@ -110,21 +111,76 @@
                     <thead>
                         <tr>
                             <th>Sản Phẩm</th>
+                            <th>Thuộc Tính</th>
                             <th>Đơn Giá</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($order->products as $item_product)
+                            @if($item_product->pivot->attribute)
+                                @php
+                                    $arr_json = json_decode($item_product->pivot->attribute,true);
+                                    $arr_json = array_except($arr_json, ['img_url']);
+                                @endphp
+                            @endif
                         <tr>
                             <td>{!! $item_product->name !!}</td>
-                            <td >{!! $item_product->discount ? number_format($item_product->discount) : number_format($item_product->price)  !!}</td>
+                            <td>
+                                @if(isset($arr_json))
+                                @foreach($arr_json as $k=>$item_att)
+                                    <p><b>{!! $k !!}:</b> {!! $item_att !!}</p>
+                                @endforeach
+                                @endif
+                            </td>
+                            <td >{!! $item_product->discount ? number_format($item_product->discount) : number_format($item_product->price)  !!} vnd</td>
                         </tr>
                         @endforeach
                         <tr>
-                            <td colspan="2" align="right">
+                            <td colspan="3" align="right">
                                 <b>Tổng Cộng: </b>{!! number_format($order->total) !!} VND
                             </td>
                         </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="payment-address">
+                <div class="table-right-header">
+                    <h4 class="order-detail-header">THÔNG TIN GIAO HÀNG</h4>
+                </div>
+                <table class="table table-bordered">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td><b>Người nhận hàng</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Điện thoại</b></td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>Địa chỉ</b></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>{!! $order->shipAddress->fullname !!}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{!! $order->shipAddress->phone !!}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>{!! $order->shipAddress->address !!}, {!!DB::table('wards')->where('code',$order->shipAddress->ward)->first() ? DB::table('wards')->where('code',$order->shipAddress->ward)->first()->name_with_type : null !!}, {!!DB::table('district')->where('code',$order->shipAddress->district)->first() ? DB::table('district')->where('code',$order->shipAddress->district)->first()->name_with_type : null !!}, {!!DB::table('cities')->where('code',$order->shipAddress->city)->first() ? DB::table('cities')->where('code',$order->shipAddress->city)->first()->name_with_type : null !!}    </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>
@@ -134,5 +190,4 @@
 @stop
 
 @section("script")
-
 @stop

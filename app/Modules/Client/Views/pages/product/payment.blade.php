@@ -29,14 +29,40 @@
                                 <div class="form-group">
                                     <label for="">Số điện thoại khách hàng</label>
                                     {!! Form::text('vpc_Customer_Phone', Auth::guard('customer')->check() ? Auth::guard('customer')->user()->phone : '', ['class'=>'form-control']) !!}
+                                    <small class="form-text text-muted">
+                                        Tigerd.vn hoặc tổng đài tự động của chúng tôi sẽ liên hệ quý khách theo số điện thoại này để xác nhận hoặc thông báo giao hàng
+                                    </small>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Email khách hàng</label>
                                     {!! Form::text('vpc_Customer_Email',  Auth::guard('customer')->check() ? Auth::guard('customer')->user()->email : '', ['class'=>'form-control']) !!}
                                 </div>
                                 <div class="form-group">
+                                    <label for="">Tỉnh/Thành phố</label>
+                                    {!! Form::select('vpc_SHIP_City',['' => 'Chọn Tỉnh/Thành Phố']+$city, old('vpc_SHIP_City'), ['class'=>'form-control']) !!}
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="">Quận/Huyện</label>
+                                            <div class="ajax-province">
+                                                {!! Form::select('vpc_SHIP_Provice',['' => 'Chọn Quận/Huyện'], old('vpc_SHIP_Provice'), ['class'=>'form-control', 'disabled']) !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <div class="form-group">
+                                            <label for="">Phường/Xã</label>
+                                            <div class="ajax-ward">
+                                                {!! Form::select('ward',['' => 'Chọn Phường/Xã'], old('ward'), ['class'=>'form-control', 'disabled']) !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label for="">Địa chỉ giao hàng</label>
-                                    {!! Form::text('AVS_Street01', Auth::guard('customer')->check() ? Auth::guard('customer')->user()->address : '', ['class'=>'form-control']) !!}
+                                    {!! Form::text('AVS_Street01', Auth::guard('customer')->check() ? Auth::guard('customer')->user()->address : '', ['class'=>'form-control', 'placeholder' => 'Địa chỉ bao gồm số nhà/số tầng nếu là văn phòng cụ thể.']) !!}
                                 </div>
                                 <div class="form-group">
                                     <label for="">Ghi chú</label>
@@ -121,6 +147,32 @@
 
 @section('script')
     <script>
+        $(document).ready(function(){
+            $('select[name=vpc_SHIP_City]').on('change', function(){
+                var city_id = $(this).val();
+                $.ajax({
+                    url: "{!! route('client.post.getDistrict') !!}",
+                    type: 'POST',
+                    data: {city_id: city_id},
+                    success: function(data){
+                        $('.ajax-province').html(data.data);
+                    }
+                })
+            })
+
+            $(document).on('change', 'select[name=vpc_SHIP_Provice]', function () {
+                var district_id = $(this).val();
+                $.ajax({
+                    url: "{!! route('client.post.getWard') !!}",
+                    type: 'POST',
+                    data: {district_id: district_id},
+                    success: function(data){
+                        $('.ajax-ward').html(data.data);
+                    }
+                })
+            })
+
+        });
         function applyPromotion()
         {
             var promotion = $('input[name="promotion"]').val();

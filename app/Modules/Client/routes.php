@@ -42,6 +42,7 @@ Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controlle
     /*SEARCH*/
     Route::post('/search', ['as' => 'client.search.post', 'uses' => 'ExtensionController@postSearch']);
 
+
     /*CUSTOMER*/
     Route::get('/dang-nhap', ['as' => 'client.auth.login', 'uses' => 'Auth\AuthController@getLogin']);
     Route::post('/dang-nhap', ['as' => 'client.auth.login.post', 'uses' => 'Auth\AuthController@postLogin']);
@@ -60,4 +61,8 @@ Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controlle
     Route::get('/dang-xuat', ['as' => 'client.auth.logout', 'uses' => 'Auth\AuthController@logout']);
 
     Route::get('/{slug}', ['as'=>'client.single_page', 'uses'=>'SingleController@index'])->where('slug', '[0-9a-zA-Z._\-]+');
+
+    Route::post('/payment/getDistrict', ['as' => 'client.post.getDistrict', 'uses' => 'ProductController@getDistrict']);
+    Route::post('/payment/getWard', ['as' => 'client.post.getWard', 'uses' => 'ProductController@getWard']);
+
 });

@@ -800,8 +800,9 @@ ul.list-success li {
       .page .cart-page .control-cart .amount-wrapper p.amount span.price {
         font-size: 2.2rem;
         color: #000; }
-  .page .payment-page form.form-payment input {
-    font-size: 1.4rem; }
+  .page .payment-page form.form-payment input, .page .payment-page form.form-payment select {
+    font-size: 1.4rem;
+    height: 3.2rem; }
   .page .payment-page form.form-payment div.custom-control {
     padding-left: 3rem; }
     .page .payment-page form.form-payment div.custom-control label.custom-control-label {
@@ -968,7 +969,7 @@ ul.list-success li {
         color: #CB1F6A; }
   .page footer {
     padding: 10rem 0;
-    background: #e4e4e4; }
+    background: #f3f3f3; }
     @media screen and (max-width: 767px) {
       .page footer {
         padding: 3rem 0; } }

@@ -82,8 +82,6 @@
     <!--END PRODUCT-->
     @endif
 
-    @include('Client::layouts.testimonial')
-
     <!--VIDEO FANPAGE-->
     <section class="video-container page-section" data-aos="fade-up">
         <div class="container">
@@ -149,6 +147,8 @@
     @endif
 
     @include("Client::layouts.fanpage")
+
+    @include('Client::layouts.testimonial')
 @stop
 
 @section('script')

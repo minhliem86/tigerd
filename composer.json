@@ -9,7 +9,8 @@
         "laravel/framework": "5.2.*",
         "liemphan/modules": "1.0",
         "darryldecode/cart": "3.0.0",
-        "landish/pagination": "^1.3"
+        "landish/pagination": "^1.3",
+        "barryvdh/laravel-dompdf": "^0.8.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
