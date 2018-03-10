@@ -191,6 +191,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
 
         /*ORDER*/
         Route::get('/print-preview/{order_id}', ['as' => 'admin.order.invoice', 'uses' => 'OrderController@printPreview'])->where('order_id','[0-9a-zA-Z]+');
+
+        /*SHIPPING COST*/
+        Route::get('shippingcost/getData', ['as' => 'admin.shippingcost.getData', 'uses' => 'ShippingCostController@getData']);
+        Route::post('shippingcost/deleteAll', ['as' => 'admin.shippingcost.deleteAll', 'uses' => 'ShippingCostController@deleteAll']);
+        Route::post('shippingcost/updateStatus', ['as' => 'admin.shippingcost.updateStatus', 'uses' => 'ShippingCostController@updateStatus']);
+        Route::post('shippingcost/postAjaxUpdateOrder', ['as' => 'admin.shippingcost.postAjaxUpdateOrder', 'uses' => 'ShippingCostController@postAjaxUpdateOrder']);
+        Route::resource('shippingcost', 'ShippingCostController');
     });
   });
 });

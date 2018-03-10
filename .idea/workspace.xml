@@ -2,63 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="17afa036-b3b5-46e4-ad1c-f1d93a557e79" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/upload/origin/1519705803_lotion02.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/upload/origin/1519705803_lotion03.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/upload/origin/1519705859_chanel-coco-02.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/upload/origin/1519705859_chanel-coco.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/upload/thumbnails/100x100/1519705803_lotion02.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/upload/thumbnails/100x100/1519705803_lotion03.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/upload/thumbnails/100x100/1519705859_chanel-coco-02.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/upload/thumbnails/100x100/1519705859_chanel-coco.jpg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/4696e09e35ef027b331d244eff8d7899.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/5c77ce390abd78dd35240c4990f46695.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/618216e3b09f49f22566f3c854f4e18a.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/a1de52c73e3209ef8fbbde713a6fc546.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/db71cba6f9a285f2e674ae746fc8f5a5.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/printPreview.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Modules/Client/Views/ajax/district.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Modules/Client/Views/ajax/ward.blade.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/config/dompdf.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2017_07_19_135449_create_products_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2018_02_27_035513_add_attribute_column_to_order_product_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2018_02_27_041249_add_wards_column_to_ship_addresses_table.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/admin/dist/css/invoice.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/4696e09e35ef027b331d244eff8d7899.ufm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/5c77ce390abd78dd35240c4990f46695.ufm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/5c77ce390abd78dd35240c4990f46695.ufm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/618216e3b09f49f22566f3c854f4e18a.ufm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/618216e3b09f49f22566f3c854f4e18a.ufm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/DejaVuSans-Bold.ufm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/DejaVuSans-Oblique.ufm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/DejaVuSans.ufm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/Helvetica-Bold.afm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/Helvetica-Oblique.afm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/Helvetica.afm.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/a1de52c73e3209ef8fbbde713a6fc546.ufm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/db71cba6f9a285f2e674ae746fc8f5a5.ufm" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/storage/fonts/dompdf_font_family_cache.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/php.xml" afterPath="$PROJECT_DIR$/.idea/php.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Models/District.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Models/Shipping_Cost.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Modules/Admin/Controllers/ShippingCostController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/shippingcost/create.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/shippingcost/edit.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/shippingcost/index.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Repositories/ShippingCostRepository.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2018_03_06_031834_create_shipping_cost_table.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/tigerd.iml" afterPath="$PROJECT_DIR$/.idea/tigerd.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/1/16/16b90c759d22eb3a5c43c4d24f89d2fe" afterPath="$PROJECT_DIR$/1/16/16b90c759d22eb3a5c43c4d24f89d2fe" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/1/9a/9af770637bac65ce20b0e2d027b5f676" afterPath="$PROJECT_DIR$/1/9a/9af770637bac65ce20b0e2d027b5f676" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/Order.php" afterPath="$PROJECT_DIR$/app/Models/Order.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Models/OrderProduct.php" afterPath="$PROJECT_DIR$/app/Models/OrderProduct.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Controllers/OrderController.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Controllers/OrderController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/layouts/main-layout.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/layouts/main-layout.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/index.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/show.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/show.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/layouts/navigation.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/layouts/navigation.blade.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/routes.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Client/Controllers/ProductController.php" afterPath="$PROJECT_DIR$/app/Modules/Client/Controllers/ProductController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Client/Views/layouts/fanpage.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Client/Views/layouts/fanpage.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Client/Views/pages/home/index.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Client/Views/pages/home/index.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Client/Views/pages/product/payment.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Client/Views/pages/product/payment.blade.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Client/routes.php" afterPath="$PROJECT_DIR$/app/Modules/Client/routes.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.json" afterPath="$PROJECT_DIR$/composer.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/app.php" afterPath="$PROJECT_DIR$/config/app.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/client/css/style.min.css" afterPath="$PROJECT_DIR$/public/assets/client/css/style.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/client/css/style.min.css.map" afterPath="$PROJECT_DIR$/public/assets/client/css/style.min.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/client/sass/style.scss" afterPath="$PROJECT_DIR$/public/assets/client/sass/style.scss" />
     </list>
     <ignored path="$PROJECT_DIR$/vendor/landish/pagination/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -72,12 +29,22 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="composer.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/composer.json">
+    <leaf>
+      <file leaf-file-name="ShippingCostController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/ShippingCostController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
-              <caret line="12" column="32" lean-forward="false" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="32" />
+            <state relative-caret-position="374">
+              <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="2018_03_06_031834_create_shipping_cost_table.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2018_03_06_031834_create_shipping_cost_table.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="14" column="38" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -87,8 +54,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>img_detail</find>
-      <find>update</find>
       <find>updatePhoto</find>
       <find>update(R</find>
       <find>slider</find>
@@ -117,6 +82,8 @@
       <find>numeral</find>
       <find>order_date</find>
       <find>loadV</find>
+      <find>news</find>
+      <find>pages</find>
     </findStrings>
     <replaceStrings>
       <replace>attributr</replace>
@@ -126,6 +93,7 @@
       <replace>customer-idea</replace>
       <replace>supplier</replace>
       <replace>order</replace>
+      <replace>shippingcost</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -134,12 +102,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/product/configuable/edit.blade.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Client/Views/extensions/photo_product.blade.php" />
-        <option value="$PROJECT_DIR$/app/Repositories/ProductRepository.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/product/edit.blade.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Client/Views/extensions/invoke.blade.php" />
-        <option value="$PROJECT_DIR$/app/Models/Customer.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Controllers/CustomerController.php" />
         <option value="$PROJECT_DIR$/public/assets/admin/dist/sass/customize.scss" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/customer/edit.blade.php" />
@@ -152,8 +114,8 @@
         <option value="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" />
         <option value="$PROJECT_DIR$/app/Listeners/SendMailListener.php" />
         <option value="$PROJECT_DIR$/app/Modules/Client/Views/emails/payment_email.blade.php" />
+        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/.env.example" />
-        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/layouts/navigation.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/subscribe/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Controllers/SubscribeController.php" />
         <option value="$PROJECT_DIR$/app/Modules/Client/Views/pages/product/detail.blade.php" />
@@ -177,14 +139,20 @@
         <option value="$PROJECT_DIR$/app/Modules/Client/Controllers/ProductController.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/layouts/main-layout.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/index.blade.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Admin/routes.php" />
         <option value="$PROJECT_DIR$/config/app.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/show.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Controllers/OrderController.php" />
         <option value="$PROJECT_DIR$/public/assets/admin/dist/css/invoice.css" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/printPreview.blade.php" />
-        <option value="$PROJECT_DIR$/.env" />
-        <option value="$PROJECT_DIR$/database/migrations/2018_03_05_150052_create_shipping_cost_table.php" />
+        <option value="$PROJECT_DIR$/database/migrations/2018_03_06_031834_create_shipping_cost_table.php" />
+        <option value="$PROJECT_DIR$/app/Repositories/ShippingCostRepository.php" />
+        <option value="$PROJECT_DIR$/app/Models/District.php" />
+        <option value="$PROJECT_DIR$/app/Models/Shipping_Cost.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/routes.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/shippingcost/index.blade.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/layouts/navigation.blade.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/shippingcost/create.blade.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/Controllers/ShippingCostController.php" />
       </list>
     </option>
   </component>
@@ -345,6 +313,12 @@
               <item name="tigerd" type="2a2b976b:PhpTreeStructureProvider$1" />
               <item name="database" type="2a2b976b:PhpTreeStructureProvider$1" />
             </path>
+            <path>
+              <item name="tigerd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="database" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="migrations" type="2a2b976b:PhpTreeStructureProvider$1" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -356,20 +330,21 @@
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="settings.editor.selected.configurable" value="File.Encoding" />
     <property name="SearchEverywhereHistoryKey" value="{&#9;null&#9;null" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ELT-summer2018" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../elt-summer2018" />
+    <property name="PluginDummyText.Genre" value="esoteric" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\tigerd\app\Modules\Admin\Views\pages\shippingcost" />
+      <recent name="C:\xampp\htdocs\tigerd\app\Repositories" />
+      <recent name="C:\xampp\htdocs\tigerd\public\assets\admin\dist\js" />
+      <recent name="C:\xampp\htdocs\tigerd\database\migrations" />
+      <recent name="C:\xampp\htdocs\tigerd\public\assets\client\images" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\tigerd\vendor\mistic100\randomcolor\src" />
       <recent name="C:\xampp\htdocs\tigerd\app\Modules\Client\Views" />
       <recent name="C:\xampp\htdocs\tigerd\app\Modules\Admin\Views\pages\product\attribute" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\tigerd\public\assets\admin\dist\js" />
-      <recent name="C:\xampp\htdocs\tigerd\database\migrations" />
-      <recent name="C:\xampp\htdocs\tigerd\public\assets\client\images" />
-      <recent name="C:\xampp\htdocs\tigerd\app\Modules\Admin\Views\pages\product\attribute" />
-      <recent name="C:\xampp\htdocs\tigerd\app\Modules\Admin\Views\ajax\orders" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -430,27 +405,28 @@
       <workItem from="1519785688806" duration="9343000" />
       <workItem from="1519871284499" duration="5387000" />
       <workItem from="1519879551385" duration="2208000" />
-      <workItem from="1520260058302" duration="1405000" />
+      <workItem from="1520306253891" duration="5891000" />
+      <workItem from="1520520111693" duration="1034000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="378884000" />
+    <option name="totallyTimeSpent" value="384404000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26439232" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26705757" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925472" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32814237" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32936078" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30227518" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3025584" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -485,69 +461,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/product/attribute/create_configuable_s1.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-255">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/product/attribute/getAttribute.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/product/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="99" column="50" lean-forward="true" selection-start-line="99" selection-start-column="50" selection-end-line="99" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/product/configuable/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="71" column="5" lean-forward="true" selection-start-line="71" selection-start-column="5" selection-end-line="71" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/customer/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="60" column="45" lean-forward="false" selection-start-line="60" selection-start-column="45" selection-end-line="60" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/layouts/navigation.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="117" lean-forward="false" selection-start-line="21" selection-start-column="117" selection-end-line="21" selection-end-column="117" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/SubscribeController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="100">
-          <caret line="8" column="40" lean-forward="true" selection-start-line="8" selection-start-column="40" selection-end-line="8" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/subscribe/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="92" lean-forward="false" selection-start-line="3" selection-start-column="92" selection-end-line="3" selection-end-column="92" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Client/Views/pages/single/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="39" lean-forward="true" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Client/Views/pages/product/all_product.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="431">
@@ -584,13 +497,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/client/css/style.min.css.map">
+      <provider editor-type-id="sourcemapFileViewerProvider">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Client/Controllers/ExtensionController.php">
@@ -640,6 +553,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="15" column="58" lean-forward="false" selection-start-line="15" selection-start-column="58" selection-end-line="15" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2018_02_27_041249_add_wards_column_to_ship_addresses_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="27" column="39" lean-forward="false" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -722,6 +642,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/admin/dist/js/jquery.printPage.js" />
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Client/Views/layouts/default.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="578">
@@ -736,20 +663,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/src/PDF.php" />
+    <entry file="file://$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf/src/PDF.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="121" column="25" lean-forward="false" selection-start-line="121" selection-start-column="20" selection-end-line="121" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/assets/client/sass/style.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="695">
           <caret line="1489" column="3" lean-forward="false" selection-start-line="1398" selection-start-column="2" selection-end-line="1489" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/show.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3738">
+        <state relative-caret-position="3026">
           <caret line="177" column="218" lean-forward="false" selection-start-line="177" selection-start-column="218" selection-end-line="177" selection-end-column="218" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -769,15 +700,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/printPreview.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
+        <state relative-caret-position="357">
           <caret line="21" column="35" lean-forward="false" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/OrderController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2415">
+        <state relative-caret-position="1955">
           <caret line="123" column="53" lean-forward="false" selection-start-line="123" selection-start-column="53" selection-end-line="123" selection-end-column="53" />
           <folding />
         </state>
@@ -785,56 +715,104 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/app.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4809">
+        <state relative-caret-position="3893">
           <caret line="229" column="8" lean-forward="false" selection-start-line="229" selection-start-column="8" selection-end-line="229" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="190" column="0" lean-forward="true" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Client/Views/extensions/invoke.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
+        <state relative-caret-position="-17">
           <caret line="11" column="43" lean-forward="false" selection-start-line="11" selection-start-column="32" selection-end-line="11" selection-end-column="43" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2018_02_27_041249_add_wards_column_to_ship_addresses_table.php">
+    <entry file="file://$PROJECT_DIR$/app/Repositories/ShippingCostRepository.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="546">
-          <caret line="27" column="39" lean-forward="false" selection-start-line="27" selection-start-column="39" selection-end-line="27" selection-end-column="39" />
-          <folding />
+        <state relative-caret-position="221">
+          <caret line="13" column="10" lean-forward="true" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.env">
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/shippingcost/index.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="18" lean-forward="true" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
+        <state relative-caret-position="17">
+          <caret line="64" column="61" lean-forward="false" selection-start-line="64" selection-start-column="61" selection-end-line="64" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/layouts/navigation.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="171" lean-forward="false" selection-start-line="13" selection-start-column="171" selection-end-line="13" selection-end-column="171" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="195" column="32" lean-forward="false" selection-start-line="195" selection-start-column="20" selection-end-line="195" selection-end-column="32" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2018_03_05_150052_create_shipping_cost_table.php">
+    <entry file="file://$PROJECT_DIR$/app/Models/District.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="5" lean-forward="false" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Shipping_Cost.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="55" lean-forward="false" selection-start-line="14" selection-start-column="55" selection-end-line="14" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/PagesController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="10" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1734">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/CategoryController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-306">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/shippingcost/create.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="29" column="130" lean-forward="false" selection-start-line="29" selection-start-column="130" selection-end-line="29" selection-end-column="130" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/ShippingCostController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2018_03_06_031834_create_shipping_cost_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
           <caret line="14" column="38" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="12" column="32" lean-forward="false" selection-start-line="12" selection-start-column="9" selection-end-line="12" selection-end-column="32" />
           <folding />
         </state>
       </provider>
