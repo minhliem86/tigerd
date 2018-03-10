@@ -1,4 +1,4 @@
-@if(!Cart::getConditions()->isEmpty())
+@if(!Cart::getConditionsByType('discount')->isEmpty())
     <p class="float-left">Khuyến mãi áp dụng</p>
     <div class="float-right">
         @foreach(Cart::getConditions() as $cartCondition)

@@ -198,6 +198,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('shippingcost/updateStatus', ['as' => 'admin.shippingcost.updateStatus', 'uses' => 'ShippingCostController@updateStatus']);
         Route::post('shippingcost/postAjaxUpdateOrder', ['as' => 'admin.shippingcost.postAjaxUpdateOrder', 'uses' => 'ShippingCostController@postAjaxUpdateOrder']);
         Route::resource('shippingcost', 'ShippingCostController');
+
+        Route::post('/loadDistrict', ['as' => 'admin.loadDistrict.post', 'uses' => 'ShippingCostController@loadDistrict']);
     });
   });
 });

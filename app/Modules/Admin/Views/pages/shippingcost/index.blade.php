@@ -26,8 +26,7 @@
             <tr>
               <th width="5%">ID</th>
               <th width="20%">Giá Shipping</th>
-              <th width="20%"><i class="glyphicon glyphicon-search"></i> Quận</th>
-              <th width="20%">&nbsp;</th>
+              <th width="20%"><i class="glyphicon glyphicon-search"></i> Quận Áp Dụng</th>
             </tr>
           </thead>
         </table>
@@ -60,10 +59,10 @@
                 }
             },
             columns: [
-               {data: 'shipping_costs.id', name: 'ID', 'orderable': false},
-               {data: 'shipping_costs.cost', name: 'Giá Shipping'},
-               {data: 'district.name', name: 'Quận Áp Dụng'},
-               {data: 'action', name: 'action', 'orderable': false}
+               {data: 'id', name: 'ID', 'orderable': false},
+               {data: 'cost', name: 'Giá Shipping'},
+               {data: 'name_with_type', name: 'Quận Áp Dụng'},
+//               {data: 'action', name: 'action', 'orderable': false}
            ],
            initComplete: function(){
                 var table_api = this.api();

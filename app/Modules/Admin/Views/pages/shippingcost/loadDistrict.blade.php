@@ -1,0 +1,1 @@
+{!! Form::select('district_id', [''=> '-- Quận/Huyện --'] + $district, old('district_id'), ['class'=>'form-control']) !!}

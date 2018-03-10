@@ -74,9 +74,9 @@
                             <h3 class="title-payment">Hình thức thanh toán</h3>
                             @if(!$pm->isEmpty())
                             <div class="paymentMethod-wrapper">
-                                @foreach($pm as $item_pm)
+                                @foreach($pm as $k=>$item_pm)
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" id="{!! $item_pm->name !!}" name="payment_method" value="{!! $item_pm->id !!}" class="custom-control-input">
+                                    <input type="radio" id="{!! $item_pm->name !!}" {!! $k == 0 ? 'checked' : null !!} name="payment_method" value="{!! $item_pm->id !!}" class="custom-control-input">
                                     <label class="custom-control-label" for="{!! $item_pm->name !!}">{!! $item_pm->name !!} <small>({!! $item_pm->description !!})</small></label>
                                 </div>
                                 @endforeach
@@ -115,11 +115,15 @@
                             </div>
                             <div class="each-area wrap-total">
                                 <div class="input-group">
-                                    <input type="text" name="promotion" class="form-control" placeholder="Mã Khuyến Mãi" {!! Cart::getConditions()->isEmpty() ? null : 'disabled' !!}>
+                                    <input type="text" name="promotion" class="form-control" placeholder="Mã Khuyến Mãi" {!! Cart::getConditionsByType('discount')->isEmpty() ? null : 'disabled' !!}>
                                     <div class="input-group-append">
-                                        <button class="btn btn-info btn-promotion" type="button" onclick="applyPromotion()" id="btn-payment" {!! Cart::getConditions()->isEmpty() ? null : 'disabled' !!}>Áp Dụng</button>
+                                        <button class="btn btn-info btn-promotion" type="button" onclick="applyPromotion()" id="btn-payment" {!!Cart::getConditionsByType('discount')->isEmpty() ? null : 'disabled' !!}>Áp Dụng</button>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="each-area wrap-total d-flex">
+                                <p class="text">Chi phí giao hàng</p>
+                                <p class="content"><span class="shipcost">{!! number_format(0) !!}</span> vnd</p>
                             </div>
                             <div class="display-promotion each-area clearfix {!! Cart::getConditions()->isEmpty() ? 'd-none' : null !!}">
                                 @include("Client::extensions.promotion_payment")
@@ -161,7 +165,9 @@
             })
 
             $(document).on('change', 'select[name=vpc_SHIP_Provice]', function () {
+                var city_id = $('select[name=vpc_SHIP_City]').val();
                 var district_id = $(this).val();
+                var payment_method_id = $('input[name=payment_method]:checked').val();
                 $.ajax({
                     url: "{!! route('client.post.getWard') !!}",
                     type: 'POST',
@@ -170,8 +176,32 @@
                         $('.ajax-ward').html(data.data);
                     }
                 })
+                $.ajax({
+                    url : "{!! route('client.shippingcost.load') !!}",
+                    type: "POST",
+                    data: {city_id: city_id, district_id: district_id, payment_method_id: payment_method_id},
+                    success: function(rs){
+                        $('.shipcost').html(rs.shippingCost);
+                        $('.total').html(rs.total);
+                    }
+                })
             })
+            /*SHIPPING CODE*/
+            $('input[name=payment_method]').change(function(){
 
+                var city_id = $('select[name=vpc_SHIP_City]').val();
+                var district_id = $('select[name=vpc_SHIP_Provice]').val();
+                var payment_method_id = $(this).val();
+                $.ajax({
+                    url : "{!! route('client.shippingcost.load') !!}",
+                    type: "POST",
+                    data: {city_id: city_id, district_id: district_id, payment_method_id: payment_method_id},
+                    success: function(rs){
+                        $('.shipcost').html(rs.shippingCost);
+                        $('.total').html(rs.total);
+                    }
+                })
+            })
         });
         function applyPromotion()
         {

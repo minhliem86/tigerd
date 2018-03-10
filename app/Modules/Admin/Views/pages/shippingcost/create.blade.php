@@ -15,13 +15,15 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Thành Phố:</label>
                         <div class="col-md-10">
-                            {!! Form::select('city_id', $city, old('city_id'), ['class' =>'form-control']) !!}
+                            {!! Form::select('city_id',['' => '-- Thành Phố --']+ $city, old('city_id'), ['class' =>'form-control']) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">Quận/Huyện:</label>
                         <div class="col-md-10">
-                            {!! Form::select('district_id', ['' => 'Vui lòng chọn Quận/Huyện'], old('district_id'), ['class' =>'form-control', 'disabled']) !!}
+                            <div class="load-district">
+                                {!! Form::select('district_id', ['' => 'Vui lòng chọn Quận/Huyện'], old('district_id'), ['class' =>'form-control', 'disabled']) !!}
+                            </div>
                         </div>
                     </div>
                     <div class="form-group">
@@ -50,5 +52,19 @@
         function submitForm(){
             $('form').submit();
         }
+
+        $(document).ready(function(){
+            $('select[name=city_id]').change(function () {
+                var city_id = $(this).val();
+                $.ajax({
+                    url: '{!! route("admin.loadDistrict.post") !!}',
+                    type: 'POST',
+                    data: {city_id: city_id, _token: $('meta[name=csrf-token]').attr('content')},
+                    success: function (rs) {
+                        $('.load-district').html(rs.data);
+                    }
+                })
+            })
+        })
     </script>
 @stop

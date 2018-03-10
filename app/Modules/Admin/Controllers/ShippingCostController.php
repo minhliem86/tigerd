@@ -21,6 +21,15 @@ class ShippingCostController extends Controller
         $this->common = $common;
     }
 
+    protected  function _validate()
+    {
+        return [
+            'city_id' => 'required',
+            'district_id' => 'required',
+            'cost' => 'required'
+        ];
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -33,7 +42,7 @@ class ShippingCostController extends Controller
 
     public function getData(Request $request)
     {
-        $data = $this->shippingcost->query(['shipping_costs.id', 'shipping_costs.cost' ,'shipping_costs.district_id', 'district.name'])->join('district','district.id','=','shipping_costs.district_id');
+        $data = $this->shippingcost->query(['shipping_costs.id', 'shipping_costs.cost' , 'district.name_with_type'])->join('district','district.code','=','shipping_costs.district_id');
         $datatable = Datatables::of($data)
             ->addColumn('action', function($data){
                 return '<a href="'.route('admin.shippingcost.edit', $data->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>
@@ -43,9 +52,12 @@ class ShippingCostController extends Controller
                                <button class="btn  btn-danger btn-xs remove-btn" type="button" attrid=" '.route('admin.shippingcost.destroy', $data->id).' " onclick="confirm_remove(this);" > Remove </button>
                </form>' ;
             })
+            ->editColumn('cost', function($data){
+                return number_format($data->cost). ' VND';
+            })
             ->filter(function($query) use ($request){
                 if (request()->has('name')) {
-                    $query->where('district.name', 'like', "%{$request->input('name')}%");
+                    $query->where('district.name_with_type', 'like', "%{$request->input('name')}%");
                 }
             })
             ->make(true);
@@ -59,7 +71,7 @@ class ShippingCostController extends Controller
      */
     public function create()
     {
-        $city = \DB::table('cities')->lists('name', 'id');
+        $city = \DB::table('cities')->lists('name', 'code');
         return view('Admin::pages.shippingcost.create', compact('city'));
     }
 
@@ -71,6 +83,10 @@ class ShippingCostController extends Controller
      */
     public function store(Request $request)
     {
+        $valid = \Validator::make($request->all(), $this->_validate());
+        if($valid->fails()){
+            return back()->withInput()->withErrors($valid->errors());
+        }
         $data = [
             'cost' => $request->input('cost'),
             'district_id' => $request->input('district_id'),
@@ -113,6 +129,10 @@ class ShippingCostController extends Controller
      */
     public function update(Request $request, $id, MetaRepository $meta)
     {
+        $valid = \Validator::make($request->all(), $this->_validate());
+        if($valid->fails()){
+            return back()->withInput()->withErrors($valid->errors());
+        }
         $data = [
             'name' => $request->input('name'),
             'slug' => \LP_lib::unicode($request->input('name')),
@@ -197,6 +217,17 @@ class ShippingCostController extends Controller
                 'mes' => 'Updated',
                 'error'=> false,
             ], 200);
+        }
+    }
+
+    public function loadDistrict(Request $request)
+    {
+        if(!$request->ajax()){
+            abort(404);
+        }else{
+            $district = \DB::table('district')->where('parent_code',$request->input('city_id'))->lists('name_with_type','code');
+            $view = view('Admin::pages.shippingcost.loadDistrict', compact('district'))->render();
+            return response()->json(['data'=>$view], 200);
         }
     }
 }

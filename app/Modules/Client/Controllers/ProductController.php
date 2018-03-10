@@ -224,12 +224,12 @@ class ProductController extends Controller
         return view('Client::pages.product.payment', compact('cart', 'pm', 'city'));
     }
 
-    public function applyPromotion(Request $request, PromotionRepository $promotion)
+     public function applyPromotion(Request $request, PromotionRepository $promotion)
     {
         if(!$request->ajax()){
             abort(404);
         }else{
-            $promotion_valid = Cart::getConditions();
+            $promotion_valid = Cart::getConditionsByType('discount');
             if($promotion_valid->isEmpty()){
                 $promote_code = $request->input('pr_code');
                 $pr = $promotion->query()->where('sku_promotion',$promote_code)->where('status',1)->select('name','sku_promotion', 'num_use','target','value', 'value_type')->first();
@@ -356,7 +356,7 @@ class ProductController extends Controller
                 \Session::put('ship_address', $data_ship);
 
                 $order_id = \LP_lib::unicodenospace($request->input('customer_name')).'_'.time();
-                $customer_id = $this->auth->user()->firstname . '_'. $this->auth->check ? $this->auth->user()->id : 2 ;
+                $customer_id = $this->auth->check() ? $this->auth->user()->firstname . '_'. $this->auth->user()->id . '_'. time() : 2 ;
                 $onepay = $this->setupOnePay();
                 $refer = $onepay->build_link_global($request->all(),$order_id, Cart::getTotal(), $order_id, route('client.responsePayment',$promotion_id),  $customer_id);
                 return redirect($refer);
@@ -444,7 +444,112 @@ class ProductController extends Controller
         return redirect()->route('client.home');
     }
 
+    /*SHIPPING LOAD*/
+    public function loadShippingCost(Request $request)
+    {
+        if(!$request->ajax()){
+            abort(404);
+        }else{
+            $city_id = $request->input('city_id');
+            $district_id = $request->input('district_id');
+            $payment_method_id = $request->input('payment_method_id');
 
+            $condition_ship = Cart::getCondition('shippingCost');
+            if($condition_ship){
+                Cart::removeCartCondition('shippingCost');
+            }
+
+            if($city_id){
+                if($city_id != 79){
+                    switch ($payment_method_id){
+                        case '1' :
+                        /*COD*/
+                            $shipping = new \Darryldecode\Cart\CartCondition(
+                                [
+                                    'name' => 'shippingCost',
+                                    'type' => 'shipping',
+                                    'target' => 'subtotal',
+                                    'value' => '50000',
+                                ]
+                            );
+                            Cart::condition($shipping);
+                            $total = number_format(Cart::getTotal());
+                            return response()->json(['total' => $total, 'shippingCost' => number_format(50000)], 200);
+                        case '2' :
+                        /*PAYMENT ONLINE*/
+                            $shipping = new \Darryldecode\Cart\CartCondition(
+                                [
+                                    'name' => 'shippingCost',
+                                    'type' => 'shipping',
+                                    'target' => 'subtotal',
+                                    'value' => '40000',
+                                ]
+                            );
+                            Cart::condition($shipping);
+                            $total = number_format(Cart::getTotal());
+                            return response()->json(['total' => $total, 'shippingCost' => number_format(40000)], 200);
+                    }
+                }else{
+                    $shipping = \DB::table('shipping_costs')->where('district_id',$district_id)->select('cost')->first();
+                    switch ($shipping->cost){
+                        /*CASE 30k*/
+                        case '30000' :
+                            $shipping = new \Darryldecode\Cart\CartCondition(
+                                [
+                                    'name' => 'shippingCost',
+                                    'type' => 'shipping',
+                                    'target' => 'subtotal',
+                                    'value' => '30000',
+                                ]
+                            );
+                            Cart::condition($shipping);
+                            $total = number_format(Cart::getTotal());
+                            return response()->json(['total' => $total, 'shippingCost' => number_format(30000)], 200);
+                        /*CASE 40k*/
+                        case '40000' :
+                            $shipping = new \Darryldecode\Cart\CartCondition(
+                                [
+                                    'name' => 'shippingCost',
+                                    'type' => 'shipping',
+                                    'target' => 'subtotal',
+                                    'value' => '40000',
+                                ]
+                            );
+                            Cart::condition($shipping);
+                            $total = number_format(Cart::getTotal());
+                            return response()->json(['total' => $total, 'shippingCost' => number_format(40000)], 200);
+                        /*CASE 50k*/
+                        case '50000' :
+                            $shipping = new \Darryldecode\Cart\CartCondition(
+                                [
+                                    'name' => 'shippingCost',
+                                    'type' => 'shipping',
+                                    'target' => 'subtotal',
+                                    'value' => '50000',
+                                ]
+                            );
+                            Cart::condition($shipping);
+                            $total = number_format(Cart::getTotal());
+                            return response()->json(['total' => $total, 'shippingCost' => number_format(50000)], 200);
+                        /*CASE 20k*/
+                        default :
+                            $shipping = new \Darryldecode\Cart\CartCondition(
+                                [
+                                    'name' => 'shippingCost',
+                                    'type' => 'shipping',
+                                    'target' => 'subtotal',
+                                    'value' => '20000',
+                                ]
+                            );
+                            Cart::condition($shipping);
+                            $total = number_format(Cart::getTotal());
+                            return response()->json(['total' => $total, 'shippingCost' => number_format(20000)], 200);
+                    }
+                }
+            }
+
+        }
+    }
 
     /*AJAX*/
     /*CHANGE ATTRIBUTE VALUE*/

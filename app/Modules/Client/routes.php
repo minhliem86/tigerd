@@ -31,6 +31,8 @@ Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controlle
 
     Route::get('/thanh-toan-thanh-cong', ['as' => 'client.payment_success.thank','uses' => 'ProductController@getThankyou']);
 
+    Route::post('/shippingcost/load', ['as'=>'client.shippingcost.load', 'uses'=>'ProductController@loadShippingCost']);
+
     /*ORDER DETAIL*/
     Route::get('/don-hang/{id}', ['as' => 'client.order_detail', 'uses'=> 'ProfileController@getInvoke'])->where('id','[0-9a-zA-Z._\-]+');
 
