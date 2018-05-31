@@ -58,7 +58,7 @@ class CategoryController extends Controller
                   </label>
               ';
            })->editColumn('img_url',function($cate){
-             return '<img src="'.asset($cate->img_url).'" width="100" class="img-responsive">';
+             return '<img src="'.asset('public/upload/'.$cate->img_url).'" width="100" class="img-responsive">';
          })->filter(function($query) use ($request){
                     if (request()->has('name')) {
                         $query->where('categories.name', 'like', "%{$request->input('name')}%")->orWhere('categories.sku_cate','like', "%{$request->input('name')}%");
@@ -101,7 +101,7 @@ class CategoryController extends Controller
             return redirect()->back()->withInput()->withErrors($valid->errors());
         }
         if($request->has('img_url')){
-            $img_url = 'public/upload/'.$this->common->getPath($request->input('img_url'));
+            $img_url = $this->common->getPath($request->input('img_url'));
         }else{
             $img_url = '';
         }
@@ -166,7 +166,7 @@ class CategoryController extends Controller
             return redirect()->back()->withInput()->withErrors($valid->errors());
         }
 
-        $img_url = 'public/upload/'.$this->common->getPath($request->input('img_url'));
+        $img_url = $this->common->getPath($request->input('img_url'));
 
         $data = [
             'name' => $request->input('name'),

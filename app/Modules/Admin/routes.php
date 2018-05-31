@@ -202,8 +202,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('/loadDistrict', ['as' => 'admin.loadDistrict.post', 'uses' => 'ShippingCostController@loadDistrict']);
 
         Route::get('create-symbolic',function(){
-           $target = '';
-           $link = '';
+           $target = '/public_html/LP-coding/tigerd/storage/app/public/original';
+           $link = '/public_html/tigerd/public/storage';
            symlink($target, $link);
            return "done";
         });

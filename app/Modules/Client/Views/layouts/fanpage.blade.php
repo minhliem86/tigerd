@@ -13,7 +13,9 @@
                 <div class="video-section" data-aos="fade-up-left">
                     <h2 class="title-section mx-auto">Tiger-D Instagram</h2>
                     <div class="instagram-wrapper">
-                        <!-- LightWidget WIDGET --><script src="//lightwidget.com/widgets/lightwidget.js"></script><iframe src="//lightwidget.com/widgets/5b8af4128648503988d92ccfa246b87e.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width: 100%; border: 0; overflow: hidden;"></iframe>
+
+                        <!-- LightWidget WIDGET --><script src="https://cdn.lightwidget.com/widgets/lightwidget.js"></script><iframe src="//lightwidget.com/widgets/fbe4a7c177c55ee3aaeaa61d365e3891.html" scrolling="no" allowtransparency="true" class="lightwidget-widget" style="width:100%;border:0;overflow:hidden;"></iframe>
+
                     </div>
                 </div>
             </div>
