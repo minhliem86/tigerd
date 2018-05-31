@@ -40,7 +40,7 @@ class NewsController extends Controller
         $data = $this->news->query(['id', 'img_url', 'name' ,'order', 'status']);
         $datatable = Datatables::of($data)
             ->editColumn('img_url', function ($data){
-                $img = "<img src='".asset($data->img_url)."' style='max-width:100px'/>";
+                $img = "<img src='".asset('public/upload/'.$data->img_url)."' style='max-width:100px'/>";
                 return $img;
             })
             ->editColumn('order', function($data){

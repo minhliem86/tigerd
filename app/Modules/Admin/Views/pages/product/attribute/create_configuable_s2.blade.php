@@ -7,6 +7,62 @@
 
 @section('title','Tạo Sản phẩm phức hợp')
 
+@section('css')
+    <style>
+        /* Mimic table appearance */
+        div.album{
+            margin:10px 0;
+        }
+        div#actions{
+            margin-bottom:10px;
+        }
+        div.table {
+            display: table;
+        }
+        div.table .file-row {
+            display: table-row;
+        }
+        div.table .file-row > div {
+            display: table-cell;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+            padding: 8px;
+        }
+        div.table .file-row:nth-child(odd) {
+            background: #f9f9f9;
+        }
+
+
+
+        /* The total progress gets shown by event listeners */
+        #total-progress {
+            opacity: 0;
+            transition: opacity 0.3s linear;
+        }
+
+        /* Hide the progress bar when finished */
+        #previews .file-row.dz-success .progress {
+            opacity: 0;
+            transition: opacity 0.3s linear;
+        }
+
+        /* Hide the delete button initially */
+        #previews .file-row .delete {
+            display: none;
+        }
+
+        /* Hide the start and cancel buttons and show the delete button */
+
+        #previews .file-row.dz-success .start,
+        #previews .file-row.dz-success .cancel {
+            display: none;
+        }
+        #previews .file-row.dz-success .delete {
+            display: block;
+        }
+    </style>
+@stop
+
 @section('content')
     <div class="row">
         <div class="col-md-12">
@@ -23,90 +79,88 @@
                     {!! Form::hidden('product_parent_id', Session::get('product_parent_id')) !!}
                     {!! Form::hidden('type', 'simple') !!}
                     {!! Form::hidden('visibility', '0') !!}
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Tên Sản Phẩm:</label>
-                        <div class="col-md-10">
-                            {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
+                    <fielset>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Tên Sản Phẩm Thuộc Tính:</label>
+                            <div class="col-md-10">
+                                {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Mã Sản Phẩm:<p><small>(EX: Quần Tây -> QT)</small></p></label>
-                        <div class="col-md-10">
-                            {!! Form::text('sku_product', old('sku_product'), ['class' => 'form-control']) !!}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Mã Sản Phẩm:<p><small>(EX: Quần Tây -> QT)</small></p></label>
+                            <div class="col-md-10">
+                                {!! Form::text('sku_product', old('sku_product'), ['class' => 'form-control']) !!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Mô tả ngắn:</label>
-                        <div class="col-md-10">
-                            {!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ...']) !!}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Mô tả ngắn:</label>
+                            <div class="col-md-10">
+                                {!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ...']) !!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Bài viết sản phẩm:</label>
-                        <div class="col-md-10">
-                            {!! Form::textarea('content',old('content'), ['class'=> 'form-control my-editor', 'placeholder' => 'Mô tả ...']) !!}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Bài viết sản phẩm:</label>
+                            <div class="col-md-10">
+                                {!! Form::textarea('content',old('content'), ['class'=> 'form-control my-editor', 'placeholder' => 'Mô tả ...']) !!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Giá</label>
-                        <div class="col-md-10">
-                            {!!Form::number('price',old('price'), ['class'=>'form-control', 'placeholder'=>'Giá'])!!}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Giá</label>
+                            <div class="col-md-10">
+                                {!!Form::number('price',old('price'), ['class'=>'form-control', 'placeholder'=>'Giá'])!!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Giảm Giá</label>
-                        <div class="col-md-10">
-                            {!!Form::number('discount',old('discount'), ['class'=>'form-control', 'placeholder'=>'0'])!!}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Giảm Giá</label>
+                            <div class="col-md-10">
+                                {!!Form::number('discount',old('discount'), ['class'=>'form-control', 'placeholder'=>'0'])!!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Nhập Kho</label>
-                        <div class="col-md-10">
-                            {!!Form::number('stock',old('stock'), ['class'=>'form-control', 'placeholder'=>'0'])!!}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Nhập Kho</label>
+                            <div class="col-md-10">
+                                {!!Form::number('stock',old('stock'), ['class'=>'form-control', 'placeholder'=>'0'])!!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Hình Ảnh:</label>
-                        <div class="col-md-10">
-                            <div class="input-group">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Hình Ảnh:</label>
+                            <div class="col-md-10">
+                                <div class="input-group">
                             <span class="input-group-btn">
                                 <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
                                     <i class="fa fa-picture-o"></i> Chọn
                                 </a>
                             </span>
-                            <input id="thumbnail" class="form-control" type="hidden" name="img_url">
+                                    <input id="thumbnail" class="form-control" type="hidden" name="img_url">
+                                </div>
+                                <img id="holder" style="margin-top:15px;max-height:100px;">
+                            </div>
                         </div>
-                            <img id="holder" style="margin-top:15px;max-height:100px;">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Hình Chi Tiết (opt)</label>
+                            <div class="col-md-10">
+                                <div class="photo-container">
+                                    <input type="file" name="thumb-input[]" id="thumb-input" multiple >
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </fielset>
+
                     <fieldset>
                         <legend>Thuộc tính</legend>
                         @foreach($att as $item_att)
-                            @php
 
-                            @endphp
                             <div class="form-group">
                                 <input type="hidden" name="att[]" value="{!! $item_att->id !!}">
 
                                 <label class="col-md-2 control-label" for="">{!! $item_att->name !!}</label>
                                 <div class="col-md-10">
-                                    <input type="text" name="value[]" class="form-control" value="{!! old('value[]') !!}">
+                                    <input type="text" name="value[]" class="form-control" value="{!! old('value[]') !!}" placeholder="Giá trị thuộc tính">
                                 </div>
                             </div>
                         @endforeach
                     </fieldset>
-                    <fieldset class="area-control img-detail">
-                        <legend>
-                            <div class="checkbox">
-                                <input type="checkbox" name="img_detail" id="img_detail" class="trigger_input"> HÌNH ẢNH CHI TIẾT
-                            </div>
-                        </legend>
-                        <div class="container-fluid">
-                            <div class="wrap-img_detail wrap_general">
-                                <input type="file" name="thumb-input[]" id="thumb-input" multiple >
-                            </div>
-                        </div>
-                    </fieldset>
+
                     <fieldset>
                         <legend>
                             <div class="checkbox">
@@ -200,10 +254,20 @@
                 uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
                 uploadAsync: true,
                 showUpload: false,
+                showBrowse: false,
                 showCaption: false,
-                dropZoneEnabled : false,
+                showCancel: false,
+                dropZoneEnabled : true,
+                browseOnZoneClick: true,
                 fileActionSettings:{
                     showUpload : false,
+                    showZoom: false,
+                    showDrag: false,
+                    showDownload: false,
+                    removeIcon: '<i class="fa fa-trash text-danger"></i>',
+                },
+                layoutTemplates: {
+                    progress: '<div class="kv-upload-progress hidden"></div>'
                 }
             })
 

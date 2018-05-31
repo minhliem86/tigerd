@@ -6,66 +6,133 @@
 
 @section('title','Thông tin chung')
 
+@section('css')
+    <style>
+        /* Mimic table appearance */
+        div.album{
+            margin:10px 0;
+        }
+        div#actions{
+            margin-bottom:10px;
+        }
+        div.table {
+            display: table;
+        }
+        div.table .file-row {
+            display: table-row;
+        }
+        div.table .file-row > div {
+            display: table-cell;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+            padding: 8px;
+        }
+        div.table .file-row:nth-child(odd) {
+            background: #f9f9f9;
+        }
+
+
+
+        /* The total progress gets shown by event listeners */
+        #total-progress {
+            opacity: 0;
+            transition: opacity 0.3s linear;
+        }
+
+        /* Hide the progress bar when finished */
+        #previews .file-row.dz-success .progress {
+            opacity: 0;
+            transition: opacity 0.3s linear;
+        }
+
+        /* Hide the delete button initially */
+        #previews .file-row .delete {
+            display: none;
+        }
+
+        /* Hide the start and cancel buttons and show the delete button */
+
+        #previews .file-row.dz-success .start,
+        #previews .file-row.dz-success .cancel {
+            display: none;
+        }
+        #previews .file-row.dz-success .delete {
+            display: block;
+        }
+    </style>
+@stop
+
 @section('content')
     <div class="row">
         <div class="col-md-12">
             @include('Admin::errors.error_layout')
                 {!! Form::model($product,['route' => ['admin.product.configuable.s1.edit.post', $product->id], 'class' => 'form-horizontal', 'id'=>'form', 'method' => 'POST', 'files' => true]) !!}
-                <div class="form-group">
-                    <label for="agency_id" class="col-md-2 control-label">Chọn Danh Mục Sản Phẩm</label>
-                    <div class="col-md-10">
-                        {!! Form::select('category_id', ['' => 'Chọn Danh Mục Sản Phẩm'] + $cate, old('category_id'), ['class'=>'form-control', 'required'] ) !!}
+                <fielset>
+                    <div class="form-group">
+                        <label for="agency_id" class="col-md-2 control-label">Chọn Danh Mục Sản Phẩm</label>
+                        <div class="col-md-10">
+                            {!! Form::select('category_id', ['' => 'Chọn Danh Mục Sản Phẩm'] + $cate, old('category_id'), ['class'=>'form-control', 'required'] ) !!}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Tên Sản Phẩm:</label>
-                    <div class="col-md-10">
-                        {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Tên Hiển Thị:</label>
+                        <div class="col-md-10">
+                            {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Mã Sản Phẩm:<p><small>(EX: Quần Tây -> QT)</small></p></label>
-                    <div class="col-md-10">
-                        {!! Form::text('sku_product', old('sku_product'), ['class' => 'form-control']) !!}
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Mã:<p><small>(EX: Quần Tây -> QT)</small></p></label>
+                        <div class="col-md-10">
+                            {!! Form::text('sku_product', old('sku_product'), ['class' => 'form-control']) !!}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Mô tả ngắn:</label>
-                    <div class="col-md-10">
-                        {!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ...']) !!}
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Mô tả ngắn:</label>
+                        <div class="col-md-10">
+                            {!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ...']) !!}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Hình Ảnh:</label>
-                    <div class="col-md-10">
-                        <div class="input-group">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Hình Ảnh:</label>
+                        <div class="col-md-10">
+                            <div class="input-group">
                                 <span class="input-group-btn">
                                     <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
                                         <i class="fa fa-picture-o"></i> Chọn
                                     </a>
                                 </span>
-                            {!!Form::hidden('img_url',old('img_url'), ['class'=>'form-control', 'id'=>'thumbnail' ])!!}
+                                {!!Form::hidden('img_url',old('img_url'), ['class'=>'form-control', 'id'=>'thumbnail' ])!!}
+                            </div>
+                            <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset('public/upload/'.$product->img_url)}}">
                         </div>
-                        <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($product->img_url)}}">
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Hình Chi Tiết (opt)</label>
+                        <div class="col-md-10">
+                            <div class="photo-container">
+                                <input type="file" name="thumb-input[]" id="thumb-input" multiple >
+                            </div>
+                        </div>
+                    </div>
+                </fielset>
+
                 <fieldset>
                     <legend>
                         <div class="checkbox">
-                            <input type="checkbox" name="meta_config" id="meta_config"> CẤU HÌNH SEO
+                            <input type="checkbox" name="meta_config" id="meta_config" {!! $product  ->meta_configs()->count() ? 'checked' : null !!}> CẤU HÌNH SEO
                         </div>
                     </legend>
                     <div class="wrap-seo">
                         <div class="form-group clearfix">
                             <label class="col-md-2 control-label">Meta Keywords:</label>
                             <div class="col-md-10">
-                                <input type="text" placeholder="Từ khóa bài viết (ngăn cách bởi dấu `,`. Ex: quầy tây, quần kaki)" id="meta_keywords" class="form-control" name="meta_keywords">
+                                {!! Form::text('meta_keywords', $product->meta_configs()->count() ? $product->meta_configs()->first()->meta_keywords : '' , ['class'=> 'form-control', 'placeholder'=>"Từ khóa bài viết (ngăn cách bởi dấu `,`. Ex: quầy tây, quần kaki)"]) !!}
                             </div>
                         </div>
                         <div class="form-group clearfix">
                             <label class="col-md-2 control-label">Meta Description:</label>
                             <div class="col-md-10">
-                                <input type="text" placeholder="Mô tả bài viết" id="meta_description" class="form-control" name="meta_description">
+                                {!! Form::text('meta_description', $product->meta_configs()->count() ? $product->meta_configs()->first()->meta_description : '', ['class'=> 'form-control', 'placeholder'=>"Mô tả bài viết"]) !!}
                             </div>
                         </div>
                         <div class="form-group clearfix">
@@ -73,54 +140,18 @@
                             <div class="col-md-10">
                                 <div class="input-group">
                                     <span class="input-group-btn">
-                                        <a id="lfm-meta" data-input="thumbnail_meta" data-preview="holder_meta" class="btn btn-primary">
-                                            <i class="fa fa-picture-o"></i> Chọn
-                                        </a>
+                                    <a id="lfm-meta" data-input="thumbnail_meta" data-preview="holder_meta" class="btn btn-primary">
+                                    <i class="fa fa-picture-o"></i> Chọn
+                                    </a>
                                     </span>
-                                    <input id="thumbnail_meta" class="form-control" type="hidden" name="meta_img">
+                                    {!!Form::hidden('meta_img',$product->meta_configs()->count() ? $product->meta_configs()->first()->meta_img : '', ['class'=>'form-control', 'id'=>'thumbnail_meta' ])!!}
                                 </div>
-                                <img id="holder_meta" style="margin-top:15px;max-height:100px;">
+                                <img id="holder_meta" style="margin-top:15px;max-height:100px;" src="{!! $product->meta_configs()->count() ? asset('public/upload/'.$product->meta_configs()->first()->meta_img) : null !!}">
                             </div>
                         </div>
-                    </div>
-                </fieldset>
-
-            <fieldset class="area-control img-detail">
-                <legend>
-                    <div class="checkbox">
-                        <input type="checkbox" name="img_detail" id="img_detail" class="trigger_input" {!! $product->photos()->count() ? 'checked' : null !!}> HÌNH ẢNH CHI TIẾT
-                    </div>
-                </legend>
-                <div class="container-fluid">
-                    <div class="wrap-img_detail wrap_general">
-                        <div class="container-fluid">
-                            @if($product->photos->count())
-                                @foreach($product->photos->chunk(4) as $chunk )
-                                    <div class="row">
-                                        @foreach($chunk as $photo)
-                                            <div class="col-lg-2 col-md-3 col-sm-4">
-                                                <div class="file-preview-frame krajee-default  file-preview-initial file-sortable kv-preview-thumb" data-template="image">
-                                                    <div class="kv-file-content">
-                                                        <img src="{!!asset($photo->img_url)!!}" class="file-preview-image kv-preview-data img-responsive" title="" alt="" style="width:auto;height:120px; margin:0 auto">
-                                                    </div>
-                                                    <div class="photo-order-input" style="margin-bottom:10px">
-                                                        <input type="text" class="form-control text-center" name="photo_order" value="{!!$photo->order!!}">
-                                                    </div>
-                                                    <div class="file-footer-buttons">
-                                                        <button type="button" class="kv-file-remove btn btn-xs btn-default" title="Cập nhật vị trí" onclick="updatePhoto(this,{!!$photo->id!!})"><i class="glyphicon glyphicon-refresh text-warning"></i></button>
-                                                        <button type="button" class="kv-file-remove btn btn-xs btn-default" title="Remove file" onclick="removePhoto(this,{!!$photo->id!!})"><i class="glyphicon glyphicon-trash text-danger"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                @endforeach
-                            @endif
-                        </div>
-                        <input type="file" name="thumb-input[]" id="thumb-input" multiple >
-                    </div>
+                    {!! Form::hidden('meta_id',$product->meta_configs()->count() ? $product->meta_configs()->first()->id : '') !!}
                 </div>
-            </fieldset>
+                </fieldset>
             {!! Form::close() !!}
         </div>
 
@@ -153,13 +184,12 @@
             $('form').submit();
         }
         $(document).ready(function(){
-            $('.wrap-seo').hide();
-            /*CONFIG DETAIL IMAGE*/
-            var flag_img = '{!! $product->photos()->count() ? true : false !!}';
-            if(flag_img){
-                $('.wrap-img_detail').show();
+            /*CONFIG SEO*/
+            var flag_seo = '{!! $product->meta_configs()->count() ? true : false !!}';
+            if(flag_seo){
+                $('.wrap-seo').show();
             }else{
-                $('.wrap-img_detail').hide();
+                $('.wrap-seo').hide();
             }
 
             $('input#meta_config').on('ifChecked', function (event) {
@@ -182,30 +212,39 @@
             })
 
             $("#thumb-input").fileinput({
-                uploadUrl: "{!!route('admin.product.update',$product->id)!!}", // server upload action
-                uploadAsync: true,
+                uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
+                uploadAsync: false,
                 showUpload: false,
+                showCancel: false,
                 showCaption: false,
-                browseLabel: "Thêm hình",
-                dropZoneEnabled : false,
+                dropZoneEnabled : true,
+                showBrowse: false,
+                overwriteInitial: false,
+                browseOnZoneClick: true,
                 fileActionSettings:{
                     showUpload : false,
-                }
-            })
-
+                    showZoom: false,
+                    showDrag: false,
+                    showDownload: false,
+                    removeIcon: '<i class="fa fa-trash text-danger"></i>',
+                },
+                initialPreview: [
+                    @foreach($product->photos as $photo)
+                        "{!!asset($photo->thumb_url)!!}",
+                    @endforeach
+                ],
+                initialPreviewAsData: true,
+                initialPreviewFileType: 'image',
+                initialPreviewConfig: [
+                        @foreach($product->photos as $item_photo)
+                    {'url': '{!! route("admin.product.AjaxRemovePhoto") !!}', key: "{!! $item_photo->id !!}", caption: "{!! $item_photo->filename !!}"},
+                    @endforeach
+                ],
+                layoutTemplates: {
+                    progress: '<div class="kv-upload-progress hidden"></div>'
+                },
+            });
         })
-        function removePhoto(e, id){
-            $.ajax({
-                url: '{!!route("admin.product.AjaxRemovePhoto")!!}',
-                type: 'POST',
-                data:{id_photo: id, _token:$('meta[name="csrf-token"]').attr('content')},
-                success:function(data){
-                    if(!data.error){
-                        e.parentNode.parentNode.parentNode.remove();
-                    }
-                }
-            })
-        }
         function updatePhoto(e, id){
             var value = e.parentNode.previousElementSibling.childNodes[1].value;
             $.ajax({

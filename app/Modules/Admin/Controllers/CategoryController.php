@@ -18,14 +18,12 @@ class CategoryController extends Controller
     protected $cateRepo;
     protected $agency;
     protected $common;
-    protected $_replacePath;
 
     public function __construct(CategoryRepository $cate, CommonRepository $common, AgencyRepository $agency)
     {
         $this->cateRepo = $cate;
         $this->agency = $agency;
         $this->common = $common;
-        $this->_replacePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
     }
     /**
      * Display a listing of the resource.
@@ -103,7 +101,7 @@ class CategoryController extends Controller
             return redirect()->back()->withInput()->withErrors($valid->errors());
         }
         if($request->has('img_url')){
-            $img_url = $this->common->getPath($request->input('img_url'),$this->_replacePath);
+            $img_url = 'public/upload/'.$this->common->getPath($request->input('img_url'));
         }else{
             $img_url = '';
         }
@@ -168,7 +166,7 @@ class CategoryController extends Controller
             return redirect()->back()->withInput()->withErrors($valid->errors());
         }
 
-        $img_url = $this->common->getPath($request->input('img_url'),$this->_replacePath);
+        $img_url = 'public/upload/'.$this->common->getPath($request->input('img_url'));
 
         $data = [
             'name' => $request->input('name'),

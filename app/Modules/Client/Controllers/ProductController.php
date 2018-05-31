@@ -491,7 +491,7 @@ class ProductController extends Controller
                     }
                 }else{
                     $shipping = \DB::table('shipping_costs')->where('district_id',$district_id)->select('cost')->first();
-                    switch ($shipping->cost){
+                    switch ($shipping->cost ){
                         /*CASE 30k*/
                         case '30000' :
                             $shipping = new \Darryldecode\Cart\CartCondition(

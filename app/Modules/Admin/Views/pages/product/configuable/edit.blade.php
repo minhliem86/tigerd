@@ -16,62 +16,73 @@
                     {!! Form::hidden('product_parent_id', $parent_product->id) !!}
                     {!!Form::hidden('type', 'simple')!!}
                     {!!Form::hidden('visibility', '0')!!}
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Tên Sản Phẩm:</label>
-                        <div class="col-md-10">
-                            {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
+
+                    <fieldset>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Tên Sản Phẩm Thuộc Tính:</label>
+                            <div class="col-md-10">
+                                {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Mã Sản Phẩm:<p><small>(EX: Quần Tây -> QT)</small></p></label>
-                        <div class="col-md-10">
-                            {!! Form::text('sku_product', old('sku_product'), ['class' => 'form-control']) !!}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Mã Sản Phẩm:<p><small>(EX: Quần Tây -> QT)</small></p></label>
+                            <div class="col-md-10">
+                                {!! Form::text('sku_product', old('sku_product'), ['class' => 'form-control']) !!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Mô tả ngắn:</label>
-                        <div class="col-md-10">
-                            {!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ...']) !!}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Mô tả ngắn:</label>
+                            <div class="col-md-10">
+                                {!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ...']) !!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Bài viết sản phẩm:</label>
-                        <div class="col-md-10">
-                            {!! Form::textarea('content',old('content'), ['class'=> 'form-control my-editor', 'placeholder' => 'Mô tả ...']) !!}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Bài viết sản phẩm:</label>
+                            <div class="col-md-10">
+                                {!! Form::textarea('content',old('content'), ['class'=> 'form-control my-editor', 'placeholder' => 'Mô tả ...']) !!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Giá</label>
-                        <div class="col-md-10">
-                            {!!Form::number('price',old('price'), ['class'=>'form-control', 'placeholder'=>'Giá'])!!}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Giá</label>
+                            <div class="col-md-10">
+                                {!!Form::number('price',old('price'), ['class'=>'form-control', 'placeholder'=>'Giá'])!!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Giảm Giá</label>
-                        <div class="col-md-10">
-                            {!!Form::number('discount',old('discount'), ['class'=>'form-control', 'placeholder'=>'0'])!!}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Giảm Giá</label>
+                            <div class="col-md-10">
+                                {!!Form::number('discount',old('discount'), ['class'=>'form-control', 'placeholder'=>'0'])!!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Nhập Kho</label>
-                        <div class="col-md-10">
-                            {!!Form::number('stock',old('stock'), ['class'=>'form-control', 'placeholder'=>'0'])!!}
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Nhập Kho</label>
+                            <div class="col-md-10">
+                                {!!Form::number('stock',old('stock'), ['class'=>'form-control', 'placeholder'=>'0'])!!}
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">Hình Ảnh:</label>
-                        <div class="col-md-10">
-                            <div class="input-group">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Hình Ảnh:</label>
+                            <div class="col-md-10">
+                                <div class="input-group">
                             <span class="input-group-btn">
                                 <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
                                     <i class="fa fa-picture-o"></i> Chọn
                                 </a>
                             </span>
-                                {!!Form::hidden('img_url',old('img_url'), ['class'=>'form-control', 'id'=>'thumbnail' ])!!}
+                                    {!!Form::hidden('img_url',old('img_url'), ['class'=>'form-control', 'id'=>'thumbnail' ])!!}
+                                </div>
+                                <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset('public/upload/'.$product->img_url)}}">
                             </div>
-                            <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($product->img_url)}}">
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">Hình Chi Tiết (opt)</label>
+                            <div class="col-md-10">
+                                <div class="photo-container">
+                                    <input type="file" name="thumb-input[]" id="thumb-input" multiple >
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
                     <fieldset>
                         <legend>Thuộc tính</legend>
                         @foreach($product->values as $item_att)
@@ -85,42 +96,7 @@
                             </div>
                         @endforeach
                     </fieldset>
-                    <fieldset class="area-control img-detail">
-                        <legend>
-                            <div class="checkbox">
-                                <input type="checkbox" name="img_detail" id="img_detail" class="trigger_input" {!! $product->photos()->count() ? 'checked' : null !!}> HÌNH ẢNH CHI TIẾT
-                            </div>
-                        </legend>
-                        <div class="container-fluid">
-                            <div class="wrap-img_detail wrap_general">
-                                <div class="container-fluid">
-                                    @if($product->photos->count())
-                                        @foreach($product->photos->chunk(4) as $chunk )
-                                            <div class="row">
-                                                @foreach($chunk as $photo)
-                                                    <div class="col-lg-2 col-md-3 col-sm-4">
-                                                        <div class="file-preview-frame krajee-default  file-preview-initial file-sortable kv-preview-thumb" data-template="image">
-                                                            <div class="kv-file-content">
-                                                                <img src="{!!asset($photo->img_url)!!}" class="file-preview-image kv-preview-data img-responsive" title="" alt="" style="width:auto;height:120px;">
-                                                            </div>
-                                                            <div class="photo-order-input" style="margin-bottom:10px">
-                                                                <input type="text" class="form-control text-center" name="photo_order" value="{!!$photo->order!!}">
-                                                            </div>
-                                                            <div class="file-footer-buttons">
-                                                                <button type="button" class="kv-file-remove btn btn-xs btn-default" title="Cập nhật vị trí" onclick="updatePhoto(this,{!!$photo->id!!})"><i class="glyphicon glyphicon-refresh text-warning"></i></button>
-                                                                <button type="button" class="kv-file-remove btn btn-xs btn-default" title="Remove file" onclick="removePhoto(this,{!!$photo->id!!})"><i class="glyphicon glyphicon-trash text-danger"></i></button>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endforeach
-                                            </div>
-                                        @endforeach
-                                    @endif
-                                </div>
-                                <input type="file" name="thumb-input[]" id="thumb-input" multiple >
-                            </div>
-                        </div>
-                    </fieldset>
+
                 {!! Form::close() !!}
             </div>
         </div>
@@ -172,31 +148,42 @@
                 $('.checkbox-att input').iCheck('uncheck');
             })
             /*HINH CHI TIET*/
+            /*HINH CHI TIET*/
             $("#thumb-input").fileinput({
-                uploadUrl: "{!!route('admin.product.update',$product->id)!!}", // server upload action
-                uploadAsync: true,
+                uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
+                uploadAsync: false,
                 showUpload: false,
+                showCancel: false,
                 showCaption: false,
-                browseLabel: "Thêm hình",
-                dropZoneEnabled : false,
+                dropZoneEnabled : true,
+                showBrowse: false,
+                overwriteInitial: false,
+                browseOnZoneClick: true,
                 fileActionSettings:{
                     showUpload : false,
-                }
-            })
+                    showZoom: false,
+                    showDrag: false,
+                    showDownload: false,
+                    removeIcon: '<i class="fa fa-trash text-danger"></i>',
+                },
+                initialPreview: [
+                    @foreach($product->photos as $photo)
+                        "{!!asset($photo->thumb_url)!!}",
+                    @endforeach
+                ],
+                initialPreviewAsData: true,
+                initialPreviewFileType: 'image',
+                initialPreviewConfig: [
+                        @foreach($product->photos as $item_photo)
+                    {'url': '{!! route("admin.product.AjaxRemovePhoto") !!}', key: "{!! $item_photo->id !!}", caption: "{!! $item_photo->filename !!}"},
+                    @endforeach
+                ],
+                layoutTemplates: {
+                    progress: '<div class="kv-upload-progress hidden"></div>'
+                },
+            });
         })
 
-        function removePhoto(e, id){
-            $.ajax({
-                url: '{!!route("admin.product.AjaxRemovePhoto")!!}',
-                type: 'POST',
-                data:{id_photo: id, _token:$('meta[name="csrf-token"]').attr('content')},
-                success:function(data){
-                    if(!data.error){
-                        e.parentNode.parentNode.parentNode.remove();
-                    }
-                }
-            })
-        }
         function updatePhoto(e, id){
             var value = e.parentNode.previousElementSibling.childNodes[1].value;
             $.ajax({

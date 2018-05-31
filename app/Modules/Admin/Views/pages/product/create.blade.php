@@ -6,6 +6,62 @@
 
 @section('title','Sản Phẩm')
 
+@section('css')
+    <style>
+        /* Mimic table appearance */
+        div.album{
+            margin:10px 0;
+        }
+        div#actions{
+            margin-bottom:10px;
+        }
+        div.table {
+            display: table;
+        }
+        div.table .file-row {
+            display: table-row;
+        }
+        div.table .file-row > div {
+            display: table-cell;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+            padding: 8px;
+        }
+        div.table .file-row:nth-child(odd) {
+            background: #f9f9f9;
+        }
+
+
+
+        /* The total progress gets shown by event listeners */
+        #total-progress {
+            opacity: 0;
+            transition: opacity 0.3s linear;
+        }
+
+        /* Hide the progress bar when finished */
+        #previews .file-row.dz-success .progress {
+            opacity: 0;
+            transition: opacity 0.3s linear;
+        }
+
+        /* Hide the delete button initially */
+        #previews .file-row .delete {
+            display: none;
+        }
+
+        /* Hide the start and cancel buttons and show the delete button */
+
+        #previews .file-row.dz-success .start,
+        #previews .file-row.dz-success .cancel {
+            display: none;
+        }
+        #previews .file-row.dz-success .delete {
+            display: block;
+        }
+    </style>
+@stop
+
 @section('content')
     <div class="row">
         @include("Admin::errors.error_layout")
@@ -78,16 +134,12 @@
                             <img id="holder" style="margin-top:15px;max-height:100px;">
                         </div>
                     </div>
-                </fieldset>
-                <fieldset class="area-control img-detail">
-                    <legend>
-                        <div class="checkbox">
-                            <input type="checkbox" name="img_detail" id="img_detail" class="trigger_input"> HÌNH ẢNH CHI TIẾT
-                        </div>
-                    </legend>
-                    <div class="container-fluid">
-                        <div class="wrap-img_detail wrap_general">
-                            <input type="file" name="thumb-input[]" id="thumb-input" multiple >
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Hình Chi Tiết (opt)</label>
+                        <div class="col-md-10">
+                            <div class="photo-container">
+                                <input type="file" name="thumb-input[]" id="thumb-input" multiple >
+                            </div>
                         </div>
                     </div>
                 </fieldset>
@@ -204,6 +256,7 @@
     <script src="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/js/plugins/sortable.min.js"></script>
     <script src="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/js/plugins/purify.min.js"></script>
     <script src="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/js/fileinput.min.js"></script>
+
     <script>
         const url = "{!!url('/')!!}"
         init_tinymce(url);
@@ -377,32 +430,27 @@
         })
 
 
-
         $(document).ready(function(){
-            // var footerTemplate = '<div class="file-thumbnail-footer" style ="height:94px">\n' +
-            // '   <div style="margin:5px 0">\n' +
-            // '       <input class="kv-input kv-new form-control input-sm text-center {TAG_CSS_NEW}" value="{caption}" placeholder="Enter caption..." name="caption[]">\n' +
-            // '   </div>\n' +
-            // '   {size} {progress} {actions}\n' +
-            // '</div>';
             $("#thumb-input").fileinput({
                 uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
                 uploadAsync: true,
                 showUpload: false,
+                showBrowse: false,
                 showCaption: false,
-                // layoutTemplates: {footer: footerTemplate},
-                // previewThumbTags: {
-                //     '{TAG_VALUE}': '',        // no value
-                //     '{TAG_CSS_NEW}': '',      // new thumbnail input
-                //     '{TAG_CSS_INIT}': 'hide'  // hide the initial input
-                // },
-                dropZoneEnabled : false,
+                showCancel: false,
+                dropZoneEnabled : true,
+                browseOnZoneClick: true,
                 fileActionSettings:{
                     showUpload : false,
+                    showZoom: false,
+                    showDrag: false,
+                    showDownload: false,
+                    removeIcon: '<i class="fa fa-trash text-danger"></i>',
+                },
+                layoutTemplates: {
+                    progress: '<div class="kv-upload-progress hidden"></div>'
                 }
             })
-
-            $('input.number').maskNumber({});
         })
     </script>
 @stop

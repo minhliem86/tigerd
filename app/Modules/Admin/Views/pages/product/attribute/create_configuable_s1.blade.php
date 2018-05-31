@@ -6,50 +6,117 @@
 
 @section('title','Thông tin chung')
 
+@section('css')
+    <style>
+        /* Mimic table appearance */
+        div.album{
+            margin:10px 0;
+        }
+        div#actions{
+            margin-bottom:10px;
+        }
+        div.table {
+            display: table;
+        }
+        div.table .file-row {
+            display: table-row;
+        }
+        div.table .file-row > div {
+            display: table-cell;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+            padding: 8px;
+        }
+        div.table .file-row:nth-child(odd) {
+            background: #f9f9f9;
+        }
+
+
+
+        /* The total progress gets shown by event listeners */
+        #total-progress {
+            opacity: 0;
+            transition: opacity 0.3s linear;
+        }
+
+        /* Hide the progress bar when finished */
+        #previews .file-row.dz-success .progress {
+            opacity: 0;
+            transition: opacity 0.3s linear;
+        }
+
+        /* Hide the delete button initially */
+        #previews .file-row .delete {
+            display: none;
+        }
+
+        /* Hide the start and cancel buttons and show the delete button */
+
+        #previews .file-row.dz-success .start,
+        #previews .file-row.dz-success .cancel {
+            display: none;
+        }
+        #previews .file-row.dz-success .delete {
+            display: block;
+        }
+    </style>
+@stop
+
 @section('content')
     <div class="row">
         <div class="col-md-12">
             @include('Admin::errors.error_layout')
             <form method="POST" action="{{route('admin.create.product.configuable.s1')}}" id="form" role="form" class="form-horizontal" enctype="multipart/form-data">
                 {{Form::token()}}
-                <div class="form-group">
-                    <label for="agency_id" class="col-md-2 control-label">Chọn Danh Mục Sản Phẩm</label>
-                    <div class="col-md-10">
-                        {!! Form::select('category_id', ['' => 'Chọn Danh Mục Sản Phẩm'] + $cate, old('category_id'), ['class'=>'form-control', 'required'] ) !!}
+                <fielset>
+                    <div class="form-group">
+                        <label for="agency_id" class="col-md-2 control-label">Chọn Danh Mục Sản Phẩm</label>
+                        <div class="col-md-10">
+                            {!! Form::select('category_id', ['' => 'Chọn Danh Mục Sản Phẩm'] + $cate, old('category_id'), ['class'=>'form-control', 'required'] ) !!}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Tên Sản Phẩm:</label>
-                    <div class="col-md-10">
-                        {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Tên Hiển Thị:</label>
+                        <div class="col-md-10">
+                            {!! Form::text('name', old('name'), ['class' => 'form-control']) !!}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Mã Sản Phẩm:<p><small>(EX: Quần Tây -> QT)</small></p></label>
-                    <div class="col-md-10">
-                        {!! Form::text('sku_product', old('sku_product'), ['class' => 'form-control']) !!}
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Mã:<p><small>(EX: Quần Tây -> QT)</small></p></label>
+                        <div class="col-md-10">
+                            {!! Form::text('sku_product', old('sku_product'), ['class' => 'form-control']) !!}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Mô tả ngắn:</label>
-                    <div class="col-md-10">
-                        {!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ...']) !!}
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Mô tả ngắn:</label>
+                        <div class="col-md-10">
+                            {!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ...']) !!}
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Hình Ảnh:</label>
-                    <div class="col-md-10">
-                        <div class="input-group">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Hình Ảnh:</label>
+                        <div class="col-md-10">
+                            <div class="input-group">
                         <span class="input-group-btn">
                             <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
                                 <i class="fa fa-picture-o"></i> Chọn
                             </a>
                         </span>
-                        <input id="thumbnail" class="form-control" type="hidden" name="img_url">
+                                <input id="thumbnail" class="form-control" type="hidden" name="img_url">
+                            </div>
+                            <img id="holder" style="margin-top:15px;max-height:100px;">
+                        </div>
                     </div>
-                        <img id="holder" style="margin-top:15px;max-height:100px;">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Hình Chi Tiết (opt)</label>
+                        <div class="col-md-10">
+                            <div class="photo-container">
+                                <input type="file" name="thumb-input[]" id="thumb-input" multiple >
+                            </div>
+                        </div>
                     </div>
-                </div>
+                </fielset>
+
                 <fieldset>
                     <legend>
                         <div class="checkbox">
@@ -82,19 +149,6 @@
                                 </div>
                                 <img id="holder_meta" style="margin-top:15px;max-height:100px;">
                             </div>
-                        </div>
-                    </div>
-                </fieldset>
-
-                <fieldset class="area-control img-detail">
-                    <legend>
-                        <div class="checkbox">
-                            <input type="checkbox" name="img_detail" id="img_detail" class="trigger_input"> HÌNH ẢNH CHI TIẾT
-                        </div>
-                    </legend>
-                    <div class="container-fluid">
-                        <div class="wrap-img_detail wrap_general">
-                            <input type="file" name="thumb-input[]" id="thumb-input" multiple >
                         </div>
                     </div>
                 </fieldset>
@@ -146,25 +200,26 @@
                 $('.checkbox-att input').iCheck('uncheck');
             })
 
-
             $("#thumb-input").fileinput({
                 uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
                 uploadAsync: true,
                 showUpload: false,
+                showBrowse: false,
                 showCaption: false,
-                // layoutTemplates: {footer: footerTemplate},
-                // previewThumbTags: {
-                //     '{TAG_VALUE}': '',        // no value
-                //     '{TAG_CSS_NEW}': '',      // new thumbnail input
-                //     '{TAG_CSS_INIT}': 'hide'  // hide the initial input
-                // },
-                dropZoneEnabled : false,
+                showCancel: false,
+                dropZoneEnabled : true,
+                browseOnZoneClick: true,
                 fileActionSettings:{
                     showUpload : false,
+                    showZoom: false,
+                    showDrag: false,
+                    showDownload: false,
+                    removeIcon: '<i class="fa fa-trash text-danger"></i>',
+                },
+                layoutTemplates: {
+                    progress: '<div class="kv-upload-progress hidden"></div>'
                 }
             })
-
-
         })
     </script>
 @stop

@@ -10,7 +10,7 @@
     <div class="row">
         <div class="col-md-12">
             <div class="wrap-title">
-                <p style="font-size:16px; text-transform: uppercase;">Sản Phẩm: <b><a href="{!! route('admin.product.configuable.s1.edit', $parent_product->id) !!}">{!! $parent_product->name !!}</a></b></p>
+                <p style="font-size:16px; text-transform: uppercase;">Sản Phẩm: <b><a  href="{!! route('admin.product.configuable.s1.edit', $parent_product->id) !!}">{!! $parent_product->name !!}</a></b> <span class="badge">Click to Edit</span></p>
             </div>
 
             <div class="wrap-table-config">
@@ -47,7 +47,7 @@
                                    }
                             @endphp
                         <tr>
-                            <td><img src="{!! asset($item_child->img_url) !!}" class="img-responsive" style="width:80px" alt="{!! $item_child->name !!}"></td>
+                            <td><img src="{!! asset('public/upload/'.$item_child->img_url) !!}" class="img-responsive" style="width:80px" alt="{!! $item_child->name !!}"></td>
                             <td>{!! $item_child->name !!}</td>
                             <td>{!! number_format($item_child->price) !!} VND</td>
                             <td>{!! $item_child->stock !!}</td>

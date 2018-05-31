@@ -56,7 +56,7 @@
                  </span>
                           {{Form::hidden('img_url',old('img_url'), ['class'=>'form-control', 'id'=>'thumbnail' ])}}
                       </div>
-                      <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($inst->img_url)}}">
+                      <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset('public/upload/'.$inst->img_url)}}">
                   </div>
               </div>
           </fieldset>
@@ -91,7 +91,7 @@
                             </span>
                               {{Form::hidden('meta_img',$inst->meta_configs()->count() ? $inst->meta_configs()->first()->meta_img : '', ['class'=>'form-control', 'id'=>'thumbnail_meta' ])}}
                           </div>
-                          <img id="holder_meta" style="margin-top:15px;max-height:100px;" src="{!! $inst->meta_configs()->count() ? asset($inst->meta_configs()->first()->meta_img) : null !!}">
+                          <img id="holder_meta" style="margin-top:15px;max-height:100px;" src="{!! $inst->meta_configs()->count() ? asset('public/upload/'.$inst->meta_configs()->first()->meta_img) : null !!}">
                       </div>
                   </div>
                   {!! Form::hidden('meta_config_id',$inst->meta_configs()->count() ? $inst->meta_configs()->first()->id : '') !!}

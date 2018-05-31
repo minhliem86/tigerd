@@ -200,6 +200,13 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::resource('shippingcost', 'ShippingCostController');
 
         Route::post('/loadDistrict', ['as' => 'admin.loadDistrict.post', 'uses' => 'ShippingCostController@loadDistrict']);
+
+        Route::get('create-symbolic',function(){
+           $target = '';
+           $link = '';
+           symlink($target, $link);
+           return "done";
+        });
     });
   });
 });

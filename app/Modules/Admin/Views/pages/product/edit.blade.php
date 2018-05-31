@@ -75,7 +75,7 @@
                     </span>
                             {!!Form::hidden('img_url',old('img_url'), ['class'=>'form-control', 'id'=>'thumbnail' ])!!}
                         </div>
-                        <img id="holder" style="margin-top:15px;max-height:100px;" src="{!!asset($inst->img_url)!!}">
+                        <img id="holder" style="margin-top:15px;max-height:100px;" src="{!!asset('public/upload/'.$inst->img_url)!!}">
                     </div>
                 </div>
                 <div class="form-group">
@@ -93,40 +93,12 @@
                         </label>
                     </div>
                 </div>
-            </fieldset>
-            <fieldset class="area-control img-detail">
-                <legend>
-                    <div class="checkbox">
-                        <input type="checkbox" name="img_detail" id="img_detail" class="trigger_input" {!! $inst->photos()->count() ? 'checked' : null !!}> HÌNH ẢNH CHI TIẾT
-                    </div>
-                </legend>
-                <div class="container-fluid">
-                    <div class="wrap-img_detail wrap_general">
-                        <div class="container-fluid">
-                            @if($inst->photos->count())
-                                @foreach($inst->photos->chunk(4) as $chunk )
-                                    <div class="row">
-                                        @foreach($chunk as $photo)
-                                            <div class="col-md-3 col-sm-4">
-                                                <div class="file-preview-frame krajee-default  file-preview-initial file-sortable kv-preview-thumb" data-template="image">
-                                                    <div class="kv-file-content">
-                                                        <img src="{!!asset($photo->img_url)!!}" class="file-preview-image kv-preview-data img-responsive" title="" alt="" style="width:auto;height:120px;">
-                                                    </div>
-                                                    <div class="photo-order-input" style="margin-bottom:10px">
-                                                        <input type="text" class="form-control text-center" name="photo_order" value="{!!$photo->order!!}">
-                                                    </div>
-                                                    <div class="file-footer-buttons">
-                                                        <button type="button" class="kv-file-remove btn btn-xs btn-default" title="Cập nhật vị trí" onclick="updatePhoto(this,{!!$photo->id!!})"><i class="glyphicon glyphicon-refresh text-warning"></i></button>
-                                                        <button type="button" class="kv-file-remove btn btn-xs btn-default" title="Remove file" onclick="removePhoto(this,{!!$photo->id!!})"><i class="glyphicon glyphicon-trash text-danger"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                @endforeach
-                            @endif
+                <div class="form-group">
+                    <label class="col-md-2 control-label">Hình Chi Tiết (opt)</label>
+                    <div class="col-md-10">
+                        <div class="photo-container">
+                            <input type="file" name="thumb-input[]" id="thumb-input" multiple >
                         </div>
-                        <input type="file" name="thumb-input[]" id="thumb-input" multiple >
                     </div>
                 </div>
             </fieldset>
@@ -163,7 +135,7 @@
                             </span>
                                 {!!Form::hidden('meta_img',$inst->meta_configs()->count() ? $inst->meta_configs()->first()->meta_img : '', ['class'=>'form-control', 'id'=>'thumbnail_meta' ])!!}
                             </div>
-                            <img id="holder_meta" style="margin-top:15px;max-height:100px;" src="{!! $inst->meta_configs()->count() ? asset($inst->meta_configs()->first()->meta_img) : null !!}">
+                            <img id="holder_meta" style="margin-top:15px;max-height:100px;" src="{!! $inst->meta_configs()->count() ? asset('public/upload/'.$inst->meta_configs()->first()->meta_img) : null !!}">
                         </div>
                     </div>
                     {!! Form::hidden('meta_config_id',$inst->meta_configs()->count() ? $inst->meta_configs()->first()->id : '') !!}
@@ -465,30 +437,40 @@
 
             /*HINH CHI TIET*/
             $("#thumb-input").fileinput({
-                uploadUrl: "{!!route('admin.product.update',$inst->id)!!}", // server upload action
-                uploadAsync: true,
+                uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
+                uploadAsync: false,
                 showUpload: false,
+                showCancel: false,
                 showCaption: false,
-                browseLabel: "Thêm hình",
-                dropZoneEnabled : false,
+                dropZoneEnabled : true,
+                showBrowse: false,
+                overwriteInitial: false,
+                browseOnZoneClick: true,
                 fileActionSettings:{
                     showUpload : false,
-                }
-            })
+                    showZoom: false,
+                    showDrag: false,
+                    showDownload: false,
+                    removeIcon: '<i class="fa fa-trash text-danger"></i>',
+                },
+                initialPreview: [
+                    @foreach($inst->photos as $photo)
+                        "{!!asset($photo->thumb_url)!!}",
+                    @endforeach
+                ],
+                initialPreviewAsData: true,
+                initialPreviewFileType: 'image',
+                initialPreviewConfig: [
+                        @foreach($inst->photos as $item_photo)
+                    {'url': '{!! route("admin.product.AjaxRemovePhoto") !!}', key: "{!! $item_photo->id !!}", caption: "{!! $item_photo->filename !!}"},
+                    @endforeach
+                ],
+                layoutTemplates: {
+                    progress: '<div class="kv-upload-progress hidden"></div>'
+                },
+            });
         })
 
-        function removePhoto(e, id){
-            $.ajax({
-                url: '{!!route("admin.product.AjaxRemovePhoto")!!}',
-                type: 'POST',
-                data:{id_photo: id, _token:$('meta[name="csrf-token"]').attr('content')},
-                success:function(data){
-                    if(!data.error){
-                        e.parentNode.parentNode.parentNode.remove();
-                    }
-                }
-            })
-        }
         function updatePhoto(e, id){
             var value = e.parentNode.previousElementSibling.childNodes[1].value;
             $.ajax({

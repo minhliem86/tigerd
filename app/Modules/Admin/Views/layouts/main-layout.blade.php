@@ -25,6 +25,13 @@
     <script type="text/javascript" src="{{asset('/public/assets/admin')}}/dist/js/site.min.js"></script>
     <!-- CHART JS -->
     <script src="{{asset('/public/assets/admin')}}/dist/js/Chart.js"></script>
+    <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+    </script>
 
   </head>
   <body>
