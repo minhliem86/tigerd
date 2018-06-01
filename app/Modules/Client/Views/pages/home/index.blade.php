@@ -23,7 +23,7 @@
                                             <div class="swiper-slide">
                                                 <div class="each-product">
                                                     <figure>
-                                                        <a href="{!! route('client.product', $item_product->slug) !!}"><img src="{!! asset($item_product->img_url) !!}" class="img-fluid mx-auto mb-2" alt="{!! $item_product->name !!}"></a>
+                                                        <a href="{!! route('client.product', $item_product->slug) !!}"><img src="{!! asset('public/upload/'.$item_product->img_url) !!}" class="img-fluid mx-auto mb-2" alt="{!! $item_product->name !!}"></a>
                                                         <figcaption>
                                                             <p class="product-name"><a href="{!! route('client.product', $item_product->slug) !!}">{!! $item_product->name !!}</a></p>
                                                             <p class="price {!! $item_product->discount ? 'discount' : null !!}">{!! number_format($item_product->price) !!} VND</p>
@@ -48,7 +48,7 @@
                                                     <div class="swiper-slide">
                                                         <div class="each-product">
                                                             <figure>
-                                                                <a href="{!! route('client.product', $item_product->slug) !!}"><img src="{!! asset($product_child->img_url) !!}" class="img-fluid mx-auto mb-2" alt="{!! $product_child->name !!}"></a>
+                                                                <a href="{!! route('client.product', $item_product->slug) !!}"><img src="{!! asset('public/upload/'.$product_child->img_url) !!}" class="img-fluid mx-auto mb-2" alt="{!! $product_child->name !!}"></a>
                                                                 <figcaption>
                                                                     <p class="product-name"><a href="{!! route('client.product', $item_product->slug) !!}">{!! $item_product->name !!}</a></p>
                                                                     <p class="price {!! $product_child->discount ? 'discount' : null !!}">{!! number_format($product_child->price) !!} VND</p>
@@ -112,7 +112,7 @@
                                                 <div class="each-news">
                                                     @foreach($item_news_chunk as $item_news)
                                                         <div class="media">
-                                                            <a href="{!! route('client.news.detail', $item_news->slug) !!}"><img src="{!! asset($item_news->img_url) !!}" class="mr-5" alt="{!! $item_news->name !!}"></a>
+                                                            <a href="{!! route('client.news.detail', $item_news->slug) !!}"><img src="{!! asset('public/upload/'.$item_news->img_url) !!}" class="mr-5" alt="{!! $item_news->name !!}"></a>
                                                             <div class="media-body">
                                                                 <h3 class="news-name"><a href="{!! route('client.news.detail', $item_news->slug) !!}">{!! $item_news->name !!}</a></h3>
                                                                 <p>{!! $item_news->description !!}</p>
