@@ -220,7 +220,7 @@ class ProductController extends Controller
         }
         $cart = Cart::getContent();
         $city = DB::table('cities')->lists('name_with_type', 'code');
-        $pm = $paymentMethod->all(['id', 'name','description']);
+        $pm = $paymentMethod->query(['id', 'name','description'])->where('slug','cod')->get();
         return view('Client::pages.product.payment', compact('cart', 'pm', 'city'));
     }
 

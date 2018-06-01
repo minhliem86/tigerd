@@ -504,6 +504,8 @@ ul.list-success li {
       font-weight: 600;
       margin-bottom: 1.4rem;
       font-style: italic; }
+    .page .news-detail-page .news-detail-inner .body-news img {
+      max-width: 100%; }
   .page .news-detail-page .relate-news h3.title-relate {
     font-size: 2rem;
     text-transform: uppercase;

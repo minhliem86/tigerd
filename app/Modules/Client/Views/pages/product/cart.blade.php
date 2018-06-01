@@ -24,7 +24,7 @@
                                     @foreach($cart as $item_cart)
                                     <tr id="{!! $item_cart->id !!}">
                                         
-                                        <td><img src="{!! $item_cart->attributes->has('img_url') ? $item_cart->attributes->img_url : ''  !!}" class="img-fluid" alt="{!! $item_cart->name !!}"></td>
+                                        <td><img src="{!! $item_cart->attributes->has('img_url') ? asset('public/upload/'.$item_cart->attributes->img_url) : ''  !!}" class="img-fluid" alt="{!! $item_cart->name !!}"></td>
                                         <td>
                                             <p>{!! $item_cart->name !!}</p>
                                             @if(!$item_cart->attributes->isEmpty())

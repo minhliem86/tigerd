@@ -18,7 +18,7 @@
         <meta name="description" content="" >
         <meta property="og:title" content="Tiger D">
         <meta property="og:description" content="TigerD">
-        <meta property="og:image" content="{!! asset('public/assets/client/images/fb-sharing.jpg') !!}">
+        <meta property="og:image" content="{!! asset('public/assets/client/images/fb-share.png') !!}">
         <meta property="og:image:width" content="600">
         <meta property="og:image:height" content="315">
         <meta property="og:url" content="{!! url()->current() !!}">
@@ -61,6 +61,7 @@
 
             var productSwiper = new Swiper('#swiper-product', {
                 'slidesPerView' : 3,
+                spaceBetween:30,
                 navigation: {
                     nextEl: '.swiper-button-next',
                     prevEl: '.swiper-button-prev',
