@@ -7,5 +7,5 @@
         @endforeach
     </ul>
 @else
-    <img src="{!! asset($product->img_url) !!}" class="img-fluid" alt="{!! $product->name !!}">
+    <img src="{!! asset('public/upload/'.$product->img_url) !!}" class="img-fluid" alt="{!! $product->name !!}">
 @endif

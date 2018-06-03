@@ -32,8 +32,9 @@ class SendMailListener
     {
         $customer = $this->customer->find($event->customer_id);
         Mail::send('Client::emails.payment_email', ['customer' => $customer, 'cart' => $event->cart], function ($message) use ($customer){
+            $message->from('meo@tigerd.vn');
             $message->to($customer->email);
-            $message->subject('Email xác nhận mua hàng.');
+            $message->subject('Email Xác Nhận Mua Hàng Thành Công.');
         });
     }
 }

@@ -18,6 +18,9 @@ class EventServiceProvider extends ServiceProvider
 //        ],
         'App\Modules\Client\Events\SendMail'=>[
             'App\Listeners\SendMailListener'
+        ],
+        'App\Events\EmailTemplateEvent' => [
+            'App\Listeners\EmailTemplateListener'
         ]
     ];
 

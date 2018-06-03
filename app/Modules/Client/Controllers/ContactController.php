@@ -40,7 +40,7 @@ class ContactController extends Controller
 
     public function getIndex(CompanyRepository $company)
     {
-        $info = $company->getFirst(['map']);
+        $info = $company->getFirst();
         return view('Client::pages.contact.index', compact('info'));
     }
 

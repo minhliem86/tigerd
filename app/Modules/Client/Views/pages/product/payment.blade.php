@@ -24,22 +24,22 @@
                                 {!! Form::hidden('Title', 'Online Payment Via OnePay') !!}
                                 <div class="form-group">
                                     <label for="">Họ tên khách hàng</label>
-                                    {!! Form::text('customer_name', Auth::guard('customer')->check() ? Auth::guard('customer')->user()->lastname.' '.Auth::guard('customer')->user()->firstname : '', ['class' => 'form-control']  ) !!}
+                                    {!! Form::text('customer_name', Auth::guard('customer')->check() ? Auth::guard('customer')->user()->lastname.' '.Auth::guard('customer')->user()->firstname : '', ['class' => 'form-control', 'required']  ) !!}
                                 </div>
                                 <div class="form-group">
                                     <label for="">Số điện thoại khách hàng</label>
-                                    {!! Form::text('vpc_Customer_Phone', Auth::guard('customer')->check() ? Auth::guard('customer')->user()->phone : '', ['class'=>'form-control']) !!}
+                                    {!! Form::text('vpc_Customer_Phone', Auth::guard('customer')->check() ? Auth::guard('customer')->user()->phone : '', ['class'=>'form-control', 'required']) !!}
                                     <small class="form-text text-muted">
                                         Tigerd.vn hoặc tổng đài tự động của chúng tôi sẽ liên hệ quý khách theo số điện thoại này để xác nhận hoặc thông báo giao hàng
                                     </small>
                                 </div>
                                 <div class="form-group">
                                     <label for="">Email khách hàng</label>
-                                    {!! Form::text('vpc_Customer_Email',  Auth::guard('customer')->check() ? Auth::guard('customer')->user()->email : '', ['class'=>'form-control']) !!}
+                                    {!! Form::text('vpc_Customer_Email',  Auth::guard('customer')->check() ? Auth::guard('customer')->user()->email : '', ['class'=>'form-control', 'required']) !!}
                                 </div>
                                 <div class="form-group">
                                     <label for="">Tỉnh/Thành phố</label>
-                                    {!! Form::select('vpc_SHIP_City',['' => 'Chọn Tỉnh/Thành Phố']+$city, old('vpc_SHIP_City'), ['class'=>'form-control']) !!}
+                                    {!! Form::select('vpc_SHIP_City',['' => 'Chọn Tỉnh/Thành Phố']+$city, old('vpc_SHIP_City'), ['class'=>'form-control', 'required']) !!}
                                 </div>
 
                                 <div class="form-row">
@@ -62,7 +62,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Địa chỉ giao hàng</label>
-                                    {!! Form::text('AVS_Street01', Auth::guard('customer')->check() ? Auth::guard('customer')->user()->address : '', ['class'=>'form-control', 'placeholder' => 'Địa chỉ bao gồm số nhà/số tầng nếu là văn phòng cụ thể.']) !!}
+                                    {!! Form::text('AVS_Street01', Auth::guard('customer')->check() ? Auth::guard('customer')->user()->address : '', ['class'=>'form-control', 'placeholder' => 'Địa chỉ bao gồm số nhà/số tầng nếu là văn phòng cụ thể.', 'required']) !!}
                                 </div>
                                 <div class="form-group">
                                     <label for="">Ghi chú</label>
@@ -113,14 +113,14 @@
                                 <p class="text">Tạm Tính</p>
                                 <p class="content"><span class="sub">{!! number_format(Cart::getSubTotal()) !!}</span> vnd</p>
                             </div>
-                            <div class="each-area wrap-total">
-                                <div class="input-group">
-                                    <input type="text" name="promotion" class="form-control" placeholder="Mã Khuyến Mãi" {!! Cart::getConditionsByType('discount')->isEmpty() ? null : 'disabled' !!}>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-info btn-promotion" type="button" onclick="applyPromotion()" id="btn-payment" {!!Cart::getConditionsByType('discount')->isEmpty() ? null : 'disabled' !!}>Áp Dụng</button>
-                                    </div>
-                                </div>
-                            </div>
+                            {{--<div class="each-area wrap-total">--}}
+                                {{--<div class="input-group">--}}
+                                    {{--<input type="text" name="promotion" class="form-control" placeholder="Mã Khuyến Mãi" {!! Cart::getConditionsByType('discount')->isEmpty() ? null : 'disabled' !!}>--}}
+                                    {{--<div class="input-group-append">--}}
+                                        {{--<button class="btn btn-info btn-promotion" type="button" onclick="applyPromotion()" id="btn-payment" {!!Cart::getConditionsByType('discount')->isEmpty() ? null : 'disabled' !!}>Áp Dụng</button>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
                             <div class="each-area wrap-total d-flex">
                                 <p class="text">Chi phí giao hàng</p>
                                 <p class="content"><span class="shipcost">{!! number_format(0) !!}</span> vnd</p>
@@ -137,7 +137,7 @@
                             <div class="btn-wrapper clearfix">
                                 {{--<a href="{!! route('client.home') !!}" class="btn btn-info btn-buy" >Mua Hàng</a>--}}
 
-                                <button type="submit" class="btn btn-primary float-right btn-payment" >Thanh Toán</button>
+                                <button type="submit" class="btn btn-primary float-right btn-payment" >Đặt Hàng</button>
                             </div>
                         </div>
                     </div>

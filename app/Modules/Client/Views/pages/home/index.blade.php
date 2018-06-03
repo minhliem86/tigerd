@@ -89,7 +89,7 @@
                 <div class="col">
                     <h2 class="title-section mx-auto">Tiger-D Video</h2>
                     <div class="video-inner">
-                        <div data-type="youtube" data-video-id="GaW0OYw7OMY"></div>
+                        <div data-type="youtube" data-video-id="xm5XFF6dCD8"></div>
                     </div>
                 </div>
             </div>
@@ -112,7 +112,7 @@
                                                 <div class="each-news">
                                                     @foreach($item_news_chunk as $item_news)
                                                         <div class="media">
-                                                            <a href="{!! route('client.news.detail', $item_news->slug) !!}"><img src="{!! asset('public/upload/'.$item_news->img_url) !!}" class="mr-5" alt="{!! $item_news->name !!}"></a>
+                                                            <a href="{!! route('client.news.detail', $item_news->slug) !!}"><img src="{!! asset('public/upload/'.$item_news->img_url) !!}" class="mr-5" alt="{!! $item_news->name !!}" style="max-width:180px"></a>
                                                             <div class="media-body">
                                                                 <h3 class="news-name"><a href="{!! route('client.news.detail', $item_news->slug) !!}">{!! $item_news->name !!}</a></h3>
                                                                 <p>{!! $item_news->description !!}</p>

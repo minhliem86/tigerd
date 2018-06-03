@@ -11,6 +11,8 @@ use App\Repositories\OrderRepository;
 use App\Repositories\PromotionRepository;
 use Carbon\Carbon;
 use Datatables;
+use App\Events\EmailTemplateEvent;
+
 class OrderController extends Controller
 {
     protected $order;
@@ -29,11 +31,12 @@ class OrderController extends Controller
 
     public function getData(Request $request)
     {
-        $data = $this->order->query(['orders.id', 'orders.order_name', 'orders.total','orders.created_at', 'orders.customer_id', 'orders.promotion_id', 'orders.paymentmethod_id', 'orders.shipstatus_id', 'orders.paymentstatus_id'])
+        $data = $this->order->query(['orders.id', 'orders.order_name', 'orders.total','orders.created_at', 'orders.customer_id', 'orders.promotion_id', 'orders.paymentmethod_id', 'orders.shipstatus_id', 'orders.paymentstatus_id', 'ship_addresses.email as customer_email'])
             ->join('customers', 'customers.id', '=', 'orders.customer_id')
             ->join('payment_methods', 'payment_methods.id', '=', 'orders.paymentmethod_id' )
             ->join('paymentstatus', 'paymentstatus.id', '=', 'orders.paymentstatus_id' )
-            ->join('shipstatus', 'shipstatus.id', '=', 'orders.shipstatus_id' );
+            ->join('shipstatus', 'shipstatus.id', '=', 'orders.shipstatus_id' )
+            ->join('ship_addresses','ship_addresses.order_id','=','orders.id');
 
         return Datatables::of($data)
             ->addColumn('action', function($data){
@@ -78,6 +81,7 @@ class OrderController extends Controller
         }else{
             $value = $request->value;
             $id = $request->id;
+            $email = $request->email;
 
             $order = $this->order->find($id);
             $order->shipstatus_id = $value;
@@ -87,6 +91,7 @@ class OrderController extends Controller
             }else{
                 $order->save();
             }
+            event(new EmailTemplateEvent('Admin::emails.notifyShipping',[],'meo@tigerd.vn', $email, 'TIGERD - Trạng Thái Đơn Hàng'));
 
             return response()->json(['error'=> false, 'data'=> $value], 200);
         }

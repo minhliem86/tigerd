@@ -35,6 +35,12 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-md-2 control-label" for="description">Sắp xếp</label>
+                <div class="col-md-10">
+                    {{Form::text('order',old('order'), ['class'=>'form-control', 'placeholder'=>'order'])}}
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-md-2 control-label">Hình Ảnh:</label>
                 <div class="col-md-10">
                     <div class="input-group">
@@ -45,7 +51,7 @@
                     </span>
                     {{Form::hidden('img_url',old('img_url'), ['class'=>'form-control', 'id'=>'thumbnail' ])}}
                     </div>
-                    <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($inst->img_url)}}">
+                    <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset('public/upload/'.$inst->img_url)}}">
                 </div>
             </div>
             </form>

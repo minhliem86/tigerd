@@ -24,6 +24,7 @@ use App\Repositories\ShipAddressRepository;
 use App\Repositories\TransactionRepository;
 
 use App\Modules\Client\Events\SendMail;
+use App\Events\EmailTemplateEvent;
 
 class ProductController extends Controller
 {
@@ -220,7 +221,7 @@ class ProductController extends Controller
         }
         $cart = Cart::getContent();
         $city = DB::table('cities')->lists('name_with_type', 'code');
-        $pm = $paymentMethod->all(['id', 'name','description']);
+        $pm = $paymentMethod->query(['id', 'name','description'])->where('slug','cod')->get();
         return view('Client::pages.product.payment', compact('cart', 'pm', 'city'));
     }
 
@@ -327,6 +328,8 @@ class ProductController extends Controller
                 }
 
                 event(new SendMail($cart,  $this->auth->check() ? $this->auth->user()->id : 2));
+
+                event(new EmailTemplateEvent('Client::emails.notifyAdmin', [],'meo@tigerd.vn', 'meo@tigerd.vn', 'Thông Báo - Khách Đặt Hàng' ));
 
                 Cart::clearCartConditions();
                 Cart::clear();

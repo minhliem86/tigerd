@@ -56,8 +56,7 @@ class PagesController extends Controller
                 return '<a href="'.route('admin.pages.edit', $data->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>
                 <form method="POST" action=" '.route('admin.pages.destroy', $data->id).' " accept-charset="UTF-8" class="inline-block-span">
                     <input name="_method" type="hidden" value="DELETE">
-                    <input name="_token" type="hidden" value="'.csrf_token().'">
-                               <button class="btn  btn-danger btn-xs remove-btn" type="button" attrid=" '.route('admin.pages.destroy', $data->id).' " onclick="confirm_remove(this);" > Remove </button>
+                   
                </form>' ;
             })
             ->filter(function($query) use ($request){

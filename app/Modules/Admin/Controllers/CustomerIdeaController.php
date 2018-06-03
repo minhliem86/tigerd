@@ -17,7 +17,6 @@ class CustomerIdeaController extends Controller
     public function __construct(CustomerIdeaRepository $customerIdea, CommonRepository $common){
         $this->customerIdea = $customerIdea;
         $this->common = $common;
-        $this->_replacePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
     }
 
     /**
@@ -36,7 +35,7 @@ class CustomerIdeaController extends Controller
         $data = $this->customerIdea->query(['id', 'img_url', 'customer_name' ,'order', 'status']);
         $datatable = Datatables::of($data)
             ->editColumn('img_url', function ($data){
-                $img = "<img src='".asset($data->img_url)."' style='max-width:100px'/>";
+                $img = "<img src='".asset('public/upload/'.$data->img_url)."' style='max-width:100px'/>";
                 return $img;
             })
             ->editColumn('order', function($data){
@@ -88,7 +87,7 @@ class CustomerIdeaController extends Controller
     public function store(Request $request)
     {
         if($request->has('img_url')){
-            $img_url = $this->common->getPath($request->input('img_url'),$this->_replacePath);
+            $img_url = $this->common->getPath($request->input('img_url'));
         }else{
             $img_url = '';
         }
@@ -137,7 +136,7 @@ class CustomerIdeaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $img_url = $this->common->getPath($request->input('img_url'),$this->_replacePath);
+        $img_url = $this->common->getPath($request->input('img_url'));
         $data = [
             'customer_name' => $request->input('customer_name'),
             'slug' => \LP_lib::unicode($request->input('customer_name')),

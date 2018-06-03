@@ -101,13 +101,14 @@
 
                     $('table').on('change','select[name="ship_status"]', function(){
                         const value = $(this).val();
-                        const element_id = $(this).data('id')
+                        const element_id = $(this).data('id');
+                        const element_email = $(this).data('email');
 
                         $.ajax({
                             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                             url: "{{route('admin.order.changeShipStatus')}}",
                             type : 'POST',
-                            data: {value: value, id: element_id},
+                            data: {value: value, id: element_id, email : element_email},
                             success: function(data){
                                 if(!data.error){
                                     alertify.success('Trạng thái xử lý được cập nhật !');

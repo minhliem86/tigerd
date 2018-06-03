@@ -92,7 +92,7 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         if($request->has('img_url')){
-            $img_url = $this->common->getPath($request->input('img_url'),$this->_replacePath);
+            $img_url = $this->common->getPath($request->input('img_url'));
         }else{
             $img_url = '';
         }
@@ -110,7 +110,7 @@ class NewsController extends Controller
 
         if($request->has('meta_config')){
             if($request->has('meta_img')){
-                $meta_img = $this->common->getPath($request->input('meta_img'),$this->_replacePath);
+                $meta_img = $this->common->getPath($request->input('meta_img'));
             }else{
                 $meta_img = '';
             }
