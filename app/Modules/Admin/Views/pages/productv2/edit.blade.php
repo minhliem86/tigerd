@@ -65,8 +65,7 @@
 @section('content')
     <div class="row">
         @include("Admin::errors.error_layout")
-        <form method="POST" action="{!!route('admin.product.store')!!}" id="form" role="form" class="form-horizontal form-create-product" enctype="multipart/form-data">
-            {!!Form::token()!!}
+            {!! Form::model($inst,['route' => ['admin.product.update', $inst->id], 'method' => 'PUT', 'files' => true, 'class' => 'form-horizontal form-edit-product']) !!}
             <div class="col-md-12">
                 <fieldset>
                     <div class="form-group">
@@ -124,14 +123,14 @@
                         <label class="col-md-2 control-label">Hình Ảnh</label>
                         <div class="col-md-10">
                             <div class="input-group">
-                         <span class="input-group-btn">
-                           <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                             <i class="fa fa-picture-o"></i> Chọn
-                           </a>
-                         </span>
-                                <input id="thumbnail" class="form-control" type="hidden" name="img_url">
+                            <span class="input-group-btn">
+                                <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+                                    <i class="fa fa-picture-o"></i> Chọn
+                                </a>
+                            </span>
+                                {!!Form::hidden('img_url',old('img_url'), ['class'=>'form-control', 'id'=>'thumbnail' ])!!}
                             </div>
-                            <img id="holder" style="margin-top:15px;max-height:100px;">
+                            <img id="holder" style="margin-top:15px;max-height:100px;" src="{!!asset('public/upload/'.$inst->img_url)!!}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -145,10 +144,10 @@
                     <div class="form-group">
                         <div class="col-md-10 col-md-offset-2">
                             <div class="thuoctinh-wrapper" style="margin-bottom:10px">
-                                <button type="button" class="btn btn-secondary" id="att-trigger">Sản Phẩm Nhiều Thuộc Tính</button>
+                                <button type="button" class="btn btn-secondary" id="att-trigger">{!! $inst->attributes->isEmpty() ? 'Sản Phẩm Nhiều Thuộc Tính' : 'Hủy' !!}</button>
                             </div>
 
-                            <div class="thuoctinh-container hidden" style="padding:10px; border:1px solid #ccc; border-radius:5px;">
+                            <div class="thuoctinh-container {!! $inst->attributes->isEmpty() ? 'hidden' : 'show' !!}" style="padding:10px; border:1px solid #ccc; border-radius:5px;">
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-12 attribute_process">
@@ -156,16 +155,23 @@
                                                 <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_attribute"><i class="fa fa-plus"></i> Thêm Thuộc Tính Mới</button>
                                                 <button type="button" class="btn btn-sm btn-primary" id="trigger_addmore_att"><i class="fa fa-plus" ></i> Thêm Dòng Thuộc Tính</button>
                                             </div>
+                                            @if(!$inst->attributes->isEmpty())
+                                                @foreach($inst->attributes as $item_attribute)
                                             <div class="manage-thuoctinh" style="margin-bottom:15px; padding-bottom:10px; border-bottom:1px solid lightgrey">
                                                 <div class="row">
                                                         <div class="col-md-3">
-                                                            {!! Form::select('attribute[]', ['' => 'Chọn thuộc tính'] + $attribute_list, '', ['class' => 'form-control']) !!}
+                                                            {!! Form::select('attribute[]', ['' => 'Chọn thuộc tính'] + $attribute_list, $item_attribute->id, ['class' => 'form-control']) !!}
                                                         </div>
                                                         <div class="col-md-9">
                                                             <div class="value-wrapper">
-                                                                <div class="each-value" style="margin-bottom:10px">
-                                                                    <input type="text" name="att_value[][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g">
-                                                                </div>
+                                                                @if(!$item_attribute->attribute_values->isEmpty())
+                                                                    @foreach($item_attribute->attribute_values as $item_value)
+                                                                    <div class="each-value" style="margin-bottom:10px">
+                                                                        <input type="text" name="att_value[{!! $item_attribute->id ? $item_attribute->id : null  !!}][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g" value="{!! $item_value->value ? $item_value->value: '' !!}">
+                                                                        <input type="hidden" name="att_value_id[{!! $item_attribute->id ? $item_attribute->id : null  !!}][]" value="{!! $item_value->id ? $item_value->id : null  !!}">
+                                                                    </div>
+                                                                    @endforeach
+                                                                @endif
                                                             </div>
                                                             <div class="control-value text-right">
 
@@ -175,6 +181,8 @@
                                                         </div>
                                                     </div>
                                             </div>
+                                                @endforeach
+                                                @endif
 
                                         </div>
                                     </div>
@@ -188,45 +196,45 @@
 
                 <fieldset>
                     <legend>
-                        <div class="checkbox">
-                            <input type="checkbox" name="meta_config" id="meta_config"> CẤU HÌNH SEO
+                        <div class="checkbox my-checkbox">
+                            <input type="checkbox" name="meta_config" id="meta_config" {!! $inst->meta_configs()->count() ? 'checked' : null !!}> CẤU HÌNH SEO
                         </div>
                     </legend>
                     <div class="wrap-seo">
-                        <div class="form-group clearfix">
+                        <div class="form-group">
                             <label class="col-md-2 control-label">Meta Keywords:</label>
                             <div class="col-md-10">
-                                <input type="text" placeholder="Từ khóa bài viết (ngăn cách bởi dấu `,`. Ex: quầy tây, quần kaki)" id="meta_keywords" class="form-control" name="meta_keywords">
+                                {!! Form::text('meta_keywords', $inst->meta_configs()->count() ? $inst->meta_configs()->first()->meta_keywords : '' , ['class'=> 'form-control', 'placeholder'=>"Từ khóa bài viết (ngăn cách bởi dấu `,`. Ex: quầy tây, quần kaki)"]) !!}
                             </div>
                         </div>
-                        <div class="form-group clearfix">
+                        <div class="form-group">
                             <label class="col-md-2 control-label">Meta Description:</label>
                             <div class="col-md-10">
-                                <input type="text" placeholder="Mô tả bài viết" id="meta_description" class="form-control" name="meta_description">
+                                {!! Form::text('meta_description', $inst->meta_configs()->count() ? $inst->meta_configs()->first()->meta_description : '', ['class'=> 'form-control', 'placeholder'=>"Mô tả bài viết"]) !!}
                             </div>
                         </div>
-                        <div class="form-group clearfix">
+                        <div class="form-group">
                             <label class="col-md-2 control-label">Hình ảnh SEO:</label>
                             <div class="col-md-10">
                                 <div class="input-group">
                             <span class="input-group-btn">
-                            <a id="lfm-meta" data-input="thumbnail_meta" data-preview="holder_meta" class="btn btn-primary">
+                            <a id="lfm_meta" data-input="thumbnail_meta" data-preview="holder_meta" class="btn btn-primary">
                             <i class="fa fa-picture-o"></i> Chọn
                             </a>
                             </span>
-                                    <input id="thumbnail_meta" class="form-control" type="hidden" name="meta_img">
+                                    {{Form::hidden('meta_img',$inst->meta_configs()->count() ? $inst->meta_configs()->first()->meta_img : '', ['class'=>'form-control', 'id'=>'thumbnail_meta' ])}}
                                 </div>
-                                <img id="holder_meta" style="margin-top:15px;max-height:100px;">
+                                <img id="holder_meta" style="margin-top:15px;max-height:100px;" src="{!! $inst->meta_configs()->count() ? asset('public/upload/'.$inst->meta_configs()->first()->meta_img) : null !!}">
                             </div>
                         </div>
+                        {!! Form::hidden('meta_config_id',$inst->meta_configs()->count() ? $inst->meta_configs()->first()->id : '') !!}
                     </div>
                 </fieldset>
             </div>
-        </form>
+        {!! Form::close() !!}
     </div>
     {{--ATTRIBUTE MODAL--}}
     <div class="modal fade" tabindex="-1" role="dialog" id="modal_attribute">
-        {!! Form::open(['route' => 'admin.product.createAttribute','class' =>'form_create_att']) !!}
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -245,12 +253,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    {{--<button type="button" class="btn btn-primary" onclick="addAttribute( '{!! route('admin.product.createAttribute') !!}','modal-add-attribute')">Thêm</button>--}}
-                    <button type="submit" class="btn btn-primary" id="btn-addAttribute">Thêm</button>
+                    <button type="button" class="btn btn-primary" onclick="addAttribute( '{!! route('admin.product.createAttribute') !!}','modal-add-attribute')">Thêm</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
-        {!! Form::close() !!}
     </div><!-- /.modal -->
 @endsection
 
@@ -269,8 +275,6 @@
     <script src="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/js/plugins/sortable.min.js"></script>
     <script src="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/js/plugins/purify.min.js"></script>
     <script src="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/js/fileinput.min.js"></script>
-
-    <script type="text/javascript" src="{!! asset('public/assets/admin') !!}/dist/js/jquery.validate.min.js"></script>
 
     <script>
         const url = "{!!url('/')!!}"
@@ -337,14 +341,16 @@
 
 
         $(document).ready(function(){
+            /*HINH CHI TIET*/
             $("#thumb-input").fileinput({
                 uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
-                uploadAsync: true,
+                uploadAsync: false,
                 showUpload: false,
-                showBrowse: false,
-                showCaption: false,
                 showCancel: false,
+                showCaption: false,
                 dropZoneEnabled : true,
+                showBrowse: false,
+                overwriteInitial: false,
                 browseOnZoneClick: true,
                 fileActionSettings:{
                     showUpload : false,
@@ -353,11 +359,24 @@
                     showDownload: false,
                     removeIcon: '<i class="fa fa-trash text-danger"></i>',
                 },
+                initialPreview: [
+                    @foreach($inst->photos as $photo)
+                        "{!!asset($photo->thumb_url)!!}",
+                    @endforeach
+                ],
+                initialPreviewAsData: true,
+                initialPreviewFileType: 'image',
+                initialPreviewConfig: [
+                        @foreach($inst->photos as $item_photo)
+                    {'url': '{!! route("admin.product.AjaxRemovePhoto") !!}', key: "{!! $item_photo->id !!}", caption: "{!! $item_photo->filename !!}"},
+                    @endforeach
+                ],
                 layoutTemplates: {
                     progress: '<div class="kv-upload-progress hidden"></div>'
-                }
-            })
+                },
+            });
 
+            @if($inst->attributes->isEmpty())
             /*ATT TRIGGER*/
             $('.thuoctinh-container').hide();
             var att_con = $('.thuoctinh-container');
@@ -374,7 +393,63 @@
                     })
                 }
             })
-            var cp_manage_thuoctinh = $('.manage-thuoctinh').clone();
+            @else
+                $('.thuoctinh-container').hide();
+                var att_con = $('.thuoctinh-container');
+                $('#att-trigger').on('click', function(){
+                    if($('.thuoctinh-container').is(':hidden')){
+                        att_con.removeClass('hidden').addClass('show');
+                        $(this).text('Hủy');
+                    }else{
+                        alertify.confirm('Nếu Hủy, tất cả thuộc tính trong sản phẩm sẽ được gỡ bỏ. Bạn có đồng ý ?', function(e){
+                            if(e){
+                                att_con.removeClass('show').addClass('hidden');
+                                $(this).text('Sản Phẩm Nhiều Thuộc Tính');
+                                $("select[name='attribute[]']").val('');
+                                $('.each-value').each(function(index){
+                                    $(this).find('input[type=text]').val('');
+                                })
+                                $.ajax({
+                                    url: "{!! route('admin.product.removeAttribute') !!}",
+                                    type: "POST",
+                                    data: {product_id : {!! $inst->id !!}},
+                                    success: function(data){
+                                        if(!data.error){
+                                            alertify.success('Thuộc tính sản phẩm đã được gỡ bỏ.');
+                                        }
+
+                                    }
+                                })
+                            }
+                        })
+
+                    }
+                })
+                    @endif
+//            var cp_manage_thuoctinh = $('.manage-thuoctinh').clone().find("select[name='attribute']").val('').find();
+            var str_att = '<div class="manage-thuoctinh" style="margin-bottom:15px; padding-bottom:10px; border-bottom:1px solid lightgrey">\n' +
+                '<div class="row">\n' +
+                '<div class="col-md-3">\n' +
+                '<select name="attribute[]" class="form-control">\n' +
+                @foreach($attribute_list as $item_option)
+                        '<option value="'+{!! $item_option->id !!}+'">'+{!! $item_option->name !!}+' </option>'
+
+                        @endforeach
+                '</div>\n' +
+                '       <div class="col-md-9">\n' +
+                '                                                            <div class="value-wrapper">\n' +
+                '                                                                <div class="each-value" style="margin-bottom:10px">\n' +
+                '                                                                    <input type="text" name="att_value[][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g">\n' +
+                '                                                                </div>\n' +
+                '                                                            </div>\n' +
+                '                                                            <div class="control-value text-right">\n' +
+                '\n' +
+                '                                                                <button type="button" id="trigger-value"  class="btn btn-sm btn-warning"><i class="fa fa-plus"></i> Thêm giá trị</button>\n' +
+                '\n' +
+                '                                                            </div>\n' +
+                '                                                        </div>\n' +
+                '                                                    </div>\n' +
+                '                                            </div>';
             $('#trigger-value').on('click', function(){
                 var str = $(this).parent('.control-value').prev().children('.each-value').first().clone();
                 str.find('input[type=text]').val('');
@@ -382,15 +457,15 @@
             })
 
             $('#trigger_addmore_att').on('click', function(){
-                cp_manage_thuoctinh.appendTo('.attribute_process');
+                str_att.appendTo('.attribute_process');
             });
 
             $("select[name='attribute[]']").on('change', function(){
                 var value = $(this).val();
-               var input = $(this).parent().next().find('.value-wrapper').find("input[type=text]");
-               input.each(function (index){
+                var input = $(this).parent().next().find('.value-wrapper').find("input[type=text]");
+                input.each(function (index){
                    $(this).attr('name','att_value['+value+'][]');
-               })
+                })
             });
 
             /*ADD NEW ATTRIBUTE*/

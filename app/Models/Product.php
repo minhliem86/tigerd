@@ -61,6 +61,7 @@ class Product extends Model
                     \App\Models\MetaConfiguration::destroy($item_meta->id);
                 }
             }
+            $product->attributes()->detach();
         });
     }
 }

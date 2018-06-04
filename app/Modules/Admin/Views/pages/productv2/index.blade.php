@@ -33,8 +33,6 @@
                 <th width="50">Sắp xếp</th>
                 <th width="50">Trạng thái</th>
                 <th width="50">Nổi bật</th>
-                <th width="50">Type</th>
-                <th width="50">Thuộc tính</th>
                 <th width="90">Danh Mục Sản Phẩm</th>
                 <th width="90">&nbsp;</th>
             </tr>
@@ -79,8 +77,6 @@
                {data: 'order', name: 'order'},
                {data: 'status', name: 'status', 'orderable': false},
                {data: 'hot', name: 'hot', 'orderable': false},
-               {data: 'type', name: 'type', 'orderable': false},
-               {data: 'attribute', name: 'attribute', 'orderable': false},
                {data: 'cate_name', name: 'cate_name', 'orderable': false},
                {data: 'action', name: 'action', 'orderable': false}
            ],

@@ -77,11 +77,11 @@ class ProductController extends Controller
 
     public function getData(Request $request, AttributeRepository $attribute)
     {
-        $product = $this->productRepo->query(['products.id as id', 'products.name as name', 'products.sku_product as sku_product', 'products.price as price', 'products.stock as quality', 'products.img_url as img_url', 'products.hot as hot', 'products.order as order', 'products.status as status', 'categories.name as cate_name', 'products.type as type'])->join('categories', 'categories.id', '=', 'products.category_id')->orderBy('id', 'ASC')->where('visibility', 1)->with(['values']);
+        $product = $this->productRepo->query(['products.id as id', 'products.name as name', 'products.sku_product as sku_product', 'products.price as price', 'products.stock as quality', 'products.img_url as img_url', 'products.hot as hot', 'products.order as order', 'products.status as status', 'categories.name as cate_name'])->join('categories', 'categories.id', '=', 'products.category_id')->orderBy('id', 'ASC')->where('visibility', 1)->with(['values']);
 
         return Datatables::of($product)
             ->addColumn('action', function($product){
-                $link = $product->type == 'simple' ?  '<a href="'.route('admin.product.edit', $product->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>' : '<a href="'.route('admin.product.configuable.index', $product->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>';
+                $link = '<a href="'.route('admin.product.edit', $product->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>';
 
                 return $link.
             ' <form method="POST" action=" '.route('admin.product.destroy', $product->id).' " accept-charset="UTF-8" class="inline-block-span">
@@ -110,26 +110,6 @@ class ProductController extends Controller
              </label>
             ';
             })
-            ->addColumn('attribute', function($product) use ($attribute){
-                $array_att = [];
-                foreach($product->values as $item_value){
-                    $array_att[$item_value->attributes->name][$item_value->id] = $item_value->value;
-                }
-                $string = '';
-
-                foreach ($array_att as $k => $v){
-                    $string .= '<p>'.$k.':';
-                    foreach ($v as $item_v){
-                        if($item_v == end($v)){
-                            $string .= ' '.$item_v.'</p>';
-                        }else{
-                            $string .= ' '.$item_v.',';
-                        }
-                    }
-                }
-                return $string;
-            })
-
             ->editColumn('price', function($product){
                 $price = number_format($product->price);
                 return $price;
@@ -149,7 +129,7 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(CategoryRepository $category, AttributeRepository $attribute )
+    public function create(CategoryRepository $category, AttributeRepository $attribute, AttributeValueRepository $attribute_value )
     {
         if(!$category->query()->count()){
             return redirect()->route('admin.category.index')->with('error','Vui lòng Tạo danh mục sản phẩm');
@@ -165,7 +145,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, CategoryRepository $cate)
+    public function store(Request $request, CategoryRepository $cate, AttributeRepository $attribute, AttributeValueRepository $attribute_value )
     {
         $valid = Validator::make($request->all(), $this->rules, $this->messages);
         if($valid->fails()){
@@ -177,7 +157,7 @@ class ProductController extends Controller
             $img_url = "";
         }
 
-        $sku_product = \Str::upper(trim($request->input('sku_product')));
+        $sku_product = strtoupper(str_replace(' ','', $request->input('sku_product')));
         $order = $this->productRepo->getOrder();
         $data = [
             'name' => $request->input('name'),
@@ -232,16 +212,29 @@ class ProductController extends Controller
             $product->photos()->saveMany($data_photo);
         }
 
-        if($request->has('attribute_section')){
-           if($request->has('att')){
-               $data_att = $request->input('att');
-               $product->attributes()->attach($data_att);
-               if($request->has('att_value')){
-                   $data_value = $request->input('att_value');
-                   $product->values()->attach($data_value);
-               }
-           }
+        /*ATTRIBUTE PROCESS*/
+        $attribute_arr = $request->input('attribute');
+
+        if($attribute_arr[0]){
+            foreach($attribute_arr as $item_attribute){
+                if($item_attribute){
+                    $value_arr = $request->input('att_value');
+                    if($value_arr[$item_attribute][0]) {
+                        $product->attributes()->attach($item_attribute);
+                        foreach($value_arr[$item_attribute] as $item_value){
+                            $arr_obj_value[] = new \App\Models\AttributeValue([
+                                'value' => $item_value,
+                                'product_id' => $product->id,
+                            ]);
+                        }
+                        $attribute = $attribute->find($item_attribute);
+                        $attribute->attribute_values()->saveMany($arr_obj_value);
+                    }
+
+                }
+            }
         }
+
         return redirect()->route('admin.product.index')->with('success','Created !');
     }
 
@@ -264,18 +257,10 @@ class ProductController extends Controller
      */
     public function edit($id, CategoryRepository $cate, AttributeRepository $attribute)
     {
-        $attribute_list = $attribute->all(['id', 'name', 'slug']);
+        $attribute_list = $attribute->query(['id', 'name'])->lists('name','id')->toArray();
         $cate = $cate->query(['id','name'])->lists('name', 'id')->toArray();
-        $inst = $this->productRepo->find($id,['*'],['photos','attributes','values']);
-        $array_att = [];
-        $array_value = [];
-        foreach($inst->attributes as $item_att){
-            array_push($array_att,$item_att->id);
-        };
-        foreach($inst->values as $item_value){
-            array_push($array_value,$item_value->id);
-        };
-        return view('Admin::pages.product.edit', compact('inst', 'cate', 'attribute_list', 'array_att', 'array_value'));
+        $inst = $this->productRepo->find($id,['*'],['photos','attributes']);
+        return view('Admin::pages.productv2.edit', compact('inst', 'cate', 'attribute_list'));
     }
 
     /**
@@ -285,7 +270,7 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,  CategoryRepository $cate, MetaRepository $meta,  $id)
+    public function update(Request $request,  CategoryRepository $cate, MetaRepository $meta,  AttributeRepository $attribute, AttributeValueRepository $attribute_value,  $id)
     {
         $valid = Validator::make($request->all(), $this->rules_edit, $this->messages_edit);
         if($valid->fails()){
@@ -301,7 +286,7 @@ class ProductController extends Controller
             'content' => $request->input('content'),
             'price' => $request->input('price'),
             'discount' => $request->input('discount'),
-            'sku_product' => $request->input('sku_product'),
+            'sku_product' => $sku_product = strtoupper(str_replace(' ','', $request->input('sku_product'))),
             'stock' => $request->input('stock'),
             'img_url' => $img_url,
             'order' => $request->input('order'),
@@ -348,16 +333,31 @@ class ProductController extends Controller
             $product->photos()->saveMany($data_photo);
         }
 
-        if($request->has('attribute_section')){
-            if($request->has('att')){
-                $data_att = $request->input('att');
-                $product->attributes()->sync($data_att);
-                if($request->has('att_value')){
-                    $data_value = $request->input('att_value');
-                    $product->values()->sync($data_value);
+        /*ATTRIBUTE PROCESS*/
+        $attribute_arr = $request->input('attribute');
+
+        if($attribute_arr[0]){
+            foreach($attribute_arr as $item_attribute){
+                if($item_attribute){
+                    $value_arr = $request->input('att_value');
+                    if($value_arr[$item_attribute][0]) {
+                        $arr_attribute_id[] = $item_attribute;
+                        foreach($value_arr[$item_attribute] as $item_value){
+                            $arr_obj_value[] = new \App\Models\AttributeValue([
+                                'value' => $item_value,
+                                'product_id' => $product->id,
+                            ]);
+                        }
+                        $attribute = $attribute->find($item_attribute);
+                        $attribute->attribute_values()->saveMany($arr_obj_value);
+                    }
+
                 }
             }
+            $attribute->attributes()->sync($arr_attribute_id);
         }
+
+
 
         return redirect()->route('admin.product.index')->with('success', 'Updated !');
     }
@@ -476,16 +476,14 @@ class ProductController extends Controller
             abort('404', 'Not Access');
         }else{
             $data = [
-                'name' => $request->input('name_att'),
-                'slug' => \LP_lib::unicodenospace($request->input('name_att')),
+                'name' => $request->input('att_name'),
+                'slug' => \LP_lib::unicode($request->input('att_name')),
                 'description' => $request->input('att_description'),
             ];
             $item_attr = $attribute->create($data);
-            $attribute_list = $attribute->all(['id','name','slug'],['attribute_values']);
-            $array_att = [];
-            $view = view('Admin::ajax.attribute.att', compact('item_attr', 'array_att'))->render();
-
-            return response()->json(['rs'=>'ok', 'data' => $view], 200);
+            $data_name = $item_attr->name;
+            $data_id = $item_attr->id;
+            return response()->json(['rs'=>'ok', 'data_name' => $data_name, 'data_id' => $data_id], 200);
         }
     }
 
@@ -514,18 +512,34 @@ class ProductController extends Controller
     }
 
     /*REMOVE ATTRIBUTE OR VALUE*/
-    public function removeAttribute(Request $request, AttributeRepository $att )
+    public function removeAttribute(Request $request, AttributeRepository $att, AttributeValueRepository $attribute_value )
     {
         if(!$request->ajax()){
-            abort('404', 'Not Access');
-        }else {
-            $array_att = $request->input('arr_att');
-            if(count($array_att)){
-                $att->deleteAll($array_att);
-                return response()->json(['error'=>false, 'mes' => 'Thuộc tính đã được xóa thành công'], 200);
-            }else{
-                return response()->json(['error'=>true, 'mes' => 'Vui lòng chọn thuộc tính cần xóa'], 200);
-            }
+            abort('404');
+        }else{
+            $product_id = $request->input('product_id');
+            $product = $this->productRepo->find($product_id);
+            $product->attributes()->detach();
+            $attribute_value->query()->where('product_id',$product_id)->delete();
+            return response()->json(['error'=>false,'data'=>'done']);
+        }
+    }
+
+    /*VALIDATE NEW ATTRIBUTE*/
+    public function checkRuleAttribute(Request $request, AttributeValueRepository $attribute_value)
+    {
+        $request->merge(['att_name' => \LP_lib::unicode($request->input('att_name'))]);
+        $rule = [
+            'att_name' => 'required|unique:attributes,slug'
+        ];
+        $message = [
+          'att_name.exists' => 'Thuộc tính đã tồn tại',
+        ];
+        $valid = \Validator::make($request->all(), $rule, $message);
+        if($valid->fails()){
+            return response()->json(false);
+        }else{
+            return response()->json(true);
         }
     }
 
