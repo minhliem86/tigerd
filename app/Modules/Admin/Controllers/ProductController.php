@@ -172,70 +172,77 @@ class ProductController extends Controller
             'order' => $order,
             'category_id' => $request->input('category_id'),
         ];
-//        $product = $this->productRepo->create($data);
-//
-//        if($request->has('meta_config')){
-//            if($request->has('meta_img')){
-//                $meta_img = $this->common->getPath($request->input('meta_img'));
-//            }else{
-//                $meta_img = "";
-//            }
-//            $data = [
-//                'meta_keywords' => $request->input('meta_keywords'),
-//                'meta_description' => $request->input('meta_description'),
-//                'meta_img' => $meta_img,
-//            ];
-//            $product->meta_configs()->save(new \App\Models\MetaConfiguration($data));
-//        }
-//
-//        $sub_photo = $request->file('thumb-input');
-//
-//        if($sub_photo[0]) {
-//            $data_photo = [];
-//            foreach ($sub_photo as $thumb) {
-//                $bigSize = $this->common->uploadImage($request, $thumb, $this->_big, $resize = false, null, null, base_path($this->_removePath));
-//                $smallsize = $this->common->createThumbnail($bigSize, $this->_small, 350, 350, base_path($this->_removePath));
-//
-//                $order = $this->photo->getOrder();
-//                $filename = $this->common->getFileName($bigSize);
-//                $data = new \App\Models\Photo(
-//                    [
-//                        'img_url' => $bigSize,
-//                        'thumb_url' => $smallsize,
-//                        'order' => $order,
-//                        'filename' => $filename,
-//                    ]
-//                );
-//                array_push($data_photo, $data);
-//            }
-//
-//            $product->photos()->saveMany($data_photo);
-//        }
+        $product = $this->productRepo->create($data);
+
+        if($request->has('meta_config')){
+            if($request->has('meta_img')){
+                $meta_img = $this->common->getPath($request->input('meta_img'));
+            }else{
+                $meta_img = "";
+            }
+            $data = [
+                'meta_keywords' => $request->input('meta_keywords'),
+                'meta_description' => $request->input('meta_description'),
+                'meta_img' => $meta_img,
+            ];
+            $product->meta_configs()->save(new \App\Models\MetaConfiguration($data));
+        }
+
+        $sub_photo = $request->file('thumb-input');
+
+        if($sub_photo[0]) {
+            $data_photo = [];
+            foreach ($sub_photo as $thumb) {
+                $bigSize = $this->common->uploadImage($request, $thumb, $this->_big, $resize = false, null, null, base_path($this->_removePath));
+                $smallsize = $this->common->createThumbnail($bigSize, $this->_small, 350, 350, base_path($this->_removePath));
+
+                $order = $this->photo->getOrder();
+                $filename = $this->common->getFileName($bigSize);
+                $data = new \App\Models\Photo(
+                    [
+                        'img_url' => $bigSize,
+                        'thumb_url' => $smallsize,
+                        'order' => $order,
+                        'filename' => $filename,
+                    ]
+                );
+                array_push($data_photo, $data);
+            }
+
+            $product->photos()->saveMany($data_photo);
+        }
 
         /*ATTRIBUTE PROCESS*/
         $attribute_arr = $request->input('attribute');
         $value_arr = $request->input('att_value');
-        dd($value_arr);
-        if($attribute_arr[0]){
-            foreach($attribute_arr as $item_attribute){
-                if($item_attribute){
-                    dd($item_attribute);
 
+        if(count($attribute_arr)){
+            foreach($attribute_arr as $item_attribute) {
+                if ($item_attribute) {
+                    if (count($value_arr[$item_attribute])) {
+                        foreach ($value_arr[$item_attribute] as $item_value) {
+                            if ($item_value) {
+                                $arr_obj_value[$item_attribute][] = new \App\Models\AttributeValue([
+                                    'value' => $item_value,
+                                    'product_id' => $product->id,
+                                ]);
+                            }
+                        }
 
-//                    if($value_arr[$item_attribute][0]) {
-//                        $product->attributes()->attach($item_attribute);
-//                        foreach($value_arr[$item_attribute] as $item_value){
-//                            $arr_obj_value[] = new \App\Models\AttributeValue([
-//                                'value' => $item_value,
-//                                'product_id' => $product->id,
-//                            ]);
-//                        }
-//                        $att = $attribute->find($item_attribute);
-//                        $att->attribute_values()->saveMany($arr_obj_value);
-//                    }
-
+                    }
+                    $arr_attribute_id [] = $item_attribute;
                 }
             }
+            if(count($arr_attribute_id)){
+                $product->attributes()->attach($arr_attribute_id);
+            }
+            if(count($arr_obj_value)){
+                foreach($arr_obj_value as $key => $att_val){
+                    $att = $attribute->find($key);
+                    $att->attribute_values()->saveMany($att_val);
+                }
+            }
+
         }
 
         return redirect()->route('admin.product.index')->with('success','Created !');
@@ -338,29 +345,41 @@ class ProductController extends Controller
 
         /*ATTRIBUTE PROCESS*/
         $attribute_arr = $request->input('attribute');
+        $value_arr = $request->input('att_value');
 
-        if($attribute_arr[0]){
-            foreach($attribute_arr as $item_attribute){
-                if($item_attribute){
-                    $value_arr = $request->input('att_value');
-                    if($value_arr[$item_attribute][0]) {
-                        $arr_attribute_id[] = $item_attribute;
-                        $attribute = $attribute->find($item_attribute);
-                        $attribute->attribute_values()->delete();
-                        foreach($value_arr[$item_attribute] as $item_value){
-                            $arr_obj_value[] = new \App\Models\AttributeValue([
-                                'value' => $item_value,
-                                'product_id' => $product->id,
-                            ]);
+        if(count($attribute_arr)){
+            foreach($attribute_arr as $item_attribute) {
+                if ($item_attribute) {
+                    if (count($value_arr[$item_attribute])) {
+                        foreach ($value_arr[$item_attribute] as $item_value) {
+                            if ($item_value) {
+                                $arr_obj_value[$item_attribute][] = new \App\Models\AttributeValue([
+                                    'value' => $item_value,
+                                    'product_id' => $product->id,
+                                ]);
+                            }
                         }
-                        $attribute->attribute_values()->saveMany($arr_obj_value);
+
                     }
+                    $arr_attribute_id [] = $item_attribute;
                 }
             }
-            $attribute->attributes()->sync($arr_attribute_id);
+            if(!$product->attributes->isEmpty()){
+                foreach($product->attributes as $item_attr){
+                    $item_attr->attribute_values()->delete();
+                }
+            }
+
+            if(count($arr_attribute_id)){
+                $product->attributes()->sync($arr_attribute_id);
+            }
+            if(count($arr_obj_value)){
+                foreach($arr_obj_value as $key => $att_val){
+                    $att = $attribute->find($key);
+                    $att->attribute_values()->saveMany($att_val);
+                }
+            }
         }
-
-
 
         return redirect()->route('admin.product.index')->with('success', 'Updated !');
     }

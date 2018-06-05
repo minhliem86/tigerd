@@ -231,7 +231,7 @@
         </div><!-- /.modal-dialog -->
         {!! Form::close() !!}
     </div><!-- /.modal -->
-    <div class="manage-thuoctinh-copy hidden" style="margin-bottom:15px; padding-bottom:10px; border-bottom:1px solid lightgrey">
+    <div class="manage-thuoctinh copy hidden" style="margin-bottom:15px; padding-bottom:10px; border-bottom:1px solid lightgrey">
         <div class="row">
             <div class="col-md-3">
                 {!! Form::select('attribute[]', ['' => 'Chọn thuộc tính'] + $attribute_list, '', ['class' => 'form-control']) !!}
@@ -379,7 +379,8 @@
             })
 
             $('body').on('click','#trigger_addmore_att', function(){
-                $('.attribute_process').append($('.manage-thuoctinh-copy').clone().removeClass('hidden').addClass('show').removeClass('.manage-thuoctinh-copy').addClass('.manage-thuoctinh'));
+                var manage =$('.manage-thuoctinh.copy').clone().removeClass('copy').removeClass('hidden').addClass('show');
+                $('.attribute_process').append(manage);
             });
 
             $("body").on('change', "select[name='attribute[]']", function(){
@@ -406,6 +407,7 @@
                     }
                 },
                 submitHandler: function(form){
+                    return false;
                     var att_name = $(form).find('input[name=att_name]').val();
                     var att_description = $(form).find('textarea[name=att_description]').val();
                     $.ajax({
@@ -423,7 +425,7 @@
 
                         }
                     })
-                    return false;
+
                 }
 
             })

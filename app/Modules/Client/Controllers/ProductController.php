@@ -112,42 +112,39 @@ class ProductController extends Controller
 
     public function getProduct(Request $request, $slug)
     {
-        $product = $this->product->getProductBySlug($slug,['id','name', 'slug', 'description', 'content', 'sku_product', 'price', 'discount', 'img_url','category_id','type'], ['categories','photos', 'values', 'attributes','product_links']);
+        $product = $this->product->getProductBySlug($slug,['id','name', 'slug', 'description', 'content', 'sku_product', 'price', 'discount', 'img_url','category_id','type'], ['categories','photos', 'attributes']);
         $meta = $product->meta_configs()->first();
         if(count($product)){
-            $array_option_att = [];
-            $option = "";
             $relate_product = $this->product->relateProduct([$product->id], ['id', 'img_url', 'name','slug', 'price', 'discount','category_id', 'default'],['attributes', 'product_links']);
-
-            if($product->type == 'configuable'){
-                $array_product_id = [];
-                if(!$product->product_links->isEmpty()){
-                    foreach($product->product_links as $link){
-                        array_push($array_product_id, $link->link_to_product_id);
-                    }
-                }
-                $collect_product_child = $this->product->findWhereIn('id', $array_product_id);
-
-                foreach($collect_product_child as $item_child){
-                    foreach($item_child->values as $item_value){
-                        if($item_value == $item_child->values->last()){
-                            $option .= $item_value->attributes->name .': '.$item_value->value;
-                        }else {
-                            $option .= $item_value->attributes->name . ': ' . $item_value["value"] . ', ';
-                        }
-                    }
-                    $rs_array = "<option value='".$item_child->id."'>".$option."</option>";
-                    array_push($array_option_att,$rs_array);
-                    $option = "";
-                }
-                foreach($collect_product_child as $item_default){
-                    if($item_default->default){
-                        $product = $item_default;
-                        break;
-                    }
-                }
-
-            }
+//            if($product->type == 'configuable'){
+//                $array_product_id = [];
+//                if(!$product->product_links->isEmpty()){
+//                    foreach($product->product_links as $link){
+//                        array_push($array_product_id, $link->link_to_product_id);
+//                    }
+//                }
+//                $collect_product_child = $this->product->findWhereIn('id', $array_product_id);
+//
+//                foreach($collect_product_child as $item_child){
+//                    foreach($item_child->values as $item_value){
+//                        if($item_value == $item_child->values->last()){
+//                            $option .= $item_value->attributes->name .': '.$item_value->value;
+//                        }else {
+//                            $option .= $item_value->attributes->name . ': ' . $item_value["value"] . ', ';
+//                        }
+//                    }
+//                    $rs_array = "<option value='".$item_child->id."'>".$option."</option>";
+//                    array_push($array_option_att,$rs_array);
+//                    $option = "";
+//                }
+//                foreach($collect_product_child as $item_default){
+//                    if($item_default->default){
+//                        $product = $item_default;
+//                        break;
+//                    }
+//                }
+//
+//            }
 
             $ip = $request->ip();
             $info_cache = $ip . '_' .$slug;
@@ -160,7 +157,7 @@ class ProductController extends Controller
                 });
             }
 
-            return view('Client::pages.product.detail', compact('product', 'relate_product', 'array_option_att', 'meta'));
+            return view('Client::pages.product.detail', compact('product', 'relate_product', 'meta'));
         }
         return abort(404);
     }

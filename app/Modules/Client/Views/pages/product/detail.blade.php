@@ -45,7 +45,7 @@
                             <input type="number" name="quantity" class="form-control" min="1" max="10"  value="1" id="quantity" onkeypress="restrictMinus(event)">
                         </div>
                         <div class="each-attribute quantity">
-                            <button class="btn btn-primary" type="submit">Mua Ngay</button>
+                            <button class="btn btn-primary" type="submit">Đặt hàng</button>
                         </div>
                     </div>
                     {!! Form::close() !!}

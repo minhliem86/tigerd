@@ -120,6 +120,21 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-md-2 control-label" for="description">Sắp xếp</label>
+                        <div class="col-md-10">
+                            {{Form::text('order',old('order'), ['class'=>'form-control', 'placeholder'=>'order'])}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label" for="description">Trạng thái</label>
+                        <div class="col-md-10">
+                            <label class="toggle">
+                                <input type="checkbox" name="status" value="1" {{$inst->status == 1 ? 'checked' : '' }}  >
+                                <span class="handle"></span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-md-2 control-label">Hình Ảnh</label>
                         <div class="col-md-10">
                             <div class="input-group">
@@ -256,6 +271,25 @@
         </div><!-- /.modal-dialog -->
         {!! Form::close() !!}
     </div><!-- /.modal -->
+    <div class="manage-thuoctinh copy hidden" style="margin-bottom:15px; padding-bottom:10px; border-bottom:1px solid lightgrey">
+        <div class="row">
+            <div class="col-md-3">
+                {!! Form::select('attribute[]', ['' => 'Chọn thuộc tính'] + $attribute_list, '', ['class' => 'form-control']) !!}
+            </div>
+            <div class="col-md-9">
+                <div class="value-wrapper">
+                    <div class="each-value" style="margin-bottom:10px">
+                        <input type="text" name="att_value[][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g">
+                    </div>
+                </div>
+                <div class="control-value text-right">
+
+                    <button type="button"  class="btn btn-sm btn-warning trigger-value"><i class="fa fa-plus"></i> Thêm giá trị</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
@@ -426,35 +460,15 @@
                     }
                 })
                     @endif
-//            var cp_manage_thuoctinh = $('.manage-thuoctinh').clone().find("select[name='attribute']").val('').find();
-            var str_att = '<div class="manage-thuoctinh" style="margin-bottom:15px; padding-bottom:10px; border-bottom:1px solid lightgrey">\n' +
-                '<div class="row">\n' +
-                '<div class="col-md-3">\n' +
-                '<select name="attribute[]" class="form-control">\n' +
-                '</select> \n' +
-                '</div>\n' +
-                '       <div class="col-md-9">\n' +
-                '                                                            <div class="value-wrapper">\n' +
-                '                                                                <div class="each-value" style="margin-bottom:10px">\n' +
-                '                                                                    <input type="text" name="att_value[][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g">\n' +
-                '                                                                </div>\n' +
-                '                                                            </div>\n' +
-                '                                                            <div class="control-value text-right">\n' +
-                '\n' +
-                '                                                                <button type="button" id="trigger-value"  class="btn btn-sm btn-warning"><i class="fa fa-plus"></i> Thêm giá trị</button>\n' +
-                '\n' +
-                '                                                            </div>\n' +
-                '                                                        </div>\n' +
-                '                                                    </div>\n' +
-                '                                            </div>';
             $('body').on('click','.trigger-value', function(){
                 var str = $(this).parent('.control-value').prev().children('.each-value').first().clone();
                 str.find('input[type=text]').val('');
                 $(this).parent('.control-value').prev().append(str);
             })
 
-            $('#trigger_addmore_att').on('click', function(){
-                cp_manage_thuoctinh.appendTo('.attribute_process');
+            $('body').on('click','#trigger_addmore_att', function(){
+                var manage =$('.manage-thuoctinh.copy').clone().removeClass('copy').removeClass('hidden').addClass('show');
+                $('.attribute_process').append(manage);
             });
 
             $("body").on('change', "select[name='attribute[]']", function(){
@@ -481,6 +495,7 @@
                     }
                 },
                 submitHandler: function(form){
+                    return false;
                     var att_name = $(form).find('input[name=att_name]').val();
                     var att_description = $(form).find('textarea[name=att_description]').val();
                     $.ajax({
@@ -498,7 +513,7 @@
 
                         }
                     })
-                    return false;
+
                 }
 
 

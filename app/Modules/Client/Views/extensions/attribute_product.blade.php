@@ -1,11 +1,14 @@
-@if(count($array_option_att))
+@if(!$product->attributes->isEmpty())
+    @foreach($product->attributes as $item_attribute)
         <div class="each-attribute">
-            <p class="att-title">Chọn Sản Phẩm</p>
-            <select name="att_value[]" class="form-control value_product" required >
-                <option value="">--Vui lòng chọn thuộc tính--</option>
-                    @foreach($array_option_att as $item_att )
-                        {!! $item_att !!}
-                    @endforeach
-            </select>
+            @if(!$item_attribute->attribute_values->isEmpty())
+                @foreach($item_attribute->attribute_values()->where('product_id',$product->id)->get() as $item_att_value)
+                <div class="custom-control custom-radio">
+                    <input type="radio" id="" name="{!! LP_lib::unicode($item_att_value->value) !!}" class="custom-control-input" value="{!! $item_att_value->id !!}">
+                    <label class="custom-control-label" for="{!! LP_lib::unicode($item_att_value->value) !!}">{!! $item_att_value->value !!}</label>
+                </div>
+                @endforeach
+            @endif
         </div>
+    @endforeach
 @endif
