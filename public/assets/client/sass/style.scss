@@ -1354,6 +1354,11 @@ ul.list-success{
           }
         }
       }
+      p{
+        font-size:1.4rem;
+        color:$text-grey;
+        text-decoration: none;
+      }
     }
     .block-subcribe{
       @include media-max(767px){
@@ -1361,12 +1366,12 @@ ul.list-success{
         text-align:center;
       }
       h3.title-subcribe{
-        font-size:2.5rem;
+        font-size:2rem;
         text-transform: uppercase;
         color: $cl-pink;
       }
       p.sub-title{
-        font-size:1.6rem;
+        font-size:1.4rem;
         font-style:italic;
         margin-bottom:15px;
       }

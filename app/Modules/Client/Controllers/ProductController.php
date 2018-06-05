@@ -220,7 +220,7 @@ class ProductController extends Controller
             return redirect()->route('client.home')->with('error','Giỏ hàng của bạn đang rỗng. Vui lòng chọn sản phẩm.');
         }
         $cart = Cart::getContent();
-        $city = DB::table('cities')->lists('name_with_type', 'code');
+        $city = DB::table('cities')->lists('name', 'code');
         $pm = $paymentMethod->query(['id', 'name','description'])->where('slug','cod')->get();
         return view('Client::pages.product.payment', compact('cart', 'pm', 'city'));
     }

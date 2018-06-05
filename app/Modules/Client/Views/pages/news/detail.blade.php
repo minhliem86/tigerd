@@ -36,12 +36,12 @@
                             @foreach($relate_news as $item_relate)
                             <div class="box">
                                 <figure>
-                                    <a href="{!! route('client.news.detail', $item_relate->slug) !!}"><img src="{!! asset($item_relate->img_url) !!}" class="img-fluid" alt="{!! $item_relate->name !!}"></a>
+                                    <a href="{!! route('client.news.detail', $item_relate->slug) !!}"><img src="{!! asset('public/upload/'.$item_relate->img_url) !!}" class="img-fluid" alt="{!! $item_relate->name !!}"></a>
                                     <figcaption>
                                         <h4 class="news-name-relate">{!! $item_relate->name !!}</h4>
-                                        <div class="content-relate">{!! $item_relate->description !!}</div>
+                                        <div class="content-relate">{!! Str::words($item_relate->description, 25) !!}</div>
                                         <div class="wrap-readmore">
-                                            <a href="{!! route('client.news.detail', $item_relate->slug) !!}" class="readmore">Read more...</a>
+                                            <a href="{!! route('client.news.detail', $item_relate->slug) !!}" class="readmore">Xem thêm...</a>
                                         </div>
                                     </figcaption>
                                 </figure>

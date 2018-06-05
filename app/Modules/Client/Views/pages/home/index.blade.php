@@ -116,7 +116,7 @@
                                                             <div class="media-body">
                                                                 <h3 class="news-name"><a href="{!! route('client.news.detail', $item_news->slug) !!}">{!! $item_news->name !!}</a></h3>
                                                                 <p>{!! $item_news->description !!}</p>
-                                                                <a href="{!! route('client.news.detail', $item_news->slug) !!}" class="readmore float-right">Read more ...</a>
+                                                                <a href="{!! route('client.news.detail', $item_news->slug) !!}" class="readmore float-right">Xem thêm ...</a>
                                                             </div>
                                                         </div>
                                                     @endforeach

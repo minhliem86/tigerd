@@ -165,17 +165,16 @@
                                                         <div class="col-md-9">
                                                             <div class="value-wrapper">
                                                                 @if(!$item_attribute->attribute_values->isEmpty())
-                                                                    @foreach($item_attribute->attribute_values as $item_value)
+                                                                    @foreach($item_attribute->attribute_values()->where('product_id',$inst->id)->get() as $item_value)
                                                                     <div class="each-value" style="margin-bottom:10px">
-                                                                        <input type="text" name="att_value[{!! $item_attribute->id ? $item_attribute->id : null  !!}][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g" value="{!! $item_value->value ? $item_value->value: '' !!}">
-                                                                        <input type="hidden" name="att_value_id[{!! $item_attribute->id ? $item_attribute->id : null  !!}][]" value="{!! $item_value->id ? $item_value->id : null  !!}">
+                                                                        <input type="text" name="att_value[{!! $item_attribute->id ? $item_attribute->id : null  !!}][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g" value="{!! $item_value->value ? $item_value->value : '' !!}">
                                                                     </div>
                                                                     @endforeach
                                                                 @endif
                                                             </div>
                                                             <div class="control-value text-right">
 
-                                                                <button type="button" id="trigger-value"  class="btn btn-sm btn-warning"><i class="fa fa-plus"></i> Thêm giá trị</button>
+                                                                <button type="button" class="btn btn-sm btn-warning trigger-value"><i class="fa fa-plus"></i> Thêm giá trị</button>
 
                                                             </div>
                                                         </div>
@@ -183,11 +182,8 @@
                                             </div>
                                                 @endforeach
                                                 @endif
-
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
@@ -235,6 +231,7 @@
     </div>
     {{--ATTRIBUTE MODAL--}}
     <div class="modal fade" tabindex="-1" role="dialog" id="modal_attribute">
+        {!! Form::open(['class' =>'form_create_att']) !!}
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -253,10 +250,11 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="addAttribute( '{!! route('admin.product.createAttribute') !!}','modal-add-attribute')">Thêm</button>
+                    <button type="submit" class="btn btn-primary" id="btn-addAttribute">Thêm</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
+        {!! Form::close() !!}
     </div><!-- /.modal -->
 @endsection
 
@@ -275,6 +273,8 @@
     <script src="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/js/plugins/sortable.min.js"></script>
     <script src="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/js/plugins/purify.min.js"></script>
     <script src="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/js/fileinput.min.js"></script>
+
+    <script type="text/javascript" src="{!! asset('public/assets/admin') !!}/dist/js/jquery.validate.min.js"></script>
 
     <script>
         const url = "{!!url('/')!!}"
@@ -431,10 +431,7 @@
                 '<div class="row">\n' +
                 '<div class="col-md-3">\n' +
                 '<select name="attribute[]" class="form-control">\n' +
-                @foreach($attribute_list as $item_option)
-                        '<option value="'+{!! $item_option->id !!}+'">'+{!! $item_option->name !!}+' </option>'
-
-                        @endforeach
+                '</select> \n' +
                 '</div>\n' +
                 '       <div class="col-md-9">\n' +
                 '                                                            <div class="value-wrapper">\n' +
@@ -450,21 +447,21 @@
                 '                                                        </div>\n' +
                 '                                                    </div>\n' +
                 '                                            </div>';
-            $('#trigger-value').on('click', function(){
+            $('body').on('click','.trigger-value', function(){
                 var str = $(this).parent('.control-value').prev().children('.each-value').first().clone();
                 str.find('input[type=text]').val('');
                 $(this).parent('.control-value').prev().append(str);
             })
 
             $('#trigger_addmore_att').on('click', function(){
-                str_att.appendTo('.attribute_process');
+                cp_manage_thuoctinh.appendTo('.attribute_process');
             });
 
-            $("select[name='attribute[]']").on('change', function(){
+            $("body").on('change', "select[name='attribute[]']", function(){
                 var value = $(this).val();
                 var input = $(this).parent().next().find('.value-wrapper').find("input[type=text]");
                 input.each(function (index){
-                   $(this).attr('name','att_value['+value+'][]');
+                    $(this).attr('name','att_value['+value+'][]');
                 })
             });
 
@@ -501,7 +498,9 @@
 
                         }
                     })
+                    return false;
                 }
+
 
             })
 

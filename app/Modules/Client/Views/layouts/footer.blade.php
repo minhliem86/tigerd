@@ -3,7 +3,15 @@
         <div class="row">
             <div class="col-md-3 col-sm-4">
                 <div class="block-footer">
-                    <h3 class="title-footer">About Tigerd</h3>
+                    <div id="wrap-chinhsach">
+                        <p>HKD Tiger D - MST 0305625567 do UBND quận Bình Thạnh cấp ngày 16/04/2008  – HKD/Sở hữu website Lê Trần Trà My </p>
+                        <p>Địa Chỉ:  43/5B Điện Biên Phủ, P. 15, Q, Bình Thạnh, Tp. HCM</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-4">
+                <div class="block-footer">
+                    <h3 class="title-footer">Tigerd.vn</h3>
                     <ul class="list-footer">
                         <li><a href="{!! route('client.product.showAll') !!}">Sản Phẩm</a></li>
                         <li><a href="{!! route('client.news') !!}">Tin Tức</a></li>
@@ -13,7 +21,7 @@
             </div>
             <div class="col-md-3 col-sm-4">
                 <div class="block-footer">
-                    <h3 class="title-footer">Guide</h3>
+                    <h3 class="title-footer">Chính sách</h3>
                     @if(!$page->isEmpty())
 
                     <ul class="list-footer">
@@ -24,10 +32,10 @@
                     @endif
                 </div>
             </div>
-            <div class="col-md-6 col-sm-4">
+            <div class="col-md-3 col-sm-4">
                 <div class="block-subcribe">
-                    <h3 class="title-subcribe">NEWSLETTER SIGN UP</h3>
-                    <p class="sub-title">Sign up to get information and more...</p>
+                    <h3 class="title-subcribe">ĐĂNG KÝ  NHẬN THÔNG TIN</h3>
+                    <p class="sub-title">Đăng ký để nhận thêm thông tin từ Tigerd</p>
                     {!! Form::open(['route'=>'client.subcribe.post', 'class' => 'form-subcribe']) !!}
                         <div class="input-group">
                             <div class="input-group-prepend">

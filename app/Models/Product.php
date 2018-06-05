@@ -61,7 +61,19 @@ class Product extends Model
                     \App\Models\MetaConfiguration::destroy($item_meta->id);
                 }
             }
-            $product->attributes()->detach();
+            if(isset($product->attributes)){
+                foreach($product->attributes as $item_att){
+                    if(isset($item_att->attribute_values)){
+                        foreach($item_att->attribute_values as $item_value){
+                            if($item_value->product_id == $product->id){
+                                $item_value->delete();
+                            }
+                        }
+                    }
+                }
+                $product->attributes()->detach();
+            }
+
         });
     }
 }

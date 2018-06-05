@@ -156,30 +156,9 @@
                                                 <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_attribute"><i class="fa fa-plus"></i> Thêm Thuộc Tính Mới</button>
                                                 <button type="button" class="btn btn-sm btn-primary" id="trigger_addmore_att"><i class="fa fa-plus" ></i> Thêm Dòng Thuộc Tính</button>
                                             </div>
-                                            <div class="manage-thuoctinh" style="margin-bottom:15px; padding-bottom:10px; border-bottom:1px solid lightgrey">
-                                                <div class="row">
-                                                        <div class="col-md-3">
-                                                            {!! Form::select('attribute[]', ['' => 'Chọn thuộc tính'] + $attribute_list, '', ['class' => 'form-control']) !!}
-                                                        </div>
-                                                        <div class="col-md-9">
-                                                            <div class="value-wrapper">
-                                                                <div class="each-value" style="margin-bottom:10px">
-                                                                    <input type="text" name="att_value[][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g">
-                                                                </div>
-                                                            </div>
-                                                            <div class="control-value text-right">
-
-                                                                <button type="button" id="trigger-value"  class="btn btn-sm btn-warning"><i class="fa fa-plus"></i> Thêm giá trị</button>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                            </div>
-
+                                            @include('Admin::ajax.script.manage_thuoctinh')
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
@@ -226,7 +205,7 @@
     </div>
     {{--ATTRIBUTE MODAL--}}
     <div class="modal fade" tabindex="-1" role="dialog" id="modal_attribute">
-        {!! Form::open(['route' => 'admin.product.createAttribute','class' =>'form_create_att']) !!}
+        {!! Form::open(['class' =>'form_create_att']) !!}
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -252,6 +231,25 @@
         </div><!-- /.modal-dialog -->
         {!! Form::close() !!}
     </div><!-- /.modal -->
+    <div class="manage-thuoctinh-copy hidden" style="margin-bottom:15px; padding-bottom:10px; border-bottom:1px solid lightgrey">
+        <div class="row">
+            <div class="col-md-3">
+                {!! Form::select('attribute[]', ['' => 'Chọn thuộc tính'] + $attribute_list, '', ['class' => 'form-control']) !!}
+            </div>
+            <div class="col-md-9">
+                <div class="value-wrapper">
+                    <div class="each-value" style="margin-bottom:10px">
+                        <input type="text" name="att_value[][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g">
+                    </div>
+                </div>
+                <div class="control-value text-right">
+
+                    <button type="button"  class="btn btn-sm btn-warning trigger-value"><i class="fa fa-plus"></i> Thêm giá trị</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
@@ -374,18 +372,17 @@
                     })
                 }
             })
-            var cp_manage_thuoctinh = $('.manage-thuoctinh').clone();
-            $('#trigger-value').on('click', function(){
+            $('body').on('click','.trigger-value', function(){
                 var str = $(this).parent('.control-value').prev().children('.each-value').first().clone();
                 str.find('input[type=text]').val('');
                 $(this).parent('.control-value').prev().append(str);
             })
 
-            $('#trigger_addmore_att').on('click', function(){
-                cp_manage_thuoctinh.appendTo('.attribute_process');
+            $('body').on('click','#trigger_addmore_att', function(){
+                $('.attribute_process').append($('.manage-thuoctinh-copy').clone().removeClass('hidden').addClass('show').removeClass('.manage-thuoctinh-copy').addClass('.manage-thuoctinh'));
             });
 
-            $("select[name='attribute[]']").on('change', function(){
+            $("body").on('change', "select[name='attribute[]']", function(){
                 var value = $(this).val();
                var input = $(this).parent().next().find('.value-wrapper').find("input[type=text]");
                input.each(function (index){
@@ -426,6 +423,7 @@
 
                         }
                     })
+                    return false;
                 }
 
             })
