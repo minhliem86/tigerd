@@ -36,7 +36,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="{!! asset('public/assets/client') !!}/js/bootstrap.min.js"></script>
     <script src="{!! asset('public/assets/client') !!}/js/plugins/swiper/js/swiper.min.js"></script>
-    <script src="{!! asset('public/assets/client') !!}/js/plugins/swiper/js/swiper.esm.js"></script>
 
     <link rel="stylesheet" href="{{asset('/public/assets/admin')}}/dist/js/plugins/alertify/alertify.css">
     <link rel="stylesheet" href="{{asset('/public/assets/admin')}}/dist/js/plugins/alertify/bootstrap.min.css">
@@ -147,6 +146,8 @@
         @yield('content')
 
         @include('Client::layouts.footer')
+
+        @include("Client::layouts.hotline")
     </div>
 
     <!--AOS -->

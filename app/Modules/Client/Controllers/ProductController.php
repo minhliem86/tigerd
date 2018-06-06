@@ -47,6 +47,7 @@ class ProductController extends Controller
         $this->order = $order;
         $this->ship_address = $ship_address;
         $this->promotion = $promotion;
+        $this->customeridea = $customeridea;
 
         $this->merchant = env('OP_MERCHANT');
         $this->access = env('OP_ACCESS');
@@ -112,40 +113,10 @@ class ProductController extends Controller
 
     public function getProduct(Request $request, $slug)
     {
-        $product = $this->product->getProductBySlug($slug,['id','name', 'slug', 'description', 'content', 'sku_product', 'price', 'discount', 'img_url','category_id','type'], ['categories','photos', 'attributes']);
+        $product = $this->product->getProductBySlug($slug,['id','name', 'slug', 'description', 'content', 'sku_product', 'price', 'discount', 'img_url','category_id','type'], ['categories','photos', 'attributes','testimonials']);
         $meta = $product->meta_configs()->first();
         if(count($product)){
             $relate_product = $this->product->relateProduct([$product->id], ['id', 'img_url', 'name','slug', 'price', 'discount','category_id', 'default'],['attributes', 'product_links']);
-//            if($product->type == 'configuable'){
-//                $array_product_id = [];
-//                if(!$product->product_links->isEmpty()){
-//                    foreach($product->product_links as $link){
-//                        array_push($array_product_id, $link->link_to_product_id);
-//                    }
-//                }
-//                $collect_product_child = $this->product->findWhereIn('id', $array_product_id);
-//
-//                foreach($collect_product_child as $item_child){
-//                    foreach($item_child->values as $item_value){
-//                        if($item_value == $item_child->values->last()){
-//                            $option .= $item_value->attributes->name .': '.$item_value->value;
-//                        }else {
-//                            $option .= $item_value->attributes->name . ': ' . $item_value["value"] . ', ';
-//                        }
-//                    }
-//                    $rs_array = "<option value='".$item_child->id."'>".$option."</option>";
-//                    array_push($array_option_att,$rs_array);
-//                    $option = "";
-//                }
-//                foreach($collect_product_child as $item_default){
-//                    if($item_default->default){
-//                        $product = $item_default;
-//                        break;
-//                    }
-//                }
-//
-//            }
-
             $ip = $request->ip();
             $info_cache = $ip . '_' .$slug;
             if(!Cache::has($info_cache)){
@@ -164,21 +135,26 @@ class ProductController extends Controller
 
     public function addToCart(Request $request)
     {
-        $valid = Validator::make($request->all(), ['att_value.*' => 'required', 'quantity' => 'required|min:1'] , ['att_value.*.required' => 'Vui lòng chọn 1 sản phẩm.', 'quantity.required' => 'Vui lòng chọn số lượng sản phẩn cần mua.', 'quantity.min' => 'Số lượng tối thiểu là 1.']);
+        $valid = Validator::make($request->all(), ['att_value' => 'required',  'att_value.*' => 'required', 'quantity' => 'required|min:1'] , ['att_value.required'=>'Vui lòng chọn thuộc tính sản phẩm', 'att_value.*.required' => 'Vui lòng chọn Thuộc tính sản phẩm.', 'quantity.required' => 'Vui lòng chọn số lượng sản phẩn cần mua.', 'quantity.min' => 'Số lượng tối thiểu là 1.']);
         if($valid->fails()){
-            return redirect()->back()->withErrors($valid);
+            return redirect()->back()->withErrors($valid,'addToCart');
         }
         $id = $request->input('product_id');
-        $product = $this->product->find($id, ['id', 'name','price', 'discount', 'img_url'], ['values']);
+        $product = $this->product->find($id, ['id', 'name','price', 'discount', 'img_url'], ['attributes']);
         if(count($product)){
-            $att = [
-                'img_url' => $product->img_url,
-            ];
-            if(!$product->values->isEmpty()){
-                foreach($product->values as $item_value){
-                    $att[$item_value->attributes->name] = $item_value->value;
+            $arr_att = [];
+            if($request->has('att_value')){
+                foreach($request->input('att_value') as $key =>$item_value){
+                    $i_value = $this->value->find($item_value);
+                    $arr_att[$i_value->attributes->name] = $i_value->value;
                 }
             }
+            $att_img = [
+                'img_url' => $product->img_url,
+            ];
+
+            $att = $arr_att + $att_img;
+
             $data = [
                 'id' => $product->id,
                 'name' => $product->name,

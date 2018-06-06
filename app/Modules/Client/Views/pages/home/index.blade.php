@@ -148,7 +148,6 @@
 
     @include("Client::layouts.fanpage")
 
-    @include('Client::layouts.testimonial')
 @stop
 
 @section('script')

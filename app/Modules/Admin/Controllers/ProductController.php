@@ -40,6 +40,7 @@ class ProductController extends Controller
 
     public $rules = [
         'category_id'=> 'required',
+        'name' => 'required|unique:products,name',
         'sku_product' => 'required',
         'price' => 'required',
         'stock' => 'required'
@@ -576,5 +577,21 @@ class ProductController extends Controller
             $attribute_value->delete($id);
             return response()->json(['error'=>false, 'mes' => 'Giá trị đã được xóa'], 200);
         }
+    }
+
+    /*CHECK UNIQUE PRODUCT*/
+    public function checkUniqueProduct(Request $request)
+    {
+        $request->merge(['name' => \LP_lib::unicode($request->input('name'))]);
+        $rule = [
+          'name' => 'unique:products,slug'
+        ];
+        $valid = \Validator::make($request->all(), $rule);
+        if($valid->fails()){
+            return response()->json(false);
+        }else{
+            return response()->json(true);
+        }
+
     }
 }

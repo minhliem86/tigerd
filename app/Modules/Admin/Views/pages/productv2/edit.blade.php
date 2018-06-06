@@ -108,7 +108,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Giảm Giá</label>
+                        <label class="col-md-2 control-label">Giá sau khi giảm</label>
                         <div class="col-md-10">
                             {!!Form::number('discount',old('discount'), ['class'=>'form-control', 'placeholder'=>'0'])!!}
                         </div>

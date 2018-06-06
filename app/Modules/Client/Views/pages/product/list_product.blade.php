@@ -15,7 +15,7 @@
                                     <div class="col-md-3 col-sm-4">
                                         <div class="each-cate">
                                             <figure class="figure" >
-                                                <a href="{!! route('client.product', $item_product->slug) !!}" ><img src="{!! asset($item_product->img_url) !!}" class="figure-img img-fluid rounded" alt="{!! $item_product->name !!}" ></a>
+                                                <a href="{!! route('client.product', $item_product->slug) !!}" ><img src="{!! asset('public/upload/'.$item_product->img_url) !!}" class="figure-img img-fluid rounded" alt="{!! $item_product->name !!}" ></a>
                                                 <figcaption class="figure-caption">
                                                     <h2 class="product-name"><a href="{!! route('client.product', $item_product->slug) !!}">{!! $item_product->name !!}</a></h2>
                                                     <p class="price {!! $item_product->discount ? 'discount' : null !!}">{!! number_format($item_product->price) !!} VND</p>
@@ -40,7 +40,7 @@
                                             <div class="col-md-3 col-sm-4">
                                                 <div class="each-cate">
                                                     <figure class="figure" >
-                                                        <a href="{!! route('client.product', $item_product->slug) !!}" ><img src="{!! asset($product_child->img_url) !!}" class="figure-img img-fluid rounded" alt="{!! $product_child->name !!}" ></a>
+                                                        <a href="{!! route('client.product', $item_product->slug) !!}" ><img src="{!! asset('public/upload/'.$product_child->img_url) !!}" class="figure-img img-fluid rounded" alt="{!! $product_child->name !!}" ></a>
                                                         <figcaption class="figure-caption">
                                                             <h2 class="product-name"><a href="{!! route('client.product', $item_product->slug) !!}">{!! $product_child->name !!}</a></h2>
                                                             <p class="price {!! $product_child->discount ? 'discount' : null !!}">{!! number_format($product_child->price) !!} VND</p>
@@ -83,7 +83,7 @@
                             <div class="swiper-wrapper">
                                 @foreach($hotProduct as $item_hot)
                                 <div class="swiper-slide">
-                                    <a href="{!! route('client.product', $item_hot->slug) !!}"><img src="{!! asset($item_hot->img_url) !!}" class="img-fluid" alt="{!! $item_hot->name !!}"></a>
+                                    <a href="{!! route('client.product', $item_hot->slug) !!}"><img src="{!! asset('public/upload/'.$item_hot->img_url) !!}" class="img-fluid" alt="{!! $item_hot->name !!}"></a>
                                 </div>
                                 @endforeach
                             </div>

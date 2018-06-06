@@ -18,7 +18,7 @@
                     </div>
                 </div>
                 <div class="col-md-8 col-sm-7">
-                    {!! Form::open(['route' => 'client.product.addToCart','class' => 'form']) !!}
+                    {!! Form::open(['route' => 'client.product.addToCart','class' => 'form', 'id' => 'formAddToCart']) !!}
                     <div class="product-info">
                         <h2 class="product-name">{!! $product->name !!}</h2>
                         <div class="brand-info d-flex justify-content-between">
@@ -28,9 +28,9 @@
                         <p class="price"><span class="price-value">{!! $product->discount ? number_format($product->discount)  : number_format($product->price) !!}</span> <small>vnd</small></p>
                         <p class="description">{!! $product->description !!}</p>
                     </div>
-                    @if(count($errors))
+                    @if(!$errors->addToCart->isEmpty())
                     <ul class="list-errors">
-                        @foreach($errors->all() as $error)
+                        @foreach($errors->addToCart->all() as $error)
                             <li>{!! $error !!}</li>
                         @endforeach
                     </ul>
@@ -75,6 +75,33 @@
         </div>
     </section>
     <!--END PRODUCT-->
+    @if(!$product->testimonials->isEmpty())
+    <section class="page-section testimonial-product">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <h2 class="title-section mx-auto">Ý Kiến Khách Hàng</h2>
+                    <div class="wrap-testimonial">
+                        <div class="swiper-container swiper-testimonial">
+                            <div class="swiper-wrapper">
+                                @foreach($product->testimonials as $item_testimonial)
+                                <div class="swiper-slide">
+                                    <div class="each-slider">
+                                        {!! $item_testimonial->content !!}
+                                    </div>
+                                </div>
+                                @endforeach
+
+                            </div>
+                        </div>
+                        <!-- If we need pagination -->
+                        <div class="swiper-pagination-custom text-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
 
     <!--RELATE PRODUCT-->
     <section class="page-section relate-product">
@@ -93,7 +120,7 @@
                                     <div class="swiper-slide">
                                         <div class="each-product">
                                             <figure>
-                                                <a href="{!! route('client.product', $item_product->slug) !!}"><img src="{!! asset($item_product->img_url) !!}" class="img-fluid mx-auto mb-2" alt="{!! $item_product->name !!}"></a>
+                                                <a href="{!! route('client.product', $item_product->slug) !!}"><img src="{!! asset('public/upload/'.$item_product->img_url) !!}" class="img-fluid mx-auto mb-2" alt="{!! $item_product->name !!}"></a>
                                                 <figcaption>
                                                     <p class="product-name"><a href="{!! route('client.product', $item_product->slug) !!}">{!! $item_product->name !!}</a></p>
                                                     <p class="price {!! $item_product->discount ? 'discount' : null !!}">{!! number_format($item_product->price) !!} VND</p>
@@ -157,7 +184,7 @@
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <td width="150"><img src="{!! asset(session('data')->img_url) !!}" style="max-width:120px" alt="{!! session('data')->name !!}"></td>
+                                    <td width="150"><img src="{!! asset('public/upload/'.session('data')->img_url) !!}" style="max-width:120px" alt="{!! session('data')->name !!}"></td>
                                     <td>
                                         <p class="product-name">
                                             {!! session('data')->name !!}
@@ -190,6 +217,8 @@
     <link rel="stylesheet" href="{!! asset('public/assets/client') !!}/js/plugins/lightslider/css/lightslider.min.css">
     <script src="{!! asset('public/assets/client') !!}/js/plugins/lightslider/js/lightslider.min.js"></script>
 
+    <script type="text/javascript" src="{!! asset('public/assets/admin') !!}/dist/js/jquery.validate.min.js"></script>
+
     <script>
         function restrictMinus(e) {
             if (e.keyCode == 45) e.preventDefault();
@@ -208,36 +237,15 @@
                 $('.modal-addToCart-success').modal('show');
             @endif
 
-            $('.value_product').on('change', function (e) {
-                var value_id = $(this).val();
-                $.ajax({
-                    url: '{!! route("client.product.ajaxChangeAttributeValue") !!}',
-                    type: 'POST',
-                    data: {value_id: value_id},
-                    success: function (data){
-                        if(!data.error){
-                            $('h2.product-name').text(data.data.name);
-                            $('p.description').text(data.data.description);
-                            $('.price-value').text(data.price);
-                            $('input[name=product_id]').val(data.data.id);
-                            $('.wrap-chitietsanpham').html(data.content);
-                            $('.wrap-gallery').html(data.photo);
+            var mySwiperTestimonial = new Swiper ('.swiper-testimonial',{
+                    loop: true,
+                    // If we need pagination
+                    pagination: {
+                        el: '.swiper-pagination-custom',
+                        clickable: true,
+                    },
 
-                            $('#image-gallery').lightSlider({
-                                gallery:true,
-                                item:1,
-                                loop:true,
-                                thumbItem:4,
-                                slideMargin:0,
-                                enableDrag: false,
-                                currentPagerPosition:'left',
-                            })
-
-                        }
-                    }
                 })
-            })
-
         })
     </script>
 @stop

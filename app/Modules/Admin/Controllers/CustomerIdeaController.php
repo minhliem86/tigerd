@@ -2,20 +2,24 @@
 
 namespace App\Modules\Admin\Controllers;
 
+use App\Repositories\PromotionRepository;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Repositories\CustomerIdeaRepository;
+use App\Repositories\ProductRepository;
 use App\Repositories\Eloquent\CommonRepository;
 use Datatables;
 
 class CustomerIdeaController extends Controller
 {
     protected $customerIdea;
+    protected $product;
 
-    public function __construct(CustomerIdeaRepository $customerIdea, CommonRepository $common){
+    public function __construct(CustomerIdeaRepository $customerIdea, CommonRepository $common, ProductRepository $product){
         $this->customerIdea = $customerIdea;
+        $this->product = $product;
         $this->common = $common;
     }
 
@@ -32,7 +36,7 @@ class CustomerIdeaController extends Controller
 
     public function getData(Request $request)
     {
-        $data = $this->customerIdea->query(['id', 'img_url', 'customer_name' ,'order', 'status']);
+        $data = $this->customerIdea->query(['customer_ideas.id as id', 'customer_ideas.img_url as img_url', 'customer_ideas.customer_name as customer_name' ,'customer_ideas.order as order', 'customer_ideas.status as status', 'products.name as product_name'])->join('products','products.id','=','customer_ideas.product_id');
         $datatable = Datatables::of($data)
             ->editColumn('img_url', function ($data){
                 $img = "<img src='".asset('public/upload/'.$data->img_url)."' style='max-width:100px'/>";
@@ -75,7 +79,8 @@ class CustomerIdeaController extends Controller
      */
     public function create()
     {
-        return view('Admin::pages.customerIdea.create');
+        $list_product = $this->product->query(['id', 'name'])->lists('name','id')->toArray();
+        return view('Admin::pages.customerIdea.create', compact('list_product'));
     }
 
     /**
@@ -94,6 +99,7 @@ class CustomerIdeaController extends Controller
         $order = $this->customerIdea->getOrder();
         $data = [
             'customer_name' => $request->input('customer_name'),
+            'product_id' => $request->input('product_id'),
             'slug' => \LP_lib::unicode($request->input('customer_name')),
             'content' => $request->input('content'),
             'img_url' => $img_url,
@@ -123,8 +129,9 @@ class CustomerIdeaController extends Controller
      */
     public function edit($id)
     {
+        $list_product = $this->product->query(['id', 'name'])->lists('name','id')->toArray();
         $inst = $this->customerIdea->find($id);
-        return view('Admin::pages.customerIdea.edit', compact('inst'));
+        return view('Admin::pages.customerIdea.edit', compact('inst', 'list_product'));
     }
 
     /**
@@ -139,6 +146,7 @@ class CustomerIdeaController extends Controller
         $img_url = $this->common->getPath($request->input('img_url'));
         $data = [
             'customer_name' => $request->input('customer_name'),
+            'product_id' => $request->input('product_id'),
             'slug' => \LP_lib::unicode($request->input('customer_name')),
             'content' => $request->input('content'),
             'img_url' => $img_url,

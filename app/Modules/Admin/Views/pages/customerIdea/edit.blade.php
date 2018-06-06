@@ -13,6 +13,12 @@
             @include('Admin::errors.error_layout')
             {{Form::model($inst, ['route'=>['admin.customer-idea.update',$inst->id], 'method'=>'put' , 'class'=>'form-horizontal' ])}}
             <div class="form-group">
+                <label class="col-md-2 control-label">Ý kiến cho sản phẩm: </label>
+                <div class="col-md-10">
+                    {!! Form::select('product_id',['' => 'Chọn sản phẩm'] + $list_product, old('product_id'), ['class'=> 'form-control']) !!}
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-md-2 control-label">Tên Khách Hàng: </label>
                 <div class="col-md-10">
                     {!! Form::text('customer_name', old('customer_name'), ['class'=> 'form-control', 'placeholder' => 'Tên Khách Hàng']) !!}

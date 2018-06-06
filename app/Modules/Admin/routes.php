@@ -74,6 +74,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('product/removeAttribute', ['as' => 'admin.product.removeAttribute', 'uses' => 'ProductController@removeAttribute']);
 
         Route::get('product/attribute/checkRule', ['as' => 'admin.product.checkRuleAttribute', 'uses' => 'ProductController@checkRuleAttribute']);
+        Route::get('product/checkUniqueProduct', ['as' => 'admin.product.checkUniqueProduct', 'uses' => 'ProductController@checkUniqueProduct']);
         Route::resource('product', 'ProductController');
 
         /*ORDER*/

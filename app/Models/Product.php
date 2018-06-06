@@ -46,6 +46,11 @@ class Product extends Model
         return $this->hasMany('App\Models\ProductLink');
     }
 
+    public function testimonials()
+    {
+        return $this->hasMany('App\Models\CustomerIdea', 'product_id');
+    }
+
     protected static function boot()
     {
         parent::boot();
@@ -61,14 +66,10 @@ class Product extends Model
                     \App\Models\MetaConfiguration::destroy($item_meta->id);
                 }
             }
-            if(isset($product->attributes)){
+            if(!$product->attributes->isEmpty()){
                 foreach($product->attributes as $item_att){
-                    if(isset($item_att->attribute_values)){
-                        foreach($item_att->attribute_values as $item_value){
-                            if($item_value->product_id == $product->id){
-                                $item_value->delete();
-                            }
-                        }
+                    if(!$item_att->attribute_values->isEmpty()){
+                        $item_att->attribute_values()->where('product_id', $product->id)->delete();
                     }
                 }
                 $product->attributes()->detach();
