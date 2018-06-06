@@ -33,6 +33,9 @@
                 </div>
             </div>
             <div class="col-md-3 col-sm-4">
+                <div class="block-footer mb-2">
+                    <h3 class="title-footer">Lượt Xem: {!! $total_pageview !!}</h3>
+                </div>
                 <div class="block-subcribe">
                     <h3 class="title-subcribe">ĐĂNG KÝ  NHẬN THÔNG TIN</h3>
                     <p class="sub-title">Đăng ký để nhận thêm thông tin từ Tigerd</p>

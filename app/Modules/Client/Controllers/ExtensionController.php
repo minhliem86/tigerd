@@ -45,6 +45,7 @@ class ExtensionController extends Controller
         $this->subcribe->create($data);
         return back()->with('success_subscribe', 'Cảm ơn bạn đã Subscribe website chúng tôi.');
     }
+
     public function postSubscribeHeader(Request $request)
     {
         $valid = Validator::make($request->all(), ['email_subcribe_header' => 'required|email'], ['email_subcribe.required'=>'Vui lòng nhập Email', 'email_subcribe.email'=> 'Vui lòng nhập định dạng Email']);

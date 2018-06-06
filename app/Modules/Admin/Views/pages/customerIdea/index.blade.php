@@ -27,6 +27,7 @@
                 <th width="5%">ID</th>
                 <th width="120px"><i class="glyphicon glyphicon-search"></i> Tên Khách Hàng</th>
                 <th width="120">Hình ảnh</th>
+                <th width="">Thuộc Sản Phẩm</th>
                 <th width="80">Sắp xếp</th>
                 <th >Trạng thái</th>
                 <th width="120px">&nbsp;</th>
@@ -49,6 +50,7 @@
     <link rel="stylesheet" href="{{asset('/public/assets/admin')}}/dist/js/plugins/alertify/bootstrap.min.css">
     <script type="text/javascript" src="{{asset('/public/assets/admin')}}/dist/js/plugins/alertify/alertify.js"></script>
     <script>
+
       $(document).ready(function(){
         hideAlert('.alert');
         // REMOVE ALL
@@ -65,6 +67,7 @@
                {data: 'id', name: 'id', 'orderable': false},
                {data: 'customer_name', name: 'customer_name'},
                {data: 'img_url', name: 'img_url', 'orderable': false},
+               {data: 'product_name', name: 'product_name'},
                {data: 'order', name: 'order'},
                {data: 'status', name: 'status'},
                {data: 'action', name: 'action', 'orderable': false}

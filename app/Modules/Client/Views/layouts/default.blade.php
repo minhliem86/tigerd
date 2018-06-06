@@ -36,7 +36,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="{!! asset('public/assets/client') !!}/js/bootstrap.min.js"></script>
     <script src="{!! asset('public/assets/client') !!}/js/plugins/swiper/js/swiper.min.js"></script>
-    <script src="{!! asset('public/assets/client') !!}/js/plugins/swiper/js/swiper.esm.js"></script>
 
     <link rel="stylesheet" href="{{asset('/public/assets/admin')}}/dist/js/plugins/alertify/alertify.css">
     <link rel="stylesheet" href="{{asset('/public/assets/admin')}}/dist/js/plugins/alertify/bootstrap.min.css">
@@ -147,6 +146,8 @@
         @yield('content')
 
         @include('Client::layouts.footer')
+
+        @include("Client::layouts.hotline")
     </div>
 
     <!--AOS -->
@@ -169,7 +170,7 @@
         (function () {
             var options = {
                 facebook: "250175375160781", // Facebook page ID
-                call_to_action: "TIGERD'S SUPPORTER", // Call to action
+                call_to_action: "Message us", // Call to action
                 position: "right", // Position may be 'right' or 'left'
             };
             var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;

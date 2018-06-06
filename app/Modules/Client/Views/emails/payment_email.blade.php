@@ -107,17 +107,17 @@
                                     <table width="100%" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td data-color="title" data-size="size title" data-min="25" data-max="45" data-link-color="link title color" data-link-style="text-decoration:none; color:#292c34;" class="title" align="center" style="font:35px/38px Arial, Helvetica, sans-serif; color:#c71568; padding:0 0 24px;">
-                                                ĐƠN HÀNG CHI TIẾT
+                                                ĐƠN HÀNG ONLINE
                                             </td>
                                         </tr>
                                         <tr>
                                             <td data-color="text" data-size="size text" data-min="10" data-max="26" data-link-color="link text color" data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;" style="font:bold 16px/25px Arial, Helvetica, sans-serif; color:#888; padding:0 0 23px;">
-                                                Xin chào {!! $customer->firstname !!},
+                                                Xin chào {!! $name !!},
                                             </td>
                                         </tr>
                                         <tr>
                                             <td data-color="text" data-size="size text" data-min="10" data-max="26" data-link-color="link text color" data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;" style="font:bold 16px/25px Arial, Helvetica, sans-serif; color:#888; padding:0 0 23px;">
-                                                Bạn vừa đặt hàng tại website TIGERD, đơn hàng gồm:
+                                                Bạn vừa đặt hàng tại website TIGERD, đơn hàng bao gồm:
                                             </td>
                                         </tr>
                                         <tr>
@@ -159,7 +159,7 @@
                                                 <table width="134" align="center" style="margin:0 auto;" cellpadding="0" cellspacing="0">
                                                     <tr>
                                                         <td data-bgcolor="bg-button" data-size="size button" data-min="10" data-max="16" class="btn" align="center" style="font:12px/14px Arial, Helvetica, sans-serif; color:#f8f9fb; text-transform:uppercase; mso-padding-alt:12px 10px 10px; border-radius:2px;" bgcolor="#7bb84f">
-                                                            <a target="_blank" style="text-decoration:none; color:#f8f9fb; display:block; padding:12px 10px 10px;" href="{!! route('client.home') !!}">XEM THÊM SẢN PHẨM</a>
+                                                            <a target="_blank" style="text-decoration:none; color:#f8f9fb; display:block; padding:12px 10px 10px; width:160px" href="{!! route('client.home') !!}">XEM THÊM SẢN PHẨM</a>
                                                         </td>
                                                     </tr>
                                                 </table>

@@ -880,8 +880,9 @@ ul.list-success{
         }
         p.att-title{
           @include fontThin(600);
-          font-size:1.6rem;
+          font-size:1.4rem;
           margin-bottom:1rem;
+          text-transform: uppercase;
         }
       }
       button{
@@ -1497,4 +1498,83 @@ ul.list-success{
     text-align: left;
   }
 }
+.custom-control{
+  padding-left:30px;
+  .custom-control-label{
+    font-weight:600;
+    font-size:1.5rem;
+    &:before, &:after{
+      width:1.3rem;
+      height:1.3rem;
+      top:0.5rem
+    }
+  }
+}
 
+.testimonial-product{
+  h2.title-section{
+    margin-bottom:5rem !important;
+  }
+  .wrap-testimonial{
+    max-width:800px;
+    margin:0 auto;
+    position:relative;
+    &:before, &:after{
+      content: "";
+      display:block;
+      width:66px;
+      height:52px;
+      position: absolute;
+    }
+    &:before{
+      background:url(../images/quote.png)no-repeat;
+      background-position: 0 0;
+      top:0px;
+      left:-100px;
+    }
+    &:after{
+      background:url(../images/quote.png)no-repeat;
+      background-position: 0 -52px;
+      bottom:0;
+      right:-100px;
+    }
+    .each-slider{
+      font-style: italic;
+    }
+  }
+  .swiper-pagination-custom{
+    .swiper-pagination-bullet{
+      background:$cl-pink;
+      width:10px;
+      height:10px;
+      margin:0 5px;
+    }
+  }
+}
+.call-action{
+  position:fixed;
+  bottom:0;
+  left:0;
+  padding:20px;
+  .wrap-phone{
+    position:relative;
+    img{
+      position:relative;
+      z-index:2;
+    }
+    img.hotline{
+      position:absolute;
+      top:50%;
+      left:50px;
+      transform:translateY(-50%);
+      transition: all 0.3s;
+      width:0;
+      z-index:1
+    }
+    &:hover{
+      img.hotline{
+        width:186px;
+      }
+    }
+  }
+}

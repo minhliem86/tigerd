@@ -91,7 +91,8 @@ class OrderController extends Controller
             }else{
                 $order->save();
             }
-            event(new EmailTemplateEvent('Admin::emails.notifyShipping',[],'meo@tigerd.vn', $email, 'TIGERD - Trạng Thái Đơn Hàng'));
+            event(new EmailTemplateEvent('Admin::emails.notifyShipping',[],env('MAIL_USERNAME'), $email, 'TIGERD - Trạng Thái Đơn Hàng'));
+
 
             return response()->json(['error'=> false, 'data'=> $value], 200);
         }

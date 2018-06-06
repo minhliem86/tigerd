@@ -109,7 +109,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Giảm Giá</label>
+                        <label class="col-md-2 control-label">Giá sau khi giảm</label>
                         <div class="col-md-10">
                             {!!Form::number('discount',old('discount'), ['class'=>'form-control', 'placeholder'=>'0'])!!}
                         </div>
@@ -428,6 +428,33 @@
 
                 }
 
+            })
+
+
+            /*VALIDATE*/
+            $('#form').validate({
+                errorElement: 'span',
+                rules:{
+                    name:{
+                        required: true,
+                        async:false,
+                        remote: "{!! route('admin.product.checkUniqueProduct') !!}"
+                    },
+                    category_id:{
+                        required: true,
+                    },
+                    sku_product: {
+                        required: true,
+                    },
+                    price:{
+                        required: true,
+                    }
+                },
+                messages:{
+                    name:{
+                        remote: "The Product is exists",
+                    }
+                }
             })
 
         })
