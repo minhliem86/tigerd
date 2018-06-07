@@ -157,9 +157,9 @@
                 }
             });
             /*SELECT ROW*/
-            $('table tbody').on('click','tr',function(){
-                $(this).toggleClass('selected');
-            })
+            // $('table tbody').on('click','tr',function(){
+            //     $(this).toggleClass('selected');
+            // })
 
         });
         function hideAlert(a){

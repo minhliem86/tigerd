@@ -61,10 +61,11 @@ class ContactController extends Controller
         return redirect()->route('client.contact.thankyou')->with('status',true);
     }
 
-    public function getThankyou()
+    public function getThankyou(CompanyRepository $company)
     {
         if(Session::has('status')){
-            return view('Client::pages.contact.thankyou');
+            $info = $company->getFirst();
+            return view('Client::pages.contact.thankyou', compact('info'));
         }else{
             return redirect()->route('client.contact');
         }

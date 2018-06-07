@@ -1538,6 +1538,9 @@ ul.list-success{
       bottom:0;
       right:-100px;
     }
+    .each-slider{
+      font-style: italic;
+    }
   }
   .swiper-pagination-custom{
     .swiper-pagination-bullet{
@@ -1571,6 +1574,22 @@ ul.list-success{
     &:hover{
       img.hotline{
         width:186px;
+      }
+    }
+  }
+}
+
+#swiper-product{
+  @media (max-width:560px){
+    .swiper-wrapper{
+      flex-wrap: wrap;
+      width:100%;
+      .swiper-slide{
+        width:100%;
+        margin-bottom:20px;
+      }
+      .swiper-button{
+        display:none
       }
     }
   }

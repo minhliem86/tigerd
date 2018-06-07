@@ -11,7 +11,7 @@
                                 <img src="{!! asset('public/assets/client/images/location.svg') !!}" class="img-fluid" alt="Location">
                             </div>
                             <div class=" flex-item">
-                                Toà Central 2, Vinhomes Central Park, 208 Nguyễn Hữu Cảnh, Phường 22, Bình Thạnh , TP Hồ Chí Minh, Việt Nam
+                                {!! $info->address !!}
                             </div>
                         </div>
                         <div class="d-flex mb-4">
@@ -19,7 +19,7 @@
                                 <img src="{!! asset('public/assets/client/images/phone-call.svg') !!}" class="img-fluid" alt="Location">
                             </div>
                             <div class=" flex-item">
-                                0943.722 227
+                                {!! $info->phone !!}
                             </div>
                         </div>
                         <div class="d-flex mb-4">
@@ -27,7 +27,7 @@
                                 <img src="{!! asset('public/assets/client/images/mail.svg') !!}" class="img-fluid" alt="Location">
                             </div>
                             <div class=" flex-item">
-                                tramyletran22@gmail.com
+                                {!! $info->email !!}
                             </div>
                         </div>
                     </div>

@@ -4,7 +4,7 @@
             <div class="col-md-3 col-sm-4">
                 <div class="block-footer">
                     <div id="wrap-chinhsach">
-                        <p>HKD Tiger D - MST 0305625567 do UBND quận Bình Thạnh cấp ngày 16/04/2008  – HKD/Sở hữu website Lê Trần Trà My </p>
+                        <p>HKD Tiger D - MST 0305625567 do UBND quận Bình Thạnh cấp ngày 16/04/2018  – HKD/Sở hữu website Lê Trần Trà My </p>
                         <p>Địa Chỉ:  43/5B Điện Biên Phủ, P. 15, Q, Bình Thạnh, Tp. HCM</p>
                     </div>
                 </div>

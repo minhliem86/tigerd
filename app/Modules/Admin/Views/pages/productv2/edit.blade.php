@@ -180,11 +180,21 @@
                                                         <div class="col-md-9">
                                                             <div class="value-wrapper">
                                                                 @if(!$item_attribute->attribute_values->isEmpty())
-                                                                    @foreach($item_attribute->attribute_values()->where('product_id',$inst->id)->get() as $item_value)
-                                                                    <div class="each-value" style="margin-bottom:10px">
-                                                                        <input type="text" name="att_value[{!! $item_attribute->id ? $item_attribute->id : null  !!}][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g" value="{!! $item_value->value ? $item_value->value : '' !!}">
-                                                                    </div>
-                                                                    @endforeach
+                                                                    @if(!$item_attribute->attribute_values()->where('product_id',$inst->id)->get()->isEmpty())
+                                                                        @foreach($item_attribute->attribute_values()->where('product_id',$inst->id)->get() as $item_value)
+                                                                        <div class="each-value" style="margin-bottom:10px">
+                                                                            <input type="text" name="att_value[{!! $item_attribute->id ? $item_attribute->id : null  !!}][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g" value="{!! $item_value->value ? $item_value->value : '' !!}">
+                                                                        </div>
+                                                                        @endforeach
+                                                                    @else
+                                                                        <div class="each-value" style="margin-bottom:10px">
+                                                                            <input type="text" name="att_value[{!! $item_attribute->id!!}][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g">
+                                                                        </div>
+                                                                    @endif
+                                                                @else
+                                                                        <div class="each-value" style="margin-bottom:10px">
+                                                                            <input type="text" name="att_value[{!! $item_attribute->id!!}][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g">
+                                                                        </div>
                                                                 @endif
                                                             </div>
                                                             <div class="control-value text-right">

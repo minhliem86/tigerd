@@ -24,8 +24,8 @@ class HomeController extends Controller
 
     public function index()
     {
-        $product = $this->product->getProductHomePage(['id', 'img_url', 'name','slug', 'price', 'discount','category_id', 'default','stock'], ['attributes','product_links']);
-        $news = $this->news->all(['name','slug', 'description', 'img_url']);
+        $product = $this->product->getProductHomePage(['id', 'img_url', 'name','slug', 'price', 'discount','category_id', 'default','stock'], ['attributes']);
+        $news = $this->news->query(['name','slug', 'description', 'img_url'])->inRandomOrder()->get();
 
         return view('Client::pages.home.index', compact('product', 'news', 'total_pageview'));
     }

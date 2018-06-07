@@ -58,22 +58,55 @@
                 }
             });
 
-            var productSwiper = new Swiper('#swiper-product', {
-                'slidesPerView' : 3,
-                spaceBetween:30,
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                breakpoints:{
-                    575: {
-                        'slidesPerView' : 1,
-                    },
-                    767: {
-                        'slidesPerView' : 2,
-                    }
+//            var productSwiper = new Swiper('#swiper-product', {
+//                'slidesPerView' : 3,
+//                spaceBetween:30,
+//                navigation: {
+//                    nextEl: '.swiper-button-next',
+//                    prevEl: '.swiper-button-prev',
+//                },
+//                breakpoints:{
+//                    767: {
+//                        'slidesPerView' : 2,
+//                    }
+//                }
+//            })
+
+            const breakpoint = window.matchMedia('(min-width:560px)');
+
+            let productSwiper;
+
+            const breakpointChecker = function(){
+                if(breakpoint.matches === true){
+                    return enableSwiper();
+                }else if (breakpoint.matches === false){
+                    if(productSwiper !== undefined) productSwiper.destroy(true, true);
+                    return;
                 }
-            })
+            }
+
+            const enableSwiper = function() {
+                productSwiper = new Swiper('#swiper-product', {
+                    'slidesPerView' : 3,
+                    spaceBetween:30,
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    breakpoints:{
+                        767: {
+                            'slidesPerView' : 2,
+                        }
+                    }
+                })
+            };
+
+            // keep an eye on viewport size changes
+            breakpoint.addListener(breakpointChecker);
+
+            // kickstart
+            breakpointChecker();
+
 
             var relateProduct = new Swiper('#hotProductSwiper', {
                 'slidesPerView' : 1,
@@ -170,7 +203,7 @@
         (function () {
             var options = {
                 facebook: "250175375160781", // Facebook page ID
-                call_to_action: "TIGERD'S SUPPORTER", // Call to action
+                call_to_action: "Message us", // Call to action
                 position: "right", // Position may be 'right' or 'left'
             };
             var proto = document.location.protocol, host = "whatshelp.io", url = proto + "//static." + host;

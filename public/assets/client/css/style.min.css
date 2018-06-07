@@ -1124,6 +1124,8 @@ ul.list-success li {
     background-position: 0 -52px;
     bottom: 0;
     right: -100px; }
+  .testimonial-product .wrap-testimonial .each-slider {
+    font-style: italic; }
 .testimonial-product .swiper-pagination-custom .swiper-pagination-bullet {
   background: #CB1F6A;
   width: 10px;
@@ -1150,5 +1152,15 @@ ul.list-success li {
       z-index: 1; }
     .call-action .wrap-phone:hover img.hotline {
       width: 186px; }
+
+@media (max-width: 560px) {
+  #swiper-product .swiper-wrapper {
+    flex-wrap: wrap;
+    width: 100%; }
+    #swiper-product .swiper-wrapper .swiper-slide {
+      width: 100%;
+      margin-bottom: 20px; }
+    #swiper-product .swiper-wrapper .swiper-button {
+      display: none; } }
 
 /*# sourceMappingURL=style.min.css.map */

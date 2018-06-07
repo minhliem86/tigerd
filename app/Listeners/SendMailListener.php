@@ -6,7 +6,6 @@ use App\Modules\Client\Events\SendMail;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Mail;
-use App\Repositories\CustomerRepository;
 
 class SendMailListener
 {
@@ -15,11 +14,10 @@ class SendMailListener
      *
      * @return void
      */
-    protected $customer;
 
-    public function __construct(CustomerRepository $customer)
+    public function __construct()
     {
-        $this->customer = $customer;
+
     }
 
     /**
@@ -30,10 +28,9 @@ class SendMailListener
      */
     public function handle(SendMail $event)
     {
-        $customer = $this->customer->find($event->customer_id);
-        Mail::send('Client::emails.payment_email', ['customer' => $customer, 'cart' => $event->cart], function ($message) use ($customer){
-            $message->from('meo@tigerd.vn');
-            $message->to($customer->email);
+        Mail::send('Client::emails.payment_email',['name'=> $event->name, 'cart' => $event->cart], function ($message) use ($event){
+            $message->from(env("MAIL_USERNAME"));
+            $message->to($event->customer_email);
             $message->subject('Email Xác Nhận Mua Hàng Thành Công.');
         });
     }

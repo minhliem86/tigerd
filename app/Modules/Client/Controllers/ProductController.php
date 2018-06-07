@@ -47,7 +47,6 @@ class ProductController extends Controller
         $this->order = $order;
         $this->ship_address = $ship_address;
         $this->promotion = $promotion;
-        $this->customeridea = $customeridea;
 
         $this->merchant = env('OP_MERCHANT');
         $this->access = env('OP_ACCESS');
@@ -135,18 +134,25 @@ class ProductController extends Controller
 
     public function addToCart(Request $request)
     {
-        $valid = Validator::make($request->all(), ['att_value' => 'required',  'att_value.*' => 'required', 'quantity' => 'required|min:1'] , ['att_value.required'=>'Vui lòng chọn thuộc tính sản phẩm', 'att_value.*.required' => 'Vui lòng chọn Thuộc tính sản phẩm.', 'quantity.required' => 'Vui lòng chọn số lượng sản phẩn cần mua.', 'quantity.min' => 'Số lượng tối thiểu là 1.']);
+        $valid = Validator::make($request->all(), [ 'quantity' => 'required|min:1'] , [ 'quantity.required' => 'Vui lòng chọn số lượng sản phẩn cần mua.', 'quantity.min' => 'Số lượng tối thiểu là 1.']);
         if($valid->fails()){
             return redirect()->back()->withErrors($valid,'addToCart');
         }
         $id = $request->input('product_id');
         $product = $this->product->find($id, ['id', 'name','price', 'discount', 'img_url'], ['attributes']);
         if(count($product)){
+            $str_cart_id = $product->id.'-';
             $arr_att = [];
             if($request->has('att_value')){
-                foreach($request->input('att_value') as $key =>$item_value){
+                $arr_value = $request->input('att_value');
+                foreach($arr_value as $key =>$item_value){
+
                     $i_value = $this->value->find($item_value);
                     $arr_att[$i_value->attributes->name] = $i_value->value;
+                    $str_cart_id = $str_cart_id.\LP_lib::unicode($i_value->value);
+                    if($item_value != end($arr_value)){
+                        $str_cart_id += '-';
+                    }
                 }
             }
             $att_img = [
@@ -156,7 +162,7 @@ class ProductController extends Controller
             $att = $arr_att + $att_img;
 
             $data = [
-                'id' => $product->id,
+                'id' => $str_cart_id,
                 'name' => $product->name,
                 'price' => $product->discount ? $product->discount : $product->price,
                 'quantity' => $request->quantity,
@@ -300,9 +306,9 @@ class ProductController extends Controller
                     $pr->save();
                 }
 
-                event(new SendMail($cart,  $this->auth->check() ? $this->auth->user()->id : 2));
+                event(new SendMail($cart,   $request->input('vpc_Customer_Email'), $request->customer_name));
 
-                event(new EmailTemplateEvent('Client::emails.notifyAdmin', [],'meo@tigerd.vn', 'meo@tigerd.vn', 'Thông Báo - Khách Đặt Hàng' ));
+                event(new EmailTemplateEvent('Client::emails.notifyAdmin', [],env("MAIL_USERNAME"), env('ADMIN_PAGE_EMAIL'), 'Thông Báo - Khách Đặt Hàng' ));
 
                 Cart::clearCartConditions();
                 Cart::clear();
@@ -571,28 +577,6 @@ class ProductController extends Controller
             Cart::remove($request->input('id'));
             $subTotal = Cart::getSubTotal();
             return response()->json(['error' => false, 'data'=>number_format($subTotal)]);
-        }
-    }
-
-    public function addToCartAjax(Request $request)
-    {
-        if(!$request->ajax()){
-            abort(404);
-        }else{
-            $id = $request->input('id');
-            $product = $this->product->find($id,['id', 'slug', 'name', 'price', 'img_url']);
-            $att = [
-                'img_url' => $product->img_url,
-            ];
-            $itemCart = Cart::add([
-                'id'=>$id,
-                'name' => $product->name,
-                'price' => $product->price,
-                'quantity' => 1,
-                'attributes' =>$att
-            ]);
-            $quantityCart = Cart::getTotalQuantity();
-            return response()->json(['error' => false, 'data'=> $quantityCart]);
         }
     }
 

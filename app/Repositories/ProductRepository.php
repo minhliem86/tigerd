@@ -19,7 +19,7 @@ class ProductRepository extends BaseRepository implements RestfulInterface
     public function getProductHomePage($columns = ['*'], $with = [])
     {
         $query = $this->make($with);
-        return $query->where('status',1)->where('visibility', 1)->get($columns);
+        return $query->where('status',1)->where('visibility', 1)->orderBy('order','DESC')->get($columns);
     }
     public function hotProduct($data = ['*'])
     {
@@ -41,7 +41,7 @@ class ProductRepository extends BaseRepository implements RestfulInterface
     public function getAllProduct($columns= ['*'], $with=[])
     {
         $query = $this->make($with);
-        return $query->where('status', 1)->where('visibility', 1)->get($columns);
+        return $query->where('status', 1)->where('visibility', 1)->orderBy('order','DESC')->get($columns);
     }
 
     /*ADMIN CUSTOM*/
