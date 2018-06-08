@@ -55,9 +55,9 @@
                     </div>
                     <div class="control-cart clearfix">
                         <div class="button-wrapper">
-                            <a href="{!! route('client.home') !!}" class="btn btn-info">Tiếp tục mua hàng</a>
+                            <a href="{!! route('client.home') !!}" class="btn btn-info">Tiếp tục xem hàng</a>
                             @if(!Cart::isEmpty())
-                            <a href="{!! route('client.payment') !!}" class="btn btn-primary">Thanh Toán</a>
+                            <a href="{!! route('client.payment') !!}" class="btn btn-primary">Đặt hàng</a>
                             <a href="{!! route('client.cart.clear') !!}" class="btn btn-danger">Xóa Giỏ Hàng</a>
                             @endif
                         </div>
