@@ -18,6 +18,18 @@
         </div>
     @endif
     <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <div class="wrap-select" style="margin-bottom:10px;">
+                <form method="POST" id="search-form" class="form-inline" role="form">
+                    <div class="form-group">
+                        <label for="city_code" class="control-label">Chọn Thành Phố</label>
+                        {!! Form::select('city_code',[''=> 'Chọn trung tâm'] + $list_city, '',['class'=>'form-control']) !!}
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="row">
         <div class="col-sm-12">
             <table class="table table-hover">
             </table>
@@ -47,18 +59,19 @@
                     url:  '{!! route('admin.location.getDistrict') !!}',
                     data: function(d){
                         d.name = $('input[type="search"]').val();
+                        d.city_id = $('select[name=city_code]').val();
                     }
                 },
                 columns: [
                     {data: 'id', name: 'id', 'orderable': false, 'visible': false},
-                    {data: 'name', name: 'name', title: 'Quận/Huyện'},
+                    {data: 'name_with_type', name: 'name_with_type', title: 'Quận/Huyện'},
                     {data: 'order', name: 'order', title: 'Sắp Xếp'},
                 ],
                 initComplete: function(){
                     var table_api = this.api();
                     var data = [];
                     var data_order = {};
-                    $('#btn-updateOrder').click(function(){
+                    $('body').on('click', '#btn-updateOrder', function (){
                         var rows_order = table_api.rows().data();
                         var data_order = {};
                         $('input[name="order"]').each(function(index){
@@ -69,7 +82,7 @@
                         $.ajax({
                             url: '{{route("admin.localtion.postAjaxUpdateOrder")}}',
                             type:'POST',
-                            data: {data: data_order, key: 'disctrict',  _token:$('meta[name="csrf-token"]').attr('content') },
+                            data: {data: data_order, key: 'district',  _token:$('meta[name="csrf-token"]').attr('content') },
                             success: function(rs){
                                 if(rs.code == 200){
                                     location.reload(true);
@@ -78,6 +91,10 @@
                         })
                     })
                 }
+            });
+
+            $('select[name=city_code]').on('change', function(){
+                table.draw();
             });
             /*SELECT ROW*/
             $('table tbody').on('click','tr',function(){

@@ -209,6 +209,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::get('/district', ['as' => 'admin.location.getDistrict', 'uses' => 'LocationController@getDistrict']);
         Route::get('/ward', ['as' => 'admin.location.getWard', 'uses' => 'LocationController@getWard']);
         Route::post('localtion/postAjaxUpdateOrder', ['as' => 'admin.localtion.postAjaxUpdateOrder', 'uses' => 'LocationController@postAjaxUpdateOrder']);
+        Route::post('/getDistrictAjax', ['as' => 'admin.location.getDistrictAjax', 'uses' => 'LocationController@getDistrictAjax']);
 
         Route::get('/sendmail', function(){
            Mail::send('Admin::emails.notifyShipping',[], function($mes){
