@@ -11,7 +11,7 @@
             </div>
             <div class="col-md-3 col-sm-4">
                 <div class="block-footer">
-                    <h3 class="title-footer">Tigerd.vn</h3>
+                    <h3 class="title-footer">TigerD.vn</h3>
                     <ul class="list-footer">
                         <li><a href="{!! route('client.product.showAll') !!}">Sản Phẩm</a></li>
                         <li><a href="{!! route('client.news') !!}">Tin Tức</a></li>

@@ -24,6 +24,14 @@
         <a class="list-group-item sub-item {{LP_lib::setActive(2,'customer')}}" href="{{route('admin.customer.index')}}"><i class="fa fa-user"></i>Tài Khoản Khách Hàng</a>
       </div>
     </li>
+    <li>
+      <a href="#location" class="list-group-item " data-toggle="collapse"><b><i class="fa fa-location-arrow"></i>Quản Lý Dữ Liệu Địa Lý</b>  <span class="glyphicon glyphicon-chevron-right"></span></a>
+      <div class="collapse" id="location">
+        <a class="list-group-item sub-item {{LP_lib::setActive(2,'city')}}" href="{{route('admin.location.getCity')}}"><i class="fa fa-location-arrow"></i>Tỉnh/ Thành Phố</a>
+        <a class="list-group-item sub-item {{LP_lib::setActive(2,'district')}}" href="{{route('admin.location.getDistrict')}}"><i class="fa fa-location-arrow"></i>Quận/ Huyện</a>
+        <a class="list-group-item sub-item {{LP_lib::setActive(2,'ward')}}" href="{{route('admin.location.getWard')}}"><i class="fa fa-location-arrow"></i>Phường Xã</a>
+      </div>
+    </li>
     <li class="divider"></li>
     <li class="list-group-item {{LP_lib::setActive(2,'news')}}"><a href="{{route('admin.news.index')}}"><i class="fa fa-newspaper-o"></i>Quản Lý Tin Tức</a></li>
     <li class="list-group-item {{LP_lib::setActive(2,'pages')}}"><a href="{{route('admin.pages.index')}}"><i class="fa fa-braille"></i>Quản Lý Các Trang Đơn</a></li>
