@@ -586,7 +586,7 @@ class ProductController extends Controller
             abort(404);
         }else{
             $city_id = $request->input('city_id');
-            $district = DB::table('district')->where('parent_code', $city_id)->lists('name_with_type', 'code');
+            $district = DB::table('district')->where('parent_code', $city_id)->orderBy('order','DESC')->lists('name_with_type', 'code');
             $view = view('Client::ajax.district', compact('district'))->render();
             return response()->json(['error' => false, 'data'=> $view]);
         }
@@ -597,7 +597,7 @@ class ProductController extends Controller
             abort(404);
         }else{
             $district_id = $request->input('district_id');
-            $ward = DB::table('wards')->where('parent_code', $district_id)->lists('name_with_type', 'code');
+            $ward = DB::table('wards')->where('parent_code', $district_id)->orderBy('order','DESC')->lists('name_with_type', 'code');
             $view = view('Client::ajax.ward', compact('ward'))->render();
             return response()->json(['error' => false, 'data'=> $view]);
         }

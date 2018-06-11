@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateShippingCostTable extends Migration
+class CreateFailedJobsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,12 @@ class CreateShippingCostTable extends Migration
      */
     public function up()
     {
-        Schema::create('shipping_costs', function (Blueprint $table) {
+        Schema::create('failed_jobs', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('cost')->default(0);
-            $table->integer('district_id')->unsigned();
-            $table->boolean('status')->default(1);
-            $table->timestamps();
+            $table->text('connection');
+            $table->text('queue');
+            $table->longText('payload');
+            $table->timestamp('failed_at')->useCurrent();
         });
     }
 
@@ -28,6 +28,6 @@ class CreateShippingCostTable extends Migration
      */
     public function down()
     {
-        Schema::drop('shipping_costs');
+        Schema::drop('failed_jobs');
     }
 }

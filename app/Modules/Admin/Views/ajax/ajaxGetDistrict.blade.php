@@ -1,0 +1,1 @@
+{!! Form::select('district_code',[''=> 'Chọn Quận/Huyện'] + $list_district, '', ['class'=>'form-control' , 'required ']) !!}

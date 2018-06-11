@@ -1556,11 +1556,17 @@ ul.list-success{
   bottom:0;
   left:0;
   padding:20px;
+  z-index:100;
   .wrap-phone{
     position:relative;
     img{
       position:relative;
       z-index:2;
+      &.phone{
+        @include media-max(768px){
+          max-width:48px;
+        }
+      }
     }
     img.hotline{
       position:absolute;
@@ -1588,9 +1594,9 @@ ul.list-success{
         width:100%;
         margin-bottom:20px;
       }
-      .swiper-button{
-        display:none
-      }
+    }
+    .swiper-button{
+      display:none
     }
   }
 }

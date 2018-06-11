@@ -13,10 +13,10 @@
                             @foreach($result as $item_result)
                                 <div class="each-news">
                                     <div class="media">
-                                        <a href="{!! route('client.product',$item_result->slug) !!}"><img src="{!! asset($item_result->img_url) !!}" class="mr-5" alt="{!! $item_result->name !!}"></a>
+                                        <a href="{!! route('client.product',$item_result->slug) !!}"><img src="{!! asset('public/upload/'.$item_result->img_url) !!}" style="max-width:120px" class="mr-5 img-fluid" alt="{!! $item_result->name !!}"></a>
                                         <div class="media-body">
                                             <h3 class="news-name"><a href="{!! route('client.product',$item_result->slug) !!}">{!! $item_result->name !!}</a></h3>
-                                            <p>{!! $item_result->description !!}</p>
+                                            <p>{!! Str::words($item_result->description,50) !!}</p>
                                             <a href="{!! route('client.product',$item_result->slug) !!}" class="readmore float-right">Xem sản phẩm</a>
                                         </div>
                                     </div>

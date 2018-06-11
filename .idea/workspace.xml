@@ -4,7 +4,70 @@
     <bookmark url="file://$PROJECT_DIR$/app/Events/EmailTemplateEvent.php" line="25" mnemonic="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17afa036-b3b5-46e4-ad1c-f1d93a557e79" name="Default" comment="" />
+    <list default="true" id="17afa036-b3b5-46e4-ad1c-f1d93a557e79" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/assets/client/images/call.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Modules/Admin/Controllers/LocationController.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/ajaxGetDistrict.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/location/city.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/location/disctrict.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/location/ward.blade.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2018_06_07_151357_create_jobs_table.php" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/database/migrations/2018_06_07_151431_create_failed_jobs_table.php" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/database/migrations/2018_03_06_031834_create_shipping_cost_table.php" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_000000_create_users_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2014_10_12_000000_create_users_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2014_10_12_100000_create_password_resets_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2014_10_12_100000_create_password_resets_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_06_15_031022_create_photos_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_06_15_031022_create_photos_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_07_19_135449_create_products_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_07_19_135449_create_products_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_07_19_140408_create_companies_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_07_19_140408_create_companies_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_050325_create_agencies_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_050325_create_agencies_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_050344_create_categories_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_050344_create_categories_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_050400_create_products_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_050400_create_products_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_050403_create_comments_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_050403_create_comments_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_050435_create_feedbacks_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_050435_create_feedbacks_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_050509_create_news_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_050509_create_news_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_050518_create_pages_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_050518_create_pages_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_050534_create_payment_methods_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_050534_create_payment_methods_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_050621_create_attributes_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_050621_create_attributes_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_050649_create_attribute_values_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_050649_create_attribute_values_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_051040_create_ship_payments_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_051040_create_ship_payments_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_051120_create_promotions_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_051120_create_promotions_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_051130_create_payment_status_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_051130_create_payment_status_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_051135_create_shipping_status_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_051135_create_shipping_status_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_051210_create_customers_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_051210_create_customers_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_051215_create_orders_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_051215_create_orders_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_051216_create_ship_addresses_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_051216_create_ship_addresses_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_051217_create_order_products_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_051217_create_order_products_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_051250_create_customer_addresses_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_051250_create_customer_addresses_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_071109_create_meta_configurations_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_071109_create_meta_configurations_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_095647_create_hotstatus_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_095647_create_hotstatus_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_100542_laratrust_setup_tables.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_100542_laratrust_setup_tables.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_20_141011_create_payment_suppliers_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_20_141011_create_payment_suppliers_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_22_104534_create_product_attribute_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_22_104534_create_product_attribute_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_23_084550_add_time_to_promotion_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_23_084550_add_time_to_promotion_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2017_12_31_111449_create_product_value_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2017_12_31_111449_create_product_value_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2018_01_15_075525_create_transaction_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2018_01_15_075525_create_transaction_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2018_01_15_081007_create_subcribe_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2018_01_15_081007_create_subcribe_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2018_01_22_034238_create_product_link_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2018_01_22_034238_create_product_link_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2018_01_25_071259_create_videos_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2018_01_25_071259_create_videos_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2018_01_25_071534_create_customer_ideas_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2018_01_25_071534_create_customer_ideas_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2018_02_27_035513_add_attribute_column_to_order_product_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2018_02_27_035513_add_attribute_column_to_order_product_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2018_02_27_041249_add_wards_column_to_ship_addresses_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2018_02_27_041249_add_wards_column_to_ship_addresses_table.php" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/database/migrations/2018_03_05_150052_create_shipping_cost_table.php" afterPath="$PROJECT_DIR$/database/migrations/old/2018_03_05_150052_create_shipping_cost_table.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/tigerd.iml" afterPath="$PROJECT_DIR$/.idea/tigerd.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/1/16/16b90c759d22eb3a5c43c4d24f89d2fe" afterPath="$PROJECT_DIR$/1/16/16b90c759d22eb3a5c43c4d24f89d2fe" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/layouts/navigation.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/layouts/navigation.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/routes.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/routes.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Client/Controllers/ExtensionController.php" afterPath="$PROJECT_DIR$/app/Modules/Client/Controllers/ExtensionController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Client/Controllers/ProductController.php" afterPath="$PROJECT_DIR$/app/Modules/Client/Controllers/ProductController.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Client/Views/layouts/default.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Client/Views/layouts/default.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Client/Views/layouts/footer.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Client/Views/layouts/footer.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Client/Views/layouts/hotline.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Client/Views/layouts/hotline.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Client/Views/pages/extension/search.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Client/Views/pages/extension/search.blade.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/client/css/style.min.css" afterPath="$PROJECT_DIR$/public/assets/client/css/style.min.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/client/css/style.min.css.map" afterPath="$PROJECT_DIR$/public/assets/client/css/style.min.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/assets/client/sass/style.scss" afterPath="$PROJECT_DIR$/public/assets/client/sass/style.scss" />
+    </list>
     <ignored path="$PROJECT_DIR$/vendor/landish/pagination/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -17,13 +80,10 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>changeShipStatus</find>
-      <find>pre_create</find>
-      <find>simp</find>
       <find>value</find>
       <find>admin.product.configuable.index</find>
       <find>va</find>
@@ -40,9 +100,9 @@
       <find>trigger</find>
       <find>form_create_att</find>
       <find>valid</find>
-      <find>Giảm Giá</find>
+      <find />
       <find>att-title</find>
-      <find>Giá sau khi giảm</find>
+      <find />
       <find>form</find>
       <find>asset</find>
       <find>page-section</find>
@@ -51,6 +111,9 @@
       <find>getProductHomePage</find>
       <find>swiper-product</find>
       <find>payment</find>
+      <find>name_with_type</find>
+      <find>district_code</find>
+      <find>postAjaxUpdateOrder</find>
     </findStrings>
     <replaceStrings>
       <replace>attributr</replace>
@@ -67,16 +130,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/app/Modules/Client/Views/layouts/footer.blade.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" root2="FORCE_HIGHLIGHTING" />
-  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Events/EmailTemplateEvent.php" />
-        <option value="$PROJECT_DIR$/app/Providers/EventServiceProvider.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Client/Views/emails/notifyAdmin.blade.php" />
-        <option value="$PROJECT_DIR$/app/Listeners/EmailTemplateListener.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/orders/shipStatus.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/emails/notifyShipping.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Client/Views/pages/product/payment.blade.php" />
@@ -87,7 +143,6 @@
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/layouts/main-layout.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Client/Views/pages/news/detail.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/manage_thuoctinh.blade.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Admin/routes.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/create.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/edit.blade.php" />
@@ -124,6 +179,11 @@
         <option value="$PROJECT_DIR$/public/assets/client/sass/style.scss" />
         <option value="$PROJECT_DIR$/app/Modules/Client/Controllers/ProductController.php" />
         <option value="$PROJECT_DIR$/app/Modules/Client/Views/pages/product/cart.blade.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/location/disctrict.blade.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/routes.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/Controllers/LocationController.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/ajaxGetDistrict.blade.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/location/ward.blade.php" />
       </list>
     </option>
   </component>
@@ -231,8 +291,6 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
     <option name="width" value="1296" />
     <option name="height" value="1000" />
   </component>
@@ -251,29 +309,107 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="tigerd" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tigerd" type="2a2b976b:PhpTreeStructureProvider$1" />
+              <item name="tigerd" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Modules" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Modules" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Modules" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Modules" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Modules" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="ajax" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Modules" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Modules" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="feedback" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Modules" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="location" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Modules" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="pages" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="PluginDummyText.Genre" value="esoteric" />
-    <property name="SearchEverywhereHistoryKey" value="{&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../testFB" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -369,34 +505,35 @@
       <workItem from="1528167765992" duration="13911000" />
       <workItem from="1528250435760" duration="19049000" />
       <workItem from="1528292152943" duration="7599000" />
-      <workItem from="1528427180879" duration="4422000" />
+      <workItem from="1528427180879" duration="3324000" />
+      <workItem from="1528602803334" duration="9671000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="538670000" />
+    <option name="totallyTimeSpent" value="547275000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16684435" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925472" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -423,67 +560,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../landingpage/2018/democlass/index.html" />
-    <entry file="file://$PROJECT_DIR$/../elt-summer2018/app/Modules/Client/Views/pages/register/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="79" column="113" lean-forward="false" selection-start-line="79" selection-start-column="111" selection-end-line="79" selection-end-column="113" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/layouts/main-layout.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="23" column="123" lean-forward="false" selection-start-line="23" selection-start-column="123" selection-end-line="23" selection-end-column="123" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/news/edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="678">
-          <caret line="131" column="6" lean-forward="true" selection-start-line="131" selection-start-column="6" selection-end-line="131" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/client/css/style.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-32">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/Attribute.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="36" lean-forward="false" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/AttributeValue.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="30" lean-forward="false" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/manage_thuoctinh.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="6" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="18" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/pages/edit.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="40" column="20" lean-forward="true" selection-start-line="26" selection-start-column="14" selection-end-line="40" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="76" column="141" lean-forward="false" selection-start-line="76" selection-start-column="123" selection-end-line="76" selection-end-column="141" />
         </state>
       </provider>
     </entry>
@@ -729,7 +809,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
           <caret line="32" column="5" lean-forward="true" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -737,9 +816,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="26" column="153" lean-forward="false" selection-start-line="26" selection-start-column="153" selection-end-line="26" selection-end-column="153" />
-          <folding>
-            <element signature="e#50#78#0#PHP" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -747,7 +823,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="1553" column="13" lean-forward="true" selection-start-line="1553" selection-start-column="12" selection-end-line="1553" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -755,7 +830,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="16" column="58" lean-forward="false" selection-start-line="16" selection-start-column="44" selection-end-line="16" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -763,7 +837,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="74" column="54" lean-forward="false" selection-start-line="74" selection-start-column="54" selection-end-line="74" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -771,7 +844,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="46" column="37" lean-forward="true" selection-start-line="46" selection-start-column="33" selection-end-line="46" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -779,6 +851,69 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="223">
           <caret line="200" column="35" lean-forward="false" selection-start-line="200" selection-start-column="35" selection-end-line="200" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/feedback/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="14" column="38" lean-forward="false" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/pages/edit.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="724">
+          <caret line="114" column="0" lean-forward="true" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/pages/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="108" column="54" lean-forward="false" selection-start-line="108" selection-start-column="54" selection-end-line="108" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="211" column="57" lean-forward="false" selection-start-line="211" selection-start-column="50" selection-end-line="211" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/location/disctrict.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="61" column="24" lean-forward="false" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/ajaxGetDistrict.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="31" lean-forward="false" selection-start-line="0" selection-start-column="18" selection-end-line="0" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/location/ward.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1187">
+          <caret line="123" column="61" lean-forward="false" selection-start-line="123" selection-start-column="61" selection-end-line="123" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/LocationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="106">
+          <caret line="86" column="82" lean-forward="false" selection-start-line="86" selection-start-column="82" selection-end-line="86" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="31" column="41" lean-forward="true" selection-start-line="31" selection-start-column="41" selection-end-line="31" selection-end-column="41" />
           <folding />
         </state>
       </provider>

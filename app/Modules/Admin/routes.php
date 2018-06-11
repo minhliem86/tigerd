@@ -204,10 +204,18 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
 
         Route::post('/loadDistrict', ['as' => 'admin.loadDistrict.post', 'uses' => 'ShippingCostController@loadDistrict']);
 
-        Route::get('create-symbolic',function(){
-           $target = '/public_html/LP-coding/tigerd/storage/app/public/original';
-           $link = '/public_html/tigerd/public/storage';
-           symlink($target, $link);
+        /*ORDER CITY, DISCTRICT, WARD*/
+        Route::get('/city', ['as' => 'admin.location.getCity', 'uses' => 'LocationController@getCity']);
+        Route::get('/district', ['as' => 'admin.location.getDistrict', 'uses' => 'LocationController@getDistrict']);
+        Route::get('/ward', ['as' => 'admin.location.getWard', 'uses' => 'LocationController@getWard']);
+        Route::post('localtion/postAjaxUpdateOrder', ['as' => 'admin.localtion.postAjaxUpdateOrder', 'uses' => 'LocationController@postAjaxUpdateOrder']);
+        Route::post('/getDistrictAjax', ['as' => 'admin.location.getDistrictAjax', 'uses' => 'LocationController@getDistrictAjax']);
+
+        Route::get('/sendmail', function(){
+           Mail::send('Admin::emails.notifyShipping',[], function($mes){
+               $mes->from(env('MAIL_USERNAME'));
+               $mes->to(env('ADMIN_PAGE_EMAIL'));
+           });
            return "done";
         });
     });
