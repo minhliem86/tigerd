@@ -15,13 +15,13 @@ class SendMail extends Event
      *
      * @return void
      */
-    public $cart;
+    public $data;
     public $customer_email;
     public $name;
 
-    public function __construct($cart, $customer_email, $name)
+    public function __construct($data = [], $customer_email, $name)
     {
-        $this->cart = $cart;
+        $this->data = $data;
         $this->customer_email = $customer_email;
         $this->name = $name;
     }

@@ -5,35 +5,17 @@
     <button class="btn btn-primary" onclick="submitForm();">Save Changes</button>
 @stop
 
-@section('title','Tin Tức')
+@section('title','Thể Loại Tin Tức')
 
 @section('content')
     <div class="row">
       <div class="col-sm-12">
-        {{Form::model($inst, ['route'=>['admin.news.update',$inst->id], 'method'=>'put', 'class' => 'form-horizontal' ])}}
+        {{Form::model($inst, ['route'=>['admin.newstype.update',$inst->id], 'method'=>'put', 'class' => 'form-horizontal' ])}}
           <fieldset>
               <div class="form-group">
-                  <label class="col-md-2 control-label">Loại tin:</label>
+                  <label class="col-md-2 control-label">Thể loại tin:</label>
                   <div class="col-md-10">
-                      {!! Form::select('news_type_id',['' => 'Chọn loại tin'] + $newstype_list, old('news_type_id'), ['class'=>'form-control', 'required']) !!}
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label class="col-md-2 control-label">Bài viết:</label>
-                  <div class="col-md-10">
-                      {{Form::text('name',old('name'), ['class'=>'form-control', 'placeholder'=>'Tiêu đề'])}}
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label class="col-md-2 control-label">Mô tả:</label>
-                  <div class="col-md-10">
-                      {!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ngắn ...']) !!}
-                  </div>
-              </div>
-              <div class="form-group">
-                  <label class="col-md-2 control-label">Nội dung:</label>
-                  <div class="col-md-10">
-                      {!! Form::textarea('content',old('content'), ['class'=> 'form-control my-editor', 'placeholder' => 'Nội dung ...']) !!}
+                      {{Form::text('title',old('title'), ['class'=>'form-control', 'placeholder'=>'Thể loại tin'])}}
                   </div>
               </div>
               <div class="form-group">

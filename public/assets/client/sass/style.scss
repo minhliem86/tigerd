@@ -1600,3 +1600,10 @@ ul.list-success{
     }
   }
 }
+
+.fb-page{
+  @include media-max(480){
+    max-width:450px;
+    width:100%;
+  }
+}

@@ -28,8 +28,8 @@ class SendMailListener
      */
     public function handle(SendMail $event)
     {
-        Mail::send('Client::emails.payment_email',['name'=> $event->name, 'cart' => $event->cart], function ($message) use ($event){
-            $message->from(env("MAIL_USERNAME"));
+        Mail::send('Client::emails.payment_email',$event->data, function ($message) use ($event){
+            $message->from(env("MAIL_USERNAME"), 'TigerD Sale');
             $message->to($event->customer_email);
             $message->subject('Email Xác Nhận Mua Hàng Thành Công.');
         });

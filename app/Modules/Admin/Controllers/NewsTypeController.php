@@ -6,25 +6,20 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Repositories\NewsRepository;
 use App\Repositories\NewsTypeRepository;
-use Yajra\Datatables\Datatables;
 use App\Repositories\Eloquent\CommonRepository;
-use App\Repositories\MetaRepository;
+use Datatables;
 
-class NewsController extends Controller
+class NewsTypeController extends Controller
 {
-    protected $news;
     protected $newstype;
     protected $common;
     protected $_replacePath;
 
-    public function __construct(NewsRepository $news, CommonRepository $common, NewsTypeRepository $newstype)
+    public function __construct(NewsTypeRepository $newstype, CommonRepository $common)
     {
-        $this->news = $news;
         $this->newstype = $newstype;
         $this->common = $common;
-        $this->_replacePath = env('REPLACE_PATH_UPLOAD') ? env('REPLACE_PATH_UPLOAD') : '';
     }
 
     /**
@@ -32,48 +27,48 @@ class NewsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        $news_quality = $this->news->all(['id'])->count();
-        return view('Admin::pages.news.index', compact('news_quality', 'newstype_list'));
-    }
 
-    public function getData(Request $request)
+    public function index(Request $request)
     {
-        $data = $this->news->query(['news.id as id', 'news.img_url as img_url', 'news.name as name' ,'news.order as order', 'news.status as status', 'news_type.title as title'])->join('news_type', 'news_type.id','=','news.news_type_id');
-        $datatable = Datatables::of($data)
-            ->editColumn('img_url', function ($data){
-                $img = "<img src='".asset('public/upload/'.$data->img_url)."' style='max-width:100px'/>";
-                return $img;
-            })
-            ->editColumn('order', function($data){
-                return "<input type='text' name='order' class='form-control' data-id= '".$data->id."' value= '".$data->order."' />";
-            })
-            ->editColumn('status', function($data){
-                $status = $data->status ? 'checked' : '';
-                $data_id =$data->id;
-                return '
+        if($request->ajax())
+        {
+            $data = $this->newstype->query(['id', 'img_url', 'title' ,'order', 'status']);
+            $datatable = Datatables::of($data)
+                ->editColumn('img_url', function ($data){
+                    $img = "<img src='".asset('public/upload/'.$data->img_url)."' style='max-width:100px'/>";
+                    return $img;
+                })
+                ->editColumn('order', function($data){
+                    return "<input type='text' name='order' class='form-control' data-id= '".$data->id."' value= '".$data->order."' />";
+                })
+                ->editColumn('status', function($data){
+                    $status = $data->status ? 'checked' : '';
+                    $data_id =$data->id;
+                    return '
                  <label class="toggle">
                     <input type="checkbox" name="status" value="1" '.$status.'   data-id ="'.$data_id.'">
                     <span class="handle"></span>
                   </label>
               ';
-            })
-            ->addColumn('action', function($data){
-                return '<a href="'.route('admin.news.edit', $data->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>
-                <form method="POST" action=" '.route('admin.news.destroy', $data->id).' " accept-charset="UTF-8" class="inline-block-span">
+                })
+                ->addColumn('action', function($data){
+                    return '<a href="'.route('admin.newstype.edit', $data->id).'" class="btn btn-info btn-xs inline-block-span"> Edit </a>
+                <form method="POST" action=" '.route('admin.newstype.destroy', $data->id).' " accept-charset="UTF-8" class="inline-block-span">
                     <input name="_method" type="hidden" value="DELETE">
                     <input name="_token" type="hidden" value="'.csrf_token().'">
-                               <button class="btn  btn-danger btn-xs remove-btn" type="button" attrid=" '.route('admin.news.destroy', $data->id).' " onclick="confirm_remove(this);" > Remove </button>
+                               <button class="btn  btn-danger btn-xs remove-btn" type="button" attrid=" '.route('admin.newstype.destroy', $data->id).' " onclick="confirm_remove(this);" > Remove </button>
                </form>' ;
-            })
-            ->filter(function($query) use ($request){
-                if (request()->has('name')) {
-                    $query->where('name', 'like', "%{$request->input('name')}%");
-                }
-            })
-            ->make(true);
-        return $datatable;
+                })
+                ->filter(function($query) use ($request){
+                    if (request()->has('name')) {
+                        $query->where('title', 'like', "%{$request->input('name')}%");
+                    }
+                })
+                ->make(true);
+            return $datatable;
+        }
+        return view('Admin::pages.newstype.index');
+
     }
 
     /**
@@ -83,8 +78,7 @@ class NewsController extends Controller
      */
     public function create()
     {
-        $newstype_list = $this->newstype->query(['*'])->lists('title','id')->toArray();
-        return view('Admin::pages.news.create', compact('newstype_list'));
+        return view('Admin::pages.newstype.create');
     }
 
     /**
@@ -100,18 +94,15 @@ class NewsController extends Controller
         }else{
             $img_url = '';
         }
-        $order = $this->news->getOrder();
+        $order = $this->newstype->getOrder();
         $data = [
-            'name' => $request->input('name'),
-            'slug' => \LP_lib::unicode($request->input('name')),
-            'description' => $request->input('description'),
-            'content' => $request->input('content'),
+            'title' => $request->input('title'),
+            'slug' => \LP_lib::unicode($request->input('title')),
             'img_url' => $img_url,
             'order' => $order,
-            'news_type_id' => $request->input('news_type_id'),
         ];
 
-        $news = $this->news->create($data);
+        $newstype = $this->newstype->create($data);
 
         if($request->has('meta_config')){
             if($request->has('meta_img')){
@@ -124,9 +115,9 @@ class NewsController extends Controller
                 'meta_description' => $request->input('meta_description'),
                 'meta_img' => $meta_img,
             ];
-            $news->meta_configs()->save(new \App\Models\MetaConfiguration($data_seo));
+            $newstype->meta_configs()->save(new \App\Models\MetaConfiguration($data_seo));
         }
-        return redirect()->route('admin.news.index')->with('success','Created !');
+        return redirect()->route('admin.newstype.index')->with('success','Created !');
     }
 
     /**
@@ -148,9 +139,8 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        $inst = $this->news->find($id);
-        $newstype_list = $this->newstype->query(['*'])->lists('title','id')->toArray();
-        return view('Admin::pages.news.edit', compact('inst','newstype_list'));
+        $inst = $this->newstype->find($id);
+        return view('Admin::pages.newstype.edit', compact('inst'));
     }
 
     /**
@@ -164,17 +154,14 @@ class NewsController extends Controller
     {
         $img_url = $this->common->getPath($request->input('img_url'));
         $data = [
-            'name' => $request->input('name'),
-            'slug' => \LP_lib::unicode($request->input('name')),
-            'description' => $request->input('description'),
-            'content' => $request->input('content'),
+            'title' => $request->input('title'),
+            'slug' => \LP_lib::unicode($request->input('title')),
             'img_url' => $img_url,
             'order' => $request->input('order'),
             'status' => $request->input('status'),
-            'news_type_id' => $request->input('news_type_id'),
         ];
 
-        $news = $this->news->update($data, $id);
+        $newstype = $this->newstype->update($data, $id);
 
         if($request->has('meta_config')){
             $meta_img = $this->common->getPath($request->input('meta_img'),$this->_replacePath);
@@ -184,12 +171,12 @@ class NewsController extends Controller
                 'meta_img' => $meta_img,
             ];
             if(!$request->has('meta_config_id')){
-                $news->meta_configs()->save(new \App\Models\MetaConfiguration($data_seo));
+                $newstype->meta_configs()->save(new \App\Models\MetaConfiguration($data_seo));
             }
             $meta_config = $meta->update($data_seo,$request->input('meta_config_id'));
         }
 
-        return redirect()->route('admin.news.index')->with('success', 'Updated !');
+        return redirect()->route('admin.newstype.index')->with('success', 'Updated !');
     }
 
     /**
@@ -200,9 +187,9 @@ class NewsController extends Controller
      */
     public function destroy($id)
     {
-//        $this->news->find($id)->meta_configs()->delete();
-        $this->news->delete($id);
-        return redirect()->route('admin.news.index')->with('success','Deleted !');
+//        $this->newstype->find($id)->meta_configs()->delete();
+        $this->newstype->delete($id);
+        return redirect()->route('admin.newstype.index')->with('success','Deleted !');
     }
 
     /*DELETE ALL*/
@@ -212,7 +199,7 @@ class NewsController extends Controller
             abort(404);
         }else{
             $data = $request->arr;
-            $response = $this->news->deleteAll($data);
+            $response = $this->newstype->deleteAll($data);
             return response()->json(['msg' => 'ok']);
         }
     }
@@ -229,7 +216,7 @@ class NewsController extends Controller
                 $upt  =  [
                     'order' => $v,
                 ];
-                $obj = $this->news->find($k);
+                $obj = $this->newstype->find($k);
                 $obj->update($upt);
             }
             return response()->json(['msg' =>'ok', 'code'=>200], 200);
@@ -244,7 +231,7 @@ class NewsController extends Controller
         }else{
             $value = $request->input('value');
             $id = $request->input('id');
-            $cate = $this->news->find($id);
+            $cate = $this->newstype->find($id);
             $cate->status = $value;
             $cate->save();
             return response()->json([

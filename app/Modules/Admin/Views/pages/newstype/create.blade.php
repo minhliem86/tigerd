@@ -4,36 +4,18 @@
     <button class="btn btn-primary" onclick="submitForm();">Save</button>
 @stop
 
-@section('title','Tin Tức')
+@section('title','Thể Loại Tin Tức')
 
 @section('content')
     <div class="row">
       <div class="col-sm-12">
-        <form method="POST" action="{{route('admin.news.store')}}" id="form" role="form" class="form-horizontal">
+        <form method="POST" action="{{route('admin.newstype.store')}}" id="form" role="form" class="form-horizontal">
           {{Form::token()}}
             <fieldset>
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Loại tin:</label>
+                    <label class="col-md-2 control-label">Thể loại tin:</label>
                     <div class="col-md-10">
-                        {!! Form::select('news_type_id',['' => 'Chọn loại tin'] + $newstype_list, old('news_type_id'), ['class'=>'form-control', 'required']) !!}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Bài viết:</label>
-                    <div class="col-md-10">
-                        <input type="text" required="" placeholder="Tiêu đề Tin Tức" id="name" class="form-control" name="name">
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Mô tả:</label>
-                    <div class="col-md-10">
-                        {!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ngắn ...']) !!}
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-md-2 control-label">Nội Dung:</label>
-                    <div class="col-md-10">
-                        {!! Form::textarea('content',old('content'), ['class'=> 'form-control my-editor', 'placeholder' => 'Nội dung ...']) !!}
+                        <input type="text" required="" placeholder="Thể loại tin:" id="title" class="form-control" name="title">
                     </div>
                 </div>
                 <div class="form-group">

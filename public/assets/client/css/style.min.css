@@ -1167,4 +1167,9 @@ ul.list-success li {
   #swiper-product .swiper-button {
     display: none; } }
 
+@media screen and (max-width: 480) {
+  .fb-page {
+    max-width: 450px;
+    width: 100%; } }
+
 /*# sourceMappingURL=style.min.css.map */

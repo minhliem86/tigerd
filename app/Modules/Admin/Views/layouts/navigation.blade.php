@@ -33,6 +33,7 @@
       </div>
     </li>
     <li class="divider"></li>
+    <li class="list-group-item {{LP_lib::setActive(2,'newstype')}}"><a href="{{route('admin.newstype.index')}}"><i class="fa fa-newspaper-o"></i>Thể Loại Tin Tức</a></li>
     <li class="list-group-item {{LP_lib::setActive(2,'news')}}"><a href="{{route('admin.news.index')}}"><i class="fa fa-newspaper-o"></i>Quản Lý Tin Tức</a></li>
     <li class="list-group-item {{LP_lib::setActive(2,'pages')}}"><a href="{{route('admin.pages.index')}}"><i class="fa fa-braille"></i>Quản Lý Các Trang Đơn</a></li>
     <li class="list-group-item {{LP_lib::setActive(2,'supplier')}}"><a href="{{route('admin.supplier.index')}}"><i class="fa fa-credit-card"></i>Nhà Cung Cấp Cổng Thanh Toán</a></li>

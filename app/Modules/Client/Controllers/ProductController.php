@@ -266,7 +266,7 @@ class ProductController extends Controller
                 $order_id = \LP_lib::unicodenospace($request->input('customer_name')).'_'.time();
                 $data = [
                     'order_name' => $order_id,
-                    'shipping_cost' => 0,
+                    'shipping_cost' => $request->input('shippingcost'),
                     'total' => Cart::getTotal(),
                     'customer_id' => $this->auth->check() ? $this->auth->user()->id : 2 ,
 //                    'customer_id' => 2,
@@ -306,7 +306,7 @@ class ProductController extends Controller
                     $pr->save();
                 }
 
-                event(new SendMail($cart,   $request->input('vpc_Customer_Email'), $request->customer_name));
+                event(new SendMail(['cart' => $cart, 'shipping_cost' =>$request->input('shippingcost') ],   $request->input('vpc_Customer_Email'), $request->customer_name));
 
                 event(new EmailTemplateEvent('Client::emails.notifyAdmin', [],env("MAIL_USERNAME"), env('ADMIN_PAGE_EMAIL'), 'Thông Báo - Khách Đặt Hàng' ));
 
@@ -586,7 +586,7 @@ class ProductController extends Controller
             abort(404);
         }else{
             $city_id = $request->input('city_id');
-            $district = DB::table('district')->where('parent_code', $city_id)->lists('name_with_type', 'code');
+            $district = DB::table('district')->where('parent_code', $city_id)->orderBy('order','DESC')->lists('name_with_type', 'code');
             $view = view('Client::ajax.district', compact('district'))->render();
             return response()->json(['error' => false, 'data'=> $view]);
         }
@@ -597,7 +597,7 @@ class ProductController extends Controller
             abort(404);
         }else{
             $district_id = $request->input('district_id');
-            $ward = DB::table('wards')->where('parent_code', $district_id)->lists('name_with_type', 'code');
+            $ward = DB::table('wards')->where('parent_code', $district_id)->orderBy('order','DESC')->lists('name_with_type', 'code');
             $view = view('Client::ajax.ward', compact('ward'))->render();
             return response()->json(['error' => false, 'data'=> $view]);
         }
