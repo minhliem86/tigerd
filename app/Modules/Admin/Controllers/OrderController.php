@@ -31,7 +31,7 @@ class OrderController extends Controller
 
     public function getData(Request $request)
     {
-        $data = $this->order->query(['orders.id', 'orders.order_name', 'orders.total','orders.created_at', 'orders.customer_id', 'orders.promotion_id', 'orders.paymentmethod_id', 'orders.shipstatus_id', 'orders.paymentstatus_id', 'ship_addresses.email as customer_email'])
+        $data = $this->order->query(['orders.id', 'orders.order_name', 'orders.total','orders.created_at', 'orders.customer_id', 'orders.promotion_id', 'orders.paymentmethod_id', 'orders.shipstatus_id', 'orders.paymentstatus_id', 'ship_addresses.email as customer_email'])->orderBy('created_at','DESC')
             ->join('customers', 'customers.id', '=', 'orders.customer_id')
             ->join('payment_methods', 'payment_methods.id', '=', 'orders.paymentmethod_id' )
             ->join('paymentstatus', 'paymentstatus.id', '=', 'orders.paymentstatus_id' )

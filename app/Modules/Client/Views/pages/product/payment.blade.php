@@ -124,6 +124,7 @@
                             <div class="each-area wrap-total d-flex">
                                 <p class="text">Chi phí giao hàng</p>
                                 <p class="content"><span class="shipcost">{!! number_format(0) !!}</span> vnd</p>
+                                <input type="hidden" name="shippingcost" value="">
                             </div>
                             <div class="display-promotion each-area clearfix {!! Cart::getConditions()->isEmpty() ? 'd-none' : null !!}">
                                 @include("Client::extensions.promotion_payment")
@@ -182,6 +183,7 @@
                     data: {city_id: city_id, district_id: district_id, payment_method_id: payment_method_id},
                     success: function(rs){
                         $('.shipcost').html(rs.shippingCost);
+                        $('input[name=shippingcost]').val(rs.shippingCost);
                         $('.total').html(rs.total);
                     }
                 })

@@ -143,6 +143,12 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('feedback/postAjaxUpdateOrder', ['as' => 'admin.feedback.postAjaxUpdateOrder', 'uses' => 'FeedbackController@postAjaxUpdateOrder']);
         Route::resource('feedback', 'FeedbackController');
 
+        /*NEWSTYPE*/
+        Route::post('newstype/deleteAll', ['as' => 'admin.newstype.deleteAll', 'uses' => 'NewsTypeController@deleteAll']);
+        Route::post('newstype/updateStatus', ['as' => 'admin.newstype.updateStatus', 'uses' => 'NewsTypeController@updateStatus']);
+        Route::post('newstype/postAjaxUpdateOrder', ['as' => 'admin.newstype.postAjaxUpdateOrder', 'uses' => 'NewsTypeController@postAjaxUpdateOrder']);
+        Route::resource('newstype', 'NewsTypeController');
+
         /*NEWS*/
         Route::get('news/getData', ['as' => 'admin.news.getData', 'uses' => 'NewsController@getData']);
         Route::post('news/deleteAll', ['as' => 'admin.news.deleteAll', 'uses' => 'NewsController@deleteAll']);
@@ -210,6 +216,10 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::get('/ward', ['as' => 'admin.location.getWard', 'uses' => 'LocationController@getWard']);
         Route::post('localtion/postAjaxUpdateOrder', ['as' => 'admin.localtion.postAjaxUpdateOrder', 'uses' => 'LocationController@postAjaxUpdateOrder']);
         Route::post('/getDistrictAjax', ['as' => 'admin.location.getDistrictAjax', 'uses' => 'LocationController@getDistrictAjax']);
+
+
+
+        /** ORDER, DE **/
 
         Route::get('/sendmail', function(){
            Mail::send('Admin::emails.notifyShipping',[], function($mes){

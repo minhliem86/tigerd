@@ -5,7 +5,16 @@
                 <div class="fanpage-section" data-aos="fade-up-right">
                     <h2 class="title-section mx-auto">Tiger-D FanPage</h2>
                     <div class="fanpage-wrapper">
-                        <iframe src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FTigerD.vn%2F&tabs=timeline&width=500&height=600&small_header=true&adapt_container_width=true&hide_cover=false&show_facepile=true&appId=318148815372649"  height="600" style="border:none;overflow:hidden; width:100%; max-width:500px; margin:0 auto" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                        <div id="fb-root">
+                            <div class="fb-page" data-href="https://www.facebook.com/TigerD.vn/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-width="450" data-height="600" data-show-facepile="true"><blockquote cite="https://www.facebook.com/TigerD.vn/" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/TigerD.vn/">Tiger D</a></blockquote></div>
+                        </div>
+                        <script>(function(d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0];
+                                if (d.getElementById(id)) return;
+                                js = d.createElement(s); js.id = id;
+                                js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId={APP_ID}";
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));</script>
                     </div>
                 </div>
             </div>

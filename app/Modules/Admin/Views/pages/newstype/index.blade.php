@@ -1,7 +1,7 @@
 @extends('Admin::layouts.main-layout')
 
 @section('link')
-    {{Html::link(route('admin.news.create'),'Add New',['class'=>'btn btn-primary'])}}
+    {{Html::link(route('admin.newstype.create'),'Add New',['class'=>'btn btn-primary'])}}
     <button type="button" class="btn btn-danger" id="btn-remove-all">Remove All Selected</button>
     <button type="button" class="btn btn-warning" id="btn-updateOrder">Update Order</button>
 @stop
@@ -9,21 +9,7 @@
 @section('title','Tin Tức')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-4 col-sm-6">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Tin Tức</h3>
-                </div>
-                <div class="panel-body-dashboard">
-                    <div class="wrap-icon text-center">
-                        <i class="fa fa-cubes"></i>
-                        <h5><span class="badge badge-info badge-md">{{$news_quality}}</span> Tin Tức</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     @if(Session::has('error'))
     <div class="alert alert-danger alert-dismissable">
       <p>{{Session::get('error')}}</p>
@@ -61,18 +47,17 @@
             processing: true,
             serverSide: true,
             ajax:{
-                url:  '{!! route('admin.news.getData') !!}',
+                url:  '{!! route('admin.newstype.index') !!}',
                 data: function(d){
                     d.name = $('input[type="search"]').val();
                 }
             },
             columns: [
                {data: 'id', name: 'id', 'orderable': false},
-               {data: 'title', name: 'title', title: 'Loại tin'},
-               {data: 'name', name: 'name', title: "Tin"},
-               {data: 'img_url', name: 'img_url', title: "Hình ảnh" , 'orderable': false},
+               {data: 'title', name: 'title', title: 'Thể Loại Tin'},
+               {data: 'img_url', name: 'img_url',title: 'Hình Ảnh', 'orderable': false},
+               {data: 'status', name: 'status', title: 'Trạng Thái'},
                {data: 'order', name: 'order', title: 'Sắp xếp'},
-               {data: 'status', name: 'status', title: 'Trạng thái'},
                {data: 'action', name: 'action', 'orderable': false}
            ],
            initComplete: function(){
@@ -87,7 +72,7 @@
                     alertify.confirm('You can not undo this action. Are you sure ?', function(e){
                         if(e){
                             $.ajax({
-                                'url':"{!!route('admin.news.deleteAll')!!}",
+                                'url':"{!!route('admin.newstype.deleteAll')!!}",
                                 'data' : {arr: data,_token:$('meta[name="csrf-token"]').attr('content')},
                                 'type': "POST",
                                 'success':function(result){
@@ -112,7 +97,7 @@
                         data_order[id] = va;
                     });
                     $.ajax({
-                        url: '{{route("admin.news.postAjaxUpdateOrder")}}',
+                        url: '{{route("admin.newstype.postAjaxUpdateOrder")}}',
                         type:'POST',
                         data: {data: data_order,  _token:$('meta[name="csrf-token"]').attr('content') },
                         success: function(rs){
@@ -131,7 +116,7 @@
                     const id_item = $(this).data('id');
                     console.log(id_item);
                     $.ajax({
-                        url: "{{route('admin.news.updateStatus')}}",
+                        url: "{{route('admin.newstype.updateStatus')}}",
                         type : 'POST',
                         data: {value: value, id: id_item, _token:$('meta[name="csrf-token"]').attr('content')},
                         success: function(data){

@@ -266,7 +266,7 @@ class ProductController extends Controller
                 $order_id = \LP_lib::unicodenospace($request->input('customer_name')).'_'.time();
                 $data = [
                     'order_name' => $order_id,
-                    'shipping_cost' => 0,
+                    'shipping_cost' => $request->input('shippingcost'),
                     'total' => Cart::getTotal(),
                     'customer_id' => $this->auth->check() ? $this->auth->user()->id : 2 ,
 //                    'customer_id' => 2,
@@ -306,7 +306,7 @@ class ProductController extends Controller
                     $pr->save();
                 }
 
-                event(new SendMail($cart,   $request->input('vpc_Customer_Email'), $request->customer_name));
+                event(new SendMail(['cart' => $cart, 'shipping_cost' =>$request->input('shippingcost') ],   $request->input('vpc_Customer_Email'), $request->customer_name));
 
                 event(new EmailTemplateEvent('Client::emails.notifyAdmin', [],env("MAIL_USERNAME"), env('ADMIN_PAGE_EMAIL'), 'Thông Báo - Khách Đặt Hàng' ));
 
