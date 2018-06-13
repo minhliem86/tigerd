@@ -26,8 +26,13 @@
                         </div>
                         @endif
                     </li>
-                    <li class="nav-item">
-                        <a href="{!! route('client.news') !!}" class="nav-link">Tin Tức</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle"  href="#" id="navbarDropdownNews" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tin Tức</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownNews">
+                            @foreach($newstype as $item_type)
+                                <a class="dropdown-item" href="{!! route('client.newstype', $item_type->slug) !!}">{!! $item_type->title !!}</a>
+                            @endforeach
+                        </div>
                     </li>
                     <li class="nav-item">
                         <a href="{!! route('client.contact') !!}" class="nav-link">Liên Hệ</a>

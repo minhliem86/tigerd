@@ -3,14 +3,16 @@
 @section('content')
     @include("Client::layouts.banner")
 
-    @if(!$news->isEmpty())
+
     <!--NEWS-->
     <section class="news-container page-section news-page">
         <div class="container">
             <div class="row">
                 <div class="col">
+                    <h2 class="title-section mx-auto">Tin {!! $newstype->title !!}</h2>
                     <div class="news-inner">
-                        @foreach($news as $item_news)
+                        @if(!$newstype->news->isEmpty())
+                        @foreach($newstype->news()->where('status',1)->orderBy('order','DESC')->get() as $item_news)
                         <div class="each-news" data-aos="flip-up">
                             <div class="media">
                                 <a href="{!! route('client.news.detail',$item_news->slug) !!}"><img src="{!! asset('public/upload/'.$item_news->img_url) !!}" style="max-width:180px" class="mr-5" alt="{!! $item_news->name !!}"></a>
@@ -22,18 +24,16 @@
                             </div>
                         </div>
                         @endforeach
-                    </div>
-                    <div class="wrap-pagination">
-                        <nav aria-label="Page navigation">
-                            @include('paginations.custom', ['paginator'=>$news])
-                        </nav>
+                        @else
+                        <h3 class="text-center">Chưa có tin mới</h3>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
     </section>
     <!--END NEWS-->
-    @endif
+
 
     @include("Client::layouts.fanpage")
 @stop

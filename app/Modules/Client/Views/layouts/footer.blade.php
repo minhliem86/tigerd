@@ -6,6 +6,7 @@
                     <div id="wrap-chinhsach">
                         <p>HKD Tiger D - MST 0305625567 do UBND quận Bình Thạnh cấp ngày 16/04/2018  – HKD/Sở hữu website Lê Trần Trà My </p>
                         <p>Địa Chỉ:  43/5B Điện Biên Phủ, P. 15, Q, Bình Thạnh, Tp. HCM</p>
+                        <a href="http://online.gov.vn/HomePage/CustomWebsiteDisplay.aspx?DocId=44724 " target="_blank"><img src="{!! asset('public/assets/client') !!}/images/logo-bct.png" class="img-fluid mt-4" alt="Bộ Công Thương"></a>
                     </div>
                 </div>
             </div>
@@ -14,7 +15,6 @@
                     <h3 class="title-footer">TigerD.vn</h3>
                     <ul class="list-footer">
                         <li><a href="{!! route('client.product.showAll') !!}">Sản Phẩm</a></li>
-                        <li><a href="{!! route('client.news') !!}">Tin Tức</a></li>
                         <li><a href="{!! route('client.contact') !!}">Liên Hệ</a></li>
                     </ul>
                 </div>

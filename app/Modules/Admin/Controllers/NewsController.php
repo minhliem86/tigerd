@@ -40,7 +40,7 @@ class NewsController extends Controller
 
     public function getData(Request $request)
     {
-        $data = $this->news->query(['news.id as id', 'news.img_url as img_url', 'news.name as name' ,'news.order as order', 'news.status as status', 'news_type.title as title'])->join('news_type', 'news_type.id','=','news.news_type_id');
+        $data = $this->news->query(['news.id as id', 'news.img_url as img_url', 'news.name as name' ,'news.order as order', 'news.status as status', 'news_type.title as title'])->join('news_type', 'news.news_type_id','=','news_type.id');
         $datatable = Datatables::of($data)
             ->editColumn('img_url', function ($data){
                 $img = "<img src='".asset('public/upload/'.$data->img_url)."' style='max-width:100px'/>";

@@ -8,7 +8,7 @@ Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controlle
     Route::get('/cam-on-khach-hang', ['as' => 'client.contact.thankyou', 'uses' => 'ContactController@getThankyou']);
 
     /*NEWS*/
-    Route::get('/tin-tuc', ['as' => 'client.news', 'uses' => 'NewsController@getIndex']);
+    Route::get('loai-tin/{slug}', ['as' => 'client.newstype', 'uses' => 'NewsController@getNewsByType'])->where('slug','[0-9a-zA-Z.\-/]+');
     Route::get('/tin-tuc/{slug}', ['as' => 'client.news.detail', 'uses' => 'NewsController@getDetail'])->where('slug', '[0-9a-zA-Z._\-]+');
 
     /*PRODUCT*/

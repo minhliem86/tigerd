@@ -183,7 +183,7 @@
                     data: {city_id: city_id, district_id: district_id, payment_method_id: payment_method_id},
                     success: function(rs){
                         $('.shipcost').html(rs.shippingCost);
-                        $('input[name=shippingcost]').val(rs.shippingCost);
+                        $('input[name=shippingcost]').val(rs.value_ship);
                         $('.total').html(rs.total);
                     }
                 })

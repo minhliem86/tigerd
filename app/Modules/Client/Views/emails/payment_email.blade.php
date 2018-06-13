@@ -131,7 +131,7 @@
                                                     </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @if(!$cart->isEmpty())
+                                                        @if(count($cart))
                                                             @foreach($cart as $item_cart)
                                                         <tr>
                                                             <td>{!! $item_cart->name !!}</td>

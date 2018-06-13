@@ -306,7 +306,7 @@ class ProductController extends Controller
                     $pr->save();
                 }
 
-                event(new SendMail(['cart' => $cart, 'shipping_cost' =>$request->input('shippingcost') ],   $request->input('vpc_Customer_Email'), $request->customer_name));
+                event(new SendMail(['cart' => $cart, 'shipping_cost' =>$request->input('shippingcost'), 'name'=>$request->customer_name ],   $request->input('vpc_Customer_Email')));
 
                 event(new EmailTemplateEvent('Client::emails.notifyAdmin', [],env("MAIL_USERNAME"), env('ADMIN_PAGE_EMAIL'), 'Thông Báo - Khách Đặt Hàng' ));
 
@@ -456,7 +456,7 @@ class ProductController extends Controller
                             );
                             Cart::condition($shipping);
                             $total = number_format(Cart::getTotal());
-                            return response()->json(['total' => $total, 'shippingCost' => number_format(50000)], 200);
+                            return response()->json(['total' => $total, 'shippingCost' => number_format(50000), 'value_ship' => 50000], 200);
                         case '2' :
                         /*PAYMENT ONLINE*/
                             $shipping = new \Darryldecode\Cart\CartCondition(
@@ -469,7 +469,7 @@ class ProductController extends Controller
                             );
                             Cart::condition($shipping);
                             $total = number_format(Cart::getTotal());
-                            return response()->json(['total' => $total, 'shippingCost' => number_format(40000)], 200);
+                            return response()->json(['total' => $total, 'shippingCost' => number_format(40000), 'value_ship' => 40000], 200);
                     }
                 }else{
                     $shipping = \DB::table('shipping_costs')->where('district_id',$district_id)->select('cost')->first();
@@ -486,7 +486,7 @@ class ProductController extends Controller
                             );
                             Cart::condition($shipping);
                             $total = number_format(Cart::getTotal());
-                            return response()->json(['total' => $total, 'shippingCost' => number_format(30000)], 200);
+                            return response()->json(['total' => $total, 'shippingCost' => number_format(30000), 'value_ship' => 30000], 200);
                         /*CASE 40k*/
                         case '40000' :
                             $shipping = new \Darryldecode\Cart\CartCondition(
@@ -499,7 +499,7 @@ class ProductController extends Controller
                             );
                             Cart::condition($shipping);
                             $total = number_format(Cart::getTotal());
-                            return response()->json(['total' => $total, 'shippingCost' => number_format(40000)], 200);
+                            return response()->json(['total' => $total, 'shippingCost' => number_format(40000), 'value_ship' => 40000], 200);
                         /*CASE 50k*/
                         case '50000' :
                             $shipping = new \Darryldecode\Cart\CartCondition(
@@ -512,7 +512,7 @@ class ProductController extends Controller
                             );
                             Cart::condition($shipping);
                             $total = number_format(Cart::getTotal());
-                            return response()->json(['total' => $total, 'shippingCost' => number_format(50000)], 200);
+                            return response()->json(['total' => $total, 'shippingCost' => number_format(50000), 'value_ship' => 50000], 200);
                         /*CASE 20k*/
                         default :
                             $shipping = new \Darryldecode\Cart\CartCondition(
@@ -525,7 +525,7 @@ class ProductController extends Controller
                             );
                             Cart::condition($shipping);
                             $total = number_format(Cart::getTotal());
-                            return response()->json(['total' => $total, 'shippingCost' => number_format(20000)], 200);
+                            return response()->json(['total' => $total, 'shippingCost' => number_format(20000), 'value_ship' => 20000], 200);
                     }
                 }
             }
