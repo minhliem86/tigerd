@@ -217,7 +217,8 @@ class ProductController extends Controller
         $attribute_arr = $request->input('attribute');
         $value_arr = $request->input('att_value');
 
-        if(count($attribute_arr)){
+        if(count($attribute_arr))
+        {
             foreach($attribute_arr as $item_attribute) {
                 if ($item_attribute) {
                     if (count($value_arr[$item_attribute])) {

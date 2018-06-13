@@ -139,10 +139,14 @@
                                                             <td align="right">{!! number_format($item_cart->price) !!} VND</td>
                                                         </tr>
                                                             @endforeach
-                                                            <tr>
-                                                                <td colspan="2">Phí vận chuyển</td>
-                                                                <td align="right">{!! number_format($shipping_cost) !!}</td>
-                                                            </tr>
+                                                        <tr>
+                                                            <td colspan="2">Phí vận chuyển</td>
+                                                            <td align="right">{!! number_format($shipping_cost) !!}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="2">Tổng cộng:</td>
+                                                            <td align="right">{!! number_format(Cart::getTotal()); !!}</td>
+                                                        </tr>
                                                         @endif
                                                     </tbody>
                                                 </table>
