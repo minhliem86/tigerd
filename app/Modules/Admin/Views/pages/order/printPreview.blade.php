@@ -107,7 +107,10 @@
                 </td>
             </tr>
         @endforeach
-
+        <tr>
+            <td colspan="2">Phí vận chuyển</td>
+            <td align="right">{!! number_format($order_detail->shipping_cost) !!}</td>
+        </tr>
         <tr class="total">
             <td align="right" colspan="3">
                 <b>Tổng Cộng: {!! number_format($order_detail->total) !!} VND</b>

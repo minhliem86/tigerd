@@ -13,6 +13,12 @@
         {{Form::model($inst, ['route'=>['admin.news.update',$inst->id], 'method'=>'put', 'class' => 'form-horizontal' ])}}
           <fieldset>
               <div class="form-group">
+                  <label class="col-md-2 control-label">Loại tin:</label>
+                  <div class="col-md-10">
+                      {!! Form::select('news_type_id',['' => 'Chọn loại tin'] + $newstype_list, old('news_type_id'), ['class'=>'form-control', 'required']) !!}
+                  </div>
+              </div>
+              <div class="form-group">
                   <label class="col-md-2 control-label">Bài viết:</label>
                   <div class="col-md-10">
                       {{Form::text('name',old('name'), ['class'=>'form-control', 'placeholder'=>'Tiêu đề'])}}

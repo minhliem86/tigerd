@@ -44,7 +44,13 @@
                                             <td><b>Trạng Thái Giao Hàng</b></td>
                                         </tr>
                                         <tr>
-                                            <td><b>Thanh Toán</b></td>
+                                            <td><b>Trạng Thái Thanh Toán</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Giá Trị Đơn Hàng</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td><b>Phí Vận Chuyển</b></td>
                                         </tr>
                                         <tr>
                                             <td><b>Tổng cộng: </b></td>
@@ -87,6 +93,16 @@
                                     <tr>
                                         <td>
                                             {!! $order->paymentstatus->description !!}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {!! number_format($order->total - $order->shipping_cost) !!} VND
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {!! number_format($order->shipping_cost) !!} VND
                                         </td>
                                     </tr>
                                     <tr>
@@ -135,6 +151,10 @@
                             <td >{!! $item_product->discount ? number_format($item_product->discount) : number_format($item_product->price)  !!} vnd</td>
                         </tr>
                         @endforeach
+                        <tr>
+                            <td colspan="2">Phí vận chuyển</td>
+                            <td>{!! number_format($order->shipping_cost)  !!} vnd</td>
+                        </tr>
                         <tr>
                             <td colspan="3" align="right">
                                 <b>Tổng Cộng: </b>{!! number_format($order->total) !!} VND

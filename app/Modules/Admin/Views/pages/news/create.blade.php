@@ -15,7 +15,7 @@
                 <div class="form-group">
                     <label class="col-md-2 control-label">Loại tin:</label>
                     <div class="col-md-10">
-                        {!! Form::select('news_type_id',['' => 'Chọn loại tin'] + $newstype_list, old('news_type_id'), ['class'=>'form-control']) !!}
+                        {!! Form::select('news_type_id',['' => 'Chọn loại tin'] + $newstype_list, old('news_type_id'), ['class'=>'form-control', 'required']) !!}
                     </div>
                 </div>
                 <div class="form-group">
