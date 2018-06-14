@@ -236,7 +236,7 @@
             <div class="col-md-3">
                 {!! Form::select('attribute[]', ['' => 'Chọn thuộc tính'] + $attribute_list, '', ['class' => 'form-control']) !!}
             </div>
-            <div class="col-md-9">
+            <div class="col-md-7">
                 <div class="value-wrapper">
                     <div class="each-value" style="margin-bottom:10px">
                         <input type="text" name="att_value[][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g">
@@ -244,9 +244,15 @@
                 </div>
                 <div class="control-value text-right">
 
-                    <button type="button"  class="btn btn-sm btn-warning trigger-value"><i class="fa fa-plus"></i> Thêm giá trị</button>
+                    <div class="clearfix">
+                        <input type="file" name="thumb-input" class="thumb-sp" multiple>
+
+                    </div>
 
                 </div>
+            </div>
+            <div class="col-md-2">
+                <button type="button"  class="btn btn-warning trigger-value "><i class="fa fa-plus"></i> Thêm giá trị</button>
             </div>
         </div>
     </div>
@@ -356,6 +362,30 @@
                 }
             })
 
+
+            {{--$(".thumb-sp").fileinput({--}}
+                {{--uploadUrl: "{!!route('admin.product.store')!!}", // server upload action--}}
+                {{--uploadAsync: true,--}}
+                {{--showUpload: false,--}}
+                {{--showBrowse: true,--}}
+                {{--browseLabel:'Chọn Hình',--}}
+                {{--browseClass:'btn btn-primary btn-sm',--}}
+                {{--showCaption: false,--}}
+                {{--showCancel: false,--}}
+                {{--dropZoneEnabled : false,--}}
+                {{--browseOnZoneClick: false,--}}
+                {{--fileActionSettings:{--}}
+                    {{--showUpload : false,--}}
+                    {{--showZoom: false,--}}
+                    {{--showDrag: false,--}}
+                    {{--showDownload: false,--}}
+                    {{--removeIcon: '<i class="fa fa-trash text-danger"></i>',--}}
+                {{--},--}}
+                {{--layoutTemplates: {--}}
+                    {{--progress: '<div class="kv-upload-progress hidden"></div>'--}}
+                {{--}--}}
+            {{--})--}}
+
             /*ATT TRIGGER*/
             $('.thuoctinh-container').hide();
             var att_con = $('.thuoctinh-container');
@@ -373,9 +403,10 @@
                 }
             })
             $('body').on('click','.trigger-value', function(){
-                var str = $(this).parent('.control-value').prev().children('.each-value').first().clone();
+                var str = $(this).parent('.control-value').next().children('.wrapper-attribute-set').first().clone();
                 str.find('input[type=text]').val('');
-                $(this).parent('.control-value').prev().append(str);
+                str.find('input[type=file]').val('');
+                $(this).parent('.control-value').next().append(str);
             })
 
             $('body').on('click','#trigger_addmore_att', function(){
@@ -385,7 +416,7 @@
 
             $("body").on('change', "select[name='attribute[]']", function(){
                 var value = $(this).val();
-               var input = $(this).parent().next().find('.value-wrapper').find("input[type=text]");
+               var input = $(this).parent().next().next('.attribute-section').find('.value-wrapper').find("input[type=text]");
                input.each(function (index){
                    $(this).attr('name','att_value['+value+'][]');
                })
