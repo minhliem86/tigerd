@@ -4,10 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/app/Events/EmailTemplateEvent.php" line="25" mnemonic="4" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="17afa036-b3b5-46e4-ad1c-f1d93a557e79" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php" afterPath="$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/Modules/Client/Views/emails/payment_email.blade.php" afterPath="$PROJECT_DIR$/app/Modules/Client/Views/emails/payment_email.blade.php" />
-    </list>
+    <list default="true" id="17afa036-b3b5-46e4-ad1c-f1d93a557e79" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/vendor/landish/pagination/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -351,7 +348,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="576920000" />
+    <option name="totallyTimeSpent" value="576997000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
