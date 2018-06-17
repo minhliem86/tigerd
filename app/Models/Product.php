@@ -66,10 +66,10 @@ class Product extends Model
                     \App\Models\MetaConfiguration::destroy($item_meta->id);
                 }
             }
-            if(!$product->attributes->isEmpty()){
+            if(count($product->attributes)){
                 foreach($product->attributes as $item_att){
-                    if(!$item_att->attribute_values->isEmpty()){
-                        $item_att->attribute_values()->where('product_id', $product->id)->delete();
+                    if($att = \App\Models\Attribute::find($item_att)){
+                        $att->attribute_values()->where('product_id', $product->id)->delete();
                     }
                 }
                 $product->attributes()->detach();

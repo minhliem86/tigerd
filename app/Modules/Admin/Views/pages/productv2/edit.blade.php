@@ -170,43 +170,7 @@
                                                 <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#modal_attribute"><i class="fa fa-plus"></i> Thêm Thuộc Tính Mới</button>
                                                 <button type="button" class="btn btn-sm btn-primary" id="trigger_addmore_att"><i class="fa fa-plus" ></i> Thêm Dòng Thuộc Tính</button>
                                             </div>
-                                            @if(!$inst->attributes->isEmpty())
-                                                @foreach($inst->attributes as $item_attribute)
-                                            <div class="manage-thuoctinh" style="margin-bottom:15px; padding-bottom:10px; border-bottom:1px solid lightgrey">
-                                                <div class="row">
-                                                        <div class="col-md-3">
-                                                            {!! Form::select('attribute[]', ['' => 'Chọn thuộc tính'] + $attribute_list, $item_attribute->id, ['class' => 'form-control']) !!}
-                                                        </div>
-                                                        <div class="col-md-9">
-                                                            <div class="value-wrapper">
-                                                                @if(!$item_attribute->attribute_values->isEmpty())
-                                                                    @if(!$item_attribute->attribute_values()->where('product_id',$inst->id)->get()->isEmpty())
-                                                                        @foreach($item_attribute->attribute_values()->where('product_id',$inst->id)->get() as $item_value)
-                                                                        <div class="each-value" style="margin-bottom:10px">
-                                                                            <input type="text" name="att_value[{!! $item_attribute->id ? $item_attribute->id : null  !!}][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g" value="{!! $item_value->value ? $item_value->value : '' !!}">
-                                                                        </div>
-                                                                        @endforeach
-                                                                    @else
-                                                                        <div class="each-value" style="margin-bottom:10px">
-                                                                            <input type="text" name="att_value[{!! $item_attribute->id!!}][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g">
-                                                                        </div>
-                                                                    @endif
-                                                                @else
-                                                                        <div class="each-value" style="margin-bottom:10px">
-                                                                            <input type="text" name="att_value[{!! $item_attribute->id!!}][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g">
-                                                                        </div>
-                                                                @endif
-                                                            </div>
-                                                            <div class="control-value text-right">
-
-                                                                <button type="button" class="btn btn-sm btn-warning trigger-value"><i class="fa fa-plus"></i> Thêm giá trị</button>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                            </div>
-                                                @endforeach
-                                                @endif
+                                            @include("Admin::ajax.script.edit_product.edit_manage_thuoctinh")
                                         </div>
                                     </div>
                                 </div>
@@ -281,25 +245,6 @@
         </div><!-- /.modal-dialog -->
         {!! Form::close() !!}
     </div><!-- /.modal -->
-    <div class="manage-thuoctinh copy hidden" style="margin-bottom:15px; padding-bottom:10px; border-bottom:1px solid lightgrey">
-        <div class="row">
-            <div class="col-md-3">
-                {!! Form::select('attribute[]', ['' => 'Chọn thuộc tính'] + $attribute_list, '', ['class' => 'form-control']) !!}
-            </div>
-            <div class="col-md-9">
-                <div class="value-wrapper">
-                    <div class="each-value" style="margin-bottom:10px">
-                        <input type="text" name="att_value[][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g">
-                    </div>
-                </div>
-                <div class="control-value text-right">
-
-                    <button type="button"  class="btn btn-sm btn-warning trigger-value"><i class="fa fa-plus"></i> Thêm giá trị</button>
-
-                </div>
-            </div>
-        </div>
-    </div>
 @endsection
 
 @section('script')
@@ -469,25 +414,57 @@
 
                     }
                 })
-                    @endif
+            @endif
             $('body').on('click','.trigger-value', function(){
-                var str = $(this).parent('.control-value').prev().children('.each-value').first().clone();
-                str.find('input[type=text]').val('');
-                $(this).parent('.control-value').prev().append(str);
+                var thisButton = $(this);
+                var value_att = thisButton.parent('.control-value').prev().find('select').val();
+                $.ajax({
+                    url: "{!! route('admin.attribute.addMoreAttValue') !!}",
+                    data:{value_att: value_att },
+                    type: "GET",
+                    success: function(res){
+                        thisButton.parent('.control-value').next('.attribute-section').append(res.data)
+                    }
+                })
             })
 
             $('body').on('click','#trigger_addmore_att', function(){
-                var manage =$('.manage-thuoctinh.copy').clone().removeClass('copy').removeClass('hidden').addClass('show');
-                $('.attribute_process').append(manage);
+                $.ajax({
+                    url: "{!! route('admin.attribute.addMoreAtt') !!}",
+                    type: 'GET',
+                    success: function(rs){
+                        $('.attribute_process').append(rs.data);
+                    }
+                })
+
             });
 
             $("body").on('change', "select[name='attribute[]']", function(){
                 var value = $(this).val();
-                var input = $(this).parent().next().find('.value-wrapper').find("input[type=text]");
+                var input = $(this).parent().next().next('.attribute-section').find('.value-wrapper').find("input[type=text]");
                 input.each(function (index){
                     $(this).attr('name','att_value['+value+'][]');
                 })
             });
+
+            $("body").on('click','.trigger_upload_img', function () {
+                var att_value = $(this).parent().prev('.each-value').children('input[type=text]').val();
+                var thisButton = $(this);
+                if(att_value){
+                    $.ajax({
+                        url: "{!! route('admin.attribute.value.img') !!}",
+                        type: 'POST',
+                        data:{id: att_value},
+                        success:function(res){
+                            if(res.data){
+                                thisButton.parent().parent().parent('.value-wrapper').next('.img-wrapper').append(res.data);
+                            }
+                        }
+                    })
+                }else{
+                    alert('Vui lòng nhập giá trị thuộc tính trước khi thêm hình ảnh.')
+                }
+            })
 
             /*ADD NEW ATTRIBUTE*/
             $('.form_create_att').validate({
