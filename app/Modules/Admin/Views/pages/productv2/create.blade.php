@@ -256,6 +256,8 @@
             </div>
         </div>
     </div>
+
+    <input type="file" name="thumb-input" class="thumb-sp-template hidden" multiple>
 @endsection
 
 @section('script')
@@ -275,6 +277,7 @@
     <script src="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/js/fileinput.min.js"></script>
 
     <script type="text/javascript" src="{!! asset('public/assets/admin') !!}/dist/js/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="{!! asset('public/assets/admin') !!}/dist/js/slug.js"></script>
 
     <script>
         const url = "{!!url('/')!!}"
@@ -362,29 +365,50 @@
                 }
             })
 
-
-            {{--$(".thumb-sp").fileinput({--}}
-                {{--uploadUrl: "{!!route('admin.product.store')!!}", // server upload action--}}
-                {{--uploadAsync: true,--}}
-                {{--showUpload: false,--}}
-                {{--showBrowse: true,--}}
-                {{--browseLabel:'Chọn Hình',--}}
-                {{--browseClass:'btn btn-primary btn-sm',--}}
-                {{--showCaption: false,--}}
-                {{--showCancel: false,--}}
-                {{--dropZoneEnabled : false,--}}
-                {{--browseOnZoneClick: false,--}}
-                {{--fileActionSettings:{--}}
-                    {{--showUpload : false,--}}
-                    {{--showZoom: false,--}}
-                    {{--showDrag: false,--}}
-                    {{--showDownload: false,--}}
-                    {{--removeIcon: '<i class="fa fa-trash text-danger"></i>',--}}
-                {{--},--}}
-                {{--layoutTemplates: {--}}
-                    {{--progress: '<div class="kv-upload-progress hidden"></div>'--}}
-                {{--}--}}
-            {{--})--}}
+            var fileInputOption = {
+                uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
+                uploadAsync: true,
+                showUpload: false,
+                showBrowse: true,
+                browseLabel:'Chọn Hình',
+                browseClass:'btn btn-primary btn-sm',
+                showCaption: false,
+                showCancel: false,
+                dropZoneEnabled : false,
+                browseOnZoneClick: false,
+                fileActionSettings:{
+                    showUpload : false,
+                    showZoom: false,
+                    showDrag: false,
+                    showDownload: false,
+                    removeIcon: '<i class="fa fa-trash text-danger"></i>',
+                },
+                layoutTemplates: {
+                    progress: '<div class="kv-upload-progress hidden"></div>'
+                }
+            }
+            $(".thumb-sp").fileinput('refresh',{
+                uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
+                uploadAsync: true,
+                showUpload: false,
+                showBrowse: true,
+                browseLabel:'Chọn Hình',
+                browseClass:'btn btn-primary btn-sm',
+                showCaption: false,
+                showCancel: false,
+                dropZoneEnabled : false,
+                browseOnZoneClick: false,
+                fileActionSettings:{
+                    showUpload : false,
+                    showZoom: false,
+                    showDrag: false,
+                    showDownload: false,
+                    removeIcon: '<i class="fa fa-trash text-danger"></i>',
+                },
+                layoutTemplates: {
+                    progress: '<div class="kv-upload-progress hidden"></div>'
+                }
+            })
 
             /*ATT TRIGGER*/
             $('.thuoctinh-container').hide();
@@ -421,6 +445,15 @@
                    $(this).attr('name','att_value['+value+'][]');
                })
             });
+
+            /*FOCUS VALUE CREATE UPLOAD HINH*/
+//            var fileInput = $('.thumb-sp-template').fileinput();
+//            $('body').on('focusout','.att_value_input', function(){
+//                var value = $(this).val();
+//                if(value){
+//                    $(this).parent().parent('.value-wrapper').next('.img-wrapper').append(fileInput);
+//                }
+//            })
 
             /*ADD NEW ATTRIBUTE*/
             $('.form_create_att').validate({

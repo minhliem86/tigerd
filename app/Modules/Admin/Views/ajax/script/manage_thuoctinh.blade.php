@@ -10,15 +10,13 @@
             <div class="wrapper-attribute-set" style="margin-bottom:20px;">
                 <div class="value-wrapper">
                     <div class="each-value" style="margin-bottom:10px">
-                        <input type="text" name="att_value[][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g">
+                        <input type="text" name="att_value[][]" class="form-control att_value_input" placeholder="Giá trị thuộc tính. VD: 500g">
                     </div>
                 </div>
                 <div class="img-wrapper">
                     <input type="file" name="thumb-input" class="thumb-sp" multiple>
-                    <label for="">Chọn hình ảnh</label>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
