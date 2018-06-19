@@ -61,11 +61,13 @@ class Product extends Model
                     \App\Models\Photo::destroy($item_photo->id);
                 }
             }
-            if(!$product->meta_configs->isEmpty()){
-                foreach($product->meta_configs as $item_meta){
-                    \App\Models\MetaConfiguration::destroy($item_meta->id);
-                }
-            }
+//            if(!$product->meta_configs->isEmpty()){
+//                foreach($product->meta_configs as $item_meta){
+//                    \App\Models\MetaConfiguration::destroy($item_meta->id);
+//                }
+//            }
+
+            $product->meta_configs()->delete();
             if(count($product->attributes)){
                 foreach($product->attributes as $item_att){
                     if($att = \App\Models\Attribute::find($item_att)){

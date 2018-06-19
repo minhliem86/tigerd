@@ -368,8 +368,8 @@ class ProductController extends Controller
 
         if(!$product->attributes->isEmpty()){
             foreach($product->attributes as $item_attr){
-               $item_attr->attribute_values()->where('product_id',$product->id)->delete();
-
+//               $item_attr->attribute_values()->where('product_id',$product->id)->delete();
+                $attribute_value->where('photoable_id',$item_attr->id)->first->delete();
             }
         }
 
