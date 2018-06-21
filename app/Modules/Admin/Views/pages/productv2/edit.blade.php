@@ -419,7 +419,7 @@
                 var thisButton = $(this);
                 var value_att = thisButton.parent('.control-value').prev().find('select').val();
                 $.ajax({
-                    url: "{!! route('admin.attribute.addMoreAttValue') !!}",
+                    url: "{!! route('admin.attribute.addMoreAttValueEdit') !!}",
                     data:{value_att: value_att },
                     type: "GET",
                     success: function(res){

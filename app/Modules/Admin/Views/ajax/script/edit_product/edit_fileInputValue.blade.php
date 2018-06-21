@@ -6,13 +6,13 @@
             uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
             uploadAsync: true,
             showUpload: false,
-            showBrowse: true,
+            showBrowse: false,
             browseLabel:'Chọn Hình',
             browseClass:'btn btn-primary btn-sm',
             showCaption: false,
             showCancel: false,
-            dropZoneEnabled : false,
-            browseOnZoneClick: false,
+            dropZoneEnabled : true,
+            browseOnZoneClick: true,
             fileActionSettings:{
                 showUpload : false,
                 showZoom: false,

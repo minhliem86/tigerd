@@ -5,12 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17afa036-b3b5-46e4-ad1c-f1d93a557e79" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/add_more_att_value_addnew.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/1/16/16b90c759d22eb3a5c43c4d24f89d2fe" beforeDir="false" afterPath="$PROJECT_DIR$/1/16/16b90c759d22eb3a5c43c4d24f89d2fe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/AttributeValue.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/AttributeValue.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Product.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_add_more_att_value.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_add_more_att_value.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_fileInputValue.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_fileInputValue.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/edit.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Modules/Admin/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Admin/routes.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/vendor/landish/pagination/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -28,8 +30,8 @@
       <file leaf-file-name="ProductController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="370" column="74" lean-forward="true" selection-start-line="370" selection-start-column="74" selection-end-line="370" selection-end-column="74" />
+            <state relative-caret-position="85">
+              <caret line="381" column="62" selection-start-line="381" selection-start-column="47" selection-end-line="381" selection-end-column="62" />
             </state>
           </provider>
         </entry>
@@ -37,7 +39,7 @@
       <file leaf-file-name="AttributeValue.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Models/AttributeValue.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="609">
+            <state relative-caret-position="598">
               <caret line="29" selection-start-line="29" selection-end-line="29" />
             </state>
           </provider>
@@ -46,8 +48,8 @@
       <file leaf-file-name="Product.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Models/Product.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="840">
-              <caret line="40" column="7" selection-start-line="40" selection-start-column="7" selection-end-line="40" selection-end-column="64" />
+            <state relative-caret-position="661">
+              <caret line="79" column="11" selection-start-line="79" selection-start-column="11" selection-end-line="79" selection-end-column="11" />
             </state>
           </provider>
         </entry>
@@ -55,8 +57,8 @@
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Modules/Admin/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1659">
-              <caret line="79" column="73" selection-start-line="79" selection-start-column="65" selection-end-line="79" selection-end-column="96" />
+            <state relative-caret-position="533">
+              <caret line="80" column="159" selection-start-line="80" selection-start-column="159" selection-end-line="80" selection-end-column="159" />
             </state>
           </provider>
         </entry>
@@ -64,8 +66,8 @@
       <file leaf-file-name="edit.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/edit.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4305">
-              <caret line="205" column="35" selection-start-line="205" selection-start-column="35" selection-end-line="205" selection-end-column="35" />
+            <state relative-caret-position="777">
+              <caret line="421" column="72" selection-start-line="421" selection-start-column="72" selection-end-line="421" selection-end-column="72" />
             </state>
           </provider>
         </entry>
@@ -73,17 +75,8 @@
       <file leaf-file-name="edit_add_more_att_value.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_add_more_att_value.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="edit_fileInputValue.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_fileInputValue.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="630">
-              <caret line="30" column="63" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="63" />
+            <state relative-caret-position="126">
+              <caret line="6" column="162" selection-start-line="6" selection-start-column="162" selection-end-line="6" selection-end-column="162" />
             </state>
           </provider>
         </entry>
@@ -92,7 +85,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>block-footer</find>
       <find>id</find>
       <find>trigger-value</find>
       <find>trigger</find>
@@ -122,6 +114,7 @@
       <find>.trigger-value</find>
       <find>attribute_process</find>
       <find>lfm_meta</find>
+      <find>addMoreAttValue</find>
     </findStrings>
     <replaceStrings>
       <replace>attributr</replace>
@@ -142,7 +135,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/.env.example" />
         <option value="$PROJECT_DIR$/app/Modules/Client/Views/pages/news/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Client/Views/pages/contact/index.blade.php" />
@@ -182,17 +174,18 @@
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/news/create.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Client/Views/pages/news/news_category.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/manage_thuoctinh.blade.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Admin/routes.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/fileInputValue.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/add_more_att_value.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/create.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_manage_thuoctinh.blade.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_add_more_att_value.blade.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_fileInputValue.blade.php" />
         <option value="$PROJECT_DIR$/app/Models/Product.php" />
         <option value="$PROJECT_DIR$/app/Models/AttributeValue.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_fileInputValue.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/edit.blade.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/routes.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/add_more_att_value_addnew.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_add_more_att_value.blade.php" />
       </list>
     </option>
   </component>
@@ -308,6 +301,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -340,6 +334,36 @@
               <item name="Modules" type="462c0819:PsiDirectoryNode" />
               <item name="Admin" type="462c0819:PsiDirectoryNode" />
               <item name="Views" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Modules" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="ajax" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Modules" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="ajax" type="462c0819:PsiDirectoryNode" />
+              <item name="script" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Modules" type="462c0819:PsiDirectoryNode" />
+              <item name="Admin" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="ajax" type="462c0819:PsiDirectoryNode" />
+              <item name="script" type="462c0819:PsiDirectoryNode" />
+              <item name="edit_product" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tigerd" type="b2602c69:ProjectViewProjectNode" />
@@ -399,7 +423,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -409,17 +432,17 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\tigerd\public\assets\admin\dist\js" />
-      <recent name="C:\xampp\htdocs\tigerd\app\Modules\Admin\Views\pages" />
-      <recent name="C:\xampp\htdocs\tigerd\app\Repositories" />
-      <recent name="C:\xampp\htdocs\tigerd\public\assets\client\images" />
-      <recent name="C:\xampp\htdocs\tigerd\app\Modules\Admin\Views\pages\productv2" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\tigerd\vendor\mistic100\randomcolor\src" />
       <recent name="C:\xampp\htdocs\tigerd\app\Modules\Client\Views" />
       <recent name="C:\xampp\htdocs\tigerd\app\Modules\Admin\Views\pages\product\attribute" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\tigerd\app\Modules\Admin\Views\ajax\script\edit_product" />
+      <recent name="C:\xampp\htdocs\tigerd\public\assets\admin\dist\js" />
+      <recent name="C:\xampp\htdocs\tigerd\app\Modules\Admin\Views\pages" />
+      <recent name="C:\xampp\htdocs\tigerd\app\Repositories" />
+      <recent name="C:\xampp\htdocs\tigerd\public\assets\client\images" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -509,11 +532,13 @@
       <workItem from="1529245374279" duration="1841000" />
       <workItem from="1529331994428" duration="2413000" />
       <workItem from="1529370597427" duration="1021000" />
+      <workItem from="1529415462931" duration="2811000" />
+      <workItem from="1529507111065" duration="3536000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="599158000" />
+    <option name="totallyTimeSpent" value="605505000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -524,9 +549,9 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32925472" />
       <window_info id="npm" order="4" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="7" visible="true" weight="0.32852387" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.32852387" />
       <window_info id="Gulp" order="2" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16950959" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17270789" />
       <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -570,13 +595,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/location/disctrict.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="61" column="24" selection-start-line="61" selection-start-column="24" selection-end-line="61" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/ajaxGetDistrict.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -816,27 +834,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1659">
-          <caret line="79" column="73" selection-start-line="79" selection-start-column="65" selection-end-line="79" selection-end-column="96" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/fileInputValue.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="27" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_manage_thuoctinh.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="11" column="61" selection-start-line="11" selection-start-column="61" selection-end-line="11" selection-end-column="61" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/manage_thuoctinh.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="231">
@@ -851,24 +848,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_add_more_att_value.blade.php">
+    <entry file="file://$PROJECT_DIR$/../eylus/app/Modules/Admin/Controllers/ProductController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" column="20" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+        <state relative-caret-position="21">
+          <caret line="210" column="7" selection-start-line="210" selection-start-column="7" selection-end-line="210" selection-end-column="7" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_fileInputValue.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="30" column="63" selection-start-line="30" selection-start-column="52" selection-end-line="30" selection-end-column="63" />
+        <state relative-caret-position="294">
+          <caret line="14" column="35" selection-start-line="14" selection-start-column="35" selection-end-line="14" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../eylus/app/Modules/Admin/Controllers/ProductController.php">
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/fileInputValue.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="210" column="7" selection-start-line="210" selection-start-column="7" selection-end-line="210" selection-end-column="7" />
+        <state>
+          <caret selection-end-line="27" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/Product.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="661">
+          <caret line="79" column="11" selection-start-line="79" selection-start-column="11" selection-end-line="79" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="533">
+          <caret line="80" column="159" selection-start-line="80" selection-start-column="159" selection-end-line="80" selection-end-column="159" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_manage_thuoctinh.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="231">
+          <caret line="11" column="61" selection-start-line="11" selection-start-column="61" selection-end-line="11" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/AttributeValue.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="598">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/add_more_att_value_addnew.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="5" column="70" selection-start-line="5" selection-start-column="70" selection-end-line="5" selection-end-column="70" />
         </state>
       </provider>
     </entry>
@@ -879,31 +911,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_add_more_att_value.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="6" column="162" selection-start-line="6" selection-start-column="162" selection-end-line="6" selection-end-column="162" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/edit.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4305">
-          <caret line="205" column="35" selection-start-line="205" selection-start-column="35" selection-end-line="205" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/AttributeValue.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="609">
-          <caret line="29" selection-start-line="29" selection-end-line="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/Product.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="40" column="7" selection-start-line="40" selection-start-column="7" selection-end-line="40" selection-end-column="64" />
+        <state relative-caret-position="777">
+          <caret line="421" column="72" selection-start-line="421" selection-start-column="72" selection-end-line="421" selection-end-column="72" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="370" column="74" lean-forward="true" selection-start-line="370" selection-start-column="74" selection-end-line="370" selection-end-column="74" />
+        <state relative-caret-position="85">
+          <caret line="381" column="62" selection-start-line="381" selection-start-column="47" selection-end-line="381" selection-end-column="62" />
         </state>
       </provider>
     </entry>
