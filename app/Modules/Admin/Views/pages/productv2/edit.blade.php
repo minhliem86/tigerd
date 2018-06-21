@@ -203,7 +203,7 @@
                             <div class="col-md-10">
                                 <div class="input-group">
                             <span class="input-group-btn">
-                            <a id="lfm_meta" data-input="thumbnail_meta" data-preview="holder_meta" class="btn btn-primary">
+                            <a id="lfm-meta" data-input="thumbnail_meta" data-preview="holder_meta" class="btn btn-primary">
                             <i class="fa fa-picture-o"></i> Chọn
                             </a>
                             </span>
@@ -419,7 +419,7 @@
                 var thisButton = $(this);
                 var value_att = thisButton.parent('.control-value').prev().find('select').val();
                 $.ajax({
-                    url: "{!! route('admin.attribute.addMoreAttValue') !!}",
+                    url: "{!! route('admin.attribute.addMoreAttValueEdit') !!}",
                     data:{value_att: value_att },
                     type: "GET",
                     success: function(res){

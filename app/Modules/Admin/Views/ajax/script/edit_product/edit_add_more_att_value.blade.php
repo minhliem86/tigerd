@@ -4,7 +4,8 @@
         <div class="value-wrapper">
             <div class="row">
                 <div class="col-md-8 each-value">
-                    <input type="text" name="att_value[{!! $item_attribute->id ? $item_attribute->id : null  !!}][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g" value="{!! $item_value->value ? $item_value->value : '' !!}">
+                    <input type="text" name="att_value[{!! $item_attribute->id ? $item_attribute->id : null  !!}][{!! $item_value->id ? $item_value->id : null !!}]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g" value="{!! $item_value->value ? $item_value->value : '' !!}">
+                    <input type="hidden" name="att_value_id[{!! $item_attribute->id ? $item_attribute->id : null  !!}][]" value="{!! $item_value->id ? $item_value->id : null !!}">
                 </div>
                 @if($item_value->photos->isEmpty())
                     <div class="col-md-4">
