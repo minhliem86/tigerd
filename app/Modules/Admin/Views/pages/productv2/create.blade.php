@@ -224,40 +224,13 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    {{--<button type="button" class="btn btn-primary" onclick="addAttribute( '{!! route('admin.product.createAttribute') !!}','modal-add-attribute')">Thêm</button>--}}
                     <button type="submit" class="btn btn-primary" id="btn-addAttribute">Thêm</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
         {!! Form::close() !!}
     </div><!-- /.modal -->
-    <div class="manage-thuoctinh copy hidden" style="margin-bottom:15px; padding-bottom:10px; border-bottom:1px solid lightgrey">
-        <div class="row">
-            <div class="col-md-3">
-                {!! Form::select('attribute[]', ['' => 'Chọn thuộc tính'] + $attribute_list, '', ['class' => 'form-control']) !!}
-            </div>
-            <div class="col-md-7">
-                <div class="value-wrapper">
-                    <div class="each-value" style="margin-bottom:10px">
-                        <input type="text" name="att_value[][]" class="form-control" placeholder="Giá trị thuộc tính. VD: 500g">
-                    </div>
-                </div>
-                <div class="control-value text-right">
 
-                    <div class="clearfix">
-                        <input type="file" name="thumb-input" class="thumb-sp" multiple>
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-md-2">
-                <button type="button"  class="btn btn-warning trigger-value "><i class="fa fa-plus"></i> Thêm giá trị</button>
-            </div>
-        </div>
-    </div>
-
-    <input type="file" name="thumb-input" class="thumb-sp-template hidden" multiple>
 @endsection
 
 @section('script')
@@ -277,7 +250,6 @@
     <script src="{!!asset('/public/assets/admin')!!}/dist/js/plugins/bootstrap-input/js/fileinput.min.js"></script>
 
     <script type="text/javascript" src="{!! asset('public/assets/admin') !!}/dist/js/jquery.validate.min.js"></script>
-    <script type="text/javascript" src="{!! asset('public/assets/admin') !!}/dist/js/slug.js"></script>
 
     <script>
         const url = "{!!url('/')!!}"
@@ -365,51 +337,6 @@
                 }
             })
 
-            var fileInputOption = {
-                uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
-                uploadAsync: true,
-                showUpload: false,
-                showBrowse: true,
-                browseLabel:'Chọn Hình',
-                browseClass:'btn btn-primary btn-sm',
-                showCaption: false,
-                showCancel: false,
-                dropZoneEnabled : false,
-                browseOnZoneClick: false,
-                fileActionSettings:{
-                    showUpload : false,
-                    showZoom: false,
-                    showDrag: false,
-                    showDownload: false,
-                    removeIcon: '<i class="fa fa-trash text-danger"></i>',
-                },
-                layoutTemplates: {
-                    progress: '<div class="kv-upload-progress hidden"></div>'
-                }
-            }
-            $(".thumb-sp").fileinput('refresh',{
-                uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
-                uploadAsync: true,
-                showUpload: false,
-                showBrowse: true,
-                browseLabel:'Chọn Hình',
-                browseClass:'btn btn-primary btn-sm',
-                showCaption: false,
-                showCancel: false,
-                dropZoneEnabled : false,
-                browseOnZoneClick: false,
-                fileActionSettings:{
-                    showUpload : false,
-                    showZoom: false,
-                    showDrag: false,
-                    showDownload: false,
-                    removeIcon: '<i class="fa fa-trash text-danger"></i>',
-                },
-                layoutTemplates: {
-                    progress: '<div class="kv-upload-progress hidden"></div>'
-                }
-            })
-
             /*ATT TRIGGER*/
             $('.thuoctinh-container').hide();
             var att_con = $('.thuoctinh-container');
@@ -427,33 +354,55 @@
                 }
             })
             $('body').on('click','.trigger-value', function(){
-                var str = $(this).parent('.control-value').next().children('.wrapper-attribute-set').first().clone();
-                str.find('input[type=text]').val('');
-                str.find('input[type=file]').val('');
-                $(this).parent('.control-value').next().append(str);
+                var thisButton = $(this);
+                var value_att = thisButton.parent('.control-value').prev().find('select').val();
+                $.ajax({
+                    url: "{!! route('admin.attribute.addMoreAttValue') !!}",
+                    data:{value_att: value_att },
+                    type: "GET",
+                    success: function(res){
+                        thisButton.parent('.control-value').next('.attribute-section').append(res.data)
+                    }
+                })
             })
 
             $('body').on('click','#trigger_addmore_att', function(){
-                var manage =$('.manage-thuoctinh.copy').clone().removeClass('copy').removeClass('hidden').addClass('show');
-                $('.attribute_process').append(manage);
+                $.ajax({
+                    url: "{!! route('admin.attribute.addMoreAtt') !!}",
+                    type: 'GET',
+                    success: function(rs){
+                        $('.attribute_process').append(rs.data);
+                    }
+                })
+
             });
 
             $("body").on('change', "select[name='attribute[]']", function(){
                 var value = $(this).val();
-               var input = $(this).parent().next().next('.attribute-section').find('.value-wrapper').find("input[type=text]");
+                var input = $(this).parent().next().next('.attribute-section').find('.value-wrapper').find("input[type=text]");
                input.each(function (index){
                    $(this).attr('name','att_value['+value+'][]');
                })
             });
 
-            /*FOCUS VALUE CREATE UPLOAD HINH*/
-//            var fileInput = $('.thumb-sp-template').fileinput();
-//            $('body').on('focusout','.att_value_input', function(){
-//                var value = $(this).val();
-//                if(value){
-//                    $(this).parent().parent('.value-wrapper').next('.img-wrapper').append(fileInput);
-//                }
-//            })
+            $("body").on('click','.trigger_upload_img', function () {
+                var att_value = $(this).parent().prev('.each-value').children('input[type=text]').val();
+                var thisButton = $(this);
+                if(att_value){
+                    $.ajax({
+                        url: "{!! route('admin.attribute.value.img') !!}",
+                        type: 'POST',
+                        data:{id: att_value},
+                        success:function(res){
+                            if(res.data){
+                                thisButton.parent().parent().parent('.value-wrapper').next('.img-wrapper').append(res.data);
+                            }
+                        }
+                    })
+                }else{
+                    alert('Vui lòng nhập giá trị thuộc tính trước khi thêm hình ảnh.')
+                }
+            })
 
             /*ADD NEW ATTRIBUTE*/
             $('.form_create_att').validate({

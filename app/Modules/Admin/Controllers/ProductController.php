@@ -224,25 +224,43 @@ class ProductController extends Controller
                     if (count($value_arr[$item_attribute])) {
                         foreach ($value_arr[$item_attribute] as $item_value) {
                             if ($item_value) {
-                                $arr_obj_value[$item_attribute][] = new \App\Models\AttributeValue([
+                                $var_value = $attribute->find($item_attribute)->attribute_values()->create([
                                     'value' => $item_value,
                                     'product_id' => $product->id,
                                 ]);
+                                $slug = \LP_lib::unicodenospace($item_value);
+                                if($request->exists('thumb-value.'.$slug)){
+                                    $attValue_photo = $request->file('thumb-value')[$slug];
+                                    if($attValue_photo[0]) {
+                                        $data_photo = [];
+                                        foreach ($attValue_photo as $thumb) {
+                                            $bigSize = $this->common->uploadImage($request, $thumb, $this->_big, $resize = true, 350, 350, base_path($this->_removePath));
+                                            $smallsize = $this->common->createThumbnail($bigSize, $this->_small, 80, 80, base_path($this->_removePath));
+
+                                            $order = $this->photo->getOrder();
+                                            $filename = $this->common->getFileName($bigSize);
+                                            $data = new \App\Models\Photo(
+                                                [
+                                                    'img_url' => $bigSize,
+                                                    'thumb_url' => $smallsize,
+                                                    'order' => $order,
+                                                    'filename' => $filename,
+                                                ]
+                                            );
+                                            array_push($data_photo, $data);
+                                        }
+                                        $var_value->photos()->saveMany($data_photo);
+                                    }
+                                }
+                                $arr_obj_value[$item_attribute][] = $var_value;
                             }
                         }
-
+                        $arr_attribute_id [] = $item_attribute;
                     }
-                    $arr_attribute_id [] = $item_attribute;
                 }
             }
-            if(count($arr_attribute_id)){
+            if(isset($arr_attribute_id)){
                 $product->attributes()->attach($arr_attribute_id);
-            }
-            if(count($arr_obj_value)){
-                foreach($arr_obj_value as $key => $att_val){
-                    $att = $attribute->find($key);
-                    $att->attribute_values()->saveMany($att_val);
-                }
             }
 
         }
@@ -341,7 +359,6 @@ class ProductController extends Controller
                 );
                 array_push($data_photo, $data);
             }
-
             $product->photos()->saveMany($data_photo);
         }
 
@@ -349,28 +366,62 @@ class ProductController extends Controller
         $attribute_arr = $request->input('attribute');
         $value_arr = $request->input('att_value');
 
+        if(!$product->attributes->isEmpty()){
+            foreach($product->attributes as $item_attr){
+               $item_attr->attribute_values()->where('product_id',$product->id)->delete();
+
+            }
+        }
+
         if(count($attribute_arr)){
             foreach($attribute_arr as $item_attribute) {
                 if ($item_attribute) {
                     if (count($value_arr[$item_attribute])) {
                         foreach ($value_arr[$item_attribute] as $item_value) {
                             if ($item_value) {
-                                $arr_obj_value[$item_attribute][] = new \App\Models\AttributeValue([
+                                $att_value = $attribute_value->findByField('value', $item_value)->first();
+                                if($att_value == null){
+
+                                }else{
+
+                                }
+                                $var_value = $attribute->find($item_attribute)->attribute_values()->create([
                                     'value' => $item_value,
                                     'product_id' => $product->id,
                                 ]);
+                                $slug = \LP_lib::unicodenospace($item_value);
+                                if($request->exists('thumb-value.'.$slug)){
+                                    $attValue_photo = $request->file('thumb-value')[$slug];
+                                    if($attValue_photo[0]) {
+                                        $data_photo = [];
+                                        foreach ($attValue_photo as $thumb) {
+                                            $bigSize = $this->common->uploadImage($request, $thumb, $this->_big, $resize = true, 350, 350, base_path($this->_removePath));
+                                            $smallsize = $this->common->createThumbnail($bigSize, $this->_small, 80, 80, base_path($this->_removePath));
+
+                                            $order = $this->photo->getOrder();
+                                            $filename = $this->common->getFileName($bigSize);
+                                            $data = new \App\Models\Photo(
+                                                [
+                                                    'img_url' => $bigSize,
+                                                    'thumb_url' => $smallsize,
+                                                    'order' => $order,
+                                                    'filename' => $filename,
+                                                ]
+                                            );
+                                            array_push($data_photo, $data);
+                                        }
+                                        $var_value->photos()->saveMany($data_photo);
+                                    }
+                                }
+                                $arr_obj_value[$item_attribute][] = $var_value;
                             }
                         }
-
+                        $arr_attribute_id [] = $item_attribute;
                     }
-                    $arr_attribute_id [] = $item_attribute;
+
                 }
             }
-            if(!$product->attributes->isEmpty()){
-                foreach($product->attributes as $item_attr){
-                    $item_attr->attribute_values()->where('product_id',$product->id)->delete();
-                }
-            }
+
 
             if(count($arr_attribute_id)){
                 $product->attributes()->sync($arr_attribute_id);
@@ -593,6 +644,34 @@ class ProductController extends Controller
         }else{
             return response()->json(true);
         }
+    }
 
+    /*ADD UPLOAD PHOTO BUTTON TO VALUE*/
+    public function ajaxIntergateButton(Request $request)
+    {
+        if($request->ajax()){
+            $id = \LP_lib::unicodenospace($request->input('id'));
+            $view = view('Admin::ajax.script.fileInputValue', compact('id'))->render();
+            return response()->json(['data'=>$view],200);
+        }
+    }
+
+    /*ADD UPLOAD PHOTO BUTTON TO VALUE*/
+    public function ajaxAddMoreAtt(Request $request, AttributeRepository $attribute)
+    {
+        if($request->ajax()){
+            $attribute_list = $attribute->query(['id', 'name'])->lists('name','id')->toArray();
+            $view = view('Admin::ajax.script.manage_thuoctinh', compact('attribute_list'))->render();
+            return response()->json(['data'=>$view],200);
+        }
+    }
+
+    public function ajaxAddMoreAttValue(Request $request)
+    {
+        if($request->ajax()){
+            $value_att = $request->has('value_att') ? $request->get('value_att') : null ;
+            $view = view('Admin::ajax.script.add_more_att_value',compact('value_att'))->render();
+            return response()->json(['data'=>$view],200);
+        }
     }
 }

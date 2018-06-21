@@ -7,16 +7,7 @@
             <button type="button"  class="btn btn-warning trigger-value "><i class="fa fa-plus"></i> Thêm giá trị</button>
         </div>
         <div class="col-md-12 attribute-section">
-            <div class="wrapper-attribute-set" style="margin-bottom:20px;">
-                <div class="value-wrapper">
-                    <div class="each-value" style="margin-bottom:10px">
-                        <input type="text" name="att_value[][]" class="form-control att_value_input" placeholder="Giá trị thuộc tính. VD: 500g">
-                    </div>
-                </div>
-                <div class="img-wrapper">
-                    <input type="file" name="thumb-input" class="thumb-sp" multiple>
-                </div>
-            </div>
+            @include("Admin::ajax.script.add_more_att_value")
         </div>
     </div>
 </div>
