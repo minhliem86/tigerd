@@ -365,13 +365,11 @@ class ProductController extends Controller
         /*ATTRIBUTE PROCESS*/
         $attribute_arr = $request->input('attribute');
         $value_arr = $request->input('att_value');
-        $value_arr_id = $request->input('att_value_id');
 
         if(!$product->attributes->isEmpty()){
             foreach($product->attributes as $item_attr){
-                foreach($item_attr->attribute_values()->where('product_id',$product->id)->get() as $item_attValue){
-                    $item_attValue->delete();
-                }
+               $item_attr->attribute_values()->where('product_id',$product->id)->delete();
+
             }
         }
 
@@ -379,7 +377,6 @@ class ProductController extends Controller
             foreach($attribute_arr as $item_attribute) {
                 if ($item_attribute) {
                     if (count($value_arr[$item_attribute])) {
-<<<<<<< HEAD
                         foreach ($value_arr[$item_attribute] as $item_value) {
                             if ($item_value) {
                                 $att_value = $attribute_value->findByField('value', $item_value)->first();
@@ -392,15 +389,6 @@ class ProductController extends Controller
                                     'value' => $item_value,
                                     'product_id' => $product->id,
                                 ]);
-=======
-                        foreach ($value_arr_id[$item_attribute] as $item_value_id) {
-                            if ($item_value_id) {
-//                                $var_value = $attribute->find($item_attribute)->attribute_values()->create([
-//                                    'value' => $item_value,
-//                                    'product_id' => $product->id,
-//                                ]);
-                                $var_value = $attribute_value->find($item_value_id);
->>>>>>> 1db5026d0e02a8821385c1070113cd5d5c066229
                                 $slug = \LP_lib::unicodenospace($item_value);
                                 if($request->exists('thumb-value.'.$slug)){
                                     $attValue_photo = $request->file('thumb-value')[$slug];
@@ -683,15 +671,6 @@ class ProductController extends Controller
         if($request->ajax()){
             $value_att = $request->has('value_att') ? $request->get('value_att') : null ;
             $view = view('Admin::ajax.script.add_more_att_value',compact('value_att'))->render();
-            return response()->json(['data'=>$view],200);
-        }
-    }
-
-    public function ajaxAddMoreAttValueEdit(Request $request)
-    {
-        if($request->ajax()){
-            $value_att = $request->has('value_att') ? $request->get('value_att') : null ;
-            $view = view('Admin::ajax.script.edit_product.add_more_att_value_addnew',compact('value_att'))->render();
             return response()->json(['data'=>$view],200);
         }
     }
