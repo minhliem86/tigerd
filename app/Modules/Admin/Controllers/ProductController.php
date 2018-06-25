@@ -365,6 +365,7 @@ class ProductController extends Controller
         /*ATTRIBUTE PROCESS*/
         $attribute_arr = $request->input('attribute');
         $value_arr = $request->input('att_value');
+<<<<<<< HEAD
 
         if(!$product->attributes->isEmpty()){
             foreach($product->attributes as $item_attr){
@@ -372,11 +373,23 @@ class ProductController extends Controller
 
             }
         }
+=======
+//        $value_arr_id = $request->input('att_value_id');
+
+//        if(!$product->attributes->isEmpty()){
+//            foreach($product->attributes as $item_attr){
+//                foreach($item_attr->attribute_values()->where('product_id',$product->id)->get() as $item_attValue){
+//                    $item_attValue->delete();
+//                }
+//            }
+//        }
+>>>>>>> 0e0eeb3df1b97a239d1749f421a6148f0580e500
 
         if(count($attribute_arr)){
             foreach($attribute_arr as $item_attribute) {
                 if ($item_attribute) {
                     if (count($value_arr[$item_attribute])) {
+<<<<<<< HEAD
                         foreach ($value_arr[$item_attribute] as $item_value) {
                             if ($item_value) {
                                 $att_value = $attribute_value->findByField('value', $item_value)->first();
@@ -389,6 +402,28 @@ class ProductController extends Controller
                                     'value' => $item_value,
                                     'product_id' => $product->id,
                                 ]);
+=======
+                        foreach ($value_arr[$item_attribute] as $key => $item_value) {
+                            if ($item_value) {
+//                                $var_value = $attribute->find($item_attribute)->attribute_values()->create([
+//                                    'value' => $item_value,
+//                                    'product_id' => $product->id,
+//                                ]);
+                                $obj_attValue = $attribute_value->find($key);
+                                if($obj_attValue != null){
+                                    $obj_attValue->value = $item_value;
+
+                                    $attribute = $attribute->find($item_attribute);
+                                    $obj_attValue->attributes()->associate($attribute);
+                                    $new_objAtt = $obj_attValue->save();
+                                }else{
+                                    $new_objAtt  = $attribute->find($item_attribute)->attribute_values()->create([
+                                        'value' => $item_value,
+                                        'product_id' => $product->id,
+                                    ]);
+                                    $arr_obj_value[$item_attribute][] = $new_objAtt;
+                                }
+>>>>>>> 0e0eeb3df1b97a239d1749f421a6148f0580e500
                                 $slug = \LP_lib::unicodenospace($item_value);
                                 if($request->exists('thumb-value.'.$slug)){
                                     $attValue_photo = $request->file('thumb-value')[$slug];
@@ -410,10 +445,9 @@ class ProductController extends Controller
                                             );
                                             array_push($data_photo, $data);
                                         }
-                                        $var_value->photos()->saveMany($data_photo);
+                                        $new_objAtt->photos()->saveMany($data_photo);
                                     }
                                 }
-                                $arr_obj_value[$item_attribute][] = $var_value;
                             }
                         }
                         $arr_attribute_id [] = $item_attribute;
