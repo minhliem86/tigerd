@@ -269,7 +269,6 @@ class ProductController extends Controller
                     'shipping_cost' => $request->input('shippingcost'),
                     'total' => Cart::getTotal(),
                     'customer_id' => $this->auth->check() ? $this->auth->user()->id : 2 ,
-//                    'customer_id' => 2,
                     'promotion_id' => $promotion_id,
                     'paymentmethod_id' => 1,
                     'shipstatus_id' => 1,
@@ -601,5 +600,19 @@ class ProductController extends Controller
             $view = view('Client::ajax.ward', compact('ward'))->render();
             return response()->json(['error' => false, 'data'=> $view]);
         }
+    }
+
+    public function chosenAttributeAjax(Request $request)
+    {
+        !$request->ajax() ? abort(404) :
+            $value_id = $request->get('value_id');
+            $att_value = $this->value->find($value_id);
+            if($att_value->photos->isEmpty()){
+               return response()->json(['error' => true],200);
+            }else{
+                $view = view('Client::extensions.photo_product')->with(['product' => $att_value])->render();
+                return response()->json(['error' => false, 'data' => $view],200);
+            }
+
     }
 }

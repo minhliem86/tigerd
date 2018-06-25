@@ -367,18 +367,10 @@ class ProductController extends Controller
         $value_arr = $request->input('att_value');
 //        $value_arr_id = $request->input('att_value_id');
 
-//        if(!$product->attributes->isEmpty()){
-//            foreach($product->attributes as $item_attr){
-//                foreach($item_attr->attribute_values()->where('product_id',$product->id)->get() as $item_attValue){
-//                    $item_attValue->delete();
-//                }
-//            }
-//        }
-
         if(count($attribute_arr)){
-            foreach($attribute_arr as $item_attribute) {
+            foreach($attribute_arr as $key_att => $item_attribute) {
                 if ($item_attribute) {
-                    if (count($value_arr[$item_attribute])) {
+                    if (isset($value_arr[$item_attribute])) {
                         foreach ($value_arr[$item_attribute] as $key => $item_value) {
                             if ($item_value) {
 //                                $var_value = $attribute->find($item_attribute)->attribute_values()->create([
@@ -386,18 +378,17 @@ class ProductController extends Controller
 //                                    'product_id' => $product->id,
 //                                ]);
                                 $obj_attValue = $attribute_value->find($key);
-                                if($obj_attValue != null){
+                                if($obj_attValue){
                                     $obj_attValue->value = $item_value;
-
                                     $attribute = $attribute->find($item_attribute);
                                     $obj_attValue->attributes()->associate($attribute);
-                                    $new_objAtt = $obj_attValue->save();
+                                    $obj_attValue->save();
                                 }else{
-                                    $new_objAtt  = $attribute->find($item_attribute)->attribute_values()->create([
+                                    $obj_attValue  = $attribute->find($item_attribute)->attribute_values()->create([
                                         'value' => $item_value,
                                         'product_id' => $product->id,
                                     ]);
-                                    $arr_obj_value[$item_attribute][] = $new_objAtt;
+                                    $arr_obj_value[$item_attribute][] = $obj_attValue;
                                 }
                                 $slug = \LP_lib::unicodenospace($item_value);
                                 if($request->exists('thumb-value.'.$slug)){
@@ -420,22 +411,26 @@ class ProductController extends Controller
                                             );
                                             array_push($data_photo, $data);
                                         }
-                                        $new_objAtt->photos()->saveMany($data_photo);
+                                        $obj_attValue->photos()->saveMany($data_photo);
                                     }
                                 }
+                            }else{
+                                $attribute_value->delete($key);
                             }
                         }
                         $arr_attribute_id [] = $item_attribute;
                     }
-
+                }else{
+                    $product->attributes()->detach($key_att);
+                    $attribute_value->query()->where('product_id',$product->id)->where('attribute_id',$key_att)->delete();
                 }
             }
 
 
-            if(count($arr_attribute_id)){
+            if(isset($arr_attribute_id)){
                 $product->attributes()->sync($arr_attribute_id);
             }
-            if(count($arr_obj_value)){
+            if(isset($arr_obj_value)){
                 foreach($arr_obj_value as $key => $att_val){
                     $att = $attribute->find($key);
                     $att->attribute_values()->saveMany($att_val);
@@ -559,15 +554,17 @@ class ProductController extends Controller
         if(!$request->ajax()){
             abort('404', 'Not Access');
         }else{
-            $data = [
-                'name' => $request->input('att_name'),
-                'slug' => \LP_lib::unicode($request->input('att_name')),
-                'description' => $request->input('att_description'),
-            ];
-            $item_attr = $attribute->create($data);
-            $data_name = $item_attr->name;
-            $data_id = $item_attr->id;
-            return response()->json(['rs'=>'ok', 'data_name' => $data_name, 'data_id' => $data_id], 200);
+            if($request->has('att_name')){
+                $data = [
+                    'name' => $request->input('att_name'),
+                    'slug' => \LP_lib::unicode($request->input('att_name')),
+                    'description' => $request->input('att_description'),
+                ];
+                $item_attr = $attribute->create($data);
+                $data_name = $item_attr->name;
+                $data_id = $item_attr->id;
+                return response()->json(['rs'=>'ok', 'data_name' => $data_name, 'data_id' => $data_id], 200);
+            }
         }
     }
 

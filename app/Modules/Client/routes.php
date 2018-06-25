@@ -23,6 +23,7 @@ Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controlle
     Route::post('/remove-item', ['as' => 'client.cart.removeItem', 'uses' => 'ProductController@removeItemCart']);
     Route::post('/them-gio-hang-ajax', ['as' => 'client.cart.addToCartAjax', 'uses' => 'ProductController@addToCartAjax']);
     Route::get('/xoa-gio-hang',['as' => 'client.cart.clear', 'uses' => 'ProductController@clearCart']);
+    Route::post('/chooseAttribute',['as' => 'client.product.attribute.chosen', 'uses' => 'ProductController@chosenAttributeAjax']);
 
     Route::get('/thanh-toan', ['as' => 'client.payment', 'uses' => 'ProductController@getPayment']);
     Route::post('/process-promotion', ['as' => 'client.promotion', 'uses' => 'ProductController@applyPromotion']);

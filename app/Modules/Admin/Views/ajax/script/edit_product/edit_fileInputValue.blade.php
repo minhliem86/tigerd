@@ -4,7 +4,7 @@
     $('document').ready(function () {
         $("#{!! LP_lib::unicodenospace($item_value->value) !!}").fileinput({
             uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
-            uploadAsync: true,
+            uploadAsync: false,
             showUpload: false,
             showBrowse: false,
             browseLabel:'Chọn Hình',
@@ -13,6 +13,7 @@
             showCancel: false,
             dropZoneEnabled : true,
             browseOnZoneClick: true,
+            overwriteInitial: false,
             fileActionSettings:{
                 showUpload : false,
                 showZoom: false,

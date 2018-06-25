@@ -69,13 +69,16 @@
     .invoice-box table tr.top table td {
         width: 100%;
         display: block;
-        text-align: center;
+        text-align: left;
+    }
+    .invoice-box table tr.top table td.title{
+        text-align:center;
     }
 
     .invoice-box table tr.information table td {
         width: 100%;
         display: block;
-        text-align: center;
+        text-align: left;
     }
 }
 
