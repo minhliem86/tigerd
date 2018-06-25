@@ -182,6 +182,9 @@
                                     <tr>
                                         <td><b>Địa chỉ</b></td>
                                     </tr>
+                                    <tr>
+                                        <td><b>Ghi chú</b></td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </td>
@@ -196,6 +199,9 @@
                                     </tr>
                                     <tr>
                                         <td>{!! $order->shipAddress->address !!}, {!!DB::table('wards')->where('code',$order->shipAddress->ward)->first() ? DB::table('wards')->where('code',$order->shipAddress->ward)->first()->name_with_type : null !!}, {!!DB::table('district')->where('code',$order->shipAddress->district)->first() ? DB::table('district')->where('code',$order->shipAddress->district)->first()->name_with_type : null !!}, {!!DB::table('cities')->where('code',$order->shipAddress->city)->first() ? DB::table('cities')->where('code',$order->shipAddress->city)->first()->name_with_type : null !!}    </td>
+                                    </tr>
+                                    <tr>
+                                        <td>{!! $order->shipAddress->note !!}</td>
                                     </tr>
                                 </tbody>
                             </table>

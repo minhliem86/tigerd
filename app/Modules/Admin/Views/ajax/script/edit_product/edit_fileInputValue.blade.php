@@ -1,4 +1,4 @@
-<input type="file" name="thumb-value[{!! LP_lib::unicodenospace($item_value->id) !!}][]" id="{!! LP_lib::unicodenospace($item_value->value) !!}"  multiple>
+<input type="file" name="thumb-value[{!! LP_lib::unicodenospace($item_value->value) !!}][]" id="{!! LP_lib::unicodenospace($item_value->value) !!}"  multiple>
 
 <script>
     $('document').ready(function () {
@@ -11,14 +11,9 @@
             browseClass:'btn btn-primary btn-sm',
             showCaption: false,
             showCancel: false,
-<<<<<<< HEAD
-            dropZoneEnabled : false,
-            browseOnZoneClick: false,
-
-=======
             dropZoneEnabled : true,
             browseOnZoneClick: true,
->>>>>>> 1db5026d0e02a8821385c1070113cd5d5c066229
+            overwriteInitial: false,
             fileActionSettings:{
                 showUpload : false,
                 showZoom: false,

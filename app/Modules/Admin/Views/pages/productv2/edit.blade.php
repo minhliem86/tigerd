@@ -65,7 +65,7 @@
 @section('content')
     <div class="row">
         @include("Admin::errors.error_layout")
-            {!! Form::model($inst,['route' => ['admin.product.update', $inst->id], 'method' => 'PUT', 'files' => true, 'class' => 'form-horizontal form-edit-product']) !!}
+            {!! Form::model($inst,['route' => ['admin.product.update', $inst->id], 'method' => 'PUT', 'files' => true,'id' => 'form',  'class' => 'form-horizontal form-edit-product']) !!}
             <div class="col-md-12">
                 <fieldset>
                     <div class="form-group">
@@ -385,6 +385,7 @@
             @else
                 $('.thuoctinh-container').hide();
                 var att_con = $('.thuoctinh-container');
+
                 $('#att-trigger').on('click', function(){
                     if($('.thuoctinh-container').is(':hidden')){
                         att_con.removeClass('hidden').addClass('show');
@@ -434,12 +435,13 @@
                     type: 'GET',
                     success: function(rs){
                         $('.attribute_process').append(rs.data);
+                        $('.attribute_process').find('.manage-thuoctinh').last().find('.already_select').removeClass('already_select');
                     }
                 })
 
             });
-
-            $("body").on('change', "select[name='attribute[]']", function(){
+            var prevValue
+            $("body").on('change', "select.thuoctinh_select", function(){
                 var value = $(this).val();
                 var input = $(this).parent().next().next('.attribute-section').find('.value-wrapper').find("input[type=text]");
                 input.each(function (index){
@@ -482,7 +484,6 @@
                     }
                 },
                 submitHandler: function(form){
-                    return false;
                     var att_name = $(form).find('input[name=att_name]').val();
                     var att_description = $(form).find('textarea[name=att_description]').val();
                     $.ajax({
@@ -491,7 +492,8 @@
                         type: 'POST',
                         success: function (res){
                             if(res.rs == 'ok'){
-                                $("select[name='attribute[]']").append("<option value='"+res.data_id+"'>"+res.data_name+"</option>");
+                                $("select.thuoctinh_select").append("<option value='"+res.data_id+"'>"+res.data_name+"</option>");
+                                $("select.already_select option:last").remove();
                             }
                             $('#modal_attribute').modal('hide');
                             $('body').on('hidden.bs.modal', '#modal_attribute', function () {
@@ -500,10 +502,8 @@
 
                         }
                     })
-
+                    return false;
                 }
-
-
             })
 
         })

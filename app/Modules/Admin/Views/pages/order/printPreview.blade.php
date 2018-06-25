@@ -21,11 +21,11 @@
             <td colspan="3">
                 <table class="table">
                     <tr>
-                        <td class="title">
+                        <td class="title" align="center">
                             <img src="{!! asset('public/assets/client/images/logo-invoke.png') !!}" style=" max-width:300px;">
                         </td>
 
-                        <td class="text-right">
+                        <td align="left" class="text-left">
                             <b>Mã Đơn Hàng #:</b> {!! $order_detail->order_name !!}<br>
                             <b>Ngày Tạo:</b> {!! \Carbon\Carbon::parse($order_detail->created_at)->format('d-m-Y') !!}
                         </td>
@@ -38,10 +38,11 @@
             <td colspan="3">
                 <table>
                     <tr>
-                        <td >
+                        <td  align="left">
                             <b>Khách Hàng:</b> {!! $order_detail->customers->lastname !== 'No' ? $order_detail->customers->lastname : '' !!} {!! $order_detail->customers->firstname !!}<br>
                             <b>Điện Thoại:</b> {!! $order_detail->customers->phone !!}<br/>
-                            <b>Địa chỉ giao hàng:</b> {!! $order_detail ->shipAddress->address !!}, {!!DB::table('wards')->where('code',$order_detail ->shipAddress->ward)->first() ? DB::table('wards')->where('code',$order_detail ->shipAddress->ward)->first()->name_with_type : null !!}, {!!DB::table('district')->where('code',$order_detail ->shipAddress->district)->first() ? DB::table('district')->where('code',$order_detail ->shipAddress->district)->first()->name_with_type : null !!}, {!!DB::table('cities')->where('code',$order_detail ->shipAddress->city)->first() ? DB::table('cities')->where('code',$order_detail ->shipAddress->city)->first()->name_with_type : null !!}
+                            <b>Địa chỉ giao hàng:</b> {!! $order_detail ->shipAddress->address !!}, {!!DB::table('wards')->where('code',$order_detail ->shipAddress->ward)->first() ? DB::table('wards')->where('code',$order_detail ->shipAddress->ward)->first()->name_with_type : null !!}, {!!DB::table('district')->where('code',$order_detail ->shipAddress->district)->first() ? DB::table('district')->where('code',$order_detail ->shipAddress->district)->first()->name_with_type : null !!}, {!!DB::table('cities')->where('code',$order_detail ->shipAddress->city)->first() ? DB::table('cities')->where('code',$order_detail ->shipAddress->city)->first()->name_with_type : null !!}<br/>
+                            <b>Ghi chú:</b> {!! $order_detail ->shipAddress->note !!}
                         </td>
                     </tr>
                 </table>
