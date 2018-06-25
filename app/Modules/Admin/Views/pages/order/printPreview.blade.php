@@ -39,7 +39,7 @@
                 <table>
                     <tr>
                         <td  align="left">
-                            <b>Khách Hàng:</b> {!! $order_detail->customers->lastname !== 'No' ? $order_detail->customers->lastname : '' !!} {!! $order_detail->customers->firstname !!}<br>
+                            <b>Khách Hàng:</b> {!! $order_detail->shipAddress->fullname !!}<br>
                             <b>Điện Thoại:</b> {!! $order_detail->customers->phone !!}<br/>
                             <b>Địa chỉ giao hàng:</b> {!! $order_detail ->shipAddress->address !!}, {!!DB::table('wards')->where('code',$order_detail ->shipAddress->ward)->first() ? DB::table('wards')->where('code',$order_detail ->shipAddress->ward)->first()->name_with_type : null !!}, {!!DB::table('district')->where('code',$order_detail ->shipAddress->district)->first() ? DB::table('district')->where('code',$order_detail ->shipAddress->district)->first()->name_with_type : null !!}, {!!DB::table('cities')->where('code',$order_detail ->shipAddress->city)->first() ? DB::table('cities')->where('code',$order_detail ->shipAddress->city)->first()->name_with_type : null !!}<br/>
                             <b>Ghi chú:</b> {!! $order_detail ->shipAddress->note !!}
