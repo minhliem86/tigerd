@@ -79,6 +79,7 @@ class DashboardController extends Controller
         $data_bar_order = $this->getTotalOrderInMonth();
         $promotion_active = $this->getPromotionPieChart(1);
         $promotion_deactive = $this->getPromotionPieChart(0);
+
         return view('Admin::pages.dashboard.index', compact('ga', 'number_product', 'number_agency', 'number_category', 'number_news', 'number_feedback', 'number_customer', 'number_customerIdea' ,'new_sp','view_sp','data_bar_chart', 'data_bar_order','promotion_active', 'promotion_deactive'));
     }
 
@@ -104,6 +105,12 @@ class DashboardController extends Controller
     {
         $promotion = $this->promotion->findByField('status', $status, ['id'])->count();
         return $promotion;
+    }
+
+    public function getRealtimeUser()
+    {
+        $analytic = $this->analytic->getAnalyticsService()->data_realtime->get('ga:'.env('ANALYTICS_VIEW_ID'), 'rt:activeVisitors')->totalsForAllResults['rt:activeVisitors'];
+        dd($analytic);
     }
 
 

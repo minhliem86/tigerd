@@ -98,6 +98,18 @@ class OrderController extends Controller
         }
     }
 
+    /*DELETE ALL*/
+    public function deleteAll(Request $request)
+    {
+        if(!$request->ajax()){
+            abort(404);
+        }else{
+            $data = $request->arr;
+            $response = $this->order->deleteAll($data);
+            return response()->json(['msg' => 'ok']);
+        }
+    }
+
     public function postChangePayment(Request $request)
     {
         if(!$request->ajax()){

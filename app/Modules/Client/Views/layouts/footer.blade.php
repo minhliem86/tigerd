@@ -38,7 +38,7 @@
                 </div>
                 <div class="block-subcribe">
                     <h3 class="title-subcribe">ĐĂNG KÝ  NHẬN THÔNG TIN</h3>
-                    <p class="sub-title">Đăng ký để nhận thêm thông tin từ Tigerd</p>
+                    <p class="sub-title">Đăng ký để nhận thêm thông tin từ TigerD và các chương trình sale hấp dẫn.</p>
                     {!! Form::open(['route'=>'client.subcribe.post', 'class' => 'form-subcribe']) !!}
                         <div class="input-group">
                             <div class="input-group-prepend">

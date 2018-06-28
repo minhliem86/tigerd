@@ -20,7 +20,7 @@ class SubscribeController extends Controller
 
     public function getIndex()
     {
-        $newsletters = $this->subscribe->paginate(20, ['*']);
+        $newsletters = $this->subscribe->query()->orderBy('id','DESC')->paginate(20, ['*']);
         return view('Admin::pages.subscribe.index', compact('newsletters'));
     }
 

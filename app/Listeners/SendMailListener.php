@@ -29,9 +29,9 @@ class SendMailListener
     public function handle(SendMail $event)
     {
         Mail::send('Client::emails.payment_email',$event->data, function ($message) use ($event){
-            $message->from(env("MAIL_USERNAME"), 'TigerD Sale');
+            $message->from(env("MAIL_USERNAME"), 'TigerD.vn');
             $message->to($event->customer_email);
-            $message->subject('Email Xác Nhận Mua Hàng Thành Công.');
+            $message->subject($event->subject);
         });
     }
 }

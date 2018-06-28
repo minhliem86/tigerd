@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "293348abd38a36e009383ac7721e01dc",
+    "content-hash": "8cbf4caf3b1fbbd02858fc1c9574dfb3",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -579,6 +579,39 @@
                 "url"
             ],
             "time": "2017-03-20T17:10:46+00:00"
+        },
+        {
+            "name": "highideas/laravel-users-online",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/highideas/laravel-users-online.git",
+                "reference": "c54fd1d95762456c521ffed95b779f92756b29aa"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/highideas/laravel-users-online/zipball/c54fd1d95762456c521ffed95b779f92756b29aa",
+                "reference": "c54fd1d95762456c521ffed95b779f92756b29aa",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "HighIdeas\\UsersOnline\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Gabriel Goncalves",
+                    "email": "gabrielll_07@hotmail.com"
+                }
+            ],
+            "description": "This package will provide a online users management, like session break, assume identity and others fixtures.",
+            "time": "2016-04-13T04:50:38+00:00"
         },
         {
             "name": "intervention/image",

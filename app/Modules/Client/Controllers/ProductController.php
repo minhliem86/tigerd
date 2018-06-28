@@ -288,7 +288,7 @@ class ProductController extends Controller
                     'note' => $request->input('customer_note'),
                     'order_id' => $current_order->id,
                 ];
-                $this->ship_address->create($data_ship);
+                $shipAddress = $this->ship_address->create($data_ship);
 
                 /*LUU GIO HANG CHI TIET*/
                 $cart = Cart::getContent();
@@ -305,7 +305,7 @@ class ProductController extends Controller
                     $pr->save();
                 }
 
-                event(new SendMail(['cart' => $cart, 'shipping_cost' =>$request->input('shippingcost'), 'name'=>$request->customer_name, 'information_shipper' => $data_ship, 'order_no' =>  $order_id, 'order_date' => $data->created_at ],   $request->input('vpc_Customer_Email')));
+                event(new SendMail(['cart' => $cart, 'shipping_cost' =>$request->input('shippingcost'), 'name'=> $request->customer_name, 'information_shipper' => $shipAddress, 'order_no' =>  $order_id, 'order_date' => $current_order->created_at ],   $request->input('vpc_Customer_Email'), 'Xác nhận đặt hàng thành công. Đơn hàng #'.$order_id));
 
                 event(new EmailTemplateEvent('Client::emails.notifyAdmin', [],env("MAIL_USERNAME"), env('ADMIN_PAGE_EMAIL'), 'Thông Báo - Khách Đặt Hàng' ));
 

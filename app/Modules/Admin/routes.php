@@ -87,6 +87,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::get('/don-hang/show/{id}', ['as' => 'admin.order.detail', 'uses' => 'OrderController@getDetail'])->where('id','[0-9a-z-A-Z._/\-]+');
         Route::post('don-hang/doi-trang-thai-ship', ['as' => 'admin.order.changeShipStatus', 'uses' => 'OrderController@postChangeShip']);
         Route::post('don-hang/doi-trang-thai-payment', ['as' => 'admin.order.changePaymentStatus', 'uses' => 'OrderController@postChangePayment']);
+        Route::post('don-hang/deleteAll', ['as' => 'admin.order.deleteAll', 'uses' => 'OrderController@deleteAll']);
 
         Route::post('/don-hang/getProductDetail', ['as' => 'admin.order.getProductDetail', 'uses' => 'OrderController@getProductDetail']);
 
@@ -221,7 +222,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::post('localtion/postAjaxUpdateOrder', ['as' => 'admin.localtion.postAjaxUpdateOrder', 'uses' => 'LocationController@postAjaxUpdateOrder']);
         Route::post('/getDistrictAjax', ['as' => 'admin.location.getDistrictAjax', 'uses' => 'LocationController@getDistrictAjax']);
 
-
+        Route::get('/onlineUser', ['uses' => 'DashboardController@getRealtimeUser']);
 
         /** ORDER, DE **/
 

@@ -817,6 +817,12 @@ ul.list-success li {
       .page .payment-page form.form-payment div.custom-control label.custom-control-label:before {
         width: 1.5rem;
         height: 1.5rem; }
+  .page .payment-page form.form-payment span.error {
+    color: red;
+    font-size: 1.2rem;
+    font-style: italic; }
+  .page .payment-page form.form-payment span.red {
+    color: red; }
   .page .payment-page form.form-payment button {
     font-size: 1.2rem; }
   .page .payment-page h3.title-payment {

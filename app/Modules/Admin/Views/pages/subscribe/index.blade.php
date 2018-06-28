@@ -13,15 +13,13 @@
                 <table class="table">
                     <thead>
                     <tr>
-                        <th width="100">#</th>
                         <th width="40%">Email</th>
-                        <th>Thời gian</th>
+                        <th>Đăng ký ngày</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($newsletters as $item_newsletter)
                         <tr>
-                            <td>{!! $item_newsletter->id !!}</td>
                             <td>{!! $item_newsletter->email !!}</td>
                             <td>{!! Carbon\Carbon::parse($item_newsletter->created_at)->format('d-m-Y') !!}</td>
                         </tr>

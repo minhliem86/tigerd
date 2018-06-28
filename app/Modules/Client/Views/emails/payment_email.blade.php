@@ -1,192 +1,289 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Internal_email-29</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style type="text/css">
-        * {
-            -ms-text-size-adjust:100%;
-            -webkit-text-size-adjust:none;
-            -webkit-text-resize:100%;
-            text-resize:100%;
-        }
-        a{
-            outline:none;
-            color:#40aceb;
-            text-decoration:underline;
-        }
-        a:hover{text-decoration:none !important;}
-        .nav a:hover{text-decoration:underline !important;}
-        .title a:hover{text-decoration:underline !important;}
-        .title-2 a:hover{text-decoration:underline !important;}
-        .btn:hover{opacity:0.8;}
-        .btn a:hover{text-decoration:none !important;}
-        .btn{
-            -webkit-transition:all 0.3s ease;
-            -moz-transition:all 0.3s ease;
-            -ms-transition:all 0.3s ease;
-            transition:all 0.3s ease;
-        }
-        table td {border-collapse: collapse !important;}
-        .ExternalClass, .ExternalClass a, .ExternalClass span, .ExternalClass b, .ExternalClass br, .ExternalClass p, .ExternalClass div{line-height:inherit;}
-        @media only screen and (max-width:500px) {
-            table[class="flexible"]{width:100% !important;}
-            table[class="center"]{
-                float:none !important;
-                margin:0 auto !important;
-            }
-            *[class="hide"]{
-                display:none !important;
-                width:0 !important;
-                height:0 !important;
-                padding:0 !important;
-                font-size:0 !important;
-                line-height:0 !important;
-            }
-            td[class="img-flex"] img{
-                width:100% !important;
-                height:auto !important;
-            }
-            td[class="aligncenter"]{text-align:center !important;}
-            th[class="flex"]{
-                display:block !important;
-                width:100% !important;
-            }
-            td[class="wrapper"]{padding:0 !important;}
-            td[class="holder"]{padding:30px 15px 20px !important;}
-            td[class="nav"]{
-                padding:20px 0 0 !important;
-                text-align:center !important;
-            }
-            td[class="h-auto"]{height:auto !important;}
-            td[class="description"]{padding:30px 20px !important;}
-            td[class="i-120"] img{
-                width:120px !important;
-                height:auto !important;
-            }
-            td[class="footer"]{padding:5px 20px 20px !important;}
-            td[class="footer"] td[class="aligncenter"]{
-                line-height:25px !important;
-                padding:20px 0 0 !important;
-            }
-            tr[class="table-holder"]{
-                display:table !important;
-                width:100% !important;
-            }
-            th[class="thead"]{display:table-header-group !important; width:100% !important;}
-            th[class="tfoot"]{display:table-footer-group !important; width:100% !important;}
-        }
-    </style>
-</head>
-<body style="margin:0; padding:0;" bgcolor="#eaeced">
-<table style="min-width:320px;" width="100%" cellspacing="0" cellpadding="0" bgcolor="#eaeced">
-    <!-- fix for gmail -->
-    <tr>
-        <td class="hide">
-            <table width="600" cellpadding="0" cellspacing="0" style="width:600px !important;">
-                <tr>
-                    <td style="min-width:600px; font-size:0; line-height:0;">&nbsp;</td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-    <tr>
-        <td class="wrapper" style="padding:0 10px;">
 
-            <!-- module 2 -->
-            <table data-module="module-2" width="100%" cellpadding="0" cellspacing="0">
-                <tr>
-                    <td data-bgcolor="bg-module" bgcolor="#eaeced">
-                        <table class="flexible" width="600" align="center" style="margin:0 auto;" cellpadding="0" cellspacing="0">
-                            <tr>
-                                <td class="img-flex"><img src="{!! asset('public/assets/client/images/banner-email.jpg') !!}" style="vertical-align:top;" width="600" height="300" alt="" /></td>
+<head style="margin: 0; padding: 0;">
+    <meta charset="UTF-8" style="margin: 0; padding: 0;">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" style="margin: 0; padding: 0;">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" style="margin: 0; padding: 0;">
+
+    <title style="margin: 0; padding: 0;">TigerD</title>
+</head>
+
+<body style="font-family: 'Arial', sans-serif; font-size: 12px; margin: 0; padding: 0;">
+<style></style>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#a4a4a4" style="margin: 0; padding: 0;">
+    <tbody>
+    <tr style="margin: 0; padding: 0;">
+        <td align="center" style="margin: 0; padding: 0; vertical-align: top;">
+            <table border="0" cellspacing="0" cellpadding="0" width="600" bgcolor="#ffffff" style="margin: 0; padding: 0;">
+                <tbody>
+                <tr style="margin: 0; padding: 0;">
+                    <td width="100%" style="margin: 0; padding: 0; vertical-align: top;">
+                        <!--HEADER-->
+                        <table border="0" cellspacing="0" cellpadding="0" width="600" class="header" bgcolor="#e194a6" style="margin: 0; padding: 0;">
+                            <tbody>
+                            <tr style="margin: 0; padding: 0;">
+                                <td colspan="3" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <p class="height-space-header" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 10px; line-height: 18px; margin: 0; padding: 0; width: 100%;">&nbsp;</p>
+                                </td>
                             </tr>
-                            <tr>
-                                <td data-bgcolor="bg-block" class="holder" style="padding:58px 60px 52px;" bgcolor="#f9f9f9">
-                                    <table width="100%" cellpadding="0" cellspacing="0">
-                                        <tr>
-                                            <td data-color="title" data-size="size title" data-min="25" data-max="45" data-link-color="link title color" data-link-style="text-decoration:none; color:#292c34;" class="title" align="center" style="font:35px/38px Arial, Helvetica, sans-serif; color:#c71568; padding:0 0 24px;">
-                                                ĐƠN HÀNG ONLINE
+                            <tr style="margin: 0; padding: 0;">
+                                <td width="100%" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <table border="0" cellspacing="0" cellpadding="0" style="margin: 0; padding: 0;">
+                                        <tbody>
+                                        <tr style="margin: 0; padding: 0;">
+                                            <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                <p class="width-space-header" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 100%; line-height: 18px; margin: 0; padding: 0; width: 15px;">&nbsp;</p>
+                                            </td>
+                                            <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                <a href="http://tigerd.vn" style="margin: 0; padding: 0; text-decoration: none !important;"><img src="{!! asset('public/assets/client') !!}/images/logo-email.png" width="80" height="53" alt="TigerD" style="display: block; margin: 0; padding: 0;"></a>
+                                            </td>
+                                            <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                <p class="width-space-header" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 100%; line-height: 18px; margin: 0; padding: 0; width: 15px;">&nbsp;</p>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td data-color="text" data-size="size text" data-min="10" data-max="26" data-link-color="link text color" data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;" style="font:bold 16px/25px Arial, Helvetica, sans-serif; color:#888; padding:0 0 23px;">
-                                                Xin chào {!! $name !!},
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td data-color="text" data-size="size text" data-min="10" data-max="26" data-link-color="link text color" data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;" style="font:bold 16px/25px Arial, Helvetica, sans-serif; color:#888; padding:0 0 23px;">
-                                                Bạn vừa đặt hàng tại website TIGERD, đơn hàng bao gồm:
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td data-color="text" data-size="size text" data-min="10" data-max="26" data-link-color="link text color" data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;" style="font:bold 16px/25px Arial, Helvetica, sans-serif; color:#888; padding:0 0 23px;">
-                                                <table border="1" width="100%">
-                                                    <thead>
-                                                    <tr style="background-color: #565656">
-                                                        <th align="left" style="color:white">SẢN PHẨM</th>
-                                                        <th style="color:white">SÔ LƯỢNG</th>
-                                                        <th align="right" style="color:white">ĐƠN GIÁ</th>
-                                                    </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        @if(count($cart))
-                                                            @foreach($cart as $item_cart)
-                                                        <tr>
-                                                            <td>{!! $item_cart->name !!}</td>
-                                                            <td align="center">{!! $item_cart->quantity !!}</td>
-                                                            <td align="right">{!! number_format($item_cart->price) !!} VND</td>
-                                                        </tr>
-                                                            @endforeach
-                                                        <tr>
-                                                            <td colspan="2">Phí vận chuyển</td>
-                                                            <td align="right">{!! number_format($shipping_cost) !!}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="2">Tổng cộng:</td>
-                                                            <td align="right">{!! number_format(Cart::getTotal()); !!}</td>
-                                                        </tr>
-                                                        @endif
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td data-color="text" data-size="size text" data-min="10" data-max="26" data-link-color="link text color" data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;" style="font:bold 16px/25px Arial, Helvetica, sans-serif; color:#888; padding:0 0 23px;">
-                                                Đơn hàng của bạn đang được xử lý. Nhân viên TIGERD sẽ liên lạc với bạn trong thời gian sớm nhất.
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td data-color="text" data-size="size text" data-min="10" data-max="26" data-link-color="link text color" data-link-style="font-weight:bold; text-decoration:underline; color:#40aceb;" style="font:bold 16px/25px Arial, Helvetica, sans-serif; color:#888; padding:0 0 23px;">
-                                                Cảm ơn bạn !
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding:0 0 20px;">
-                                                <table width="134" align="center" style="margin:0 auto;" cellpadding="0" cellspacing="0">
-                                                    <tr>
-                                                        <td data-bgcolor="bg-button" data-size="size button" data-min="10" data-max="16" class="btn" align="center" style="font:12px/14px Arial, Helvetica, sans-serif; color:#f8f9fb; text-transform:uppercase; mso-padding-alt:12px 10px 10px; border-radius:2px;" bgcolor="#7bb84f">
-                                                            <a target="_blank" style="text-decoration:none; color:#f8f9fb; display:block; padding:12px 10px 10px; width:160px" href="{!! route('client.home') !!}">XEM THÊM SẢN PHẨM</a>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
+                                        </tbody>
                                     </table>
                                 </td>
                             </tr>
-                            <tr><td height="28"></td></tr>
+                            <tr style="margin: 0; padding: 0;">
+                                <td colspan="3" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <p class="height-space-header" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 10px; line-height: 18px; margin: 0; padding: 0; width: 100%;">&nbsp;</p>
+                                </td>
+                            </tr>
+                            </tbody>
                         </table>
+                        <!--END-->
+
+                        <!--BODY-->
+                        <table border="0" cellspacing="0" cellpadding="0" width="600" class="body" style="margin: 0; padding: 0;">
+                            <tbody>
+                            <tr style="margin: 0; padding: 0;">
+                                <td colspan="3" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <p class="height-space-body" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 50px; line-height: 18px; margin: 0; padding: 0; width: 100%;">&nbsp;</p>
+                                </td>
+                            </tr>
+                            <tr style="margin: 0; padding: 0;">
+                                <td width="100%" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <table border="0" cellspacing="0" cellpadding="0" style="margin: 0; padding: 0;">
+                                        <tbody>
+                                        <tr style="margin: 0; padding: 0;">
+                                            <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                <p class="width-space-body" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0; width: 30px;">&nbsp;</p>
+                                            </td>
+                                            <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 0; padding: 0;">
+                                                    <tbody>
+                                                    <tr style="margin: 0; padding: 0;">
+                                                        <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="text-info" style="margin: 0; padding: 0;">
+                                                                <tbody>
+                                                                <tr style="margin: 0; padding: 0;">
+                                                                    <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                                        <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0; color:#bbff5b">
+                                                                            LỰA CHỌN TUYỆT VỜI !
+                                                                        </p>
+                                                                        <p class="space-text" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 5px; line-height: 18px; margin: 0; padding: 0; width: 100%;">&nbsp;</p>
+                                                                        <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">
+                                                                            Cảm ơn quý khách đã mua sắm tại Tiger D. Hãy chắc chắn xem lại chi tiết đơn hàng của bạn bên dưới.
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <p class="height-section" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 20px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="order-infor" style="margin: 0; padding: 0;">
+                                                                <tbody>
+                                                                <tr style="margin: 0; padding: 0;">
+                                                                    <td class="title-order" colspan="2" style="border-bottom: 1px solid #cccccc; margin: 0; padding: 0; padding-bottom: 5px; padding-top: 8px; vertical-align: top;">
+                                                                        <p class="title" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><span class="hong" style="color: #e39bab; font-weight: 600; margin: 0; padding: 0;">THÔNG TIN ĐƠN HÀNG #{!! $order_no !!}</span> <span class="time" style="margin: 0; padding: 0;">({!! Carbon\Carbon::parse($order_date)->format('d/m/Y') !!})</span></p>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr style="margin: 0; padding: 0;">
+                                                                    <td width="50%" style="margin: 0; padding: 0; padding-bottom: 8px; padding-top: 8px; vertical-align: top;">
+                                                                        <p style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">Thông tin thanh toán</b></p>
+                                                                        <p class="space-text-content" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                                                        <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">
+                                                                            {!! $information_shipper->fullname !!}
+                                                                        </p>
+                                                                        <p class="space-text-content" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                                                        <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">
+                                                                            {!! $information_shipper->email !!}
+                                                                        </p>
+                                                                        <p class="space-text-content" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                                                        <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">
+                                                                            {!! $information_shipper->phone !!}
+                                                                        </p>
+                                                                    </td>
+                                                                    <td width="50%" style="margin: 0; padding: 0; padding-bottom: 8px; padding-top: 8px; vertical-align: top;">
+                                                                        <p style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">Địa chỉ giao hàng</b></p>
+                                                                        <p class="space-text-content" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                                                        <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! $information_shipper->fullname !!}</p>
+                                                                        <p class="space-text-content" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                                                        <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! $information_shipper->address !!}, {!! DB::table('wards')->where('code',$information_shipper->ward)->first()->name_with_type !!}, {!!DB::table('district')->where('code',$information_shipper->district)->first()->name_with_type !!}, {!! DB::table('cities')->where('code',$information_shipper->city)->first()->name_with_type  !!}   </p>
+                                                                        <p class="space-text-content" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                                                        <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">T: {!! $information_shipper->phone !!}</p>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <p class="height-section" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 20px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                                            {{--<p style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">Phí vận chuyển: </b>{!! number_format($shipping_cost) !!} vnd </p>--}}
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <p class="height-section" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 20px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                                <p class="height-section" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 20px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="detail-order-title" style="margin: 0; padding: 0;">
+                                                    <tbody>
+                                                    <tr style="margin: 0; padding: 0;">
+                                                        <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                            <p class="title" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><span class="hong" style="color: #e39bab; font-weight: 600; margin: 0; padding: 0;">CHI TIẾT ĐƠN HÀNG</span></p>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <p class="space-text-content" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" class="detail-order" style="background: #f1f1f1; margin: 0; padding: 0;">
+                                                    <thead style="margin: 0; padding: 0;">
+                                                    <tr style="background: #e39bab; margin: 0; padding: 0;">
+                                                        <th style="color: white; margin: 0; padding: 7px 3px; text-align: left;">
+                                                            SẢN PHẨM
+                                                        </th>
+                                                        <th style="color: white; margin: 0; padding: 7px 3px; text-align: left;">
+                                                            ĐƠN GIÁ
+                                                        </th>
+                                                        <th style="color: white; margin: 0; padding: 7px 3px; text-align: left;">
+                                                            SỐ LƯỢNG
+                                                        </th>
+                                                        <th align="right" style="color: white; margin: 0; padding: 7px 3px; text-align: left;">
+                                                            TỔNG TẠM
+                                                        </th>
+                                                    </tr>
+                                                    </thead>
+                                                    @if(count($cart))
+                                                    <tbody style="margin: 0; padding: 0;">
+
+                                                        @foreach($cart as $item_cart)
+                                                            <tr style="margin: 0; padding: 0;">
+                                                                <td style="margin: 0; padding: 10px 5px; vertical-align: top;">
+                                                                    <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">{!! $item_cart->name !!}</b></p>
+                                                                </td>
+                                                                <td style="margin: 0; padding: 10px 5px; vertical-align: top;">
+                                                                    <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! number_format($item_cart->price,0,',','.') !!} vnd</p>
+                                                                </td>
+                                                                <td align="center" style="margin: 0; padding: 10px 5px; vertical-align: top;">
+                                                                    <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! $item_cart->quantity !!}</p>
+                                                                </td>
+                                                                <td align="right" style="margin: 0; padding: 10px 5px; vertical-align: top;">
+                                                                    <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! number_format($item_cart->price,0,',','.') !!} vnd</p>
+                                                                </td>
+                                                            </tr>
+                                                        @endforeach
+
+
+                                                    </tbody>
+                                                    <tfoot style="margin: 0; padding: 0;">
+                                                    <tr style="margin: 0; padding: 0;">
+                                                        <td colspan="3" align="right" style="margin: 0; padding: 6px 5px; vertical-align: top;">
+                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">Tổng giá trị sản phẩm</p>
+                                                        </td>
+                                                        <td align="right" style="margin: 0; padding: 6px 5px; vertical-align: top;">
+                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! number_format(Cart::getSubTotal(),0,',','.'); !!} vnd</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="margin: 0; padding: 0;">
+                                                        <td colspan="3" align="right" style="margin: 0; padding: 6px 5px; vertical-align: top;">
+                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">Chi phí vận chuyển</p>
+                                                        </td>
+                                                        <td align="right" style="margin: 0; padding: 6px 5px; vertical-align: top;">
+                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! number_format($shipping_cost,0,',','.') !!} vnd</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr style="margin: 0; padding: 0;">
+                                                        <td colspan="3" align="right" style="margin: 0; padding: 6px 5px; vertical-align: top;">
+                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">Tổng giá trị đơn hàng</b></p>
+                                                        </td>
+                                                        <td align="right" style="margin: 0; padding: 6px 5px; vertical-align: top;">
+                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">{!! number_format(Cart::getTotal(),0,',','.'); !!} vnd</b></p>
+                                                        </td>
+                                                    </tr>
+                                                    </tfoot>
+                                                    @endif
+                                                </table>
+                                                <p class="space-text-content" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 0; padding: 0;">
+                                                    <tbody>
+                                                    <tr style="margin: 0; padding: 0;">
+                                                        <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">Truy cập TigerD.vn, hoặc gọi số điện thoại 0943 722 227 (8-18h từ T2 - T7) để gặp nhân viên chăm sóc khách hàng khi quý khách cần hỗ trợ.</p>
+                                                            <p class="space-text-content" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                                            <p style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">TigerD cảm ơn quý khách.</b></p>
+
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                <p class="width-space-body" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0; width: 30px;">&nbsp;</p>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr style="margin: 0; padding: 0;">
+                                <td colspan="3" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <p class="height-space-body" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 50px; line-height: 18px; margin: 0; padding: 0; width: 100%;">&nbsp;</p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--END-->
+
+                        <!--Footer-->
+                        <table border="0" cellspacing="0" cellpadding="0" width="600" class="footer" style="margin: 0; padding: 0;">
+                            <tbody>
+                            <tr style="margin: 0; padding: 0;">
+                                <td colspan="3" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <p class="height-space-footer" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                </td>
+                            </tr>
+                            <tr style="margin: 0; padding: 0;">
+                                <td style="margin: 0; padding: 0; vertical-align: top;">
+                                    <p class="width-space-body" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0; width: 30px;">&nbsp;</p>
+                                </td>
+                                <td align="center" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <a href="http://tigerd.vn" class="company-footer" style="color: #e39bab; font-size: 16px; font-weight: 600; margin: 0; padding: 0; text-decoration: none !important;">TigerD</a>
+                                </td>
+                                <td style="margin: 0; padding: 0; vertical-align: top;">
+                                    <p class="width-space-body" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0; width: 30px;">&nbsp;</p>
+                                </td>
+                            </tr>
+                            <tr style="margin: 0; padding: 0;">
+                                <td colspan="3" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <p class="height-space-footer" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--END-->
                     </td>
                 </tr>
+                </tbody>
             </table>
+            <p class="space-text-content" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">Quý khách nhận được email này vì đã mua hàng tại TigerD.vn.</p>
+            <p class="space-text-content" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
         </td>
     </tr>
-    <!-- fix for gmail -->
-    <tr>
-        <td style="line-height:0;"><div style="display:none; white-space:nowrap; font:15px/1px courier;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div></td>
-    </tr>
+    </tbody>
 </table>
+
 </body>
+
 </html>
