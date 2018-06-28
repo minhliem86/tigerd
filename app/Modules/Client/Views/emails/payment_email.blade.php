@@ -80,12 +80,12 @@
                                                                 <tbody>
                                                                 <tr style="margin: 0; padding: 0;">
                                                                     <td style="margin: 0; padding: 0; vertical-align: top;">
-                                                                        <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">
-                                                                            Chào quý khách,
+                                                                        <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0; color:#bbff5b">
+                                                                            LỰA CHỌN TUYỆT VỜI !
                                                                         </p>
                                                                         <p class="space-text" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 5px; line-height: 18px; margin: 0; padding: 0; width: 100%;">&nbsp;</p>
                                                                         <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">
-                                                                            TigerD gửi đến quý khách hóa đơn điện tử cho đơn hàng {!! $order_no !!}.
+                                                                            Cảm ơn quý khách đã mua sắm tại Tiger D. Hãy chắc chắn xem lại chi tiết đơn hàng của bạn bên dưới.
                                                                         </p>
                                                                     </td>
                                                                 </tr>
@@ -129,7 +129,7 @@
                                                                 </tbody>
                                                             </table>
                                                             <p class="height-section" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 20px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
-                                                            <p style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">Phí vận chuyển: </b>{!! number_format($shipping_cost) !!} vnd </p>
+                                                            {{--<p style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">Phí vận chuyển: </b>{!! number_format($shipping_cost) !!} vnd </p>--}}
                                                         </td>
                                                     </tr>
                                                     </tbody>
@@ -173,13 +173,13 @@
                                                                     <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">{!! $item_cart->name !!}</b></p>
                                                                 </td>
                                                                 <td style="margin: 0; padding: 10px 5px; vertical-align: top;">
-                                                                    <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! number_format($item_cart->price) !!} vnd</p>
+                                                                    <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! number_format($item_cart->price,0,',','.') !!} vnd</p>
                                                                 </td>
                                                                 <td align="center" style="margin: 0; padding: 10px 5px; vertical-align: top;">
                                                                     <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! $item_cart->quantity !!}</p>
                                                                 </td>
                                                                 <td align="right" style="margin: 0; padding: 10px 5px; vertical-align: top;">
-                                                                    <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! number_format($item_cart->price) !!} vnd</p>
+                                                                    <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! number_format($item_cart->price,0,',','.') !!} vnd</p>
                                                                 </td>
                                                             </tr>
                                                         @endforeach
@@ -192,7 +192,7 @@
                                                             <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">Tổng giá trị sản phẩm</p>
                                                         </td>
                                                         <td align="right" style="margin: 0; padding: 6px 5px; vertical-align: top;">
-                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! number_format(Cart::getSubTotal()); !!} vnd</p>
+                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! number_format(Cart::getSubTotal(),0,',','.'); !!} vnd</p>
                                                         </td>
                                                     </tr>
                                                     <tr style="margin: 0; padding: 0;">
@@ -200,7 +200,7 @@
                                                             <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">Chi phí vận chuyển</p>
                                                         </td>
                                                         <td align="right" style="margin: 0; padding: 6px 5px; vertical-align: top;">
-                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! number_format($shipping_cost) !!} vnd</p>
+                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! number_format($shipping_cost,0,',','.') !!} vnd</p>
                                                         </td>
                                                     </tr>
                                                     <tr style="margin: 0; padding: 0;">
@@ -208,7 +208,7 @@
                                                             <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">Tổng giá trị đơn hàng</b></p>
                                                         </td>
                                                         <td align="right" style="margin: 0; padding: 6px 5px; vertical-align: top;">
-                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">{!! number_format(Cart::getTotal()); !!} vnd</b></p>
+                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">{!! number_format(Cart::getTotal(),0,',','.'); !!} vnd</b></p>
                                                         </td>
                                                     </tr>
                                                     </tfoot>
@@ -219,7 +219,7 @@
                                                     <tbody>
                                                     <tr style="margin: 0; padding: 0;">
                                                         <td style="margin: 0; padding: 0; vertical-align: top;">
-                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">Truy cập tigerD.vn, hoặc gọi số điện thoại 0943 722 227 (8-21h cả T7,CN) để gặp nhân viên chăm sóc khách hàng khi quý khách cần hỗ trợ.</p>
+                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">Truy cập TigerD.vn, hoặc gọi số điện thoại 0943 722 227 (8-18h từ T2 - T7) để gặp nhân viên chăm sóc khách hàng khi quý khách cần hỗ trợ.</p>
                                                             <p class="space-text-content" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
                                                             <p style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">TigerD cảm ơn quý khách.</b></p>
 

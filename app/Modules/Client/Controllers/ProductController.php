@@ -305,7 +305,7 @@ class ProductController extends Controller
                     $pr->save();
                 }
 
-                event(new SendMail(['cart' => $cart, 'shipping_cost' =>$request->input('shippingcost'), 'name'=> $request->customer_name, 'information_shipper' => $shipAddress, 'order_no' =>  $order_id, 'order_date' => $current_order->created_at ],   $request->input('vpc_Customer_Email')));
+                event(new SendMail(['cart' => $cart, 'shipping_cost' =>$request->input('shippingcost'), 'name'=> $request->customer_name, 'information_shipper' => $shipAddress, 'order_no' =>  $order_id, 'order_date' => $current_order->created_at ],   $request->input('vpc_Customer_Email'), 'Xác nhận đặt hàng thành công. Đơn hàng #'.$order_id));
 
                 event(new EmailTemplateEvent('Client::emails.notifyAdmin', [],env("MAIL_USERNAME"), env('ADMIN_PAGE_EMAIL'), 'Thông Báo - Khách Đặt Hàng' ));
 

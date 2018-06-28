@@ -23,29 +23,29 @@
                             <div class="form-khachhang">
                                 {!! Form::hidden('Title', 'Online Payment Via OnePay') !!}
                                 <div class="form-group">
-                                    <label for="">Họ tên khách hàng</label>
+                                    <label for="">Họ tên khách hàng <span class="red">(*)</span></label>
                                     {!! Form::text('customer_name', Auth::guard('customer')->check() ? Auth::guard('customer')->user()->lastname.' '.Auth::guard('customer')->user()->firstname : '', ['class' => 'form-control', 'required']  ) !!}
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Số điện thoại khách hàng</label>
+                                    <label for="">Số điện thoại khách hàng <span class="red">(*)</span></label>
                                     {!! Form::text('vpc_Customer_Phone', Auth::guard('customer')->check() ? Auth::guard('customer')->user()->phone : '', ['class'=>'form-control', 'required']) !!}
                                     <small class="form-text text-muted">
                                         Tigerd.vn hoặc tổng đài tự động của chúng tôi sẽ liên hệ quý khách theo số điện thoại này để xác nhận hoặc thông báo giao hàng
                                     </small>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Email khách hàng</label>
+                                    <label for="">Email khách hàng <span class="red">(*)</span></label>
                                     {!! Form::text('vpc_Customer_Email',  Auth::guard('customer')->check() ? Auth::guard('customer')->user()->email : '', ['class'=>'form-control', 'required']) !!}
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Tỉnh/Thành phố</label>
+                                    <label for="">Tỉnh/Thành phố <span class="red">(*)</span></label>
                                     {!! Form::select('vpc_SHIP_City',['' => 'Chọn Tỉnh/Thành Phố']+$city, old('vpc_SHIP_City'), ['class'=>'form-control', 'required']) !!}
                                 </div>
 
                                 <div class="form-row">
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="">Quận/Huyện</label>
+                                            <label for="">Quận/Huyện <span class="red">(*)</span></label>
                                             <div class="ajax-province">
                                                 {!! Form::select('vpc_SHIP_Provice',['' => 'Chọn Quận/Huyện'], old('vpc_SHIP_Provice'), ['class'=>'form-control', 'disabled']) !!}
                                             </div>
@@ -53,7 +53,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="form-group">
-                                            <label for="">Phường/Xã</label>
+                                            <label for="">Phường/Xã <span class="red">(*)</span></label>
                                             <div class="ajax-ward">
                                                 {!! Form::select('ward',['' => 'Chọn Phường/Xã'], old('ward'), ['class'=>'form-control', 'disabled']) !!}
                                             </div>
@@ -61,7 +61,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Địa chỉ giao hàng</label>
+                                    <label for="">Địa chỉ giao hàng <span class="red">(*)</span></label>
                                     {!! Form::text('AVS_Street01', Auth::guard('customer')->check() ? Auth::guard('customer')->user()->address : '', ['class'=>'form-control', 'placeholder' => 'Địa chỉ bao gồm số nhà/số tầng nếu là văn phòng cụ thể.', 'required']) !!}
                                 </div>
                                 <div class="form-group">
@@ -151,8 +151,42 @@
 @stop
 
 @section('script')
+    <script src="{!! asset('public/assets/client') !!}/js/jquery.validate.min.js"></script>
     <script>
         $(document).ready(function(){
+            $('.form-payment').validate({
+                errorElement: 'span',
+                rules: {
+                    'customer_name': 'required',
+                    vpc_Customer_Phone: {
+                        required: true,
+                        digits: true
+                    },
+                    vpc_Customer_Email: {
+                        required: true,
+                        email: true
+                    },
+                    vpc_SHIP_City: 'required',
+                    vpc_SHIP_Provice: 'required',
+                    ward: 'required',
+                    AVS_Street01: 'required'
+                },
+                messages:{
+                    customer_name: 'Vui lòng nhập họ và tên',
+                    vpc_Customer_Phone: {
+                        required: 'Vui lòng nhập số điện thoại',
+                        digits: 'Vui lòng nhập định dạng số'
+                    },
+                    vpc_Customer_Email: {
+                        required: 'Vui lòng nhập email',
+                        email: 'Vui lòng nhập định dạng email'
+                    },
+                    vpc_SHIP_City: 'Vui lòng chọn Thành phố',
+                    vpc_SHIP_Provice: 'Vui lòng chọn Quận/Huyện',
+                    AVS_Street01: 'Vui lòng nhập địa chỉ giao hàng',
+                    ward: 'Vui lòng chọn phường/xã'
+                }
+            })
             $('select[name=vpc_SHIP_City]').on('change', function(){
                 var city_id = $(this).val();
                 $.ajax({

@@ -1,6 +1,7 @@
 @extends('Admin::layouts.main-layout')
 
 @section('link')
+    <button type="button" class="btn btn-danger" id="btn-remove-all">Remove All Selected</button>
 @stop
 
 @section('title','Quản Lý Đơn Hàng')
@@ -97,6 +98,23 @@
                         rows.each(function(index, e){
                             data.push(index.id);
                         })
+                        alertify.confirm('You can not undo this action. Are you sure ?', function(e){
+                            if(e){
+                                $.ajax({
+                                    'url':"{!!route('admin.order.deleteAll')!!}",
+                                    'data' : {arr: data,_token:$('meta[name="csrf-token"]').attr('content')},
+                                    'type': "POST",
+                                    'success':function(result){
+                                        if(result.msg = 'ok'){
+                                            table.rows('.selected').remove();
+                                            table.draw();
+                                            alertify.success('The data is removed!');
+                                            location.reload();
+                                        }
+                                    }
+                                });
+                            }
+                        })
                     })
 
                     $('table').on('change','select[name="ship_status"]', function(){
@@ -157,9 +175,9 @@
                 }
             });
             /*SELECT ROW*/
-            // $('table tbody').on('click','tr',function(){
-            //     $(this).toggleClass('selected');
-            // })
+            $('table tbody').on('click','tr',function(){
+                $(this).toggleClass('selected');
+            })
 
         });
         function hideAlert(a){

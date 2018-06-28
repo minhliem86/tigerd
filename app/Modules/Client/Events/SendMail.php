@@ -17,11 +17,13 @@ class SendMail extends Event
      */
     public $data;
     public $customer_email;
+    public $subject;
 
-    public function __construct($data = [], $customer_email)
+    public function __construct($data = [], $customer_email, $subject)
     {
         $this->data = $data;
         $this->customer_email = $customer_email;
+        $this->subject = $subject;
     }
 
     /**

@@ -56,26 +56,9 @@ class Product extends Model
         parent::boot();
 
         static::deleting(function($product){
-<<<<<<< HEAD
-
             $product->photos()->delete();
-
             $product->meta_configs()->delete();
 
-=======
-            if(!$product->photos->isEmpty()){
-                foreach($product->photos as $item_photo){
-                    \App\Models\Photo::destroy($item_photo->id);
-                }
-            }
-//            if(!$product->meta_configs->isEmpty()){
-//                foreach($product->meta_configs as $item_meta){
-//                    \App\Models\MetaConfiguration::destroy($item_meta->id);
-//                }
-//            }
-
-            $product->meta_configs()->delete();
->>>>>>> 1db5026d0e02a8821385c1070113cd5d5c066229
             if(count($product->attributes)){
                 foreach($product->attributes as $item_att){
                     if($att = \App\Models\Attribute::find($item_att)){
