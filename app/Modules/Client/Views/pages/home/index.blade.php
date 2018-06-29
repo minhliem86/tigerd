@@ -12,11 +12,12 @@
                     <div class="product-inner" data-aos="fade-up">
                         <h2 class="title-section mx-auto">Tiger-d Products</h2>
 
-                        <div class="product-body" >
-                            <div class="swiper-container" id="swiper-product">
-                                <div class="swiper-wrapper">
-                                    @foreach($product as $item_product)
-                                        <div class="swiper-slide">
+                        <div class="product-body">
+                            <div class="container-fluid">
+                                @foreach($product->chunk(3) as $item_chunk)
+                                <div class="row">
+                                    @foreach($item_chunk as $item_product)
+                                        <div class="col-md-4">
                                             <div class="each-product">
                                                 <figure>
                                                     <a href="{!! route('client.product', $item_product->slug) !!}"><img src="{!! asset('public/upload/'.$item_product->img_url) !!}" class="img-fluid mx-auto mb-2" alt="{!! $item_product->name !!}"></a>
@@ -37,9 +38,7 @@
                                         </div>
                                     @endforeach
                                 </div>
-                                <!-- If we need navigation buttons -->
-                                <div class="swiper-button-prev swiper-button"></div>
-                                <div class="swiper-button-next swiper-button"></div>
+                                @endforeach
                             </div>
                         </div>
                     </div>

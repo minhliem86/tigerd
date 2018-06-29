@@ -35,6 +35,7 @@
             <div class="col-md-3 col-sm-4">
                 <div class="block-footer mb-2">
                     <h3 class="title-footer">Lượt Xem: {!! $total_pageview !!}</h3>
+                    <h3 class="title-footer">Đang online: {!! $onlineUser !!}</h3>
                 </div>
                 <div class="block-subcribe">
                     <h3 class="title-subcribe">ĐĂNG KÝ  NHẬN THÔNG TIN</h3>

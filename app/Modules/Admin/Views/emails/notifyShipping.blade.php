@@ -1,120 +1,167 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
-<head style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
-    <!-- If you delete this meta tag, Half Life 3 will never be released. -->
-    <meta name="viewport" content="width=device-width" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
+<head style="margin: 0; padding: 0;">
+    <meta charset="UTF-8" style="margin: 0; padding: 0;">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" style="margin: 0; padding: 0;">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" style="margin: 0; padding: 0;">
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
-    <title style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">NO REPLY</title>
-
-
-
+    <title style="margin: 0; padding: 0;">TigerD</title>
 </head>
 
-<body bgcolor="#FFFFFF" style="-webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; height: 100%; margin: 0; padding: 0; width: 100% !important;">
-<style>
-    @media only screen and (max-width: 600px) {
-        a[class="btn"] {
-            display: block!important;
-            margin-bottom: 10px!important;
-            background-image: none!important;
-            margin-right: 0!important;
-        }
-        div[class="column"] {
-            width: auto!important;
-            float: none!important;
-        }
-        table.social div[class="column"] {
-            width: auto!important;
-        }
-    }
-</style>
-
-<!-- HEADER -->
-<table class="head-wrap" bgcolor="#f2f2f2" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0; width: 100%;">
+<body style="font-family: 'Arial', sans-serif; font-size: 12px; margin: 0; padding: 0;">
+<style></style>
+<table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#a4a4a4" style="margin: 0; padding: 0;">
     <tbody>
-    <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
-        <td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"></td>
-        <td class="header container" style="clear: both !important; display: block !important; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0 auto !important; max-width: 600px !important; padding: 0;">
+    <tr style="margin: 0; padding: 0;">
+        <td align="center" style="margin: 0; padding: 0; vertical-align: top;">
+            <table border="0" cellspacing="0" cellpadding="0" width="600" bgcolor="#ffffff" style="margin: 0; padding: 0;">
+                <tbody>
+                <tr style="margin: 0; padding: 0;">
+                    <td width="100%" style="margin: 0; padding: 0; vertical-align: top;">
+                        <!--HEADER-->
+                        <table border="0" cellspacing="0" cellpadding="0" width="600" class="header" bgcolor="#e194a6" style="margin: 0; padding: 0;">
+                            <tbody>
+                            <tr style="margin: 0; padding: 0;">
+                                <td colspan="3" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <p class="height-space-header" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 10px; line-height: 18px; margin: 0; padding: 0; width: 100%;">&nbsp;</p>
+                                </td>
+                            </tr>
+                            <tr style="margin: 0; padding: 0;">
+                                <td width="100%" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <table border="0" cellspacing="0" cellpadding="0" style="margin: 0; padding: 0;">
+                                        <tbody>
+                                        <tr style="margin: 0; padding: 0;">
+                                            <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                <p class="width-space-header" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 100%; line-height: 18px; margin: 0; padding: 0; width: 15px;">&nbsp;</p>
+                                            </td>
+                                            <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                <a href="http://ila.edu.vn" style="margin: 0; padding: 0; text-decoration: none !important;"><img src="{!! asset('public/assets/client') !!}/images/logo-email.png" width="80" height="53" alt="TigerD" style="display: block; margin: 0; padding: 0;"></a>
+                                            </td>
+                                            <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                <p class="width-space-header" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 100%; line-height: 18px; margin: 0; padding: 0; width: 15px;">&nbsp;</p>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr style="margin: 0; padding: 0;">
+                                <td colspan="3" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <p class="height-space-header" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 10px; line-height: 18px; margin: 0; padding: 0; width: 100%;">&nbsp;</p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--END-->
 
-            <div class="content" style="display: block; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0 auto; max-width: 600px; padding: 15px;">
-                <table bgcolor="#f2f2f2" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0; width: 100%;">
-                    <tbody>
-                    <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
-                        <td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"><img src="{!! asset('public/assets/client/images/logo-invoke.png') !!}" width="80" height="53" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; max-width: 100%; padding: 0;"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+                        <!--BODY-->
+                        <table border="0" cellspacing="0" cellpadding="0" width="600" class="body" style="margin: 0; padding: 0;">
+                            <tbody>
+                            <tr style="margin: 0; padding: 0;">
+                                <td colspan="3" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <p class="height-space-body" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 50px; line-height: 18px; margin: 0; padding: 0; width: 100%;">&nbsp;</p>
+                                </td>
+                            </tr>
+                            <tr style="margin: 0; padding: 0;">
+                                <td width="100%" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <table border="0" cellspacing="0" cellpadding="0" style="margin: 0; padding: 0;">
+                                        <tbody>
+                                        <tr style="margin: 0; padding: 0;">
+                                            <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                <p class="width-space-body" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0; width: 30px;">&nbsp;</p>
+                                            </td>
+                                            <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 0; padding: 0;">
+                                                    <tbody>
+                                                    <tr style="margin: 0; padding: 0;">
+                                                        <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="text-info" style="margin: 0; padding: 0;">
+                                                                <tbody>
+                                                                <tr style="margin: 0; padding: 0;">
+                                                                    <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                                        <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">
+                                                                            Chào quý khách hàng,
+                                                                        </p>
+                                                                        <p class="space-text" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 5px; line-height: 18px; margin: 0; padding: 0; width: 100%;">&nbsp;</p>
+                                                                        <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">
+                                                                            Sản phẩm của bạn đang được vận chuyển. Khi sản phẩm đến nơi, nhân viên của chúng tôi sẽ liên hệ với quý khách qua số điện thoại quý khách đã cung cấp.
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                            <p class="height-section" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 20px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                                <p class="space-text-content" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 0; padding: 0;">
+                                                    <tbody>
+                                                    <tr style="margin: 0; padding: 0;">
+                                                        <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                            <p style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">TigerD cảm ơn quý khách.</b></p>
+                                                            <p class="space-text-content" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">Chú quý khách ngày tốt lành.</p>
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                            <td style="margin: 0; padding: 0; vertical-align: top;">
+                                                <p class="width-space-body" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0; width: 30px;">&nbsp;</p>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr style="margin: 0; padding: 0;">
+                                <td colspan="3" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <p class="height-space-body" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 50px; line-height: 18px; margin: 0; padding: 0; width: 100%;">&nbsp;</p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--END-->
 
+                        <!--Footer-->
+                        <table border="0" cellspacing="0" cellpadding="0" width="600" class="footer" style="margin: 0; padding: 0;">
+                            <tbody>
+                            <tr style="margin: 0; padding: 0;">
+                                <td colspan="3" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <p class="height-space-footer" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                </td>
+                            </tr>
+                            <tr style="margin: 0; padding: 0;">
+                                <td style="margin: 0; padding: 0; vertical-align: top;">
+                                    <p class="width-space-body" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0; width: 30px;">&nbsp;</p>
+                                </td>
+                                <td align="center" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <a href="http://tigerd.vn" class="company-footer" style="color: #e39bab; font-size: 16px; font-weight: 600; margin: 0; padding: 0; text-decoration: none !important;">TigerD</a>
+                                </td>
+                                <td style="margin: 0; padding: 0; vertical-align: top;">
+                                    <p class="width-space-body" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0; width: 30px;">&nbsp;</p>
+                                </td>
+                            </tr>
+                            <tr style="margin: 0; padding: 0;">
+                                <td colspan="3" style="margin: 0; padding: 0; vertical-align: top;">
+                                    <p class="height-space-footer" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--END-->
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">Quý khách nhận được email này vì đã mua hàng tại TigerD.vn.</p>
         </td>
-        <td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"></td>
     </tr>
     </tbody>
 </table>
-<!-- /HEADER -->
-
-
-<!-- BODY -->
-<table class="body-wrap" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0; width: 100%;">
-    <tbody>
-    <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
-        <td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"></td>
-        <td class="container" bgcolor="#FFFFFF" style="clear: both !important; display: block !important; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0 auto !important; max-width: 600px !important; padding: 0;">
-
-            <div class="content" style="display: block; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0 auto; max-width: 600px; padding: 15px;">
-                <table style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0; width: 100%;">
-                    <tbody>
-                    <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
-                        <td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
-                            <h3 style="color: #000; font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 27px; font-weight: 500; line-height: 1.1; margin: 0; margin-bottom: 15px; padding: 0;">Chào Quí Khách Hàng,</h3>
-                            <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: normal; line-height: 1.6; margin: 0; margin-bottom: 10px; padding: 0;">Sản phẩm quí khách đặt tại TIGERD.VN đang được vận chuyển. Khi sản phẩm đế nơi, nhân viên chúng tôi sẽ liên hệ với quí khách qua số điện thoại quí khách đã cung cấp. Cảm ơn quí khách.</p>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!-- /content -->
-
-        </td>
-        <td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"></td>
-    </tr>
-    </tbody>
-</table>
-<!-- /BODY -->
-
-<!-- FOOTER -->
-<table class="footer-wrap" style="clear: both !important; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0; width: 100%;">
-    <tbody>
-    <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
-        <td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"></td>
-        <td class="container" style="clear: both !important; display: block !important; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0 auto !important; max-width: 600px !important; padding: 0;">
-
-            <!-- content -->
-            <div class="content" style="display: block; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0 auto; max-width: 600px; padding: 15px;">
-                <table style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0; width: 100%;">
-                    <tbody>
-                    <tr style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
-                        <td align="center" style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">
-                            <p style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; font-size: 14px; font-weight: normal; line-height: 1.6; margin: 0; margin-bottom: 10px; padding: 0;">
-                                <a href="{!! route('client.home') !!}" style="color: #2BA6CB; font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;">TIGERD</a>
-                            </p>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!-- /content -->
-
-        </td>
-        <td style="font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif; margin: 0; padding: 0;"></td>
-    </tr>
-    </tbody>
-</table>
-<!-- /FOOTER -->
-
-
 
 </body>
 

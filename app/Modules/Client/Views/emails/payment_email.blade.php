@@ -80,7 +80,7 @@
                                                                 <tbody>
                                                                 <tr style="margin: 0; padding: 0;">
                                                                     <td style="margin: 0; padding: 0; vertical-align: top;">
-                                                                        <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0; color:#bbff5b">
+                                                                        <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0; color:#bbff5b; text-align:center;">
                                                                             LỰA CHỌN TUYỆT VỜI !
                                                                         </p>
                                                                         <p class="space-text" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 5px; line-height: 18px; margin: 0; padding: 0; width: 100%;">&nbsp;</p>

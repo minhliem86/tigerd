@@ -30,9 +30,11 @@ class SinglePageComposer{
             $total_pageview += $item['pageViews'];
         }
 
+        $onlineUser = $this->analytic->getAnalyticsService()->data_realtime->get('ga:'.env('ANALYTICS_VIEW_ID'), 'rt:activeVisitors')->totalsForAllResults['rt:activeVisitors'];
+
         $page = $this->page->findByField('status',1, ['id', 'name', 'slug'])->get();
         $about = $this->page->findByField('slug', 'gioi-thieu', ['id', 'name', 'slug'])->first();
-        $view->with(compact('page', 'about', 'total_pageview'));
+        $view->with(compact('page', 'about', 'total_pageview','onlineUser'));
         // TODO: Bind data to view
     }
 }
