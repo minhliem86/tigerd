@@ -4,7 +4,7 @@
     <button class="btn btn-primary" onclick="submitForm();">Save</button>
 @stop
 
-@section('title','Nhà Cung Cấp')
+@section('title','Thanh Điều Hướng')
 
 @section('content')
     <div class="row">
@@ -14,29 +14,29 @@
           <div class="form-group">
             <label class="col-md-2 control-label">Tên:</label>
             <div class="col-md-10">
-              <input type="text" required="" placeholder="Tên Nhà Cung Cấp" id="name" class="form-control" name="name">
+              <input type="text" required="" placeholder="Tên Danh Mục Trên Thanh Điều Hướng" id="name" class="form-control" name="name">
             </div>
           </div>
-            <div class="form-group">
-                <label class="col-md-2 control-label">Mô tả ngắn:</label>
-                <div class="col-md-10">
-                    {!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ...']) !!}
-                </div>
-            </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label">Hình ảnh:</label>
-            <div class="col-md-10">
-                <div class="input-group">
-                 <span class="input-group-btn">
-                   <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                     <i class="fa fa-picture-o"></i> Chọn
-                   </a>
-                 </span>
-                 <input id="thumbnail" class="form-control" type="hidden" name="img_url">
-                </div>
-                <img id="holder" style="margin-top:15px;max-height:100px;">
-            </div>
-          </div>
+            {{--<div class="form-group">--}}
+                {{--<label class="col-md-2 control-label">Mô tả ngắn:</label>--}}
+                {{--<div class="col-md-10">--}}
+                    {{--{!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ...']) !!}--}}
+                {{--</div>--}}
+            {{--</div>--}}
+          {{--<div class="form-group">--}}
+            {{--<label class="col-md-2 control-label">Hình ảnh:</label>--}}
+            {{--<div class="col-md-10">--}}
+                {{--<div class="input-group">--}}
+                 {{--<span class="input-group-btn">--}}
+                   {{--<a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">--}}
+                     {{--<i class="fa fa-picture-o"></i> Chọn--}}
+                   {{--</a>--}}
+                 {{--</span>--}}
+                 {{--<input id="thumbnail" class="form-control" type="hidden" name="img_url">--}}
+                {{--</div>--}}
+                {{--<img id="holder" style="margin-top:15px;max-height:100px;">--}}
+            {{--</div>--}}
+          {{--</div>--}}
         </form>
       </div>
     </div>

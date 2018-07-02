@@ -5,7 +5,7 @@
     <button class="btn btn-primary" onclick="submitForm();">Save Changes</button>
 @stop
 
-@section('title','Nhà Cung Cấp')
+@section('title','Thanh Điều Hướng')
 
 @section('content')
     <div class="row">
@@ -17,12 +17,12 @@
               {{Form::text('name',old('name'), ['class'=>'form-control', 'placeholder'=>'Tên'])}}
             </div>
           </div>
-          <div class="form-group">
-              <label class="col-md-2 control-label">Mô tả ngắn:</label>
-              <div class="col-md-10">
-                  {!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ...']) !!}
-              </div>
-          </div>
+          {{--<div class="form-group">--}}
+              {{--<label class="col-md-2 control-label">Mô tả ngắn:</label>--}}
+              {{--<div class="col-md-10">--}}
+                  {{--{!! Form::textarea('description',old('description'), ['class'=> 'form-control', 'placeholder' => 'Mô tả ...']) !!}--}}
+              {{--</div>--}}
+          {{--</div>--}}
           <div class="form-group">
             <label class="col-md-2 control-label" for="description">Sắp xếp</label>
             <div class="col-md-10">
@@ -38,20 +38,20 @@
                 </label>
             </div>
           </div>
-          <div class="form-group">
-            <label class="col-md-2 control-label">Hình Ảnh:</label>
-            <div class="col-md-10">
-                <div class="input-group">
-                 <span class="input-group-btn">
-                   <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
-                     <i class="fa fa-picture-o"></i> Chọn
-                   </a>
-                 </span>
-                 {{Form::hidden('img_url',old('img_url'), ['class'=>'form-control', 'id'=>'thumbnail' ])}}
-                </div>
-                <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($inst->img_url)}}">
-            </div>
-          </div>
+          {{--<div class="form-group">--}}
+            {{--<label class="col-md-2 control-label">Hình Ảnh:</label>--}}
+            {{--<div class="col-md-10">--}}
+                {{--<div class="input-group">--}}
+                 {{--<span class="input-group-btn">--}}
+                   {{--<a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">--}}
+                     {{--<i class="fa fa-picture-o"></i> Chọn--}}
+                   {{--</a>--}}
+                 {{--</span>--}}
+                 {{--{{Form::hidden('img_url',old('img_url'), ['class'=>'form-control', 'id'=>'thumbnail' ])}}--}}
+                {{--</div>--}}
+                {{--<img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($inst->img_url)}}">--}}
+            {{--</div>--}}
+          {{--</div>--}}
         </form>
       </div>
     </div>

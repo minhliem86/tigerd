@@ -157,7 +157,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Liemphan\modules\ModulesServiceProvider::class,
-        Unisharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+
         Intervention\Image\ImageServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
@@ -170,6 +170,8 @@ return [
         Darryldecode\Cart\CartServiceProvider::class,
         App\Providers\ComposerProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Bhavinjr\Wishlist\Providers\WishlistServiceProvider::class,
+        UniSharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
 
     ],
 
@@ -228,6 +230,8 @@ return [
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Cart' => Darryldecode\Cart\Facades\CartFacade::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Wishlist' => Bhavinjr\Wishlist\Facades\Wishlist::class,
+        'Image' => Intervention\Image\Facades\Image::class,
     ],
 
 ];

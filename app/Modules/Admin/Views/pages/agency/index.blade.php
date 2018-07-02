@@ -6,24 +6,9 @@
     <button type="button" class="btn btn-warning" id="btn-updateOrder">Update Order</button>
 @stop
 
-@section('title','Nhà Cung Cấp')
+@section('title','Thanh Điều Hướng')
 
 @section('content')
-    <div class="row">
-        <div class="col-md-4 col-sm-6">
-            <div class="panel panel-info">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Nhà Cung Cấp</h3>
-                </div>
-                <div class="panel-body-dashboard">
-                    <div class="wrap-icon text-center">
-                        <i class="fa fa-cubes"></i>
-                        <h5><span class="badge badge-info badge-md">{{$agency_quality}}</span> Nhà Cung Cấp</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     @if(Session::has('error'))
     <div class="alert alert-danger alert-dismissable">
       <p>{{Session::get('error')}}</p>
@@ -40,8 +25,7 @@
           <thead>
             <tr>
               <th width="5%">ID</th>
-              <th width="20%"><i class="glyphicon glyphicon-search"></i> Nhà Cung Cấp </th>
-              <th width="20%">Hình ảnh</th>
+              <th width="20%"><i class="glyphicon glyphicon-search"></i> Thanh điều hướng</th>
               <th width="10%">Sắp xếp</th>
               <th width="10%">Trạng thái</th>
               <th width="20%">&nbsp;</th>
@@ -79,7 +63,6 @@
             columns: [
                {data: 'id', name: 'id', 'orderable': false},
                {data: 'name', name: 'name'},
-               {data: 'img_url', name: 'img_url', 'orderable': false},
                {data: 'order', name: 'order'},
                {data: 'status', name: 'status'},
                {data: 'action', name: 'action', 'orderable': false}

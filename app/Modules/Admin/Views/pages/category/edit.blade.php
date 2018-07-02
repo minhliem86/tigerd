@@ -13,9 +13,9 @@
             @include('Admin::errors.error_layout')
             {{Form::model($inst, ['route'=>['admin.category.update',$inst->id], 'method'=>'put' , 'class'=>'form-horizontal' ])}}
             <div class="form-group">
-                <label for="agency_id" class="col-md-2 control-label">Chọn Nhà Cung Cấp</label>
+                <label for="agency_id" class="col-md-2 control-label">Chọn Thanh Điều Hướng</label>
                 <div class="col-md-10">
-                    {!! Form::select('agency_id', ['' => 'Chọn Nhà Cung Cấp'] + $agency, old('agency_id'), ['class'=>'form-control', 'required'] ) !!}
+                    {!! Form::select('agency_id', ['' => 'Chọn Thanh Điều Hướng'] + $agency, old('agency_id'), ['class'=>'form-control', 'required'] ) !!}
                 </div>
             </div>
             <div class="form-group">
@@ -62,7 +62,7 @@
                     </span>
                     {{Form::hidden('img_url',old('img_url'), ['class'=>'form-control', 'id'=>'thumbnail' ])}}
                     </div>
-                    <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset($inst->img_url)}}">
+                    <img id="holder" style="margin-top:15px;max-height:100px;" src="{{asset('public/upload/'.$inst->img_url)}}">
                 </div>
             </div>
             </form>

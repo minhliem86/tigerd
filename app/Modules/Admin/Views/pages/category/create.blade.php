@@ -13,9 +13,9 @@
         <form method="POST" action="{{route('admin.category.store')}}" id="form" role="form" class="form-horizontal">
           {{Form::token()}}
             <div class="form-group">
-                <label for="agency_id" class="col-md-2 control-label">Chọn Nhà Cung Cấp</label>
+                <label for="agency_id" class="col-md-2 control-label">Chọn Thanh Điều Hướng</label>
                 <div class="col-md-10">
-                    {!! Form::select('agency_id', ['' => 'Chọn Nhà Cung Cấp'] + $agency, old('agency_id'), ['class'=>'form-control', 'required'] ) !!}
+                    {!! Form::select('agency_id', ['' => 'Chọn Thanh Điều Hướng'] + $agency, old('agency_id'), ['class'=>'form-control', 'required'] ) !!}
                 </div>
             </div>
           <div class="form-group">

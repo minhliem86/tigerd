@@ -14,6 +14,7 @@ class AddMoreColumnToProductsTable extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->string('agency')->after('category_id')->nullable();
+            $table->string('agency_img_url')->after('category_id')->nullable();
         });
     }
 
@@ -26,6 +27,7 @@ class AddMoreColumnToProductsTable extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->dropColumn('agency');
+            $table->dropColumn('agency_img_url');
         });
     }
 }

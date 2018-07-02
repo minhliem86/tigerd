@@ -30,7 +30,7 @@
                 <th width="120">Hình ảnh</th>
                 <th width="80">Sắp xếp</th>
                 <th >Trạng thái</th>
-                <th >Nhà Cung Cấp</th>
+                <th >Thanh Điều Hướng</th>
                 <th width="120px">&nbsp;</th>
             </tr>
           </thead>

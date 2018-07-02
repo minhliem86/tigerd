@@ -90,6 +90,28 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label class="col-md-2 control-label">
+                            Hãng Sản Xuất
+                        </label>
+                        <div class="col-md-10">
+                            {!!Form::text('agency',old('agency'), ['class'=>'form-control', 'placeholder'=>'Hãng Sản Xuất', 'required'])!!}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Hình Ảnh Hãng Sản Xuất</label>
+                        <div class="col-md-10">
+                            <div class="input-group">
+                         <span class="input-group-btn">
+                           <a id="lfm-agency" data-input="thumbnail-agency" data-preview="holder-agency" class="btn btn-primary">
+                             <i class="fa fa-picture-o"></i> Chọn
+                           </a>
+                         </span>
+                                {!!Form::hidden('agency_img_url',old('agency_img_url'), ['class'=>'form-control', 'id'=>'thumbnail-agency' ])!!}
+                            </div>
+                            <img id="holder-agency" style="margin-top:15px;max-height:100px;" {!! $inst->agency_img_url ? 'src="'.asset('public/upload/'.$inst->agency_img_url).'"' : null !!}>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <label class="col-md-2 control-label">Mô tả</label>
                         <div class="col-md-10">
                             {!!Form::textarea('description',old('description'), ['class'=>'form-control', 'placeholder' => 'Mô tả'])!!}
@@ -271,6 +293,7 @@
         // BUTTON ALONE
         init_btnImage(url,'#lfm');
         init_btnImage(url,'#lfm-meta');
+        init_btnImage(url,'#lfm-agency');
         // SUBMIT FORM
         function submitForm(){
             $('form').submit();

@@ -158,6 +158,12 @@ class ProductController extends Controller
             $img_url = "";
         }
 
+        if($request->has('agency_img_url')){
+            $agency_img_url = $this->common->getPath($request->input('agency_img_url'));
+        }else{
+            $agency_img_url = "";
+        }
+
         $sku_product = strtoupper(str_replace(' ','', $request->input('sku_product')));
         $order = $this->productRepo->getOrder();
         $data = [
@@ -170,6 +176,8 @@ class ProductController extends Controller
             'discount' => $request->input('discount'),
             'stock' => $request->input('stock'),
             'img_url' => $img_url,
+            'agency' => $request->input('agency'),
+            'agency_img_url' => $agency_img_url,
             'order' => $order,
             'category_id' => $request->input('category_id'),
         ];
@@ -308,6 +316,8 @@ class ProductController extends Controller
         }
         $img_url = $this->common->getPath($request->input('img_url'));
 
+        $agency_img_url = $this->common->getPath($request->input('agency_img_url'));
+
         $order = $this->productRepo->getOrder();
         $data = [
             'name' => $request->input('name'),
@@ -319,6 +329,8 @@ class ProductController extends Controller
             'sku_product' => $sku_product = strtoupper(str_replace(' ','', $request->input('sku_product'))),
             'stock' => $request->input('stock'),
             'img_url' => $img_url,
+            'agency' => $request->input('agency'),
+            'agency_img_url' => $agency_img_url,
             'order' => $request->input('order'),
             'status' => $request->input('status'),
             'category_id' => $request->input('category_id'),

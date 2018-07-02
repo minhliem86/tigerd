@@ -99,8 +99,8 @@ class AgencyController extends Controller
         $data = [
             'name' => $request->input('name'),
             'slug' => \LP_lib::unicode($request->input('name')),
-            'description' => $request->input('description'),
-            'img_url' => $img_url,
+//            'description' => $request->input('description'),
+//            'img_url' => $img_url,
             'order' => $order,
         ];
         
@@ -144,8 +144,8 @@ class AgencyController extends Controller
         $data = [
             'name' => $request->input('name'),
             'slug' => \LP_lib::unicode($request->input('name')),
-            'description' => $request->input('description'),
-            'img_url' => $img_url,
+//            'description' => $request->input('description'),
+//            'img_url' => $img_url,
             'order' => $request->input('order'),
             'status' => $request->input('status'),
         ];
