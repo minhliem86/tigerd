@@ -16,12 +16,12 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Danh Mục Sản Phẩm
+                            Danh Mục
                         </a>
-                        @if(!$cate->isEmpty())
+                        @if(!$menu->isEmpty())
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            @foreach($cate as $item_cate)
-                            <a class="dropdown-item" href="{!! route('client.category', $item_cate->slug) !!}">{!! $item_cate->name !!}</a>
+                            @foreach($menu as $item_menu)
+                            <a class="dropdown-item" href="{!! route('client.category', $item_menu->slug) !!}">{!! $item_menu->name !!}</a>
                             @endforeach
                         </div>
                         @endif

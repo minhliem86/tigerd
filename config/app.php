@@ -171,7 +171,7 @@ return [
         App\Providers\ComposerProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Bhavinjr\Wishlist\Providers\WishlistServiceProvider::class,
-        UniSharp\Laravelfilemanager\LaravelFilemanagerServiceProvider::class,
+        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
 
     ],
 
