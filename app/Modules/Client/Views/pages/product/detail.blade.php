@@ -23,7 +23,7 @@
                         <h2 class="product-name">{!! $product->name !!}</h2>
                         <div class="brand-info d-flex justify-content-between">
                             <p class="product_code float">Mã Sản Phẩm: <b><i>{!! $product->categories->sku_cate !!}_{!! $product->sku_product !!}</i></b></p>
-                            <p class="brand-name">Hãng Sản Xuất: <b>{!! $product->categories->name !!}</b></p>
+                            <p class="brand-name">Hãng Sản Xuất: <b>{!! $product->agency !!}</b></p>
                         </div>
                         <p class="price"><span class="price-value">{!! $product->discount ? number_format($product->discount)  : number_format($product->price) !!}</span> <small>vnd</small></p>
                         <p class="description">{!! $product->description !!}</p>
@@ -49,6 +49,10 @@
                         </div>
                     </div>
                     {!! Form::close() !!}
+
+                    <div class="sharethis-wrapper">
+                        <div class="sharethis-inline-share-buttons"></div>
+                    </div>
                 </div>
             </div>
 
@@ -271,6 +275,41 @@
                     }
                 })
             })
+
+            const breakpoint = window.matchMedia('(min-width:560px)');
+
+            let productSwiper;
+
+           const breakpointChecker = function(){
+               if(breakpoint.matches === true){
+                   return enableSwiper();
+               }else if (breakpoint.matches === false){
+                   if(productSwiper !== undefined) productSwiper.destroy(true, true);
+                   return;
+               }
+           }
+//
+           const enableSwiper = function() {
+               productSwiper = new Swiper('#swiper-product', {
+                   'slidesPerView' : 3,
+                   spaceBetween:30,
+                   navigation: {
+                       nextEl: '.swiper-button-next',
+                       prevEl: '.swiper-button-prev',
+                   },
+                   breakpoints:{
+                       767: {
+                           'slidesPerView' : 2,
+                       }
+                   }
+               })
+           };
+
+            // keep an eye on viewport size changes
+            breakpoint.addListener(breakpointChecker);
+
+            // kickstart
+            breakpointChecker();
         })
     </script>
 @stop

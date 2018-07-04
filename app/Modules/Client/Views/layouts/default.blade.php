@@ -58,41 +58,6 @@
                 }
             });
 
-            const breakpoint = window.matchMedia('(min-width:560px)');
-
-            let productSwiper;
-
-//            const breakpointChecker = function(){
-//                if(breakpoint.matches === true){
-//                    return enableSwiper();
-//                }else if (breakpoint.matches === false){
-//                    if(productSwiper !== undefined) productSwiper.destroy(true, true);
-//                    return;
-//                }
-//            }
-//
-//            const enableSwiper = function() {
-//                productSwiper = new Swiper('#swiper-product', {
-//                    'slidesPerView' : 3,
-//                    spaceBetween:30,
-//                    navigation: {
-//                        nextEl: '.swiper-button-next',
-//                        prevEl: '.swiper-button-prev',
-//                    },
-//                    breakpoints:{
-//                        767: {
-//                            'slidesPerView' : 2,
-//                        }
-//                    }
-//                })
-//            };
-
-            // keep an eye on viewport size changes
-            breakpoint.addListener(breakpointChecker);
-
-            // kickstart
-            breakpointChecker();
-
 
             var relateProduct = new Swiper('#hotProductSwiper', {
                 'slidesPerView' : 1,
@@ -106,6 +71,7 @@
                 },
             })
         })
+
         function addToCartAjax(url,id){
             $.ajax({
                 url: url,
@@ -130,6 +96,8 @@
         gtag('config', 'UA-113129910-1');
     </script>
 
+    <!-- SHARETHIS -->
+    <script type='text/javascript' src='//platform-api.sharethis.com/js/sharethis.js#property=5b39fa1907712f001137833f&product=inline-share-buttons' async='async'></script>
 
     <title>TigerD</title>
 </head>

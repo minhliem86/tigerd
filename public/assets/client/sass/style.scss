@@ -186,7 +186,7 @@ ul.list-success{
       }
     }
     #mainNavbar{
-      ul{
+      ul#navigation-list{
         > li{
           text-align: left;
           @include media-max(767px){
@@ -210,17 +210,78 @@ ul.list-success{
             border:none;
             -webkit-border-radius: 5px;
             -moz-border-radius: 5px;
-            border-radius: 5px;
-            padding:5px 10px;
+            border-radius: 2px;
             min-width:100%;
+            box-shadow:2px 3px 5px #6c757d;
             @include media-max(767px){
               background:#e6e6e6;
+            }
+            li{
+              padding:0.8rem 0.6rem;
+              text-transform: uppercase;
+            }
+            .dropdown-submenu{
+              position: relative;
+              &:after{
+                content:"";
+                position:absolute;
+                top:50%;
+                right:10px;
+                transform:translateY(-50%);
+                border-top:6px solid transparent;
+                border-bottom:6px solid transparent;
+                border-left:6px solid white;
+                @include media-max(767px){
+                  border-right:4px solid transparent;
+                  border-left:4px solid transparent;
+                  border-top:4px solid white;
+                  top:20px;
+                }
+              }
+              a{
+                display: block;
+              }
+              ul.submenu{
+                position:absolute;
+                top:0;
+                left:100%;
+                background:lighten($cl-pink, 10%);
+                width:100%;
+                list-style-type: none;
+                box-shadow:2px 3px 5px #6c757d;
+                border-radius:2px;
+                display:none;
+                @include media-max(767px){
+                  position: static;
+                  top:auto;
+                  left: auto;
+                  display: block;
+                  background:#e2e2e2;
+                }
+                li{
+                  padding:0.8rem 10px;
+                  a{
+                    display:block;
+                    @include media-max(767px){
+                      color:darken($text-grey, 20%);
+                      font-weight: 400;
+                    }
+                  }
+                }
+              }
+              @include mediamin(768px){
+                &:hover{
+                  ul.submenu{
+                    display: block;
+                  }
+                }
+              }
             }
             a{
               font-size:1.4rem;
               color:white;
-              border-bottom:1px solid white;
-              padding:0.5rem 1rem;
+              //border-bottom:1px solid white;
+              //padding:0.5rem 1rem;
               @include transition(all 0.3s);
               &:last-child{
                 border-bottom:none;
@@ -230,8 +291,9 @@ ul.list-success{
                 color:darken(white, 20%);
               }
               @include media-max(767px){
-                color:$text-grey;
+                color:darken($text-grey, 15%);
                 font-size:1.4rem;
+                font-weight: 600;
               }
             }
           }

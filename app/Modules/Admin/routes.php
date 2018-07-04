@@ -1,5 +1,4 @@
 <?php
-
 Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers'], function(){
   // Authentication Routes...
 

@@ -157,7 +157,7 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Liemphan\modules\ModulesServiceProvider::class,
-        'UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider',
+
         Intervention\Image\ImageServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Yajra\Datatables\DatatablesServiceProvider::class,
@@ -170,7 +170,8 @@ return [
         Darryldecode\Cart\CartServiceProvider::class,
         App\Providers\ComposerProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
-        Bhavinjr\Wishlist\Providers\WishlistServiceProvider::class
+        Bhavinjr\Wishlist\Providers\WishlistServiceProvider::class,
+        UniSharp\LaravelFilemanager\LaravelFilemanagerServiceProvider::class,
 
     ],
 

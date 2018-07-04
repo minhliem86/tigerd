@@ -14,18 +14,27 @@
                     <li class="nav-item">
                         <a href="{!! count($about) ? route('client.single_page',$about->slug) : '#' !!}" class="nav-link">Giới Thiệu</a>
                     </li>
-                    <li class="nav-item dropdown">
+                    <Vậy class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Danh Mục Sản Phẩm
+                            Danh Mục
                         </a>
-                        @if(!$cate->isEmpty())
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            @foreach($cate as $item_cate)
-                            <a class="dropdown-item" href="{!! route('client.category', $item_cate->slug) !!}">{!! $item_cate->name !!}</a>
+                        @if(!$menu->isEmpty())
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @foreach($menu as $item_menu)
+                                <li {!! $item_menu->categories->isEmpty() ? null : 'class="dropdown-submenu"'  !!}><a href="javascript:void(0)">{!! $item_menu->name !!}</a>
+                                    @if(!$item_menu->categories->isEmpty())
+                                        <ul class="submenu">
+                                        @foreach($item_menu->categories as $item_category)
+                                                <li><a href="{!! route('client.category', $item_category->slug) !!}">{!! $item_category->name !!}</a></li>
+                                        @endforeach
+                                        </ul>
+                                    @endif
+                                </li>
                             @endforeach
-                        </div>
+                            </ul>
+
                         @endif
-                    </li>
+                    </Vậy >
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle"  href="#" id="navbarDropdownNews" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tin Tức</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownNews">
