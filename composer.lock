@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "0b801abd489404176668458d694ea1d9",
+    "content-hash": "b2c9f772d8b43cc098266e3f2b5de6c5",
     "packages": [
         {
             "name": "barryvdh/laravel-dompdf",
@@ -1269,16 +1269,16 @@
         },
         {
             "name": "liemphan/modules",
-            "version": "1.0",
+            "version": "1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/minhliem86/modules.git",
-                "reference": "dcab1932c0178b7a2b2ce55a5001171c76d99526"
+                "reference": "7a006a44cc80028d55633b9ad0a371421f23fc9f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/minhliem86/modules/zipball/dcab1932c0178b7a2b2ce55a5001171c76d99526",
-                "reference": "dcab1932c0178b7a2b2ce55a5001171c76d99526",
+                "url": "https://api.github.com/repos/minhliem86/modules/zipball/7a006a44cc80028d55633b9ad0a371421f23fc9f",
+                "reference": "7a006a44cc80028d55633b9ad0a371421f23fc9f",
                 "shasum": ""
             },
             "require": {
@@ -1288,14 +1288,13 @@
                 "laravel/framework": "5.2.*",
                 "laravelcollective/html": "^5.2.0",
                 "santigarcor/laratrust": "5.0.*",
-                "unisharp/laravel-filemanager": "^1.7",
+                "unisharp/laravel-filemanager": "^1.8",
                 "yajra/laravel-datatables-oracle": "6.*"
             },
             "type": "modules",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "Unisharp\\Laravelfilemanager\\LaravelFilemanagerServiceProvider",
                         "Intervention\\Image\\ImageServiceProvider",
                         "Collective\\Html\\HtmlServiceProvider",
                         "Zizaco\\Entrust\\EntrustServiceProvider",
@@ -1322,7 +1321,7 @@
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "v1.0"
+                "CPOL-1.02"
             ],
             "authors": [
                 {
@@ -1331,7 +1330,7 @@
                 }
             ],
             "description": "Modules for Laravel Framework",
-            "time": "2017-12-20T02:54:01+00:00"
+            "time": "2018-07-03T07:38:10+00:00"
         },
         {
             "name": "maatwebsite/excel",
