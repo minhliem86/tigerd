@@ -1,0 +1,56 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+body {
+  font-size: 10px; }
+
+h4, p {
+  margin: 0;
+  padding: 0; }
+
+p {
+  font-size: 8px; }
+
+html, body {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+table th {
+  text-align: left; }
+
+div.page {
+  width: 210px;
+  margin: 30px auto; }
+  div.page .header {
+    margin-bottom: 20px; }
+    div.page .header p {
+      margin-bottom: 6px;
+      font-size: 6px; }
+  div.page .body h4.title {
+    text-transform: uppercase;
+    font-size: 8px;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ccc; }
+  div.page .body table.order-detail {
+    margin-bottom: 15px; }
+    div.page .body table.order-detail th {
+      text-align: left;
+      padding: 3px 0 6px; }
+      div.page .body table.order-detail th:last-child {
+        text-align: right; }
+    div.page .body table.order-detail tbody td {
+      padding: 5px 0; }
+  div.page .body table.price-infor, div.page .body table.payment-infor {
+    margin-bottom: 15px; }
+    div.page .body table.price-infor th, div.page .body table.payment-infor th {
+      text-transform: capitalize; }
+    div.page .body table.price-infor tbody td, div.page .body table.payment-infor tbody td {
+      padding: 5px 0; }
+  div.page .body p.footer {
+    font-size: 8px;
+    line-height: 12px; }
+
+/*# sourceMappingURL=receipt.min.css.map */

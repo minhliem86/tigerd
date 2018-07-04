@@ -339,7 +339,8 @@ ul.list-success li {
         text-transform: uppercase;
         font-weight: 600;
         margin-bottom: 10px;
-        line-height: 1.8rem; }
+        line-height: 1.8rem;
+        min-height: 40px; }
         .page .product-container .product-body .each-product figure figcaption p.product-name a {
           color: #000;
           text-decoration: none; }

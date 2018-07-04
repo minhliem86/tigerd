@@ -1,0 +1,73 @@
+*{margin:0; padding:0}
+body{
+  font-size:10px;
+}
+h4, p {
+  margin:0; padding:0;
+}
+p{
+  font-size:8px;
+}
+html, body{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+table {
+  th{
+    text-align: left;
+  }
+}
+div.page{
+  width:210px;
+  margin:30px auto;
+  .header{
+    margin-bottom: 20px;
+    p{
+      margin-bottom:6px;
+      font-size:6px;
+    }
+  }
+  .body{
+    h4.title{
+      text-transform:uppercase;
+      font-size:8px;
+      padding-bottom:5px;
+      margin-bottom: 5px;
+      border-bottom: 1px solid #ccc;
+    }
+    table.order-detail{
+      margin-bottom:15px;
+      th{
+        text-align: left;
+        padding:3px 0 6px;
+        &:last-child{
+          text-align: right;
+        }
+      }
+      tbody{
+        td{
+          padding:5px 0;
+        }
+      }
+    }
+    table.price-infor{
+      margin-bottom:15px;
+      th{
+        text-transform:capitalize;
+      }
+      tbody{
+        td{
+          padding:5px 0;
+        }
+      }
+    }
+    table.payment-infor{
+      @extend table.price-infor;
+    }
+    p.footer{
+      font-size:8px;
+      line-height: 12px;
+    }
+  }
+}

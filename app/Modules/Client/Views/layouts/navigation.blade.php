@@ -14,7 +14,7 @@
                     <li class="nav-item">
                         <a href="{!! count($about) ? route('client.single_page',$about->slug) : '#' !!}" class="nav-link">Giới Thiệu</a>
                     </li>
-                    <Vậy class="nav-item dropdown">
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Danh Mục
                         </a>
@@ -34,7 +34,7 @@
                             </ul>
 
                         @endif
-                    </Vậy >
+                    </li >
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle"  href="#" id="navbarDropdownNews" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tin Tức</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownNews">
