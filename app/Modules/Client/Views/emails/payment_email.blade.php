@@ -80,7 +80,7 @@
                                                                 <tbody>
                                                                 <tr style="margin: 0; padding: 0;">
                                                                     <td style="margin: 0; padding: 0; vertical-align: top;">
-                                                                        <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0; color:#bbff5b; text-align:center;">
+                                                                        <p class="text" style="font-family: 'Arial', sans-serif; font-size: 14px; line-height: 18px; margin: 0; padding: 0; color:#9edd40; text-align:center; font-weight:600">
                                                                             LỰA CHỌN TUYỆT VỜI !
                                                                         </p>
                                                                         <p class="space-text" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 5px; line-height: 18px; margin: 0; padding: 0; width: 100%;">&nbsp;</p>
@@ -179,7 +179,7 @@
                                                                     <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! $item_cart->quantity !!}</p>
                                                                 </td>
                                                                 <td align="right" style="margin: 0; padding: 10px 5px; vertical-align: top;">
-                                                                    <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! number_format($item_cart->price,0,',','.') !!} vnd</p>
+                                                                    <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! number_format($item_cart->getPriceSum(),0,',','.') !!} vnd</p>
                                                                 </td>
                                                             </tr>
                                                         @endforeach

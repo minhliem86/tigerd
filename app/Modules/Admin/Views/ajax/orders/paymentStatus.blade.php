@@ -1,1 +1,1 @@
-{!! Form::select('payment_status',$payment_list,$data->paymentstatus_id,['class' => 'form-control', 'data-id' => $data->id]) !!}
+{!! Form::select('payment_status',$payment_list,$data->paymentstatus_id,['class' => 'form-control', 'data-id' => $data->id, 'id' => 'paymentstatus_'.$data->id]) !!}

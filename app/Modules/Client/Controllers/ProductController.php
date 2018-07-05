@@ -112,7 +112,7 @@ class ProductController extends Controller
 
     public function getProduct(Request $request, $slug)
     {
-        $product = $this->product->getProductBySlug($slug,['id','name', 'slug', 'description', 'content', 'sku_product', 'price', 'discount', 'img_url','category_id','type'], ['categories','photos', 'attributes','testimonials']);
+        $product = $this->product->getProductBySlug($slug,['id','name', 'slug', 'description', 'content', 'sku_product','agency', 'price', 'discount', 'img_url','category_id','type'], ['categories','photos', 'attributes','testimonials']);
         $meta = $product->meta_configs()->first();
         if(count($product)){
             $relate_product = $this->product->relateProduct([$product->id], ['id', 'img_url', 'name','slug', 'price', 'discount','category_id', 'default'],['attributes', 'product_links']);
@@ -151,10 +151,11 @@ class ProductController extends Controller
                     $arr_att[$i_value->attributes->name] = $i_value->value;
                     $str_cart_id = $str_cart_id.\LP_lib::unicode($i_value->value);
                     if($item_value != end($arr_value)){
-                        $str_cart_id += '-';
+                        $str_cart_id = $str_cart_id.'-';
                     }
                 }
             }
+
             $att_img = [
                 'img_url' => $product->img_url,
             ];

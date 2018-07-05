@@ -354,7 +354,7 @@ class ProductController extends Controller
         $sub_photo = $request->file('thumb-input');
 
         if($sub_photo[0]) {
-            $data_photo = [];
+            $data_photo_thumb = [];
             foreach ($sub_photo as $thumb) {
                 $bigSize = $this->common->uploadImage($request, $thumb, $this->_big, $resize = false, null, null, base_path($this->_removePath));
                 $smallsize = $this->common->createThumbnail($bigSize, $this->_small, 350, 350, base_path($this->_removePath));
@@ -369,9 +369,9 @@ class ProductController extends Controller
                         'filename' => $filename,
                     ]
                 );
-                array_push($data_photo, $data);
+                array_push($data_photo_thumb, $data);
             }
-            $product->photos()->saveMany($data_photo);
+            $product->photos()->saveMany($data_photo_thumb);
         }
 
         /*ATTRIBUTE PROCESS*/
