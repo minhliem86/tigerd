@@ -103,7 +103,7 @@
                                                         <td style="margin: 0; padding: 0; vertical-align: top;">
                                                             <p style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">TigerD cảm ơn quý khách.</b></p>
                                                             <p class="space-text-content" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">&nbsp;</p>
-                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">Chú quý khách ngày tốt lành.</p>
+                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">Chúc quý khách ngày tốt lành.</p>
                                                         </td>
                                                     </tr>
                                                     </tbody>

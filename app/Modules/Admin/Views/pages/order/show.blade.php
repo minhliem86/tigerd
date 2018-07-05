@@ -157,7 +157,7 @@
                         </tr>
                         <tr>
                             <td colspan="3" align="right">
-                                <b>Tổng Cộng: </b>{!! number_format($order->total) !!} VND
+                                <b>Tổng Cộng: </b>{!! number_format($order->total ) !!} VND
                             </td>
                         </tr>
                     </tbody>
