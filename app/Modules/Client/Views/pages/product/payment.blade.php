@@ -100,7 +100,17 @@
                                     @if(!Cart::isEmpty())
                                         @foreach($cart as $item_cart)
                                             <tr>
-                                                <td>{!! $item_cart->name !!}</td>
+                                                <td>{!! $item_cart->name !!}
+                                                    @if($item_cart->attributes)
+                                                    <p>
+                                                        @foreach($item_cart->attributes as $k =>$cart_attribute)
+                                                            @if($k !='img_url')
+                                                        <small>{!! $cart_attribute !!} {!! $cart_attribute == end($item_cart->attributes) ? '/' : null !!}</small>
+                                                            @endif
+                                                        @endforeach
+                                                    </p>
+                                                    @endif
+                                                </td>
                                                 <td>{!! $item_cart->quantity !!}</td>
                                                 <td class="text-right price-td">{!! number_format($item_cart->price) !!} vnd</td>
                                             </tr>

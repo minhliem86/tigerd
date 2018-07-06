@@ -132,7 +132,7 @@
                                     alertify.success('Trạng thái xử lý được cập nhật !');
 
                                     if(data.data == 3){
-                                        $('select[data-id="'+element_id+'"]').val(2);
+                                        $('select#paymentstatus_'+element_id).val(2);
                                         $.ajax({
                                             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                                             url: "{{route('admin.order.changePaymentStatus')}}",

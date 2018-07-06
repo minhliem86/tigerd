@@ -85,14 +85,20 @@ class OrderController extends Controller
 
             $order = $this->order->find($id);
             $order->shipstatus_id = $value;
-            if($value == 3){
-                $order->paymentstatus_id = 2;
-                $order->save();
-            }else{
-                $order->save();
+            switch ($value){
+                case '3' :
+                    $order->paymentstatus_id = 2;
+                    $order->save();
+                    event(new EmailTemplateEvent('Admin::emails.notifySuccess',[],env('MAIL_USERNAME'), $email, 'TigerD.vn - Đơn hàng #'.$order->order_name.' giao nhận thành công.'));
+                    break;
+                case '2' :
+                    $order->save();
+                    event(new EmailTemplateEvent('Admin::emails.notifyShipping',[],env('MAIL_USERNAME'), $email, 'TigerD.vn - Đơn hàng #'.$order->order_name.' đang vận chuyển.'));
+                    break;
+                default :
+                    $order->save();
+                    break;
             }
-            event(new EmailTemplateEvent('Admin::emails.notifyShipping',[],env('MAIL_USERNAME'), $email, 'TigerD.vn - Đơn hàng #'.$order->order_name.' đang vận chuyển.'));
-
 
             return response()->json(['error'=> false, 'data'=> $value], 200);
         }

@@ -26,7 +26,7 @@ class NavigationComposer{
     {
         $newstype = $this->newstype->query(['title','id','slug'])->where('status',1)->orderBy('order','DESC')->get();
         $cate = $this->category->all(['id', 'name', 'slug']);
-        $menu = $this->agency->query(['*'],['categories'])->where('status', 1)->get();
+        $menu = $this->agency->query(['*'],['categories'])->where('status', 1)->orderBy('order','ASC')->get();
         $about = $this->page->findByField('slug', 'gioi-thieu', ['id', 'name', 'slug'])->first();
         $view->with(compact('cate','about', 'newstype','menu'));
         // TODO: Bind data to view
