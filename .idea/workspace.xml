@@ -5,13 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="17afa036-b3b5-46e4-ad1c-f1d93a557e79" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.env.example" beforeDir="false" afterPath="$PROJECT_DIR$/.env.example" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1/9a/9af770637bac65ce20b0e2d027b5f676" beforeDir="false" afterPath="$PROJECT_DIR$/1/9a/9af770637bac65ce20b0e2d027b5f676" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/emails/notifyShipping.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/emails/notifyShipping.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Modules/Client/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Client/Controllers/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Modules/Client/Views/emails/payment_email.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Client/Views/emails/payment_email.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/vendor/landish/pagination/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -25,30 +20,12 @@
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="edit.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/edit.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="96" column="62" selection-start-line="96" selection-start-column="56" selection-end-line="96" selection-end-column="62" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="detail.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Modules/Client/Views/pages/product/detail.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="25" column="88" selection-start-line="25" selection-start-column="82" selection-end-line="25" selection-end-column="88" />
-            </state>
-          </provider>
-        </entry>
-      </file>
+    <leaf>
       <file leaf-file-name="ProductController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Modules/Client/Controllers/ProductController.php">
+        <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="114" column="127" selection-start-line="114" selection-start-column="127" selection-end-line="114" selection-end-column="127" />
+            <state relative-caret-position="543">
+              <caret line="365" column="44" selection-start-line="365" selection-start-column="44" selection-end-line="365" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -57,7 +34,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>addMoreAttValue</find>
       <find>find</find>
       <find>form</find>
       <find>createAttribute</find>
@@ -87,6 +63,7 @@
       <find>getPriceSum</find>
       <find>valida</find>
       <find>detail</find>
+      <find>getDetail</find>
     </findStrings>
     <replaceStrings>
       <replace>attributr</replace>
@@ -131,7 +108,6 @@
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/agency/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/category/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/create.blade.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/edit.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/layouts/navigation.blade.php" />
         <option value="$PROJECT_DIR$/config/lfm.php" />
@@ -158,6 +134,7 @@
         <option value="$PROJECT_DIR$/app/Modules/Client/Views/emails/payment_email.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/emails/notifyShipping.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Client/Controllers/ProductController.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php" />
       </list>
     </option>
   </component>
@@ -265,7 +242,7 @@
       <path value="$PROJECT_DIR$/vendor/unisharp/laravel-filemanager" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="width" value="1296" />
     <option name="height" value="1000" />
   </component>
@@ -274,7 +251,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -306,7 +282,7 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Modules" type="462c0819:PsiDirectoryNode" />
               <item name="Admin" type="462c0819:PsiDirectoryNode" />
-              <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
@@ -315,17 +291,6 @@
               <item name="Modules" type="462c0819:PsiDirectoryNode" />
               <item name="Admin" type="462c0819:PsiDirectoryNode" />
               <item name="Views" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Modules" type="462c0819:PsiDirectoryNode" />
-              <item name="Admin" type="462c0819:PsiDirectoryNode" />
-              <item name="Views" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="productv2" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
@@ -422,6 +387,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -545,15 +511,16 @@
       <workItem from="1530411807141" duration="14670000" />
       <workItem from="1530628069178" duration="2096000" />
       <workItem from="1530710467674" duration="7573000" />
-      <workItem from="1530763093808" duration="8363000" />
+      <workItem from="1530763093808" duration="8961000" />
+      <workItem from="1530782954545" duration="1853000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="708395000" />
+    <option name="totallyTimeSpent" value="710846000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -564,7 +531,7 @@
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32852387" />
       <window_info id="Gulp" order="2" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18283582" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18496802" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -613,13 +580,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Providers/ComposerProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="16" column="88" selection-start-line="16" selection-start-column="70" selection-end-line="16" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/ViewComposers/SinglePageComposer.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
@@ -822,9 +782,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-220">
           <caret line="150" column="90" selection-start-line="150" selection-start-column="90" selection-end-line="150" selection-end-column="90" />
-          <folding>
-            <element signature="n#style#0;n#p#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#td#1;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#1;n#tbody#0;n#table#1;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#td#0;n#tr#0;n#tbody#0;n#table#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -860,6 +817,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">
           <caret line="114" column="127" selection-start-line="114" selection-start-column="127" selection-end-line="114" selection-end-column="127" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="543">
+          <caret line="365" column="44" selection-start-line="365" selection-start-column="44" selection-end-line="365" selection-end-column="44" />
         </state>
       </provider>
     </entry>
