@@ -3,17 +3,18 @@
 <script>
     $('document').ready(function () {
         $("#{!! LP_lib::unicodenospace($item_value->value) !!}").fileinput({
-            uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
+            {{--uploadUrl: "{!!route('admin.product.store')!!}", // server upload action--}}
             uploadAsync: false,
             showUpload: false,
-            showBrowse: false,
+            showBrowse: true,
             browseLabel:'Chọn Hình',
             browseClass:'btn btn-primary btn-sm',
             showCaption: false,
             showCancel: false,
-            dropZoneEnabled : true,
-            browseOnZoneClick: true,
+            dropZoneEnabled : false,
+            browseOnZoneClick: false,
             overwriteInitial: false,
+
             fileActionSettings:{
                 showUpload : false,
                 showZoom: false,

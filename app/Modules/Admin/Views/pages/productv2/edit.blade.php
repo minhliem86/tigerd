@@ -355,17 +355,18 @@
         $(document).ready(function(){
             /*HINH CHI TIET*/
             $("#thumb-input").fileinput({
-                uploadUrl: "{!!route('admin.product.store')!!}", // server upload action
+                {{--uploadUrl: "{!!route('admin.product.store')!!}", // server upload action--}}
                 uploadAsync: false,
+                maxFileCount: 10,
                 showUpload: false,
-                showCancel: false,
                 showCaption: false,
-                dropZoneEnabled : true,
-                showBrowse: false,
+                dropZoneEnabled : false,
+                showBrowse: true,
                 overwriteInitial: false,
-                browseOnZoneClick: true,
+                browseOnZoneClick: false,
                 fileActionSettings:{
                     showUpload : false,
+
                     showZoom: false,
                     showDrag: false,
                     showDownload: false,

@@ -237,6 +237,9 @@ class ProductController extends Controller
                                     'product_id' => $product->id,
                                 ]);
                                 $slug = \LP_lib::unicodenospace($item_value);
+                                if($request->has('value_price_'.$slug)){
+                                    $var_value->value_prices()->save(['price'=>$request->input('value_price_'.$slug)]);
+                                }
                                 if($request->exists('thumb-value.'.$slug)){
                                     $attValue_photo = $request->file('thumb-value')[$slug];
                                     if($attValue_photo[0]) {
@@ -673,6 +676,15 @@ class ProductController extends Controller
             return response()->json(['data'=>$view],200);
         }
     }
+    /*ADD PRICE TO VALUE*/
+    public function ajaxIntergatePriceToValue(Request $request)
+    {
+        if($request->ajax()){
+            $id = \LP_lib::unicodenospace($request->input('id'));
+            $view = view('Admin::ajax.script.add_price', compact('id'))->render();
+            return response()->json(['data'=>$view],200);
+        }
+    }
 
     /*ADD UPLOAD PHOTO BUTTON TO VALUE*/
     public function ajaxAddMoreAtt(Request $request, AttributeRepository $attribute)
@@ -701,4 +713,6 @@ class ProductController extends Controller
             return response()->json(['data'=>$view],200);
         }
     }
+
+
 }

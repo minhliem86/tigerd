@@ -77,6 +77,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
         Route::get('product/attribute/checkRule', ['as' => 'admin.product.checkRuleAttribute', 'uses' => 'ProductController@checkRuleAttribute']);
         Route::get('product/checkUniqueProduct', ['as' => 'admin.product.checkUniqueProduct', 'uses' => 'ProductController@checkUniqueProduct']);
         Route::post('product/attribute/uploadImg',['as' => 'admin.attribute.value.img', 'uses' => 'ProductController@ajaxIntergateButton']);
+        Route::post('product/attribute/valuePrice',['as' => 'admin.attribute.value.price', 'uses' => 'ProductController@ajaxIntergatePriceToValue']);
         Route::get('product/attribute/addMoreAtt',['as' => 'admin.attribute.addMoreAtt', 'uses' => 'ProductController@ajaxAddMoreAtt']);
         Route::get('product/attribute/addMoreAttValue',['as' => 'admin.attribute.addMoreAttValue', 'uses' => 'ProductController@ajaxAddMoreAttValue']);
         Route::get('product/attribute/addMoreAttValueEdit',['as' => 'admin.attribute.addMoreAttValueEdit', 'uses' => 'ProductController@ajaxAddMoreAttValueEdit']);
