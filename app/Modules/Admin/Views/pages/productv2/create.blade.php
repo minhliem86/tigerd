@@ -274,7 +274,7 @@
     <script type="text/javascript" src="{!! asset('public/assets/admin') !!}/dist/js/jquery.validate.min.js"></script>
 
     <script>
-        const url = "{!!url('/')!!}"
+        const url = "{!!url('/admin')!!}"
         init_tinymce(url);
         // BUTTON ALONE
         init_btnImage(url,'#lfm');
@@ -427,7 +427,7 @@
                 }
             })
 
-            $("body").on('click','.add_price_value', function () {
+            $("body").on('click change','.add_price_value', function () {
                 var att_value = $(this).parent().prev('.each-value').children('input[type=text]').val();
                 var thisButton = $(this);
                 if(att_value){
@@ -445,24 +445,7 @@
                     alert('Vui lòng nhập giá trị thuộc tính trước khi thêm giá.')
                 }
             })
-            $("body").on('focusout','.add_price_value', function(){
-                var att_value = $(this).parent().prev('.each-value').children('input[type=text]').val();
-                var thisButton = $(this);
-                if(att_value){
-                    $.ajax({
-                        url: "{!! route('admin.attribute.value.price') !!}",
-                        type: 'POST',
-                        data:{id: att_value},
-                        success:function(res){
-                            if(res.data){
-                                thisButton.parent().prev().find('.wrap-price-ajax').append(res.data);
-                            }
-                        }
-                    })
-                }else{
-                    alert('Vui lòng nhập giá trị thuộc tính trước khi thêm giá.')
-                }
-            })
+
 
             /*ADD NEW ATTRIBUTE*/
             $('.form_create_att').validate({

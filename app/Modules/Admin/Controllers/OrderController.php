@@ -93,7 +93,7 @@ class OrderController extends Controller
                     break;
                 case '2' :
                     $order->save();
-                    event(new EmailTemplateEvent('Admin::emails.notifyShipping',[],env('MAIL_USERNAME'), $email, 'TigerD.vn - Đơn hàng #'.$order->order_name.' đang vận chuyển.'));
+                    event(new EmailTemplateEvent('Admin::emails.notifyShipping',['name' => $order->ship_address->fullname],env('MAIL_USERNAME'), $email, 'TigerD.vn - Đơn hàng #'.$order->order_name.' đang vận chuyển.'));
                     break;
                 default :
                     $order->save();

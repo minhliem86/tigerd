@@ -4,6 +4,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'App\Modules\Admin\Controllers
 
   Route::group(['middleware'=>['web']], function(){
 
+
     Route::get('login', 'Auth\AuthController@showLoginForm');
     Route::post('login', 'Auth\AuthController@login');
     Route::get('logout', 'Auth\AuthController@logout');

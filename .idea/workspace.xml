@@ -6,14 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="17afa036-b3b5-46e4-ad1c-f1d93a557e79" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/1/16/16b90c759d22eb3a5c43c4d24f89d2fe" beforeDir="false" afterPath="$PROJECT_DIR$/1/16/16b90c759d22eb3a5c43c4d24f89d2fe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/AttributeValue.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/AttributeValue.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/add_more_att_value.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/add_more_att_value.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_fileInputValue.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_fileInputValue.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1/9a/9af770637bac65ce20b0e2d027b5f676" beforeDir="false" afterPath="$PROJECT_DIR$/1/9a/9af770637bac65ce20b0e2d027b5f676" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Modules/Admin/Controllers/OrderController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Admin/Controllers/OrderController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/emails/notifyShipping.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/emails/notifyShipping.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Modules/Admin/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Admin/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Modules/Client/Views/layouts/footer.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Client/Views/layouts/footer.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Modules/Client/routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Modules/Client/routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/lfm.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/lfm.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/vendor/landish/pagination/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,8 +31,35 @@
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Modules/Admin/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="79" column="88" selection-start-line="79" selection-start-column="61" selection-end-line="79" selection-end-column="88" />
+            <state relative-caret-position="85">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="lfm.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/lfm.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="script.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/assets/admin/dist/js/script.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" column="29" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/Modules/Client/routes.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="350">
+              <caret line="65" selection-start-line="65" selection-end-line="65" />
             </state>
           </provider>
         </entry>
@@ -40,35 +67,17 @@
       <file leaf-file-name="ProductController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-966">
+            <state relative-caret-position="526">
               <caret line="241" column="33" selection-start-line="241" selection-start-column="33" selection-end-line="241" selection-end-column="33" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AttributeValue.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Models/AttributeValue.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="388">
-              <caret line="26" column="32" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="32" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="add_price.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/add_price.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="37" selection-start-column="25" selection-end-column="37" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="create.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/create.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="808">
-              <caret line="463" column="17" selection-start-line="463" selection-start-column="17" selection-end-line="463" selection-end-column="17" />
+            <state relative-caret-position="84">
+              <caret line="265" selection-start-line="265" selection-end-line="265" />
             </state>
           </provider>
         </entry>
@@ -76,8 +85,8 @@
       <file leaf-file-name="SingleController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Modules/Client/Controllers/SingleController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="24" column="75" lean-forward="true" selection-start-line="24" selection-start-column="75" selection-end-line="24" selection-end-column="75" />
+            <state relative-caret-position="306">
+              <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -85,11 +94,8 @@
       <file leaf-file-name="add_more_att_value.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/add_more_att_value.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="147">
-              <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-              <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-              </folding>
+            <state relative-caret-position="170">
+              <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
             </state>
           </provider>
         </entry>
@@ -98,9 +104,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>check</find>
-      <find>addMoreAtt</find>
-      <find>att_name</find>
       <find>Order</find>
       <find>center</find>
       <find>space-text</find>
@@ -128,6 +131,9 @@
       <find>email</find>
       <find>admin.attribute.value.img</find>
       <find>ajaxIntergateButton</find>
+      <find>attri</find>
+      <find>footer</find>
+      <find>error</find>
     </findStrings>
     <replaceStrings>
       <replace>attributr</replace>
@@ -148,10 +154,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/ViewComposers/SinglePageComposer.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Client/Views/layouts/footer.blade.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/emails/shipping.blade.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Client/Views/pages/home/index.blade.php" />
         <option value="$PROJECT_DIR$/database/migrations/2018_06_29_103020_add_more_column_to_products_table.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Controllers/AgencyController.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/category/index.blade.php" />
@@ -179,12 +181,8 @@
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/show.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/receipt.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Client/Views/emails/payment_email.blade.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/emails/notifyShipping.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Client/Controllers/ProductController.php" />
-        <option value="$PROJECT_DIR$/config/lfm.php" />
         <option value="$PROJECT_DIR$/app/ViewComposers/NavigationComposer.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Admin/Controllers/OrderController.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/emails/notifySuccess.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/orders/paymentStatus.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/index.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Client/Views/pages/product/payment.blade.php" />
@@ -193,12 +191,20 @@
         <option value="$PROJECT_DIR$/app/Models/AttributeValue.php" />
         <option value="$PROJECT_DIR$/app/Models/ValuePrice.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/edit_product/edit_fileInputValue.blade.php" />
-        <option value="$PROJECT_DIR$/app/Modules/Admin/routes.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/add_price.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/add_more_att_value.blade.php" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php" />
         <option value="$PROJECT_DIR$/app/Modules/Client/Controllers/SingleController.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/emails/notifySuccess.blade.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/Controllers/OrderController.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/Views/emails/notifyShipping.blade.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Admin/routes.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Client/routes.php" />
+        <option value="$PROJECT_DIR$/config/lfm.php" />
+        <option value="$PROJECT_DIR$/public/assets/admin/dist/js/script.js" />
         <option value="$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/create.blade.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Client/Views/layouts/footer.blade.php" />
+        <option value="$PROJECT_DIR$/app/Modules/Client/Views/layouts/header.blade.php" />
       </list>
     </option>
   </component>
@@ -319,107 +325,112 @@
         <subPane>
           <expand>
             <path>
-              <item name="tigerd-v2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tigerd-v2" type="462c0819:PsiDirectoryNode" />
+              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="tigerd-v2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tigerd-v2" type="462c0819:PsiDirectoryNode" />
+              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="tigerd-v2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tigerd-v2" type="462c0819:PsiDirectoryNode" />
+              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Models" type="462c0819:PsiDirectoryNode" />
+              <item name="Listeners" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="tigerd-v2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tigerd-v2" type="462c0819:PsiDirectoryNode" />
+              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Modules" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="tigerd-v2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tigerd-v2" type="462c0819:PsiDirectoryNode" />
+              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Modules" type="462c0819:PsiDirectoryNode" />
               <item name="Admin" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="tigerd-v2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tigerd-v2" type="462c0819:PsiDirectoryNode" />
+              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Modules" type="462c0819:PsiDirectoryNode" />
               <item name="Admin" type="462c0819:PsiDirectoryNode" />
               <item name="Controllers" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="tigerd-v2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tigerd-v2" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Modules" type="462c0819:PsiDirectoryNode" />
-              <item name="Admin" type="462c0819:PsiDirectoryNode" />
-              <item name="Views" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tigerd-v2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tigerd-v2" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Modules" type="462c0819:PsiDirectoryNode" />
-              <item name="Admin" type="462c0819:PsiDirectoryNode" />
-              <item name="Views" type="462c0819:PsiDirectoryNode" />
-              <item name="ajax" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tigerd-v2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tigerd-v2" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Modules" type="462c0819:PsiDirectoryNode" />
-              <item name="Admin" type="462c0819:PsiDirectoryNode" />
-              <item name="Views" type="462c0819:PsiDirectoryNode" />
-              <item name="ajax" type="462c0819:PsiDirectoryNode" />
-              <item name="script" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tigerd-v2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tigerd-v2" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Modules" type="462c0819:PsiDirectoryNode" />
-              <item name="Admin" type="462c0819:PsiDirectoryNode" />
-              <item name="Views" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tigerd-v2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tigerd-v2" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="Modules" type="462c0819:PsiDirectoryNode" />
-              <item name="Admin" type="462c0819:PsiDirectoryNode" />
-              <item name="Views" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="productv2" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tigerd-v2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tigerd-v2" type="462c0819:PsiDirectoryNode" />
+              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Modules" type="462c0819:PsiDirectoryNode" />
               <item name="Client" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="tigerd-v2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tigerd-v2" type="462c0819:PsiDirectoryNode" />
+              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Modules" type="462c0819:PsiDirectoryNode" />
               <item name="Client" type="462c0819:PsiDirectoryNode" />
-              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="tigerd-v2" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tigerd-v2" type="462c0819:PsiDirectoryNode" />
+              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="ViewComposers" type="462c0819:PsiDirectoryNode" />
+              <item name="Modules" type="462c0819:PsiDirectoryNode" />
+              <item name="Client" type="462c0819:PsiDirectoryNode" />
+              <item name="Views" type="462c0819:PsiDirectoryNode" />
+              <item name="layouts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="assets" type="462c0819:PsiDirectoryNode" />
+              <item name="admin" type="462c0819:PsiDirectoryNode" />
+              <item name="dist" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tigerd-backup" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tigerd-backup" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+              <item name="vendor" type="462c0819:PsiDirectoryNode" />
+              <item name="laravel-filemanager" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -430,23 +441,23 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../export-video" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="C:/Program Files/nodejs/node" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\tigerd\database\migrations\old30062018" />
+      <recent name="C:\xampp\htdocs\tigerd\vendor\mistic100\randomcolor\src" />
+      <recent name="C:\xampp\htdocs\tigerd\app\Modules\Client\Views" />
+      <recent name="C:\xampp\htdocs\tigerd\app\Modules\Admin\Views\pages\product\attribute" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\xampp\htdocs\tigerd-v2\app\Modules\Admin\Views\emails" />
       <recent name="C:\xampp\htdocs\tigerd-v2\public\assets\admin\dist\sass" />
       <recent name="C:\xampp\htdocs\tigerd-v2\public\assets\admin\dist\css" />
       <recent name="C:\xampp\htdocs\tigerd\app\Modules\Client\Views\layouts" />
       <recent name="C:\xampp\htdocs\tigerd\public\assets\client\js" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\xampp\htdocs\tigerd\database\migrations\old30062018" />
-      <recent name="C:\xampp\htdocs\tigerd\vendor\mistic100\randomcolor\src" />
-      <recent name="C:\xampp\htdocs\tigerd\app\Modules\Client\Views" />
-      <recent name="C:\xampp\htdocs\tigerd\app\Modules\Admin\Views\pages\product\attribute" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -553,29 +564,31 @@
       <workItem from="1530883572509" duration="4691000" />
       <workItem from="1531047940698" duration="3270000" />
       <workItem from="1531060205884" duration="1496000" />
+      <workItem from="1531110519977" duration="11169000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="730052000" />
+    <option name="totallyTimeSpent" value="741221000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="13" />
       <window_info anchor="bottom" id="Event Log" order="16" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="19" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="14" />
       <window_info anchor="bottom" id="Run" order="4" />
+      <window_info anchor="bottom" id="Version Control" order="14" />
       <window_info id="npm" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="15" weight="0.32852387" />
+      <window_info anchor="bottom" id="Terminal" order="15" visible="true" weight="0.32777777" />
       <window_info id="Gulp" order="7" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="4" visible="true" weight="0.18923241" />
+      <window_info active="true" content_ui="combo" id="Project" order="4" visible="true" weight="0.1913646" />
       <window_info anchor="bottom" id="Docker" order="18" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="4" />
       <window_info id="Structure" order="5" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="6" weight="0.4" />
+      <window_info id="Favorites" order="8" side_tool="true" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -619,56 +632,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Modules/Client/Views/layouts/header.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/app.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="172" column="67" lean-forward="true" selection-start-line="172" selection-start-column="67" selection-end-line="172" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Client/Views/layouts/default.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Client/Views/layouts/navigation.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Client/Views/extensions/promotion_payment.blade.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/Order.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="22" column="28" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/admin/dist/css/receipt.min.css" />
-    <entry file="file://$PROJECT_DIR$/public/assets/client/sass/style.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="420" column="30" selection-start-line="420" selection-start-column="30" selection-end-line="420" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/dompdf.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="143" column="35" selection-start-line="143" selection-start-column="35" selection-end-line="143" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/assets/admin/dist/sass/receipt.scss" />
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
@@ -693,31 +656,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/receipt.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="98" column="76" selection-start-line="98" selection-start-column="76" selection-end-line="98" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Client/Views/emails/payment_email.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-220">
-          <caret line="150" column="90" selection-start-line="150" selection-start-column="90" selection-end-line="150" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Client/Views/pages/product/detail.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="237">
           <caret line="25" column="88" selection-start-line="25" selection-start-column="82" selection-end-line="25" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/lfm.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="598">
-          <caret line="71" column="25" selection-start-line="71" selection-start-column="25" selection-end-line="71" selection-end-column="25" />
         </state>
       </provider>
     </entry>
@@ -740,21 +682,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1606">
           <caret line="218" column="5" lean-forward="true" selection-start-line="218" selection-start-column="5" selection-end-line="218" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/emails/notifyShipping.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="101" selection-start-line="101" selection-end-line="102" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/emails/notifySuccess.blade.php" />
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/OrderController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="514">
-          <caret line="81" column="37" lean-forward="true" selection-start-line="81" selection-start-column="37" selection-end-line="81" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -800,23 +727,11 @@
     <entry file="file://$PROJECT_DIR$/database/migrations/old/2017_12_20_050400_create_products_table.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2018_07_08_111319_create_value_price_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="24" column="6" lean-forward="true" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2018_07_08_111319_create_value_price_table.php" />
     <entry file="file://$PROJECT_DIR$/app/Models/Shipping_Cost.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Models/ValuePrice.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="15" column="5" lean-forward="true" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Models/ValuePrice.php" />
     <entry file="file://$PROJECT_DIR$/index.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -824,13 +739,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7665">
           <caret line="365" column="41" selection-start-line="360" selection-start-column="16" selection-end-line="365" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="79" column="88" selection-start-line="79" selection-start-column="61" selection-end-line="79" selection-end-column="88" />
         </state>
       </provider>
     </entry>
@@ -857,15 +765,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Models/AttributeValue.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="388">
-          <caret line="26" column="32" selection-start-line="26" selection-start-column="20" selection-end-line="26" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-966">
-          <caret line="241" column="33" selection-start-line="241" selection-start-column="33" selection-end-line="241" selection-end-column="33" />
+        <state relative-caret-position="442">
+          <caret line="31" column="32" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -890,34 +791,143 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Client/Controllers/SingleController.php">
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/add_price.blade.php" />
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/emails/notifySuccess.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="24" column="75" lean-forward="true" selection-start-line="24" selection-start-column="75" selection-end-line="24" selection-end-column="75" />
+        <state relative-caret-position="429">
+          <caret line="91" column="474" selection-start-line="91" selection-start-column="474" selection-end-line="91" selection-end-column="474" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/add_price.blade.php">
+    <entry file="file://$PROJECT_DIR$/app/Models/Order.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="37" selection-start-column="25" selection-end-column="37" />
+        <state relative-caret-position="289">
+          <caret line="17" column="32" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Client/Events/SendMail.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/order/receipt.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="68" column="30" selection-start-line="68" selection-start-column="30" selection-end-line="68" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/emails/notifyShipping.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="74" column="90" selection-start-line="74" selection-start-column="90" selection-end-line="74" selection-end-column="90" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Listeners/EmailTemplateListener.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="30" column="42" selection-start-line="30" selection-start-column="38" selection-end-line="30" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/OrderController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="95" column="86" selection-start-line="95" selection-start-column="82" selection-end-line="95" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Client/Views/emails/payment_email.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="181" column="202" selection-start-line="181" selection-start-column="202" selection-end-line="181" selection-end-column="202" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/ajax/script/add_more_att_value.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="170">
+          <caret line="10" column="22" selection-start-line="10" selection-start-column="22" selection-end-line="10" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Client/Controllers/SingleController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="22" column="32" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/unisharp/laravel-filemanager/src/routes.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="34" lean-forward="true" selection-start-line="9" selection-start-column="34" selection-end-line="9" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/unisharp/laravel-filemanager/src/config/lfm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1768">
+          <caret line="128" column="6" lean-forward="true" selection-start-line="128" selection-start-column="6" selection-end-line="128" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/lfm.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="10" column="33" selection-start-line="10" selection-start-column="33" selection-end-line="10" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Controllers/ProductController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="526">
+          <caret line="241" column="33" selection-start-line="241" selection-start-column="33" selection-end-line="241" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Client/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="65" selection-start-line="65" selection-end-line="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Client/Views/layouts/header.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="19" column="180" selection-start-line="19" selection-start-column="88" selection-end-line="19" selection-end-column="180" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Modules/Client/Views/layouts/footer.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="286">
+          <caret line="47" column="32" selection-start-line="47" selection-start-column="32" selection-end-line="53" selection-end-column="38" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Modules/Admin/Views/pages/productv2/create.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="808">
-          <caret line="463" column="17" selection-start-line="463" selection-start-column="17" selection-end-line="463" selection-end-column="17" />
+        <state relative-caret-position="84">
+          <caret line="265" selection-start-line="265" selection-end-line="265" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/assets/admin/dist/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="29" selection-start-line="18" selection-start-column="23" selection-end-line="18" selection-end-column="29" />
         </state>
       </provider>
     </entry>

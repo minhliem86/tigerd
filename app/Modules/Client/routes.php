@@ -63,6 +63,7 @@ Route::group(['middleware'=>['web'],'namespace' => 'App\Modules\Client\Controlle
 
     Route::get('/dang-xuat', ['as' => 'client.auth.logout', 'uses' => 'Auth\AuthController@logout']);
 
+
     Route::get('/{slug}', ['as'=>'client.single_page', 'uses'=>'SingleController@index'])->where('slug', '[0-9a-zA-Z._\-]+');
 
     Route::post('/payment/getDistrict', ['as' => 'client.post.getDistrict', 'uses' => 'ProductController@getDistrict']);

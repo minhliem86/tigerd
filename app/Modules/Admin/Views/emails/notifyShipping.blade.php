@@ -81,11 +81,11 @@
                                                                 <tr style="margin: 0; padding: 0;">
                                                                     <td style="margin: 0; padding: 0; vertical-align: top;">
                                                                         <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">
-                                                                            Chào quý khách hàng,
+                                                                            Chào {!! $data['name'] !!},
                                                                         </p>
                                                                         <p class="space-text" style="font-family: 'Arial', sans-serif; font-size: 12px; height: 5px; line-height: 18px; margin: 0; padding: 0; width: 100%;">&nbsp;</p>
                                                                         <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">
-                                                                            Sản phẩm của bạn đang được vận chuyển. Khi sản phẩm đến nơi, nhân viên của chúng tôi sẽ liên hệ với quý khách qua số điện thoại quý khách đã cung cấp.
+                                                                            Sản phẩm của bạn đang được vận chuyển. Khi sản phẩm đến nơi, nhân viên của chúng tôi sẽ liên hệ với bạn qua số điện thoại bạn đã cung cấp.
                                                                         </p>
                                                                     </td>
                                                                 </tr>
