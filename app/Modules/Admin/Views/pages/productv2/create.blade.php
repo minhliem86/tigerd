@@ -274,7 +274,7 @@
     <script type="text/javascript" src="{!! asset('public/assets/admin') !!}/dist/js/jquery.validate.min.js"></script>
 
     <script>
-        const url = "{!!url('/admin')!!}"
+        const url = "{!!url('/')!!}"
         init_tinymce(url);
         // BUTTON ALONE
         init_btnImage(url,'#lfm');
@@ -402,7 +402,7 @@
 
             $("body").on('change', "select[name='attribute[]']", function(){
                 var value = $(this).val();
-                var input = $(this).parent().next().next('.attribute-section').find('.value-wrapper').find("input[type=text]");
+                var input = $(this).parent().next().next('.attribute-section').find('.value-wrapper').find("input[type=text].input_field_value");
                input.each(function (index){
                    $(this).attr('name','att_value['+value+'][]');
                })
@@ -427,7 +427,26 @@
                 }
             })
 
-            $("body").on('click change','.add_price_value', function () {
+            $("body").on('click','.add_price_value', function () {
+                var att_value = $(this).parent().prev('.each-value').children('input[type=text]').val();
+                var thisButton = $(this);
+                if(att_value){
+                    $.ajax({
+                        url: "{!! route('admin.attribute.value.price') !!}",
+                        type: 'POST',
+                        data:{id: att_value},
+                        success:function(res){
+                            if(res.data){
+                                thisButton.parent().prev().find('.wrap-price-ajax').append(res.data);
+                            }
+                        }
+                    })
+                }else{
+                    alert('Vui lòng nhập giá trị thuộc tính trước khi thêm giá.')
+                }
+            })
+
+            $("body").on('change','.add_price_value', function () {
                 var att_value = $(this).parent().prev('.each-value').children('input[type=text]').val();
                 var thisButton = $(this);
                 if(att_value){

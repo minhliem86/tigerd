@@ -8,14 +8,14 @@ return [
     */
 
     // Include to pre-defined routes from package or not. Middlewares
-    'use_package_routes' => false,
+    'use_package_routes' => true,
 
     // Middlewares which should be applied to all package routes.
     // For laravel 5.1 and before, remove 'web' from the array.
     'middlewares' => ['web', 'can_login'],
 
     // The url to this package. Change it if necessary.
-    'url_prefix' => 'admin/laravel-filemanager',
+    'url_prefix' => 'laravel-filemanager',
 
     /*
     |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ return [
     // Then you can rewrite userField function in App\Handler\ConfigHander class
     // And set 'user_field' to App\Handler\ConfigHander::class
     // Ex: The private folder of user will be named as the user id.
-    'user_field' => Unisharp\LaravelFilemanager\Handlers\ConfigHandler::class,
+    'user_field' => UniSharp\LaravelFilemanager\Handlers\ConfigHandler::class,
 
     /*
     |--------------------------------------------------------------------------
@@ -69,7 +69,7 @@ return [
     */
 
     // If true, the uploaded file will be renamed to uniqid() + file extension.
-    'rename_file' => true,
+    'rename_file' => false,
 
     // If rename_file set to false and this set to true, then non-alphanumeric characters in filename will be replaced.
     'alphanumeric_filename' => false,
@@ -78,7 +78,7 @@ return [
     'alphanumeric_directory' => false,
 
     // If true, the uploading file's size will be verified for over than max_image_size/max_file_size.
-    'should_validate_size' => true,
+    'should_validate_size' => false,
 
     'max_image_size' => 50000,
     'max_file_size' => 50000,
@@ -110,6 +110,9 @@ return [
 
     // permissions to be set on file upload.
     'create_file_mode' => 0644,
+    
+    // If true, it will attempt to chmod the file after upload
+    'should_change_file_mode' => true,
 
     // available since v1.3.0
     // only when '/laravel-filemanager?type=Files'
