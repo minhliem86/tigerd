@@ -680,9 +680,8 @@ class ProductController extends Controller
     public function ajaxIntergatePriceToValue(Request $request)
     {
         if($request->ajax()){
-            $id = \LP_lib::unicodenospace($request->input('id'));
-            $view = view('Admin::ajax.script.add_price', compact('id'))->render();
-            return response()->json(['data'=>$view],200);
+            $slug = \LP_lib::unicodenospace($request->input('att_value'));
+            return response()->json(['slug'=>$slug],200);
         }
     }
 
