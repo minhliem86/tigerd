@@ -237,7 +237,7 @@ class ProductController extends Controller
                                     'product_id' => $product->id,
                                 ]);
                                 $slug = \LP_lib::unicodenospace($item_value);
-                                if($request->has('value_price_'.$slug)){
+                                if($request->has('value_price_')){
                                     $var_value->value_prices()->save(['price'=>$request->input('value_price_'.$slug)]);
                                 }
                                 if($request->exists('thumb-value.'.$slug)){
