@@ -37,6 +37,9 @@ class AttributeValue extends Model
             foreach($attValue->photos as $photo){
                 $photo->delete();
             }
+            if($attValue->value_prices){
+                $attValue->value_prices()->delete();
+            }
         });
     }
 }

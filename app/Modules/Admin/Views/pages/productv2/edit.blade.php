@@ -443,6 +443,7 @@
             $('body').on('click','.trigger-value', function(){
                 var thisButton = $(this);
                 var value_att = thisButton.parent('.control-value').prev().find('select').val();
+                console.log(value_att);
                 $.ajax({
                     url: "{!! route('admin.attribute.addMoreAttValueEdit') !!}",
                     data:{value_att: value_att },
@@ -489,6 +490,37 @@
                     })
                 }else{
                     alert('Vui lòng nhập giá trị thuộc tính trước khi thêm hình ảnh.')
+                }
+            })
+
+            /*ADD PRICE*/
+            $("body").on('click','.add_price_value', function () {
+                var att_value = $(this).parent().prev('.each-value').children('input[type=text]').val();
+                var thisButton = $(this);
+                if(att_value){
+                    if(thisButton.parent().prev().find('.wrap-price-ajax').is(':hidden')){
+                        alertify.confirm('Nếu đặt giá cho thuộc tính thì thuộc tính không được thay đổi.', function (e) {
+                            if(e){
+                                thisButton.parent().prev().find('.input_field_value').prop('readonly', true);
+                                thisButton.parent().prev().find('.wrap-price-ajax').slideDown();
+                                $.ajax({
+                                    url: '{!! route("admin.attribute.value.price") !!}',
+                                    type: 'GET',
+                                    data: {att_value : att_value},
+                                    success: function(res){
+                                        thisButton.parent().prev().find('.wrap-price-ajax').find('input.price_value_input').attr('name','value_price_'+res.slug);
+                                    }
+                                })
+                            }
+                        })
+                    }else{
+                        thisButton.parent().prev().find('.wrap-price-ajax').slideUp();
+                        thisButton.parent().prev().find('.input_field_value').prop('readonly', false);
+                        // thisButton.parent().prev().find('.wrap-price-ajax').find('input.price_value_input').attr('name','value_price_');
+                        thisButton.parent().prev().find('.wrap-price-ajax').find('input.price_value_input').attr('value','')
+                    }
+                }else{
+                    alert('Vui lòng nhập giá trị thuộc tính trước khi thêm giá.')
                 }
             })
 
