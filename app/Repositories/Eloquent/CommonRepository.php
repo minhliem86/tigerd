@@ -11,7 +11,6 @@ class CommonRepository{
         $destinationPath = base_path($path);
         $name = preg_replace('/\s+/', '', $file->getClientOriginalName());
         $filename = time().'_'.$name;
-
         if($resize){
             $filename_resize = $destinationPath.'/'.$filename;
             \Image::make($file->getRealPath())->resize($width,$height)->save($filename_resize);

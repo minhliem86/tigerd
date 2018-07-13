@@ -20,9 +20,9 @@ use Session;
 
 class ProductController extends Controller
 {
-    protected $_big;
-    protected $_small;
-    protected $_removePath;
+    protected $big;
+    protected $small;
+    protected $removePath;
     protected $productRepo;
     protected $common;
     protected $photo;
@@ -33,9 +33,11 @@ class ProductController extends Controller
         $this->common = $common;
         $this->photo = $photo;
 
-        $this->_removePath = env('REMOVE_PATH');
-        $this->_big = env('THUMBNAIL_PATH_BIG') ? env('THUMBNAIL_PATH_BIG') : '';
-        $this->_small = env('THUMBNAIL_PATH_SMALL') ? env('THUMBNAIL_PATH_SMALL') : '';
+        $this->removePath = env('REMOVE_PATH');
+        $this->big = env('THUMBNAIL_PATH_BIG');
+        $this->small = env('THUMBNAIL_PATH_SMALL');
+
+
     }
 
     public $rules = [
@@ -181,6 +183,7 @@ class ProductController extends Controller
             'order' => $order,
             'category_id' => $request->input('category_id'),
         ];
+
         $product = $this->productRepo->create($data);
 
         if($request->has('meta_config')){
@@ -201,9 +204,10 @@ class ProductController extends Controller
 
         if($sub_photo[0]) {
             $data_photo = [];
+
             foreach ($sub_photo as $thumb) {
-                $bigSize = $this->common->uploadImage($request, $thumb, $this->_big, $resize = false, null, null, base_path($this->_removePath));
-                $smallsize = $this->common->createThumbnail($bigSize, $this->_small, 350, 350, base_path($this->_removePath));
+                $bigSize = $this->common->uploadImage($request, $thumb, env('THUMBNAIL_PATH_BIG'), $resize = false, null, null, base_path(env('REMOVE_PATH')));
+                $smallsize = $this->common->createThumbnail($bigSize, env('THUMBNAIL_PATH_SMALL'), 350, 350, base_path(env('REMOVE_PATH')));
 
                 $order = $this->photo->getOrder();
                 $filename = $this->common->getFileName($bigSize);
@@ -224,7 +228,6 @@ class ProductController extends Controller
         /*ATTRIBUTE PROCESS*/
         $attribute_arr = $request->input('attribute');
         $value_arr = $request->input('att_value');
-
         if(count($attribute_arr))
         {
             foreach($attribute_arr as $item_attribute) {
@@ -237,16 +240,16 @@ class ProductController extends Controller
                                     'product_id' => $product->id,
                                 ]);
                                 $slug = \LP_lib::unicodenospace($item_value);
-                                if($request->has('value_price_')){
-                                    $var_value->value_prices()->save(['price'=>$request->input('value_price_'.$slug)]);
+                                if($request->has('value_price_'.$slug)){
+                                    $var_value->value_prices()->create(['price'=>$request->input('value_price_'.$slug)]);
                                 }
                                 if($request->exists('thumb-value.'.$slug)){
                                     $attValue_photo = $request->file('thumb-value')[$slug];
                                     if($attValue_photo[0]) {
                                         $data_photo = [];
                                         foreach ($attValue_photo as $thumb) {
-                                            $bigSize = $this->common->uploadImage($request, $thumb, $this->_big, $resize = true, 350, 350, base_path($this->_removePath));
-                                            $smallsize = $this->common->createThumbnail($bigSize, $this->_small, 80, 80, base_path($this->_removePath));
+                                            $bigSize = $this->common->uploadImage($request, $thumb, env('THUMBNAIL_PATH_BIG'), $resize = true, 350, 350, base_path(env('REMOVE_PATH')));
+                                            $smallsize = $this->common->createThumbnail($bigSize, env('THUMBNAIL_PATH_SMALL'), 80, 80, base_path(env('REMOVE_PATH')));
 
                                             $order = $this->photo->getOrder();
                                             $filename = $this->common->getFileName($bigSize);
@@ -266,14 +269,13 @@ class ProductController extends Controller
                                 $arr_obj_value[$item_attribute][] = $var_value;
                             }
                         }
-                        $arr_attribute_id [] = $item_attribute;
                     }
+                    $arr_attribute_id [] = $item_attribute;
                 }
             }
             if(count($arr_attribute_id)){
                 $product->attributes()->attach($arr_attribute_id);
             }
-
         }
 
         return redirect()->route('admin.product.index')->with('success','Created !');
@@ -338,7 +340,6 @@ class ProductController extends Controller
             'status' => $request->input('status'),
             'category_id' => $request->input('category_id'),
         ];
-
         $product = $this->productRepo->update($data, $id);
 
         if($request->has('meta_config')){
@@ -359,8 +360,8 @@ class ProductController extends Controller
         if($sub_photo[0]) {
             $data_photo_thumb = [];
             foreach ($sub_photo as $thumb) {
-                $bigSize = $this->common->uploadImage($request, $thumb, $this->_big, $resize = false, null, null, base_path($this->_removePath));
-                $smallsize = $this->common->createThumbnail($bigSize, $this->_small, 350, 350, base_path($this->_removePath));
+                $bigSize = $this->common->uploadImage($request, $thumb, env('THUMBNAIL_PATH_BIG'), $resize = false, null, null, base_path(env('REMOVE_PATH')));
+                $smallsize = $this->common->createThumbnail($bigSize, env('THUMBNAIL_PATH_SMALL'), 350, 350, base_path(env('REMOVE_PATH')));
 
                 $order = $this->photo->getOrder();
                 $filename = $this->common->getFileName($bigSize);
@@ -406,13 +407,22 @@ class ProductController extends Controller
                                     $arr_obj_value[$item_attribute][] = $obj_attValue;
                                 }
                                 $slug = \LP_lib::unicodenospace($item_value);
+                                if($request->exists('value_price_'.$slug)){
+                                    if($request->has('value_price_'.$slug)){
+                                        \App\Models\ValuePrice::updateOrCreate(['price'=>$request->input('value_price_'.$slug), 'attribute_value_id' => $obj_attValue->id],);
+                                    }else{
+                                        if($obj_attValue->value_prices){
+                                            \App\Models\ValuePrice::where('id', $obj_attValue->value_prices->id)->delete();
+                                        }
+                                    }
+                                }
                                 if($request->exists('thumb-value.'.$slug)){
                                     $attValue_photo = $request->file('thumb-value')[$slug];
                                     if($attValue_photo[0]) {
                                         $data_photo = [];
                                         foreach ($attValue_photo as $thumb) {
-                                            $bigSize = $this->common->uploadImage($request, $thumb, $this->_big, $resize = true, 350, 350, base_path($this->_removePath));
-                                            $smallsize = $this->common->createThumbnail($bigSize, $this->_small, 80, 80, base_path($this->_removePath));
+                                            $bigSize = $this->common->uploadImage($request, $thumb, env('THUMBNAIL_PATH_BIG'), $resize = true, 350, 350, base_path(env('REMOVE_PATH')));
+                                            $smallsize = $this->common->createThumbnail($bigSize, env('THUMBNAIL_PATH_SMALL'), 80, 80, base_path(env('REMOVE_PATH')));
 
                                             $order = $this->photo->getOrder();
                                             $filename = $this->common->getFileName($bigSize);
