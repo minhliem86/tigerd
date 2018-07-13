@@ -408,12 +408,19 @@ class ProductController extends Controller
                                     $arr_obj_value[$item_attribute][] = $obj_attValue;
                                 }
                                 $slug = \LP_lib::unicodenospace($item_value);
-                                if($request->exists('value_price_'.$slug)){
-                                    if($request->has('value_price_'.$slug)){
-                                        \DB::table('value_prices')->where('id', $obj_attValue->value_prices->id)->update(['price'=>$request->input('value_price_'.$slug)]);
+                                if($request->exists('value_price_'.$slug) ){
+                                    if($obj_attValue->value_prices){
+                                        if($request->exists('value_price_id_'.$obj_attValue->value_prices->id)){
+                                            if($request->has('value_price_'.$slug)){
+                                                \DB::table('value_prices')->where('id', $obj_attValue->value_prices->id)->update(['price'=>$request->input('value_price_'.$slug)]);
+                                            }else{
+                                                \DB::table('value_prices')->where('id', $obj_attValue->value_prices->id)->delete();
+                                            }
+                                        }
                                     }else{
-                                        \DB::table('value_prices')->where('id', $obj_attValue->value_prices->id)->delete();
+                                        $obj_attValue->value_prices()->create(['price'=>$request->input('value_price_'.$slug)]);
                                     }
+
                                 }
                                 if($request->exists('thumb-value.'.$slug)){
                                     $attValue_photo = $request->file('thumb-value')[$slug];
