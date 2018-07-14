@@ -97,7 +97,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            {!! number_format($order->total - $order->shipping_cost) !!} VND
+                                            {!! number_format($order->total) !!} VND
                                         </td>
                                     </tr>
                                     <tr>
@@ -107,7 +107,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            {!! number_format($order->total) !!} VND
+                                            {!! number_format($order->total + $order->shipping_cost) !!} VND
                                         </td>
                                     </tr>
                                 </table>
@@ -128,6 +128,7 @@
                         <tr>
                             <th>Sản Phẩm</th>
                             <th>Thuộc Tính</th>
+                            <th>Số Lượng</th>
                             <th>Đơn Giá</th>
                         </tr>
                     </thead>
@@ -143,21 +144,28 @@
                             <td>{!! $item_product->name !!}</td>
                             <td>
                                 @if(isset($arr_json))
+                                    @php
+                                        $price_value = null;
+                                    @endphp
                                 @foreach($arr_json as $k=>$item_att)
                                     <p><b>{!! $k !!}:</b> {!! $item_att !!}</p>
                                 @endforeach
                                 @endif
                             </td>
-                            <td >{!! $item_product->discount ? number_format($item_product->discount) : number_format($item_product->price)  !!} vnd</td>
+                            <td>
+                                {!! $item_product->pivot->quantity !!}
+                            </td>
+
+                            <td >{!! $item_product->pivot->price !!} vnd</td>
                         </tr>
                         @endforeach
                         <tr>
-                            <td colspan="2">Phí vận chuyển</td>
+                            <td colspan="3">Phí vận chuyển</td>
                             <td>{!! number_format($order->shipping_cost)  !!} vnd</td>
                         </tr>
                         <tr>
-                            <td colspan="3" align="right">
-                                <b>Tổng Cộng: </b>{!! number_format($order->total ) !!} VND
+                            <td colspan="4" align="right">
+                                <b>Tổng Cộng: </b>{!! number_format($order->total + $order->shipping_cost) !!} VND
                             </td>
                         </tr>
                     </tbody>

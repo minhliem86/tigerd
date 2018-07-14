@@ -253,12 +253,28 @@
             /*AJAX ATTRIBUTE PHOTO*/
             $('body').on('click', 'input.attribute_product', function(){
                 var value_id = $(this).val();
+                var product_id = $('input[name=product_id]').val();
                 $.ajax({
                     url: "{!! route('client.product.attribute.chosen') !!}",
                     type: "POST",
-                    data: {value_id: value_id},
+                    data: {value_id: value_id, product_id: product_id},
                     success: function(res){
-                        if(!res.error){
+                        if(res.photo && res.price){
+                            $('.wrap-gallery').empty();
+                            $('.wrap-gallery').append(res.data);
+                            // myGallery.refresh();
+                            $('#image-gallery').lightSlider({
+                                gallery:true,
+                                item:1,
+                                loop:true,
+                                thumbItem:4,
+                                slideMargin:0,
+                                enableDrag: false,
+                                currentPagerPosition:'left',
+                            })
+                            $('.price-value').text(res.price);
+                        }
+                        if(res.photo && !res.price){
                             $('.wrap-gallery').empty();
                             $('.wrap-gallery').append(res.data);
                             // myGallery.refresh();
@@ -272,6 +288,12 @@
                                 currentPagerPosition:'left',
                             })
                         }
+                        if(!res.photo && res.price){
+                            $('.price-value').text(res.price);
+                        }
+                        if(!res.photo && !res.price){
+                            $('.price-value').text(res.price);
+                        }
                     }
                 })
             })
@@ -280,15 +302,15 @@
 
             let productSwiper;
 
-           const breakpointChecker = function(){
+            const breakpointChecker = function(){
                if(breakpoint.matches === true){
                    return enableSwiper();
                }else if (breakpoint.matches === false){
                    if(productSwiper !== undefined) productSwiper.destroy(true, true);
                    return;
                }
-           }
-//
+            }
+
            const enableSwiper = function() {
                productSwiper = new Swiper('#swiper-product', {
                    'slidesPerView' : 3,

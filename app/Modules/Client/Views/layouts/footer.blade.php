@@ -45,9 +45,9 @@
                             <div class="input-group-prepend">
                                 <input type="email" name="email_subcribe" class="form-control">
                                 <button type="submit" class="btn btn-subcribe"><i class="fa fa-chevron-right"></i></button>
-                                @if($error->error_subcribe->any())
+                                @if($errors->error_subcribe->any())
                                     <div class="invalid-feedback">
-                                        @foreach($error->error_subcribe->all() as $item_subcribe)
+                                        @foreach($errors->error_subcribe->all() as $item_subcribe)
                                         <p>{!! $item_subcribe !!}</p>
                                         @endforeach
                                     </div>

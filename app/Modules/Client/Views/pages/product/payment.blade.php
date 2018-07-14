@@ -105,7 +105,7 @@
                                                     <p>
                                                         @foreach($item_cart->attributes as $k =>$cart_attribute)
                                                             @if($k !='img_url')
-                                                        <small>{!! $cart_attribute !!} {!! $cart_attribute == end($item_cart->attributes) ? '/' : null !!}</small>
+                                                        <small>{!! $cart_attribute !!} {!! $cart_attribute != end($item_cart->attributes) ? '/' : null !!}</small>
                                                             @endif
                                                         @endforeach
                                                     </p>

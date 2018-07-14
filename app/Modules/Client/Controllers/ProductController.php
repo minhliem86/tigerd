@@ -143,15 +143,21 @@ class ProductController extends Controller
         if(count($product)){
             $str_cart_id = $product->id.'-';
             $arr_att = [];
+            $price_value = null;
             if($request->has('att_value')){
                 $arr_value = $request->input('att_value');
+
                 foreach($arr_value as $key =>$item_value){
 
                     $i_value = $this->value->find($item_value);
+
                     $arr_att[$i_value->attributes->name] = $i_value->value;
                     $str_cart_id = $str_cart_id.\LP_lib::unicode($i_value->value);
                     if($item_value != end($arr_value)){
                         $str_cart_id = $str_cart_id.'-';
+                    }
+                    if($i_value->value_prices){
+                        $price_value = $i_value->value_prices->price;
                     }
                 }
             }
@@ -165,13 +171,13 @@ class ProductController extends Controller
             $data = [
                 'id' => $str_cart_id,
                 'name' => $product->name,
-                'price' => $product->discount ? $product->discount : $product->price,
+                'price' => $price_value ? $price_value : ($product->discount ? $product->discount : $product->price),
                 'quantity' => $request->quantity,
                 'attributes' => $att,
             ];
 
             Cart::add($data);
-            $price = $product->discount ? $product->discount : $product->price * $request->quantity;
+            $price = $price_value ? $price_value : ($product->discount ? $product->discount : $product->price);
             return redirect()->back()->with(['success'=>'Sản Phẩm đã được thêm vào giỏ hàng', 'data' => $product, 'attribute' => $att ,'price' =>$price]);
         }else{
             return redirect()->back()->withInput()->with('errors','Sản Phẩm không tồn tại.');
@@ -299,7 +305,7 @@ class ProductController extends Controller
                     $product->stock = $product->stock - 1;
                     $product->save();
 
-                    $current_order->products()->attach($product_id, ['quantity'=>$item->quantity, 'unit_price'=>'VND', 'attribute' => json_encode($item->attributes, JSON_UNESCAPED_UNICODE)]);
+                    $current_order->products()->attach($product_id, ['quantity'=>$item->quantity, 'price'=>$item->price, 'unit_price'=>'VND', 'attribute' => json_encode($item->attributes, JSON_UNESCAPED_UNICODE)]);
                 }
                 if(count($pr)){
                     $pr->quantity = $pr->quantity - 1;
@@ -607,12 +613,21 @@ class ProductController extends Controller
     {
         !$request->ajax() ? abort(404) :
             $value_id = $request->get('value_id');
+            $product_id = $request->get('product_id');
             $att_value = $this->value->find($value_id);
-            if($att_value->photos->isEmpty()){
-               return response()->json(['error' => true],200);
-            }else{
+            if (!$att_value->photos->isEmpty() && !$att_value->value_prices){
                 $view = view('Client::extensions.photo_product')->with(['product' => $att_value])->render();
-                return response()->json(['error' => false, 'data' => $view],200);
+                return response()->json(['price' => false, 'photo'=>true, 'data' => $view],200);
+            }elseif ($att_value->photos->isEmpty() && $att_value->value_prices){
+                $price = $att_value->value_prices ? number_format($att_value->value_prices->price) : number_format($this->product->find($product_id)->price);
+                return response()->json(['price' => true, 'photo'=>false, 'price' => $price],200);
+            }elseif(!$att_value->photos->isEmpty() && $att_value->value_prices){
+                $price = $att_value->value_prices ? number_format($att_value->value_prices->price) : number_format($this->product->find($product_id)->price);
+                $view = view('Client::extensions.photo_product')->with(['product' => $att_value])->render();
+                return response()->json(['price' => true, 'photo'=>true, 'data' => $view, 'price'=> $price],200);
+            }else{
+                $price =  number_format($this->product->find($product_id)->price);
+                return response()->json(['photo' => false, 'price' => false, 'price' => $price],200);
             }
 
     }

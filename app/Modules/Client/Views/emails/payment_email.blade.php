@@ -208,7 +208,7 @@
                                                             <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">Tổng giá trị đơn hàng</b></p>
                                                         </td>
                                                         <td align="right" style="margin: 0; padding: 6px 5px; vertical-align: top;">
-                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">{!! number_format(Cart::getTotal(),0,',','.'); !!} vnd</b></p>
+                                                            <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">{!! number_format(Cart::getTotal() + $shipping_cost ,0,',','.'); !!} vnd</b></p>
                                                         </td>
                                                     </tr>
                                                     </tfoot>
