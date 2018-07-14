@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-7 each-value">
                 <input type="text" name="att_value[{!! isset($value_att) ? $value_att : null !!}][]" class="form-control input_field_value" placeholder="Giá trị thuộc tính. VD: 500g">
-                <div class="wrap-price-ajax" style="margin:10px 0 3px">
+                <div class="wrap-price-ajax" style="margin:10px 0 3px; display: none;">
                     <input type="text" name="value_price_" class="form-control price_value_input" placeholder="Giá thuộc tính">
                 </div>
             </div>

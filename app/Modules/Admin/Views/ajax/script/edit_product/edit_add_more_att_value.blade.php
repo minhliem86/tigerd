@@ -12,7 +12,7 @@
                             <input type="hidden" name="value_price_id_{!! $item_value->value_prices->id !!}" value="{!! $item_value->value_prices->id !!}">
                         </div>
                     @else
-                        <div class="wrap-price-ajax" style="margin:10px 0 3px; display: none; ">
+                        <div class="wrap-price-ajax" style="margin:10px 0 3px; display: none;">
                             <input type="text" name="value_price_" class="form-control price_value_input" placeholder="Giá thuộc tính">
                         </div>
                     @endif
