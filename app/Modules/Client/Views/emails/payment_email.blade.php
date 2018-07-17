@@ -171,6 +171,15 @@
                                                             <tr style="margin: 0; padding: 0;">
                                                                 <td style="margin: 0; padding: 10px 5px; vertical-align: top;">
                                                                     <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;"><b style="margin: 0; padding: 0;">{!! $item_cart->name !!}</b></p>
+                                                                    <p>
+                                                                        @if($item_cart->attributes)
+                                                                            @foreach($item_cart->attributes as $k =>$cart_attribute)
+                                                                                @if($k !='img_url')
+                                                                                    <small>{!! $cart_attribute !!} {!! $cart_attribute != end($item_cart->attributes) ? '/' : null !!}</small>
+                                                                                @endif
+                                                                            @endforeach
+                                                                        @endif
+                                                                    </p>
                                                                 </td>
                                                                 <td style="margin: 0; padding: 10px 5px; vertical-align: top;">
                                                                     <p class="text" style="font-family: 'Arial', sans-serif; font-size: 12px; line-height: 18px; margin: 0; padding: 0;">{!! number_format($item_cart->price,0,',','.') !!} vnd</p>
